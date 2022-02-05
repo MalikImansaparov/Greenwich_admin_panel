@@ -1,12 +1,22 @@
-import './App.css';
-import Button from '@mui/material/Button';
+import React from "react";
+import { Routes, Route } from 'react-router-dom';
+import { Main } from './pages/main/main';
+import { Home } from './pages/home/home';
+import './app.modul.scss';
+import Products from "./pages/products/product";
+import {SignInPage} from "./pages/signIn";
 
-function App() {
+const App = () => {
   return (
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
+      <>
+        <Routes>
+          <Route path='/' element={<SignInPage/>}/>
+          <Route path="home" element={<Home />}>
+            <Route path="main" element={<Main />} />
+            <Route path="products" element={<Products/>} />
+          </Route>
+        </Routes>
+      </>
   );
-}
-
+};
 export default App;
