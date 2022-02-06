@@ -1,133 +1,102 @@
+import React, {useState} from "react";
 import { useFormik } from 'formik';
-import { validate } from './validateForm';
 import { useNavigate } from 'react-router';
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import {CustomButton} from "../../components/signInButton";
-import Password from "../../components/password";
 import { styled } from '@mui/system';
+import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
+
 
 export const SignInSuperAdmin = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
     const TextFieldsWrapper = styled(TextField)`
-  width: 320px;
-  height: 48px;
-  fieldset {
+   width: 320px;
+   height: 48px;
+   fieldset {
     border-radius: 20px;
   }
 `;
-    // const Item = styled(Paper)(({ theme }) => ({
-    //     ...theme.typography.body2,
-    //     textAlign: 'center',
-    //     color: theme.palette.text.secondary,
-    //     height: 600,
-    //     lineHeight: '60px',
-    // }));
+    const CustomButton = styled(Button)`
+  height: 52px;
+  width: 320px;
+  background-color: #9C9C9C;
+  padding: 14px 130px;
+  border-radius: 20px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  marginTop: 110px;
+  &:hover {
+    background-color: #487349;
+  }
+`;
     const navigate = useNavigate()
-    const formik = useFormik({
+    const { handleSubmit, handleChange,handleBlur, values, errors,touched } = useFormik({
         initialValues: {
-            name: '',
             email: '',
-            phoneNumber: '',
             password: '',
-            confirmPassword: '',
         },
-        validationSchema: validate,
-        onSubmit: () => {
-            navigate('/home/main')
-            alert('You successfull registration');
-        }
+        onSubmit: values => {
+            console.log(values);
+        },
     });
     return (
-        <Box
-        >
-            <form onSubmit={formik.handleSubmit}>
+        <FormControl>
+            <form onSubmit={handleSubmit}>
                 <Box sx={{mb:'58px'}}>
                     <TextFieldsWrapper
-                        fullWidth
-                        id="name"
-                        // value={formik.values.name}
-                        // onChange={formik.handleChange}
-                        // error={formik.touched.name && Boolean(formik.errors.name)}
-                        // helperText={formik.touched.name && formik.errors.name}
-                        label="Логин" type='string' name='name' vaiant="outlined" />
+                        required
+                        id="email"
+                        name="email"
+                        onChange={handleChange("email")}
+                        type="email"
+                        value={values.email}
+                        onBlur={handleBlur}
+                        label="Логин"
+                        vaiant="outlined" />
+                    {
+                        errors.email && touched.email &&(<div>{errors.email}</div>)
+                    }
                 </Box>
                 <Box sx={{mb:'108px'}}>
-                    <Password fullWidth/>
+                <TextFieldsWrapper
+                    required
+                    label='Пароль'
+                    variant="outlined"
+                    type={showPassword ? "text" : "password"}
+                    onChange={handleChange("password")}
+                    value={values.password}
+                    onBlur={handleBlur}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
+                />
                 </Box>
-
-                <CustomButton>Войти</CustomButton>
-
+                <CustomButton type='submit'>Войти</CustomButton>
             </form>
-        </Box>
+        </FormControl>
     );
 };
-
-  //// import { useFormik } from 'formik';
-  // import {Formik, Form, Field} from "formik";
-  // import { validate } from './validateForm';
-  // import { useNavigate } from 'react-router';
-  // import TextField from '@mui/material/TextField';
-  // import Box from '@mui/material/Box';
-  // import { CustomButton } from '../../components/signInButton';
-  // import Password from '../../components/password';
-  // import { styled } from '@mui/system';
-  //
-  // export const SignInSuperAdmin = () => {
-  //   const TextFieldsWrapper = styled(TextField)`
-  //     width: 320px;
-  //     height: 48px;
-  //     fieldset {
-  //       border-radius: 20px;
-  //     }
-  //   `;
-  //   // const Item = styled(Paper)(({ theme }) => ({
-  //   //     ...theme.typography.body2,
-  //   //     textAlign: 'center',
-  //   //     color: theme.palette.text.secondary,
-  //   //     height: 600,
-  //   //     lineHeight: '60px',
-  //   // }));
-  //   const navigate = useNavigate();
-  //   // const formik = useFormik(
-  //   // {
-  //   <Formik
-  //     initialValues={{
-  //       name: '',
-  //       password: '',
-  //     }}
-  //     validate = {validate}
-  //     onSubmit = {() => {
-  //       // navigate('/home/main');
-  //       alert('You successfull registration')
-  //     }}>
-  //     {formik => (
-  //         <div>
-  //           <Form>
-  //             <Field sx={{ mb: '58px' }}
-  //                    component={TextFieldsWrapper}
-  //                    fullWidth
-  //                    id="name"
-  //                    value={formik.values.name}
-  //                    onChange={formik.handleChange}
-  //                    onBlur={formik.handleBlur}
-  //                 // error={formik.touched.name && Boolean(formik.errors.name)}
-  //                 // helperText={formik.touched.name && formik.errors.name}
-  //                    label="Логин"
-  //                    type="string"
-  //                    name="name"
-  //                    vaiant="outlined"
-  //             />
-  //             {formik.touched.name && formik.errors.name ? (
-  //                 <span>{formik.errors.name}</span>
-  //             ) : null}
-  //
-  //             <Field sx={{ mb: '100px' }}
-  //                    component={Password}/>
-  //             <CustomButton type="submit">Войти</CustomButton>
-  //           </Form>
-  //         </div>
-  //
-  //     )}
-  //   );
-  //   </Formik>
-  // };

@@ -1,23 +1,22 @@
 import * as Yup from 'yup';
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-export const validate = Yup.object({
-  name: Yup.string()
-      .max(15, 'Must be 15 characters or less')
-      .required('Required'),
-  // phone: Yup.number().phone('Email is invalid').required('Email is required'),
-  // .matches(phoneRegExp, 'Phone number is not valid')
-  phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
-  email: Yup.string().email('Email is invalid').required('Email is required'),
-  // password: Yup.string()
-  //     .matches(
-  //         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-  //         'Must be 6 Characters, One Uppercase, One Lowercase, One Number & One special Character'
-  //     )
-  //     .required('Password is required'),
-  // confirmPassword: Yup.string()
-  //     .oneOf([Yup.ref('password'), null], 'Password must match')
-  //     .required('Confirm password is required'),
+export const validationSchema = Yup.object({
+    name: Yup.string()
+        .required('Username is required')
+        .min(6, 'Username must be at least 6 characters')
+        .max(20, 'Username must not exceed 20 characters'),
+    email: Yup.string()
+        .required('Email is required')
+        .email('Email is invalid'),
+    password: Yup.string()
+        .required('Password is required')
+        .min(6, 'Password must be at least 6 characters')
+        .max(40, 'Password must not exceed 40 characters'),
+    confirmPassword: Yup.string()
+        .required('Confirm Password is required')
+        .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
+    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 });
 
 
@@ -28,10 +27,6 @@ export const validate = Yup.object({
 
 
 
-
-// import * as Yup from 'yup';
-//
-//  // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 //
 // export const validate = Yup.object({
 //   name: Yup.string()

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import { styled } from '@mui/system';
 
 const btnColor = {
@@ -24,12 +24,6 @@ const CustomButtonRoot = styled('span')`
   margintop: 110px;
   &:hover {
     background-color: ${btnColor[600]};
-  }
-
-  &.${buttonUnstyledClasses.focusVisible} {
-    box-shadow: 0 4px 20px 0 rgba(61, 71, 82, 0.1),
-      0 0 0 5px rgba(0, 127, 255, 0.5);
-    outline: none;
   }
 `;
 

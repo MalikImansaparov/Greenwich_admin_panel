@@ -2,60 +2,103 @@ import {styled} from "@mui/system";
 import TextField from "@mui/material/TextField";
 import {useNavigate} from "react-router";
 import {useFormik} from "formik";
-import { validate } from './validateForm';
 import Box from '@mui/material/Box';
-import Password from '../../components/password';
 import { CustomButton } from '../../components/signInButton';
 import InputMask from 'react-input-mask';
+import React, {useState} from "react";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export const SignInAdmin = () => {
-  const TextFieldsWrapper = styled(TextField)`
-    width: 320px;
-    height: 48px;
-    fieldset {
-      border-radius: 20px;
-    }
-  `;
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const navigate = useNavigate();
-  const formik = useFormik({
+  const TextFieldsWrapper = styled(TextField)`
+   width: 320px;
+   height: 48px;
+   fieldset {
+    border-radius: 20px;
+  }
+`;
+  const CustomButton = styled(Button)`
+  height: 52px;
+  width: 320px;
+  background-color: #9C9C9C;
+  padding: 14px 130px;
+  border-radius: 20px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  marginTop: 110px;
+  &:hover {
+    background-color: #487349;
+  }
+`;
+  const navigate = useNavigate()
+  const { handleSubmit, handleChange,handleBlur, values, errors,touched } = useFormik({
     initialValues: {
-      number: '',
+      phone: '',
       password: '',
     },
-    validationSchema: validate,
-    onSubmit: () => {
-      navigate('/home/main');
-      alert('You successfull registration');
+    onSubmit: values => {
+      console.log(values);
     },
   });
-
   return (
-    <Box>
-      <form onSubmit={formik.handleSubmit}>
-        <Box sx={{ mb: '58px' }}>
-          <TextFieldsWrapper
-            fullWidth
-            id="number"
-            // value={formik.values.number}
-            // onChange={formik.handleChange}
-            // error={formik.touched.name && Boolean(formik.errors.name)}
-            // helperText={formik.touched.name && formik.errors.name}
-            label="Номер телефона"
-            type="number"
-            name="number"
-            vaiant="outlined"
-          >
-            <InputMask mask="(999)99 99 99" maskChar="-" />
-          </TextFieldsWrapper>
-        </Box>
-        <Box sx={{ mb: '108px' }}>
-          <Password fullWidth />
-        </Box>
-
-        <CustomButton>Войти</CustomButton>
-      </form>
-    </Box>
+      <FormControl>
+        <form onSubmit={handleSubmit}>
+          <Box sx={{mb:'58px'}}>
+            <TextFieldsWrapper
+                required
+                id="phone"
+                name="phone"
+                onChange={handleChange("phone")}
+                type="number"
+                value={values.phone}
+                onBlur={handleBlur}
+                label="Номер телефона"
+                vaiant="outlined" />
+            {
+              errors.phone && touched.phone &&(<div>{errors.phone}</div>)
+            }
+          </Box>
+          <Box sx={{mb:'108px'}}>
+            <TextFieldsWrapper
+                required
+                label='Пароль'
+                variant="outlined"
+                type={showPassword ? "text" : "password"}
+                onChange={handleChange("password")}
+                value={values.password}
+                onBlur={handleBlur}
+                InputProps={{
+                  endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                  )
+                }}
+            />
+          </Box>
+          <CustomButton type='submit'>Войти</CustomButton>
+        </form>
+      </FormControl>
   );
 };
 
