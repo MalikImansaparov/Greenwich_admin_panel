@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import { Main } from './pages/main/main';
 import { Home } from './pages/home/home';
-import './app.modul.scss';
 import Products from "./pages/products/product";
 import {SignInPage} from "./pages/signIn";
 
@@ -12,7 +11,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<SignInPage/>}/>
           <Route path="home" element={<Home />}>
-            <Route path="main" element={<Main />} />
+            <Route path="home" element={<Main />} />
             <Route path="products" element={<Products/>} />
           </Route>
         </Routes>

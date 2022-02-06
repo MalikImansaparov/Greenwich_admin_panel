@@ -2,61 +2,61 @@ import {styled} from "@mui/system";
 import TextField from "@mui/material/TextField";
 import {useNavigate} from "react-router";
 import {useFormik} from "formik";
-import {validate} from "./rules";
-import Box from "@mui/material/Box";
-import Password from "../../components/password";
-import {CustomButton} from "../../components/signInButton";
+import { validate } from './validateForm';
+import Box from '@mui/material/Box';
+import Password from '../../components/password';
+import { CustomButton } from '../../components/signInButton';
+import InputMask from 'react-input-mask';
 
 export const SignInAdmin = () => {
-    const TextFieldsWrapper = styled(TextField)`
-  width: 320px;
-  height: 48px;
-  fieldset {
-    border-radius: 20px;
-  }
-`;
-    // const Item = styled(Paper)(({ theme }) => ({
-    //     ...theme.typography.body2,
-    //     textAlign: 'center',
-    //     color: theme.palette.text.secondary,
-    //     height: 600,
-    //     lineHeight: '60px',
-    // }));
-    const navigate = useNavigate()
-    const formik = useFormik({
-        initialValues: {
-            phoneNumber: '',
-            password: '',
-        },
-        validationSchema: validate,
-        onSubmit: () => {
-            navigate('/home/main')
-            alert('You successfull registration');
-        }
-    });
-    return (
-        <Box
-        >
-            <form onSubmit={formik.handleSubmit}>
-                <Box sx={{mb:'58px'}}>
-                    <TextFieldsWrapper
-                        fullWidth
-                        id="name"
-                        // value={formik.values.name}
-                        // onChange={formik.handleChange}
-                        // error={formik.touched.name && Boolean(formik.errors.name)}
-                        // helperText={formik.touched.name && formik.errors.name}
-                        label="Номер телефона" type='string' name='name' vaiant="outlined" />
-                </Box>
-                <Box sx={{mb:'108px'}}>
-                    <Password fullWidth/>
-                </Box>
+  const TextFieldsWrapper = styled(TextField)`
+    width: 320px;
+    height: 48px;
+    fieldset {
+      border-radius: 20px;
+    }
+  `;
 
-                <CustomButton>Войти</CustomButton>
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      number: '',
+      password: '',
+    },
+    validationSchema: validate,
+    onSubmit: () => {
+      navigate('/home/main');
+      alert('You successfull registration');
+    },
+  });
 
-            </form>
+  return (
+    <Box>
+      <form onSubmit={formik.handleSubmit}>
+        <Box sx={{ mb: '58px' }}>
+          <TextFieldsWrapper
+            fullWidth
+            id="number"
+            // value={formik.values.number}
+            // onChange={formik.handleChange}
+            // error={formik.touched.name && Boolean(formik.errors.name)}
+            // helperText={formik.touched.name && formik.errors.name}
+            label="Номер телефона"
+            type="number"
+            name="number"
+            vaiant="outlined"
+          >
+            <InputMask mask="(999)99 99 99" maskChar="-" />
+          </TextFieldsWrapper>
         </Box>
-    );
+        <Box sx={{ mb: '108px' }}>
+          <Password fullWidth />
+        </Box>
+
+        <CustomButton>Войти</CustomButton>
+      </form>
+    </Box>
+  );
 };
 
 

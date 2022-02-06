@@ -1,14 +1,13 @@
 import {Outlet} from "react-router";
 import ResponsiveDrawer from "../sidebar/drawer";
+import {Main} from "../main/main";
 
 export const Home = () => {
   return (
-          <div className="main">
-            <div className="container">
-                <div className='sidebar'></div>
-            <ResponsiveDrawer/>
+          <div>
+            {/*<ResponsiveDrawer/>*/}
+            <Main/>
             <Outlet />
-            </div>
           </div>
       )
 };
