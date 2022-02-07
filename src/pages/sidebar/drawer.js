@@ -11,7 +11,6 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import {NavLink} from 'react-router-dom'
-import PrimarySearchAppBar from "../navbar/appbar";
 import HomeIcon from '@mui/icons-material/Home';
 import {styled} from "@mui/material/styles";
 

@@ -1,22 +1,29 @@
 import * as Yup from 'yup';
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-export const validationSchema = Yup.object({
-    name: Yup.string()
-        .required('Username is required')
-        .min(6, 'Username must be at least 6 characters')
-        .max(20, 'Username must not exceed 20 characters'),
-    email: Yup.string()
-        .required('Email is required')
-        .email('Email is invalid'),
+export const validationSchema = Yup.object().shape({
+    // name: Yup.string()
+    //     .required('Username is required')
+    //     .min(6, 'Username must be at least 6 characters')
+    //     .max(20, 'Username must not exceed 20 characters'),
     password: Yup.string()
-        .required('Password is required')
-        .min(6, 'Password must be at least 6 characters')
-        .max(40, 'Password must not exceed 40 characters'),
-    confirmPassword: Yup.string()
-        .required('Confirm Password is required')
-        .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+        .required('Пароль обязателный')
+        .min(6,'Не правилный пароль')
+        .max(10,'Не правилный пароль'),
+    email: Yup.string()
+        .required('Пароль обязателный')
+        .email('Не правилный пароль'),
+    // number: Yup.string()
+    //     .required('Номер обязателный'),
+        // .matches(
+        //     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+        //     "Phone number is not valid"
+        // )
+    //
+    // confirmPassword: Yup.string()
+    //     .required('Confirm Password is required')
+    //     .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
+    // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 });
 
 

@@ -12,17 +12,18 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function StatisticToday() {
     return (
         <Grid container>
-                    <Grid item lg={8}>
+                    <Grid item lg={6}>
                         <Item sx={{
                             height: '472px',
                             width: '674px',
-                            borderRadius: '20px'
+                            borderRadius: '20px',
+                            mr: '17px'
                         }}>xs=8</Item>
                     </Grid>
                     <Grid item lg={4}>
                         <Item sx={{
-                            height: '467px',
-                            width: '528px',
+                            height: '472px',
+                            width: '467px',
                             borderRadius: '20px'
                         }}>xs=4</Item>
                     </Grid>
@@ -30,7 +31,8 @@ export default function StatisticToday() {
                         <Item sx={{
                             height: '458px',
                             width: '1171px',
-                            borderRadius: '20px'
+                            borderRadius: '20px',
+                            mt: '48px'
                         }}>xs=4</Item>
                     </Grid>
         </Grid>

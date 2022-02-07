@@ -53,21 +53,21 @@ export const SignInTab = () => {
             color: 'black',
             fontSize: 48,
             fontWeight: 700,
-            my: '27px',
+            my: '26px',
           }}
         >
           Вход
         </Typography>
         <Divider
           sx={{
-            mb: '70px',
+            mb: '50px',
           }}
         />
         <Tabs
           value={value}
           indicatorColor="primary"
           textColor="primary"
-          sx={{ mb: '125px', ml: '72px' }}
+          sx={{ mb: '95px', ml: '80px' }}
           onChange={handleChange}
           aria-label="disabled tabs example"
         >
