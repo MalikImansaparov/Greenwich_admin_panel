@@ -1,7 +1,5 @@
 import { red } from '@mui/material/colors';
 import { createTheme} from '@mui/material/styles';
-
-
 // A custom theme for this app
 const theme = createTheme({
     breakpoints: {
@@ -12,6 +10,14 @@ const theme = createTheme({
             lg: 1200,
             xl: 1512,
         },
+    },
+    typography: {
+        fontFamily: [
+            'Montserrat'
+        ],
+        color: {
+            main: '#000000'
+        }
     },
     palette: {
         primary: {

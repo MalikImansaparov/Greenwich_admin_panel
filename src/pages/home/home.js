@@ -1,13 +1,12 @@
 import {Outlet} from "react-router";
 import ResponsiveDrawer from "../sidebar/drawer";
-import {Main} from "../main/main";
+import Box from "@mui/material/Box";
 
 export const Home = () => {
   return (
-          <div>
-            {/*<ResponsiveDrawer/>*/}
-            <Main/>
+          <Box display="flex">
+            <ResponsiveDrawer/>
             <Outlet />
-          </div>
+          </Box>
       )
 };

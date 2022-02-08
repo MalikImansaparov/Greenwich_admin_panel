@@ -64,7 +64,7 @@ export const SignInSuperAdmin = () => {
             password: '',
         },
         onSubmit: (values, {setSubmitting}) => {
-
+           navigate('home/main')
             setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);

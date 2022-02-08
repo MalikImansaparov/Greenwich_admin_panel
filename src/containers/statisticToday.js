@@ -2,6 +2,9 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import {IncomeToday} from "../views/statisticToday/incomeToday";
+import {UsersToday} from "../views/statisticToday/usersToday";
+import {OrderToday} from "../views/statisticToday/orderToday";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -12,28 +15,29 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function StatisticToday() {
     return (
         <Grid container>
-                    <Grid item lg={6}>
+                    <Grid item xl={7}>
                         <Item sx={{
                             height: '472px',
                             width: '674px',
                             borderRadius: '20px',
-                            mr: '17px'
-                        }}>xs=8</Item>
+                            mr: '15px'
+                        }}><IncomeToday/></Item>
                     </Grid>
-                    <Grid item lg={4}>
+                    <Grid item xl={5}>
                         <Item sx={{
                             height: '472px',
                             width: '467px',
-                            borderRadius: '20px'
-                        }}>xs=4</Item>
+                            borderRadius: '20px',
+                            ml: '15px'
+                        }}><UsersToday/></Item>
                     </Grid>
-                    <Grid item lg={12}>
+                    <Grid item xl={12}>
                         <Item sx={{
                             height: '458px',
                             width: '1171px',
                             borderRadius: '20px',
                             mt: '48px'
-                        }}>xs=4</Item>
+                        }}><OrderToday/></Item>
                     </Grid>
         </Grid>
     );

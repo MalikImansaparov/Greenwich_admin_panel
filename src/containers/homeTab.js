@@ -34,7 +34,7 @@ export const HomeTab = () => {
 
   return (
 
-      <Box sx={{ width: '625px', textAlign: 'center', mb: '72px' }}>
+      <Box sx={{ width: '625px', mb: '72px' }}>
           <Typography
               sx={{
                   color: 'black',
