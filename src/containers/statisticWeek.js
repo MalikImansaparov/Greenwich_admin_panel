@@ -2,12 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import {IncomeToday} from "../views/statisticToday/incomeToday";
-import {UsersToday} from "../views/statisticToday/usersToday";
-import {OrderToday} from "../views/statisticToday/orderToday";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {ResponsiveContainer} from "recharts";
+import Box from "@mui/material/Box";
+import {IncomeWeek} from "../views/statisticWeek/incomeWeek";
+import {UsersWeek} from "../views/statisticWeek/usersWeek";
+import {OrderWeek} from "../views/statisticWeek/orderWeek";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -15,17 +14,19 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export default function StatisticToday() {
+export default function StatisticWeek() {
     return (
         <Grid container>
                     <Grid item xl={7}>
                         <Item sx={{
                             height: '472px',
-                            width: '674px',
+                            width: '574px',
                             borderRadius: '20px',
                             mr: '15px'
                         }}>
-                            <IncomeToday/></Item>
+
+                            <IncomeWeek/>
+                        </Item>
                     </Grid>
                     <Grid item xl={5}>
                         <Item sx={{
@@ -33,7 +34,10 @@ export default function StatisticToday() {
                             width: '467px',
                             borderRadius: '20px',
                             ml: '15px'
-                        }}><UsersToday/></Item>
+                        }}>
+
+                            <UsersWeek/>
+                        </Item>
                     </Grid>
                     <Grid item xl={12}>
                         <Item sx={{
@@ -41,7 +45,9 @@ export default function StatisticToday() {
                             width: '1171px',
                             borderRadius: '20px',
                             mt: '48px'
-                        }}><OrderToday/></Item>
+                        }}>
+                            <OrderWeek/>
+                        </Item>
                     </Grid>
         </Grid>
     );

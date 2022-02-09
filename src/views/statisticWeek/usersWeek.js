@@ -45,7 +45,7 @@ const data = [
     },
 ];
 
-export const UsersToday = () => {
+export const UsersWeek = () => {
         return (
             <ResponsiveContainer width="100%" height="80%">
                 <BarChart

@@ -5,9 +5,8 @@ import { styled } from '@mui/material/styles';
 import {IncomeToday} from "../views/statisticToday/incomeToday";
 import {UsersToday} from "../views/statisticToday/usersToday";
 import {OrderToday} from "../views/statisticToday/orderToday";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {ResponsiveContainer} from "recharts";
+import Box from "@mui/material/Box";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -15,7 +14,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export default function StatisticToday() {
+export default function Statistic6month() {
     return (
         <Grid container>
                     <Grid item xl={7}>
@@ -25,6 +24,17 @@ export default function StatisticToday() {
                             borderRadius: '20px',
                             mr: '15px'
                         }}>
+                            <Box sx={{display: 'flex', justifyContent: 'space-around', py:'22px'}}>
+                                <Typography variant={'h5'} mt={'8px'}>
+                                    Общее количество заказов
+                                </Typography>
+                                <Typography variant={'h6'} >
+                                    7668
+                                    <Typography color='green' >
+                                        ↑ 7,00%
+                                    </Typography>
+                                </Typography>
+                            </Box>
                             <IncomeToday/></Item>
                     </Grid>
                     <Grid item xl={5}>

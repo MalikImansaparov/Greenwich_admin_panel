@@ -47,14 +47,13 @@ const data = [
     },
 ];
 
-export const OrderToday = () => {
-    const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
+export const OrderWeek = () => {
 
     return (
-        <ResponsiveContainer width="100%" height="70%">
+        <ResponsiveContainer width="100%" height="80%">
             <AreaChart
                 width={500}
-                height={200}
+                height={400}
                 data={data}
                 margin={{
                     top: 10,

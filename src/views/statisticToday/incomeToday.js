@@ -48,7 +48,6 @@ const data = [
 ];
 
 export const IncomeToday = () => {
-    const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
         return (
             <ResponsiveContainer width="100%" height="80%">
@@ -67,7 +66,7 @@ export const IncomeToday = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+                    <Area type="monotone" dataKey="uv" stroke="#487349" fill="#9C9C9C" />
                 </AreaChart>
             </ResponsiveContainer>
         );
