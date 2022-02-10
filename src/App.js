@@ -4,6 +4,7 @@ import { Main } from './pages/main/main';
 import { Home } from './pages/home/home';
 import Products from "./pages/products/product";
 import {SignInPage} from "./pages/signIn";
+import {Orders} from "./pages/orders/order";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
           <Route path='/' element={<SignInPage/>}/>
           <Route path="home" element={<Home />}>
             <Route path="main" element={<Main />} />
+            <Route path="orders" element={<Orders/>} />
             <Route path="products" element={<Products/>} />
           </Route>
         </Routes>

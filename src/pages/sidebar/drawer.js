@@ -32,6 +32,11 @@ function ResponsiveDrawer(props) {
    margin-top: 37px;
    margin-left: 28px;
    padding: 0;
+   &:hover{
+    transition: 0.2s;
+    transition-property: green, transform;
+      
+    },
 
   `;
     const NavList = styled(NavLink)`
@@ -39,10 +44,16 @@ function ResponsiveDrawer(props) {
    font-weight: 500;
    color: #000000;
    text-decoration: none;
+   &:hover{
+       color: #487349;
+    },
   `;
     const Img = styled('img')`
     width:'20';
     height:'23px';
+    &:hover{
+       color: #487349;
+    },
   `;
     const drawer = (
         <Box  >
@@ -62,7 +73,7 @@ function ResponsiveDrawer(props) {
                         <Img src={orders}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to=''>Заказы</NavList>
+                        <NavList to='orders'>Заказы</NavList>
                     </ListItemText>
                 </Item>
                 <Item>

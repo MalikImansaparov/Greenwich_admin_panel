@@ -2,52 +2,52 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 const data = [
     {
-        name: 'Page A',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
+        name: 'Пн',
+        Пользователи: 420,
+        pv: 400,
+        amt: 240,
     },
     {
-        name: 'Page B',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
+        name: 'Вт',
+        Пользователи: 500,
+        pv: 398,
+        amt: 221,
     },
     {
-        name: 'Page C',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
+        name: 'Ср',
+        Пользователи: 270,
+        pv: 300,
+        amt: 229,
     },
     {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
+        name: 'Чт',
+        Пользователи: 378,
+        pv: 390,
+        amt: 200,
     },
     {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
+        name: 'Пт',
+        Пользователи: 289,
+        pv: 480,
+        amt: 218,
     },
     {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
+        name: 'Сб',
+        Пользователи: 390,
+        pv: 380,
+        amt: 250,
     },
     {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
+        name: 'Вс',
+        Пользователи: 490,
+        pv: 430,
+        amt: 210,
     },
 ];
 
 export const UsersWeek = () => {
         return (
-            <ResponsiveContainer width="100%" height="80%">
+            <ResponsiveContainer width="100%" height="70%">
                 <BarChart
                     width={500}
                     height={300}
@@ -65,7 +65,7 @@ export const UsersWeek = () => {
                     <Tooltip />
                     <Legend />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Bar dataKey="pv" fill="#487349" background={{ fill: '#eee' }} />
+                    <Bar dataKey="Пользователи" fill="#487349" background={{ fill: '#eee' }} />
                 </BarChart>
             </ResponsiveContainer>
         );

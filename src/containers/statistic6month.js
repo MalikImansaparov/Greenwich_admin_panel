@@ -2,11 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import {IncomeToday} from "../views/statisticToday/incomeToday";
-import {UsersToday} from "../views/statisticToday/usersToday";
-import {OrderToday} from "../views/statisticToday/orderToday";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {Income6Month} from "../views/statistic6month/income6month";
+import {Users6Month} from "../views/statistic6month/users6month";
+import {Order6Month} from "../views/statistic6month/order6month";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -31,11 +31,11 @@ export default function Statistic6month() {
                                 <Typography variant={'h6'} >
                                     7668
                                     <Typography color='green' >
-                                        ↑ 7,00%
+                                        ↑7,00%
                                     </Typography>
                                 </Typography>
                             </Box>
-                            <IncomeToday/></Item>
+                            <Income6Month/></Item>
                     </Grid>
                     <Grid item xl={5}>
                         <Item sx={{
@@ -43,7 +43,19 @@ export default function Statistic6month() {
                             width: '467px',
                             borderRadius: '20px',
                             ml: '15px'
-                        }}><UsersToday/></Item>
+                        }}>
+                            <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx: '22px'}}>
+                                <Typography variant={'h6'}>
+                                    Общее количество <br/> пользователей
+                                </Typography>
+                                <Typography variant={'h6'} >
+                                    3680
+                                    <Typography color='green' >
+                                        ↑8,00%
+                                    </Typography>
+                                </Typography>
+                            </Box>
+                            <Users6Month/></Item>
                     </Grid>
                     <Grid item xl={12}>
                         <Item sx={{
@@ -51,7 +63,19 @@ export default function Statistic6month() {
                             width: '1171px',
                             borderRadius: '20px',
                             mt: '48px'
-                        }}><OrderToday/></Item>
+                        }}>
+                            <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx:'55px'}}>
+                                <Typography variant={'h5'} mt={'8px'}>
+                                    Общий доход
+                                </Typography>
+                                <Typography variant={'h6'} >
+                                    $76685.41
+                                    <Typography color='green' >
+                                        ↑7,00%
+                                    </Typography>
+                                </Typography>
+                            </Box>
+                            <Order6Month/></Item>
                     </Grid>
         </Grid>
     );

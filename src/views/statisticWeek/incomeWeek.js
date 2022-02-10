@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 const data = [
     {
         name: 'Пн',
-        uv: 4000,
+        uv: 1500,
         pv: 2400,
         amt: 2400,
     },
@@ -18,7 +18,7 @@ const data = [
     },
     {
         name: 'Ср',
-        uv: 2000,
+        uv: 2100,
         pv: 9800,
         amt: 2290,
     },
@@ -37,12 +37,12 @@ const data = [
     {
         name: 'Сб',
         uv: 2390,
-        pv: 3800,
+        pv: 2800,
         amt: 2500,
     },
     {
         name: 'Вс',
-        uv: 3490,
+        uv: 3200,
         pv: 4300,
         amt: 2100,
     },
@@ -50,7 +50,7 @@ const data = [
 
 export const IncomeWeek = () => {
         return (
-                <ResponsiveContainer width="100%" height="80%">
+                <ResponsiveContainer width="100%" height="75%">
                     <AreaChart
                         width={500}
                         height={400}

@@ -9,7 +9,6 @@ export const Main = () => {
     <Box>
         <Box sx={{my:'38px' , mx: '32px'}}>
             <HomeTab/>
-            <StatisticWeek/>
         </Box>
 
     </Box>

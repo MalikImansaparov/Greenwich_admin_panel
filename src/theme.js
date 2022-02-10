@@ -31,8 +31,12 @@ const theme = createTheme({
         },
         background: {
             default: '#F8F3EC',
-        }
+        },
+        hover: {
+         background: "#487349"
+        },
     },
+
 });
 
 export default theme;

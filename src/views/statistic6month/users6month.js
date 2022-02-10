@@ -11,44 +11,44 @@ import {
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
+    name: 'Янв',
+    Пользователи: 2600,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: 'Page B',
-    uv: 3000,
+    name: 'Фев',
+    Пользователи: 2390,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: 'Page C',
-    uv: 2000,
+    name: 'Март',
+    Пользователи: 2000,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: 'Page D',
-    uv: 2780,
+    name: 'Апр',
+    Пользователи: 2780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: 'Page E',
-    uv: 1890,
+    name: 'Май',
+    Пользователи: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: 'Page F',
-    uv: 2390,
+    name: 'Июнь',
+    Пользователи: 2390,
     pv: 3800,
     amt: 2500,
   },
   {
-    name: 'Page G',
-    uv: 3490,
+    name: 'Июль',
+    Пользователи: 3190,
     pv: 4300,
     amt: 2100,
   },
@@ -56,7 +56,7 @@ const data = [
 
 export const Users6Month = () => {
   return (
-    <ResponsiveContainer width="100%" height="80%">
+    <ResponsiveContainer width="100%" height="70%">
       <BarChart
         width={500}
         height={300}
@@ -74,7 +74,7 @@ export const Users6Month = () => {
         <Tooltip />
         <Legend />
         <CartesianGrid strokeDasharray="3 3" />
-        <Bar dataKey="pv" fill="#487349" background={{ fill: '#eee' }} />
+        <Bar dataKey="Пользователи" fill="#487349" background={{ fill: '#eee' }} />
       </BarChart>
     </ResponsiveContainer>
   );

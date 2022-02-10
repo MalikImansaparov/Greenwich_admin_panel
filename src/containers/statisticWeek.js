@@ -4,51 +4,81 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {IncomeWeek} from "../views/statisticWeek/incomeWeek";
 import {UsersWeek} from "../views/statisticWeek/usersWeek";
 import {OrderWeek} from "../views/statisticWeek/orderWeek";
+import {IncomeWeek} from "../views/statisticWeek/incomeWeek";
 
-const Item = styled(Paper)(({ theme }) => ({
+  const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
 
-export default function StatisticWeek() {
+export default function Statistic6month() {
     return (
         <Grid container>
-                    <Grid item xl={7}>
-                        <Item sx={{
-                            height: '472px',
-                            width: '574px',
-                            borderRadius: '20px',
-                            mr: '15px'
-                        }}>
-
-                            <IncomeWeek/>
-                        </Item>
-                    </Grid>
-                    <Grid item xl={5}>
-                        <Item sx={{
-                            height: '472px',
-                            width: '467px',
-                            borderRadius: '20px',
-                            ml: '15px'
-                        }}>
-
-                            <UsersWeek/>
-                        </Item>
-                    </Grid>
-                    <Grid item xl={12}>
-                        <Item sx={{
-                            height: '458px',
-                            width: '1171px',
-                            borderRadius: '20px',
-                            mt: '48px'
-                        }}>
-                            <OrderWeek/>
-                        </Item>
-                    </Grid>
+            <Grid item xl={7}>
+                <Item sx={{
+                    height: '472px',
+                    width: '674px',
+                    borderRadius: '20px',
+                    mr: '15px'
+                }}>
+                    <Box sx={{display: 'flex', justifyContent: 'space-around', py:'22px'}}>
+                        <Typography variant={'h5'} mt={'8px'}>
+                            Общее количество заказов
+                        </Typography>
+                        <Typography variant={'h6'} >
+                            668
+                            <Typography color='green' >
+                                ↑7,00%
+                            </Typography>
+                        </Typography>
+                    </Box>
+                    <IncomeWeek/></Item>
+            </Grid>
+            <Grid item xl={5}>
+                <Item sx={{
+                    height: '472px',
+                    width: '467px',
+                    borderRadius: '20px',
+                    ml: '15px'
+                }}>
+                    <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx: '22px'}}>
+                        <Typography variant={'h6'} >
+                            Общее количество <br/> пользователей
+                        </Typography>
+                        <Typography variant={'h6'} >
+                            1115
+                            <Typography color='green' >
+                                ↑8,00%
+                            </Typography>
+                        </Typography>
+                    </Box>
+                    <UsersWeek/>
+                </Item>
+            </Grid>
+            <Grid item xl={12}>
+                <Item sx={{
+                    height: '458px',
+                    width: '1171px',
+                    borderRadius: '20px',
+                    mt: '48px'
+                }}>
+                    <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx: '55px'}}>
+                        <Typography variant={'h5'} mt={'8px'}>
+                            Общий доход
+                        </Typography>
+                        <Typography variant={'h6'} >
+                            $16685.41
+                            <Typography color='green' >
+                                ↑7,00%
+                            </Typography>
+                        </Typography>
+                    </Box>
+                    <OrderWeek/>
+                </Item>
+            </Grid>
         </Grid>
     );
 }

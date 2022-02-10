@@ -11,46 +11,130 @@ import {
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
+    name: 'Январь',
+    uv: 2500,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: 'Page B',
+    name: '2 неделя',
     uv: 3000,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: 'Page C',
-    uv: 2000,
+    name: '3 неделя',
+    uv: 1000,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
+    name: '4 неделя',
     uv: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: 'Page F',
+    name: 'Февраль',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: '2 неделя',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: '3 неделя',
     uv: 2390,
     pv: 3800,
     amt: 2500,
   },
   {
-    name: 'Page G',
+    name: '4 неделя',
     uv: 3490,
     pv: 4300,
     amt: 2100,
+  },
+  {
+    name: 'Март',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: '2 неделя',
+    uv: 2200,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: '3 неделя',
+    uv: 3400,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: '4 неделя',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Апрель',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: '2 неделя',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: '3 неделя',
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+  {
+    name: '4 неделя',
+    uv: 3000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'Май',
+    uv: 4000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: '2 неделя',
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: '3 неделя',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: '4 неделя',
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Июнь',
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
   },
 ];
 
@@ -58,7 +142,7 @@ export const Income6Month = () => {
   const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
   return (
-    <ResponsiveContainer width="100%" height="80%">
+    <ResponsiveContainer width="100%" height="70%">
       <AreaChart
         width={500}
         height={400}

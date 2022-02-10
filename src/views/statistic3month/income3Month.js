@@ -8,51 +8,85 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 const data = [
   {
-    name: 'Page A',
-    uv: 4000,
+    name: 'Январь',
+    uv: 2500,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: 'Page B',
-    uv: 3000,
+    name: '2 неделя',
+    uv: 2000,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: 'Page C',
-    uv: 2000,
+    name: '3 неделя',
+    uv: 2800,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: 'Page D',
-    uv: 2780,
+    name: '4 неделя',
+    uv: 1900,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'Февраль',
+    uv: 3380,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: 'Page E',
+    name: '2 неделя',
     uv: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: 'Page F',
-    uv: 2390,
+    name: '3 неделя',
+    uv: 3190,
     pv: 3800,
     amt: 2500,
   },
   {
-    name: 'Page G',
-    uv: 3490,
+    name: '4 неделя',
+    uv: 3000,
     pv: 4300,
     amt: 2100,
+  },
+  {
+    name: 'Март',
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: '2 неделя',
+    uv: 2200,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: '3 неделя',
+    uv: 3400,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: '4 неделя',
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'Апрель',
+    uv: 3890,
+    pv: 4800,
+    amt: 2181,
   },
 ];
 
@@ -60,18 +94,17 @@ export const Income3Month = () => {
   const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
   return (
-    <Box>
       <ResponsiveContainer width="100%" height="80%">
         <AreaChart
-          width={500}
-          height={200}
-          data={data}
-          margin={{
-            top: 10,
-            right: 30,
-            left: 0,
-            bottom: 0,
-          }}
+            width={500}
+            height={400}
+            data={data}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 0,
+            }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -80,6 +113,5 @@ export const Income3Month = () => {
           <Area type="monotone" dataKey="uv" stroke="#487349" fill="#9C9C9C" />
         </AreaChart>
       </ResponsiveContainer>
-    </Box>
   );
 };

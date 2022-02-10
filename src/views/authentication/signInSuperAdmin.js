@@ -48,8 +48,8 @@ const validationSchema = Yup.object({
         .min(6, 'Не правилный пароль')
         .max(10, 'Не правилный пароль'),
     email: Yup.string()
-        .required('Пароль обязателный')
-        .email('Не правилный пароль')
+        .required('Логин обязателный')
+        .email('Не правилный логин')
 })
 
 export const SignInSuperAdmin = () => {
@@ -63,12 +63,8 @@ export const SignInSuperAdmin = () => {
             email: '',
             password: '',
         },
-        onSubmit: (values, {setSubmitting}) => {
+        onSubmit: () => {
            navigate('home/main')
-            setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-            }, 400);
         },
         validationSchema
     });
