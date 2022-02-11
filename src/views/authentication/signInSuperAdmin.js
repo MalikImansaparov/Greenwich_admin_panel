@@ -13,8 +13,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import Typography from "@mui/material/Typography";
 import * as Yup from 'yup';
 
-
-
 const TextFieldsWrapper = styled(TextField)`
    width: 320px;
    height: 48px;

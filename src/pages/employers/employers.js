@@ -1,5 +1,9 @@
+import {EmployersList} from "../../components/employers/EmployersList/EmployersList";
+
 export const Employers = () => {
 return (
-<div>Employers</div>
+    <div>
+    <EmployersList/>
+   </div>
 )
 }

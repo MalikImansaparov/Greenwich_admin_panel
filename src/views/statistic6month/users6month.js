@@ -74,7 +74,7 @@ export const Users6Month = () => {
         <Tooltip />
         <Legend />
         <CartesianGrid strokeDasharray="3 3" />
-        <Bar dataKey="Пользователи" fill="#487349" background={{ fill: '#eee' }} />
+        <Bar dataKey="Пользователи" fill="#38A83A" background={{ fill: '#eee' }} />
       </BarChart>
     </ResponsiveContainer>
   );

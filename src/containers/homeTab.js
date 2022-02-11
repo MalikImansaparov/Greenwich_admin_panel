@@ -38,34 +38,16 @@ export const HomeTab = () => {
 
   return (
       <Box>
-          <Box sx={{display: "flex", justifyContent: "space-between"}}>
               <Typography
                   sx={{
                       color: 'black',
                       fontSize: 32,
                       fontWeight: 600,
-
+                      mb: '22px'
                   }}
               >
                   Приветствуем, Администратор
               </Typography>
-              <Box sx={{display: 'flex', mt:'10px', '&:hover': {
-                      color: '#487349',
-                      cursor:'pointer',
-
-                  },}}>
-                  <Typography sx={{
-                      width: '250px',
-                      textAlign: 'center',
-                      fontSize: 22,
-                      fontWeight: 600,
-                      mt: '10px'
-                      }}>
-                      Малик Имансапаров
-                  </Typography>
-                  <img src={avatar} alt='avatar' sx={{mt:'20px'}}/>
-              </Box>
-          </Box>
         <Tabs
           value={value}
           indicatorColor="primary"
@@ -75,8 +57,8 @@ export const HomeTab = () => {
           sx={{ mb: '42px', fontSize: '20px' }}
         >
           <Tab label="Неделя" sx={{mr: '30px', ml: '15px'}}/>
-          <Tab label="Последние 3 месяца" sx={{mr: '30px'}}/>
-          <Tab label="Последние 6 месяца" />
+          <Tab label="Последние 3 месяцев" sx={{mr: '30px'}}/>
+          <Tab label="Последние 6 месяцев" />
         </Tabs>
         <TabPanel value={value} index={0}>
          <StatisticWeek/>

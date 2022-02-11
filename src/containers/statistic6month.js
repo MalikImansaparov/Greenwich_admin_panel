@@ -1,18 +1,11 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {Income6Month} from "../views/statistic6month/income6month";
 import {Users6Month} from "../views/statistic6month/users6month";
 import {Order6Month} from "../views/statistic6month/order6month";
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import {Item} from "../style";
 
 export default function Statistic6month() {
     return (

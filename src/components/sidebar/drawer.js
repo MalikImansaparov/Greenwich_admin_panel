@@ -1,7 +1,4 @@
 import * as React from 'react';
-import AppBar from "@mui/material/AppBar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
@@ -21,7 +18,7 @@ import users from '../../assets/img/statistic.svg'
 import employers from '../../assets/img/users.svg'
 import contacts from '../../assets/img/userI.svg'
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 function ResponsiveDrawer(props) {
     const { window } = props;
@@ -31,11 +28,13 @@ function ResponsiveDrawer(props) {
     };
 
     const Item = styled(ListItem)`
+   display: 'block';
    margin-top: 37px;
-   margin-left: 18px;
+   margin-left: 28px;
+   margin-right: 80px;
    padding: 0;
+   
   `;
-
     const NavList = styled(NavLink)`
    font-size: 18px;
    font-weight: 500;
@@ -43,17 +42,15 @@ function ResponsiveDrawer(props) {
    text-decoration: none;
    transition: all .5s ease;
    &:hover {
-   // padding: 5px;
-   // color: #82ca9d;
+   padding: 5px;
+   color: #82ca9d;
    border-bottom: 2px solid #82ca9d;
-   // transition: all .2s;
+   transition: all .2s;
   `;
-
     const Img = styled('img')`
     width:'20';
     height:'23px';
   `;
-
     const drawer = (
         <Box  >
             <Toolbar />
@@ -80,14 +77,14 @@ function ResponsiveDrawer(props) {
                         <Img src={employers}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to=''>Сотрудники</NavList>
+                        <NavList to='employers'>Сотрудники</NavList>
                     </ListItemText>
                 </Item>
                 <Item>
                     <ListItemIcon>
                         <Img src={users}/>
                     </ListItemIcon>
-                    <ListItemText >
+                    <ListItemText>
                         <NavList to=''>Пользователи</NavList>
                     </ListItemText>
                 </Item>
@@ -141,13 +138,13 @@ function ResponsiveDrawer(props) {
             {/*>*/}
             {/*    <Toolbar>*/}
             {/*        <IconButton*/}
-            {/*            color="#F8F3EC"*/}
+            {/*            color="inherit"*/}
             {/*            aria-label="open drawer"*/}
             {/*            edge="start"*/}
             {/*            onClick={handleDrawerToggle}*/}
             {/*            sx={{ mr: 2, display: { sm: 'none' } }}*/}
             {/*        >*/}
-            {/*            /!*<MenuIcon/>*!/*/}
+            {/*            <MenuIcon />*/}
             {/*        </IconButton>*/}
             {/*        <Typography variant="h6" noWrap component="div">*/}
             {/*            Responsive drawer*/}

@@ -1,18 +1,11 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import {UsersWeek} from "../views/statisticWeek/usersWeek";
 import {OrderWeek} from "../views/statisticWeek/orderWeek";
 import {IncomeWeek} from "../views/statisticWeek/incomeWeek";
-
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
+import {Item} from "../style";
 
 export default function Statistic6month() {
     return (
