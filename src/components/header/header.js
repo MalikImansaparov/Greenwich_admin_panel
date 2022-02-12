@@ -5,7 +5,7 @@ import * as React from "react";
 
 export const Header = () => {
     return (
-        <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+        <Box sx={{display: 'flex', justifyContent: 'flex-end', mt: '50px'}}>
             <Box sx={{display: 'flex',
                 color: '#487349',
                 cursor:'pointer',

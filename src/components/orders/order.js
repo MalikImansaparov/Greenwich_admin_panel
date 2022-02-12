@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import {OrderTab} from "../../components/orders/containers/OrderTab";
-import {Header} from "../../components/header/header";
+import {OrderTab} from "./containers/OrderTab";
+import {Header} from "../header/header";
 
 
 export const Orders = () => {

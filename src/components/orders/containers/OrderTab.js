@@ -7,6 +7,7 @@ import {useState} from "react";
 import {CurrentOrders} from "../view/CurrentOrders/CurrentOrders";
 import {CompletedOrders} from "../view/CompletedOrders/CompletedOrders";
 import {CanceledOrders} from "../view/CanceledOrders/CanceledOrders";
+import CustomSeparator from "../../breadCrumbs";
 
 export const OrderTab = () => {
     const [value, setValue] = useState(0);
@@ -37,6 +38,7 @@ export const OrderTab = () => {
 
     return (
         <Box>
+            <CustomSeparator/>
             <Box sx={{mb: '24px', ml: '20px'}}>
                 <Typography
                     sx={{

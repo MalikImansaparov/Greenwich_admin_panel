@@ -3,11 +3,12 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import {SignInSuperAdmin} from "../views/authentication/signInSuperAdmin";
-import {SignInAdmin} from "../views/authentication/signInAdmin";
+import {SignInSuperAdmin} from "../components/authentication/view/signInSuperAdmin";
+
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
 import {useState} from "react";
+import {SignInAdmin} from "../components/authentication/view/signInAdmin";
 
 export const SignInTab = () => {
   const [value, setValue] = useState(0);
@@ -76,10 +77,10 @@ export const SignInTab = () => {
           <Tab label="Администратор" />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <SignInSuperAdmin handleChange={handleChange} />
+          <SignInSuperAdmin handleChange={handleChange}/>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <SignInAdmin />
+           <SignInAdmin/>
         </TabPanel>
       </Box>
     </Paper>

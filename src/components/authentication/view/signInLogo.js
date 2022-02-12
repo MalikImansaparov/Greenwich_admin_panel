@@ -1,4 +1,4 @@
-import logo from "../../assets/img/Greenwich.svg"
+import logo from "../../../assets/img/Greenwich.svg"
 import Box from "@mui/material/Box";
 
 export const SignInLogo = () => {

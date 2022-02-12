@@ -2,10 +2,10 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import {Income6Month} from "../views/statistic6month/income6month";
-import {Users6Month} from "../views/statistic6month/users6month";
-import {Order6Month} from "../views/statistic6month/order6month";
-import {Item} from "../style";
+import {Income6Month} from "../view/statistic6month/income6month";
+import {Users6Month} from "../view/statistic6month/users6month";
+import {Order6Month} from "../view/statistic6month/order6month";
+import {Item} from "../../../style";
 
 export default function Statistic6month() {
     return (

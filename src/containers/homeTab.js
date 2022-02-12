@@ -4,10 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {useState} from "react";
-import StatisticWeek from "./statisticWeek";
-import Statistic3month from "./statistic3month";
-import Statistic6month from "./statistic6month";
-import avatar from "../assets/img/avater.svg"
+import StatisticWeek from "../components/statistic/containers/statisticWeek";
+import Statistic3month from "../components/statistic/containers/statistic3month";
+import Statistic6month from "../components/statistic/containers/statistic6month";
 
 export const HomeTab = () => {
   const [value, setValue] = useState(0);

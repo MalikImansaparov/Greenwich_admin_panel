@@ -88,31 +88,31 @@ export const CurrentOrders = () => {
                     padding: '5px 10px',
                     backgroundColor: '#3bb077',
                     cursor: 'pointer',
-                    }}>
+                }}>
                     {params.row.status}</Box>;
             },
         },
     ];
-        return (
-            <Grid container >
-                <Grid item xs={12}>
-                    <Item sx={{
-                        height: '658px',
-                        width: '1171px',
-                        borderRadius: '20px',
-                        mt: '48px'
-                    }}>
-                        <DataGrid
-                            className="grid"
-                            rows={data}
-                            columns={columns}
-                            pageSize={10}
-                            rowsPerPageOptions={[2]}
-                            disableSelectionOnClick
-                        />
-                    </Item>
-                </Grid>
+    return (
+        <Grid container >
+            <Grid item xs={12}>
+                <Item sx={{
+                    height: '658px',
+                    width: '1171px',
+                    borderRadius: '20px',
+                    mt: '48px'
+                }}>
+                    <DataGrid
+                        className="grid"
+                        rows={data}
+                        columns={columns}
+                        pageSize={10}
+                        rowsPerPageOptions={[2]}
+                        disableSelectionOnClick
+                    />
+                </Item>
             </Grid>
+        </Grid>
     );
 }
 
