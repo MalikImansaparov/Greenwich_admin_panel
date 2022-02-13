@@ -53,12 +53,12 @@ export const userData = [
 export const userRows = [
     {
         id: 1,
-        username: 'Sofi Kamel',
+        user: 'Sofi Kamel',
         avatar:
             'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=386&q=80',
-        email: 'sofi@gmail.com',
+        phone: 'sofi@gmail.com',
         status: 'active',
-        transaction: '320.00',
+        sum: '320.00',
     },
     {
         id: 2,

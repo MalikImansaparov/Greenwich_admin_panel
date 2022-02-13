@@ -23,8 +23,8 @@ const theme = createTheme({
         primary: {
             main: '#487349',
         },
-        secondary: {
-            main: '#19857b',
+        grey: {
+            main: '#E1E1E1;',
         },
         error: {
             main: red.A400,
@@ -33,8 +33,11 @@ const theme = createTheme({
             default: '#F8F3EC',
         },
         hover: {
-         background: "#487349"
+         background: "#E6F0E6;"
         },
+        placeholder: {
+            default: '#487349;'
+        }
     },
 
 });

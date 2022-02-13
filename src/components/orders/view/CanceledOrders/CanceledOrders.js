@@ -16,14 +16,14 @@ export const CanceledOrders = () => {
     };
 
     const columns = [
-        // {
-        //     field: 'id',
-        //     headerName: 'ID',
-        //     width: 100,
-        //     renderCell: (params) => {
-        //         return <div className="user-l-id">{params.row.id}</div>;
-        //     },
-        // },
+        {
+            field: 'id',
+            headerName: 'ID заказа',
+            width: 100,
+            renderCell: (params) => {
+                return <div>{params.row.id}</div>;
+            },
+        },
         {
             field: 'user',
             headerName: 'Получатель',
@@ -36,7 +36,7 @@ export const CanceledOrders = () => {
                         {/*    src={params.row.avatar}*/}
                         {/*    alt="avatar"*/}
                         {/*/>*/}
-                        {params.row.username}
+                        {params.row.user}
                     </div>
                 );
             },
@@ -46,7 +46,23 @@ export const CanceledOrders = () => {
             headerName: 'Номер получателя',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.email}</div>;
+                return <div>{params.row.phone}</div>;
+            },
+        },
+        {
+            field: 'data',
+            headerName: 'Дата',
+            width: 200,
+            renderCell: (params) => {
+                return <div>{params.row.data}</div>;
+            },
+        },
+        {
+            field: 'address',
+            headerName: 'Адрес',
+            width: 200,
+            renderCell: (params) => {
+                return <div>{params.row.address}</div>;
             },
         },
         {
@@ -54,47 +70,26 @@ export const CanceledOrders = () => {
             headerName: 'Сумма',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.email}</div>;
+                return <div>{params.row.sum}</div>;
             },
         },
-        {
-            field: 'address',
-            headerName: 'Email',
-            width: 200,
-            renderCell: (params) => {
-                return <div>{params.row.email}</div>;
-            },
-        },
-        {
-            field: 'courier',
-            headerName: 'Курьер',
-            width: 200,
-            renderCell: (params) => {
-                return <div>{params.row.email}</div>;
-            },
-        },
-        {
-            field: 'phoneCourier',
-            headerName: 'Номер курьера',
-            width: 200,
-            renderCell: (params) => {
-                return <div>{params.row.email}</div>;
-            },
-        },
-        {
-            field: 'status',
-            headerName: 'Действие',
-            width: 130,
-            renderCell: (params) => {
-                return <Box sx={{
-                    borderRadius: '10px',
-                    padding: '5px 10px',
-                    backgroundColor: '#3bb077',
-                    cursor: 'pointer',
-                    }}>
-                    {params.row.status}</Box>;
-            },
-        },
+        // {
+        //     field: 'courier',
+        //     headerName: 'Курьер',
+        //     width: 200,
+        //     renderCell: (params) => {
+        //         return <div>{params.row.email}</div>;
+        //     },
+        // },
+        // {
+        //     field: 'phoneCourier',
+        //     headerName: 'Номер курьера',
+        //     width: 200,
+        //     renderCell: (params) => {
+        //         return <div>{params.row.email}</div>;
+        //     },
+        // },
+
     ];
 
     return (

@@ -118,50 +118,23 @@ function ResponsiveDrawer(props) {
             </List>
         </Box>
     );
-
-            {/*<AppBar*/}
-            {/*    position="fixed"*/}
-            {/*    sx={{*/}
-            {/*        width: { sm: `calc(100% - ${drawerWidth}px)` },*/}
-            {/*        ml: { sm: `${drawerWidth}px` },*/}
-            {/*    }}*/}
-            {/*>*/}
-            {/*    <Toolbar>*/}
-            {/*        <IconButton*/}
-            {/*            color="inherit"*/}
-            {/*            aria-label="open drawer"*/}
-            {/*            edge="start"*/}
-            {/*            onClick={handleDrawerToggle}*/}
-            {/*            sx={{ mr: 2, display: { sm: 'none' } }}*/}
-            {/*        >*/}
-            {/*            <MenuIcon />*/}
-            {/*        </IconButton>*/}
-            {/*        <Typography variant="h6" noWrap component="div">*/}
-            {/*            Responsive drawer*/}
-            {/*        </Typography>*/}
-            {/*    </Toolbar>*/}
-            {/*</AppBar>*/}
             const container = window !== undefined ? () => window().document.body : undefined;
 
             return (
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
-                <AppBar
-                    position="fixed"
-
-                >
                     <Toolbar>
                         <IconButton
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
+                            font-size='95px'
                             onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { md: 'none' } }}
+                            sx={{ position: 'absolute', top: '45px', display: { md: 'none' } }}
                         >
                             <MenuIcon />
                         </IconButton>
                     </Toolbar>
-                </AppBar>
                 <Box
                     component="nav"
                     sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}

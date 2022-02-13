@@ -29,6 +29,7 @@
     "recharts": "^2.1.8",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
+    "use-react-router-breadcrumbs": "^3.1.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
