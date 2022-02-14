@@ -1,8 +1,9 @@
+import {Header} from "../header/header";
 
 export const Products = () => {
   return (
       <>
-        <div>Prod</div>
+        <Header/>
       </>
 
 

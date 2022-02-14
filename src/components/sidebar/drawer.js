@@ -80,7 +80,7 @@ function ResponsiveDrawer(props) {
                         <Img src={employers}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='employers'>Сотрудники</NavList>
+                        <NavList to='employers/list'>Сотрудники</NavList>
                     </ListItemText>
                 </Item>
                 <Item>
@@ -172,9 +172,6 @@ function ResponsiveDrawer(props) {
             </Box>
             );
             }
-
-
-
             export default ResponsiveDrawer;
 
 

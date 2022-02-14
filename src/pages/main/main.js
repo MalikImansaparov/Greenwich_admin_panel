@@ -5,7 +5,7 @@ import {Header} from "../../components/header/header";
 export const Main = () => {
   return (
     <Box>
-      <Box sx={{ my: '38px', mx: '32px' }}>
+      <Box sx={{ my: '28px', mx: '5px' }}>
         <Header />
         <HomeTab />
       </Box>

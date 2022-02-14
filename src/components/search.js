@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 
-const InputWrapper = styled('input')`
+const SearchWrapper = styled('input')`
   width: 300px;
   height: 52px;
   background: #E6F0E6;
@@ -28,7 +28,7 @@ const InputWrapper = styled('input')`
 
 export const Search = () => {
     return (
-        <InputWrapper
+        <SearchWrapper
             name="search"
             type="string"
             placeholder="Поиск"

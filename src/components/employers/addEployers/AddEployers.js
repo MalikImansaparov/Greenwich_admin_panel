@@ -1,28 +1,19 @@
-import React, {useState} from "react";
+import React from "react";
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
-import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Visibility from "@mui/icons-material/Visibility";
+
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
+import {InputWrapper, SelectWrapper, LabelWrapper, optionWrapper} from "../InputWrapper";
+import {Item} from "../../../style";
 
-const TextFieldsWrapper = styled(TextField)`
-   width: 320px;
-   height: 48px;
-   fieldset {
-    border-radius: 20px;
-  }
-`;
 const CustomButton = styled(Button)`
   height: 52px;
-  width: 320px;
+  width: 500px;
   background-color: #487349;
   padding: 14px 130px;
   border-radius: 20px;
@@ -51,9 +42,6 @@ const validationSchema = Yup.object({
 })
 
 export const AddEmployers = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
@@ -67,75 +55,220 @@ export const AddEmployers = () => {
         validationSchema
     });
     return (
-        <FormControl>
-            <form onSubmit={handleSubmit}>
-                <Box sx={{ mb: '48px' }}>
-                    <TextFieldsWrapper
-                        id="outlined-number"
-                        name="number"
-                        onChange={handleChange}
-                        type="tel"
-                        value={values.number}
-                        onBlur={handleBlur}
-                        label="Номер телефона"
-                        vaiant="outlined"
-                    />
-                    {errors.number && touched.number && (
-                        <Typography
-                            sx={{
-                                textAlign: 'left',
-                                fontSize: '13px',
-                                color: 'error.main',
-                                mt: '12px',
-                                ml: '14px',
-                            }}
+        <Item sx={{width: '1200px'}}>
+
+            <FormControl>
+                <form onSubmit={handleSubmit}>
+                    <Typography sx={{
+                        fontSize: '28px',
+                        fontWeight: 500,
+                        textAlign: 'left',
+                        my: '30px'
+                    }}>
+                        Создание аккаунта
+                    </Typography>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Имя</LabelWrapper>
+                        <InputWrapper
+                            name="name"
+                            onChange={handleChange}
+                            type="string"
+                            value={values.name}
+                            onBlur={handleBlur}
+                            placeholder="Малик"
+                        />
+                        {errors.name && touched.name && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.name}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Фамилия</LabelWrapper>
+                        <InputWrapper
+                            name="surename"
+                            onChange={handleChange}
+                            type="string"
+                            value={values.surename}
+                            onBlur={handleBlur}
+                            placeholder="Имансапаров"
+                        />
+                        {errors.surename && touched.surename && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.surename}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Номер телефона</LabelWrapper>
+                        <InputWrapper
+                            name="number"
+                            onChange={handleChange}
+                            type="number"
+                            value={values.number}
+                            onBlur={handleBlur}
+                            placeholder="+996555112233"
+                        />
+                        {errors.number && touched.number && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.number}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Электронная почта</LabelWrapper>
+                        <InputWrapper
+                            name="email"
+                            onChange={handleChange}
+                            type="email"
+                            value={values.email}
+                            onBlur={handleBlur}
+                            placeholder="greenwich@gmail.com"
+                        />
+                        {errors.email && touched.email && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.email}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Роль</LabelWrapper>
+                        <SelectWrapper
+                            name="role"
+                            type='string'
+                            value={values.role}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            sx={{ display: 'block'}}
                         >
-                            {errors.number}
-                        </Typography>
-                    )}
-                </Box>
-                <Box sx={{ mb: '88px' }}>
-                    <TextFieldsWrapper
-                        id="outlined-password-input"
-                        label="Пароль"
-                        name="password"
-                        variant="outlined"
-                        type={showPassword ? 'text' : 'password'}
-                        onChange={handleChange}
-                        value={values.password}
-                        onBlur={handleBlur}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                    >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    {errors.password && touched.password && (
-                        <Typography
-                            sx={{
-                                textAlign: 'left',
-                                fontSize: '13px',
-                                color: 'error.main',
-                                mt: '12px',
-                                ml: '14px',
-                            }}
-                        >
-                            {errors.password}
-                        </Typography>
-                    )}
-                </Box>
-                <CustomButton type="submit" disabled={isSubmitting}>
-                    Войти
-                </CustomButton>
-            </form>
-        </FormControl>
+                            <option value="florist" label="Флорист" />
+                            <option value="courier" label="Курьер" />
+                            <option value="admin" label="Админ" />
+                        </SelectWrapper>
+                        {errors.role && touched.role && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.role}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Зарплата</LabelWrapper>
+                        <InputWrapper
+                            name="salary"
+                            onChange={handleChange}
+                            type="number"
+                            value={values.salary}
+                            onBlur={handleBlur}
+                            placeholder="30000"
+                        />
+                        {errors.salary && touched.salary && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.salary}
+                            </Typography>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Пароль</LabelWrapper>
+                        <InputWrapper
+                            name="password"
+                            onChange={handleChange}
+                            type="password"
+                            value={values.password}
+                            onBlur={handleBlur}
+                            placeholder="*******"
+                        />
+                        {errors.password && touched.password && (
+                            <LabelWrapper
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.password}
+                            </LabelWrapper>
+                        )}
+                    </Box>
+                    <Box sx={{ mb: '48px' }}>
+                        <LabelWrapper>Потверждение пароля</LabelWrapper>
+                        <InputWrapper
+                            name="confirm"
+                            onChange={handleChange}
+                            type="password"
+                            value={values.confirm}
+                            onBlur={handleBlur}
+                            placeholder="*******"
+                        />
+                        {errors.confirm && touched.confirm && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.confirm}
+                            </Typography>
+                        )}
+                    </Box>
+                    <CustomButton type="submit" disabled={isSubmitting}>
+                        Создать
+                    </CustomButton>
+                </form>
+            </FormControl>
+        </Item>
+
     );
 };
