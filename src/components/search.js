@@ -1,13 +1,14 @@
 import {styled} from "@mui/system";
-import TextField from "@mui/material/TextField";
+import SearchIcon from '@mui/icons-material/Search';
 import React from "react";
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 
 const SearchWrapper = styled('input')`
+  position: absolute;
+  right: 45px;
   width: 300px;
   height: 52px;
   background: #E6F0E6;
@@ -29,6 +30,8 @@ const SearchWrapper = styled('input')`
 export const Search = () => {
     return (
         <SearchWrapper
+            icon={<SearchIcon />}
+            iconPosition="end"
             name="search"
             type="string"
             placeholder="Поиск"

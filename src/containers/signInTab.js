@@ -16,7 +16,7 @@ export const SignInTab = () => {
     setValue(newValue);
   };
 
-  const paperStyle = { width: 585, height: 707 };
+  const paperStyle = { maxWidth: 585};
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,8 +44,8 @@ export const SignInTab = () => {
       style={paperStyle}
       sx={{
         ml: '100px',
-        height: '707px',
-        width: '585px',
+        height: '607px',
+        width: '485px',
         borderRadius: '20px',
       }}
     >

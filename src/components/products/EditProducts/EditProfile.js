@@ -5,15 +5,15 @@ import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
+
 import Typography from "@mui/material/Typography";
-import {InputWrapper, SelectWrapper, LabelWrapper,} from "../InputWrapper";
+import * as Yup from "yup";
+import {InputWrapper, SelectWrapper, LabelWrapper, optionWrapper} from "../InputWrapper";
 import {Item} from "../../../style";
-import {validationSchema} from "../../authentication/validateForm";
-import {GoBack} from "../../goBack";
 
 const CustomButton = styled(Button)`
   height: 52px;
-  width: 200px;
+  width: 500px;
   background-color: #487349;
   padding: 14px 130px;
   border-radius: 20px;
@@ -30,26 +30,33 @@ const CustomButton = styled(Button)`
     background-color: #9C9C9C;
   }
 `;
+const validationSchema = Yup.object({
+    password: Yup.string()
+        .required('Пароль обязателный')
+        .min(6, 'Не правилный пароль')
+        .max(10, 'Не правилный пароль'),
+    number: Yup.string()
+        .required('Номер обязателный')
+        .min(9, 'Не правилный номер')
+        .max(12, 'Не правилный номер'),
+})
 
 export const EditEmployers = () => {
+
     const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
-            name: '',
-            surname: '',
             number: '',
-            email: '',
-            role: '',
             password: '',
-            confirmPassword: '',
         },
         onSubmit: () => {
-            navigate()
+            navigate('/home/main')
         },
-        validationSchema: validationSchema
+        validationSchema
     });
     return (
-        <Item sx={{width: '1000px'}}>
+        <Item sx={{width: '1140px'}}>
+
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{
@@ -87,14 +94,14 @@ export const EditEmployers = () => {
                     <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Фамилия</LabelWrapper>
                         <InputWrapper
-                            name="surname"
+                            name="surename"
                             onChange={handleChange}
                             type="string"
-                            value={values.surname}
+                            value={values.surename}
                             onBlur={handleBlur}
                             placeholder="Имансапаров"
                         />
-                        {errors.surname && touched.surname && (
+                        {errors.surename && touched.surename && (
                             <Typography
                                 sx={{
                                     textAlign: 'left',
@@ -104,7 +111,7 @@ export const EditEmployers = () => {
                                     ml: '14px',
                                 }}
                             >
-                                {errors.surname}
+                                {errors.surename}
                             </Typography>
                         )}
                     </Box>
@@ -208,13 +215,57 @@ export const EditEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{display: 'flex', justifyContent:'space-between'}}>
-                        <GoBack/>
-                        <CustomButton type="submit" disabled={isSubmitting}>
-                            Создать
-                        </CustomButton>
+                    <Box sx={{ mb: '30px' }}>
+                        <LabelWrapper>Пароль</LabelWrapper>
+                        <InputWrapper
+                            name="password"
+                            onChange={handleChange}
+                            type="password"
+                            value={values.password}
+                            onBlur={handleBlur}
+                            placeholder="*******"
+                        />
+                        {errors.password && touched.password && (
+                            <LabelWrapper
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.password}
+                            </LabelWrapper>
+                        )}
                     </Box>
-
+                    <Box sx={{ mb: '30px' }}>
+                        <LabelWrapper>Потверждение пароля</LabelWrapper>
+                        <InputWrapper
+                            name="confirm"
+                            onChange={handleChange}
+                            type="password"
+                            value={values.confirm}
+                            onBlur={handleBlur}
+                            placeholder="*******"
+                        />
+                        {errors.confirm && touched.confirm && (
+                            <Typography
+                                sx={{
+                                    textAlign: 'left',
+                                    fontSize: '13px',
+                                    color: 'error.main',
+                                    mt: '12px',
+                                    ml: '14px',
+                                }}
+                            >
+                                {errors.confirm}
+                            </Typography>
+                        )}
+                    </Box>
+                    <CustomButton type="submit" disabled={isSubmitting}>
+                        Создать
+                    </CustomButton>
                 </form>
             </FormControl>
         </Item>

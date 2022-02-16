@@ -17,8 +17,6 @@ import products from '../../assets/img/media.svg'
 import employers from '../../assets/img/users.svg'
 import contacts from '../../assets/img/userI.svg'
 import MenuIcon from '@mui/icons-material/Menu';
-import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
 import IconButton from "@mui/material/IconButton";
 
 
@@ -34,7 +32,7 @@ function ResponsiveDrawer(props) {
     const Item = styled(ListItem)`
    width: 205px;
    display: 'block';
-   margin: 0 15px 27px 15px;
+   margin: 0 15px 20px 15px;
    padding: 8px 5px 8px 18px;
    &: hover {
    background: #E6F0E6;
@@ -80,7 +78,7 @@ function ResponsiveDrawer(props) {
                         <Img src={employers}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='employers/list'>Сотрудники</NavList>
+                        <NavList to='employers'>Сотрудники</NavList>
                     </ListItemText>
                 </Item>
                 <Item>
@@ -107,7 +105,7 @@ function ResponsiveDrawer(props) {
                         <NavList to='contacts'>Контакты</NavList>
                     </ListItemText>
                 </Item>
-                <Item sx={{mt: '140px'}}>
+                <Item sx={{mt: '100px'}}>
                     <ListItemIcon>
                         <Img src={exist}/>
                     </ListItemIcon>
@@ -175,7 +173,66 @@ function ResponsiveDrawer(props) {
             export default ResponsiveDrawer;
 
 
+//                <Item sx={{mt: '0'}} >
+//                     <ListItemIcon>
+//                         <Img src={home}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='главная'>Главная</NavList>
+//                     </ListItemText>
+//                 </Item>
 //
+//                 <Item >
+//                     <ListItemIcon>
+//                         <Img src={orders}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='заказы'>Заказы</NavList>
+//                     </ListItemText>
+//                 </Item>
+//                 <Item>
+//                     <ListItemIcon>
+//                         <Img src={employers}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='сотрудники'>Сотрудники</NavList>
+//                     </ListItemText>
+//                 </Item>
+//                 <Item>
+//                     <ListItemIcon>
+//                         <Img src={products}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='продукты'>Товары</NavList>
+//                     </ListItemText>
+//                 </Item>
+//                 <Item>
+//                     <ListItemIcon>
+//                         <Img src={statistic}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='статистика'>Статистка</NavList>
+//                     </ListItemText>
+//                 </Item>
+//                 <Item>
+//                     <ListItemIcon>
+//                         <Img src={contacts}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to='контакты'>Контакты</NavList>
+//                     </ListItemText>
+//                 </Item>
+//                 <Item sx={{mt: '100px'}}>
+//                     <ListItemIcon>
+//                         <Img src={exist}/>
+//                     </ListItemIcon>
+//                     <ListItemText>
+//                         <NavList to=''>Выход</NavList>
+//                     </ListItemText>
+//                 </Item>
+//             </List>
+//         </Box>
+//     );
 // export default ResponsiveDrawer;
 // import * as React from 'react';
 // import AppBar from '@mui/material/AppBar';

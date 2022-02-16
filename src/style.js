@@ -4,5 +4,6 @@ import Paper from "@mui/material/Paper";
 export const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'center',
+    borderRadius: '20px',
 }));
 

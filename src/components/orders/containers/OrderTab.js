@@ -49,7 +49,6 @@ export const OrderTab = () => {
                 >
                    Заказы
                 </Typography>
-                <Search/>
             </Box>
             <Tabs
                 value={value}

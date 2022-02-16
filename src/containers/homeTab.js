@@ -7,6 +7,7 @@ import {useState} from "react";
 import StatisticWeek from "../components/statistic/containers/statisticWeek";
 import Statistic3month from "../components/statistic/containers/statistic3month";
 import Statistic6month from "../components/statistic/containers/statistic6month";
+import Breadcrumbs from "../components/breadCrumbs";
 
 export const HomeTab = () => {
   const [value, setValue] = useState(0);
@@ -45,7 +46,7 @@ export const HomeTab = () => {
                       mb: '22px'
                   }}
               >
-                  Приветствуем, Администратор
+                  Приветствуем, АдминистраторSear
               </Typography>
         <Tabs
           value={value}

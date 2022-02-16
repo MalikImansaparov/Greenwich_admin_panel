@@ -31,7 +31,7 @@ const CustomButton = styled(Link)`
   }
 `;
 
-export const EmployersTable = () => {
+export const ProductsTable = () => {
     const [data, setData] = useState(userRows);
     const navigate = useNavigate()
     // const onChange = () => {

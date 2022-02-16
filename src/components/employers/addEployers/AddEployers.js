@@ -5,11 +5,10 @@ import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
-
 import Typography from "@mui/material/Typography";
-import * as Yup from "yup";
-import {InputWrapper, SelectWrapper, LabelWrapper, optionWrapper} from "../InputWrapper";
+import {InputWrapper, SelectWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
+import {validationSchema} from "../../authentication/validateForm";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -30,32 +29,27 @@ const CustomButton = styled(Button)`
     background-color: #9C9C9C;
   }
 `;
-const validationSchema = Yup.object({
-    password: Yup.string()
-        .required('Пароль обязателный')
-        .min(6, 'Не правилный пароль')
-        .max(10, 'Не правилный пароль'),
-    number: Yup.string()
-        .required('Номер обязателный')
-        .min(9, 'Не правилный номер')
-        .max(12, 'Не правилный номер'),
-})
 
 export const AddEmployers = () => {
 
     const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
+            name: '',
+            surname: '',
             number: '',
+            email: '',
+            role: '',
             password: '',
+            confirmPassword: '',
         },
         onSubmit: () => {
-            navigate('/home/main')
+            navigate()
         },
-        validationSchema
+        validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1200px'}}>
+        <Item sx={{width: '1140px'}}>
 
             <FormControl>
                 <form onSubmit={handleSubmit}>
@@ -67,7 +61,7 @@ export const AddEmployers = () => {
                     }}>
                         Создание аккаунта
                     </Typography>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Имя</LabelWrapper>
                         <InputWrapper
                             name="name"
@@ -91,17 +85,17 @@ export const AddEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Фамилия</LabelWrapper>
                         <InputWrapper
-                            name="surename"
+                            name="surname"
                             onChange={handleChange}
                             type="string"
-                            value={values.surename}
+                            value={values.surname}
                             onBlur={handleBlur}
                             placeholder="Имансапаров"
                         />
-                        {errors.surename && touched.surename && (
+                        {errors.surname && touched.surname && (
                             <Typography
                                 sx={{
                                     textAlign: 'left',
@@ -111,11 +105,11 @@ export const AddEmployers = () => {
                                     ml: '14px',
                                 }}
                             >
-                                {errors.surename}
+                                {errors.surname}
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Номер телефона</LabelWrapper>
                         <InputWrapper
                             name="number"
@@ -139,7 +133,7 @@ export const AddEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Электронная почта</LabelWrapper>
                         <InputWrapper
                             name="email"
@@ -163,7 +157,7 @@ export const AddEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Роль</LabelWrapper>
                         <SelectWrapper
                             name="role"
@@ -191,7 +185,7 @@ export const AddEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Зарплата</LabelWrapper>
                         <InputWrapper
                             name="salary"
@@ -215,7 +209,7 @@ export const AddEmployers = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Пароль</LabelWrapper>
                         <InputWrapper
                             name="password"
@@ -239,17 +233,17 @@ export const AddEmployers = () => {
                             </LabelWrapper>
                         )}
                     </Box>
-                    <Box sx={{ mb: '48px' }}>
+                    <Box sx={{ mb: '30px' }}>
                         <LabelWrapper>Потверждение пароля</LabelWrapper>
                         <InputWrapper
-                            name="confirm"
+                            name="confirmPassword"
                             onChange={handleChange}
                             type="password"
                             value={values.confirm}
                             onBlur={handleBlur}
                             placeholder="*******"
                         />
-                        {errors.confirm && touched.confirm && (
+                        {errors.confirmPassword && touched.confirmPassword && (
                             <Typography
                                 sx={{
                                     textAlign: 'left',
@@ -259,12 +253,12 @@ export const AddEmployers = () => {
                                     ml: '14px',
                                 }}
                             >
-                                {errors.confirm}
+                                {errors.confirmPassword}
                             </Typography>
                         )}
                     </Box>
                     <CustomButton type="submit" disabled={isSubmitting}>
-                        Создать
+                        Сохранить
                     </CustomButton>
                 </form>
             </FormControl>

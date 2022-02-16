@@ -4,11 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
 import {useState} from "react";
 import {EditEmployers} from "./EditProfile";
-import {EditPassword} from "./EditPassword";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LockIcon from '@mui/icons-material/Lock';
 
 export const EditEmployersTab = () => {
     const [value, setValue] = useState(0);
@@ -16,14 +14,7 @@ export const EditEmployersTab = () => {
         setValue(newValue);
     };
 
-    const paperStyle = {
-        width: '1000px',
-        marginBottom: '40px',
-        height: '90px',
-        borderRadius: '20px',
-        display: 'flex',
-        justifyContent:'center',
-    };
+    const paperStyle = { width: 985, height: 200};
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -37,7 +28,7 @@ export const EditEmployersTab = () => {
                 {...other}
             >
                 {value === index && (
-                    <Box >
+                    <Box>
                         <Typography component={'span'}>{children}</Typography>
                     </Box>
                 )}
@@ -47,33 +38,50 @@ export const EditEmployersTab = () => {
 
     return (
 
-            <Box sx={{textAlign: 'center', my: '50px', }}>
+            <Box sx={{ width: '525px', textAlign: 'center' }}>
                 <Paper
                     elevation={3}
                     style={paperStyle}
+                    sx={{
+                        ml: '100px',
+                        borderRadius: '20px',
+                    }}
                 >
+                <Typography
+                    sx={{
+                        color: 'black',
+                        fontSize: '48px',
+                        fontWeight: 700,
+                        my: '26px',
+                    }}
+                >
+                    Вход
+                </Typography>
+                <Divider
+                    sx={{
+                        mb: '50px',
+                    }}
+                />
                 <Tabs
                     value={value}
                     indicatorColor="primary"
                     textColor="primary"
-                    sx={{
-                        display: 'flex',
-                        justifyContent:'center',
-                        alignItems: 'center' }}
+                    sx={{ mb: '95px', ml: '80px' }}
                     onChange={handleChange}
                     aria-label="disabled tabs example"
                 >
-
-                    <Tab icon={<AccountCircleIcon/>} iconPosition="start" label="Изменение профиля" />
-                    <Tab icon={<LockIcon />} iconPosition="start" label="Изменение пароля" />
+                    <Tab label="Изменение профиля" />
+                    <Tab label="Изменение пароля" />
                 </Tabs>
               </Paper>
+                <Paper>
                     <TabPanel value={value} index={0}>
                         <EditEmployers/>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <EditPassword/>
+
                     </TabPanel>
+                </Paper>
 
             </Box>
 
