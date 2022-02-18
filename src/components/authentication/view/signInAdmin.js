@@ -12,6 +12,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
+import {AsyncSignIn} from "../../../store/asyncAction/asyncSignIn";
+import {useDispatch} from "react-redux";
 
 const TextFieldsWrapper = styled(TextField)`
    width: 320px;
@@ -42,26 +44,32 @@ const CustomButton = styled(Button)`
 const validationSchema = Yup.object({
     password: Yup.string()
         .required('Пароль обязателный')
-        .min(6, 'Не правилный пароль')
+        .min(5, 'Не правилный пароль')
         .max(10, 'Не правилный пароль'),
     number: Yup.string()
         .required('Номер обязателный')
-        .min(9, 'Не правилный номер')
-        .max(12, 'Не правилный номер'),
+        .min(10, 'Не правилный номер')
+        .max(16, 'Не правилный номер'),
 })
 
 export const SignInAdmin = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword(!showPassword);
     const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
             number: '',
             password: '',
         },
-        onSubmit: () => {
+
+        onSubmit: (values, { setSubmitting }) =>
+        {
+            console.log(values);
+            dispatch(AsyncSignIn(values));
+            setSubmitting(false);
             navigate('/home/main')
         },
         validationSchema

@@ -2,9 +2,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import avatar from "../../assets/img/avater.svg";
 import * as React from "react";
-import {Search} from "../search";
-import BreadCrumb from "../breadCrumbs";
-
 
 export const Header = () => {
     return (
@@ -26,10 +23,6 @@ export const Header = () => {
                     </Typography>
                     <img src={avatar} alt='avatar' sx={{mt:'20px'}}/>
                 </Box>
-            </Box>
-            <Box sx={{display: 'flex', }}>
-                <BreadCrumb/>
-                <Search/>
             </Box>
         </div>
 

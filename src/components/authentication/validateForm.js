@@ -50,17 +50,6 @@ export const validationSchema = Yup.object().shape({
     // acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
 // });
 
-
-
-
-
-
-
-
-
-
-
-//
 // export const validate = Yup.object({
 //   name: Yup.string()
 //     .max(15, 'Must be 15 characters or less')

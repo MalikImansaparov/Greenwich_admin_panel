@@ -4,20 +4,16 @@ import Box from "@mui/material/Box";
 
 export const SignInLogo = () => {
     return (
-        <Box >
-            <Box
-                component="img"
-                src={logo}
-                alt="logo"
-                sx={{
-                    height: '108px',
+        <Box>
+            <Box component="img"
+                src={logo} alt="logo"
+                sx={{ height: '108px',
                     width: '525px',
                     marginRight: '50px',
                     alignSelf: 'center',
                     marginBottom: '25px',
                     marginTop: '135px',
-                    paddingLeft: '25px'
-                }}
+                    paddingLeft: '25px'}}
             ></Box>
             <Box
                 component="img"
@@ -29,6 +25,5 @@ export const SignInLogo = () => {
                 }}
             ></Box>
         </Box>
-
     );
 }

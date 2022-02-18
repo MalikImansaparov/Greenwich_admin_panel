@@ -24,7 +24,7 @@ export const CurrentOrders = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-            width: 180,
+
             renderCell: (params) => {
                 return (
                     <div>
@@ -41,7 +41,7 @@ export const CurrentOrders = () => {
         {
             field: 'phone',
             headerName: 'Номер получателя',
-            width: 200,
+
             renderCell: (params) => {
                 return <div>{params.row.phone}</div>;
             },
@@ -49,7 +49,7 @@ export const CurrentOrders = () => {
         {
             field: 'sum',
             headerName: 'Сумма',
-            width: 100,
+
             renderCell: (params) => {
                 return <div>{params.row.sum}</div>;
             },
@@ -57,7 +57,7 @@ export const CurrentOrders = () => {
         {
             field: 'address',
             headerName: 'Email',
-            width: 200,
+
             renderCell: (params) => {
                 return <div>{params.row.address}</div>;
             },
@@ -65,7 +65,7 @@ export const CurrentOrders = () => {
         {
             field: 'courier',
             headerName: 'Курьер',
-            width: 200,
+
             renderCell: (params) => {
                 return <div>{params.row.courier}</div>;
             },
@@ -73,7 +73,7 @@ export const CurrentOrders = () => {
         {
             field: 'phoneCourier',
             headerName: 'Номер курьера',
-            width: 170,
+
             renderCell: (params) => {
                 return <div>{params.row.phoneCourier}</div>;
             },
@@ -81,7 +81,7 @@ export const CurrentOrders = () => {
         {
             field: 'status',
             headerName: 'Действие',
-            width: 100,
+
             renderCell: (params) => {
                 return <Box sx={{
                     borderRadius: '12px',
@@ -98,7 +98,7 @@ export const CurrentOrders = () => {
             <Grid item xs={12}>
                 <Item sx={{
                     height: '658px',
-                    width: '1171px',
+                    width: '100%',
                     borderRadius: '20px',
                     mt: '48px'
                 }}>

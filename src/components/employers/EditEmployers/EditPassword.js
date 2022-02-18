@@ -45,7 +45,7 @@ export const EditPassword = () => {
         validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1000px',  borderRadius:'20px'}}>
+        <Item sx={{width: '1000px', borderRadius:'20px'}}>
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{

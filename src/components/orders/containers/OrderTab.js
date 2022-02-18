@@ -7,8 +7,7 @@ import {useState} from "react";
 import {CurrentOrders} from "../view/CurrentOrders/CurrentOrders";
 import {CompletedOrders} from "../view/CompletedOrders/CompletedOrders";
 import {CanceledOrders} from "../view/CanceledOrders/CanceledOrders";
-import CustomSeparator from "../../breadCrumbs";
-import {Search} from "../../search";
+import Container from "@mui/material/Container";
 
 export const OrderTab = () => {
     const [value, setValue] = useState(0);
@@ -39,7 +38,7 @@ export const OrderTab = () => {
 
     return (
         <Box>
-            <Box sx={{mb: '24px', ml: '20px', display: 'flex', justifyContent: 'space-between'}}>
+            <Box sx={{mb: '24px', display: 'flex', justifyContent: 'space-between'}}>
                 <Typography
                     sx={{
                         color: 'black',

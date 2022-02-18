@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 
 export const BreadcrubsWrapper = styled('div')`
   position: relative;
+  justify-content: end;
   width: 800px;
   height: 52px;
   border-radius: 20px;

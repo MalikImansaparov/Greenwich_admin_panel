@@ -1,14 +1,11 @@
 import {styled} from "@mui/system";
 import SearchIcon from '@mui/icons-material/Search';
 import React from "react";
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+
 
 const SearchWrapper = styled('input')`
   position: absolute;
-  right: 45px;
+  left: 60%;
   width: 300px;
   height: 52px;
   background: #E6F0E6;

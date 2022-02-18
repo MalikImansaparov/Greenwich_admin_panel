@@ -1,19 +1,21 @@
 import Box from "@mui/material/Box";
 import {OrderTab} from "./containers/OrderTab";
 import {Header} from "../header/header";
-import {Search} from "../search";
-import Breadcrumbs from "../breadCrumbs";
 import React from "react";
+import BreadCrumb from "../breadCrumbs";
+import {Search} from "../search";
+import Container from "@mui/material/Container";
 
 export const Orders = () => {
     return (
-        <Box>
-            <Box sx={{my:'28px' , mx: '5px'}}>
+            <Container fixed>
                 <Header/>
+                <Box sx={{display: 'flex', }}>
+                    <BreadCrumb/>
+                    <Search/>
+                </Box>
                 <OrderTab/>
-            </Box>
-
-        </Box>
+            </Container>
     );
 };
 

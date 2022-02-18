@@ -153,7 +153,7 @@ export const EmployersTable = () => {
                 <Grid item xs={12}>
                     <Item sx={{
                         height: '658px',
-                        width: '1171px',
+                        width: '100%',
                         borderRadius: '20px',
                         mt: '48px'
                     }}>

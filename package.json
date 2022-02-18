@@ -2,6 +2,7 @@
   "name": "flower_delivery",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://localhost:8080",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -29,6 +30,7 @@
     "react-scripts": "^5.0.0",
     "recharts": "^2.1.8",
     "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "use-react-router-breadcrumbs": "^3.1.0",
     "uuid": "^8.3.2",
