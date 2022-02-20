@@ -63,9 +63,9 @@ export const EditEmployersTab = () => {
                     onChange={handleChange}
                     aria-label="disabled tabs example"
                 >
-
-                    <Tab icon={<AccountCircleIcon/>} iconPosition="start" label="Изменение профиля" />
-                    <Tab icon={<LockIcon />} iconPosition="start" label="Изменение пароля" />
+                    {/*iconPosition="start"*/}
+                    <Tab icon={<AccountCircleIcon/>}  label="Изменение профиля" />
+                    <Tab icon={<LockIcon />}  label="Изменение пароля" />
                 </Tabs>
               </Paper>
                     <TabPanel value={value} index={0}>

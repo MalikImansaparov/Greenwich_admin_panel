@@ -70,7 +70,7 @@ export const SignInAdmin = () => {
             console.log(values);
             dispatch(AsyncSignIn(values));
             setSubmitting(false);
-            navigate('/home/main')
+            navigate('/home')
         },
         validationSchema
     });

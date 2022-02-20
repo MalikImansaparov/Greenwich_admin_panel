@@ -8,7 +8,7 @@ export const AsyncSignIn = (values) => {
              const data = await instance.post('employee-login', {data: values} )
             dispatch(signinSucc())
             console.log(data);
-            localStorage.getItem('token', data.token)
+            localStorage.setItem('token', data.token)
         }
         catch(error) {
             dispatch(signinFail())

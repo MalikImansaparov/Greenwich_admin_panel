@@ -19,7 +19,6 @@ import contacts from '../../assets/img/userI.svg'
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from "@mui/material/IconButton";
 
-
 const drawerWidth = 260;
 
 function ResponsiveDrawer(props) {
@@ -61,7 +60,7 @@ function ResponsiveDrawer(props) {
                         <Img src={home}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='main'>Главная</NavList>
+                        <NavList to='home'>Главная</NavList>
                     </ListItemText>
                 </Item>
 

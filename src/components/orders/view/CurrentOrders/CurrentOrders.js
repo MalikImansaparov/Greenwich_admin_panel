@@ -1,12 +1,16 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import { userRows } from './orderData'
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {Item} from "../../../../style";
+import {useDispatch, useSelector} from "react-redux";
+import {AsyncOrders} from "../../../../store/asyncAction/asyncOrders";
+import {orderReducer} from "../../../../store/reducers/orderReducer";
 
 export const CurrentOrders = () => {
     const [data, setData] = useState(userRows);
+    const dispatch = useDispatch()
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
@@ -93,6 +97,14 @@ export const CurrentOrders = () => {
             },
         },
     ];
+    useEffect(() => {
+        dispatch(AsyncOrders())
+    },[])
+
+     // const tableData  = useSelector(state => state.orders.order)
+    // const ordersSelector = ;
+    const tableData  = useSelector(state => state.orders.order)
+
     return (
         <Grid container >
             <Grid item xs={12}>
@@ -104,7 +116,7 @@ export const CurrentOrders = () => {
                 }}>
                     <DataGrid
                         className="grid"
-                        rows={data}
+                        rows={tableData}
                         columns={columns}
                         pageSize={10}
                         rowsPerPageOptions={[2]}

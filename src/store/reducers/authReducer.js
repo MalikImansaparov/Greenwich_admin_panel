@@ -6,7 +6,7 @@ const initialState = {
     'loading': false
 }
 export const SignInReducer = (state = initialState, action) => {
-    switch(state, action.type){
+    switch(action.type){
         case SIGNIN_STARTED:
             return {
                 ...state,

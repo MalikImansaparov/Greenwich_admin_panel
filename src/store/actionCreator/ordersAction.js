@@ -1,13 +1,7 @@
-import {
-    HOMEPAGE_HASTOKEN,
-    SIGNIN_STARTED,
-    SIGNIN_SUCCESS,
-    SIGNIN_FAILURE,
-} from '../actionType/const';
+import {GET_ORDERS, ORDER_FAILED, ORDER_STARTED, ORDER_SUCCESS} from "../actionType/const";
 
-export const homePageHasToken = (payload) => ({type: HOMEPAGE_HASTOKEN, payload})
 
-export const ordersStart = () => ({type: SIGNIN_STARTED})
-export const ordersSucc = (payload) => ({type: SIGNIN_SUCCESS, payload})
-export const ordersFail = (payload) => ({type: SIGNIN_FAILURE, payload})
-
+export const ordersStart = () => ({type: ORDER_STARTED})
+export const ordersSucc = (payload) => ({type: ORDER_SUCCESS, payload})
+export const ordersFail = (payload) => ({type: ORDER_FAILED, payload})
+export const getOrders = (payload) => ({type: GET_ORDERS, payload})
