@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import {NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import {styled} from "@mui/material/styles";
 import home from '../../assets/img/home.svg'
 import orders from '../../assets/img/shop.svg'
@@ -18,8 +18,9 @@ import employers from '../../assets/img/users.svg'
 import contacts from '../../assets/img/userI.svg'
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from "@mui/material/IconButton";
+import {AuthContext} from "../../context/authContext";
+import {useContext} from "react";
 
-const drawerWidth = 260;
 
 function ResponsiveDrawer(props) {
     const { window } = props;
@@ -27,96 +28,122 @@ function ResponsiveDrawer(props) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const logoutHandler = event => {
+        event.preventDefault()
+        auth.logout()
+        navigate('/auth')
+    }
+
+    const ListText = styled(ListItemText)`
+   font-size: 28px;
+   font-weight: 700;
+   }
+  `;
 
     const Item = styled(ListItem)`
-   width: 205px;
+   max-width: 205px;
    display: 'block';
-   margin: 0 15px 20px 15px;
-   padding: 8px 5px 8px 18px;
+   margin: 10px auto;
    &: hover {
    background: #E6F0E6;
    border-radius: 20px;
    }
   `;
     const NavList = styled(NavLink)`
-   font-size: 18px;
-   font-weight: 500;
+   display: flex;
    color: #000000;
    text-decoration: none;
+   cursor: pointer;
    &: hover {
    color: #487349;
    }
   `;
     const Img = styled('img')`
-    width:'20';
-    height:'23px';
+    width:'17px';
+    height:'20px';
   `;
+
     const drawer = (
-        <Box  >
-            <Toolbar />
+        <Box>
+            <Toolbar/>
             <List>
-                <Item sx={{mt: '0'}} >
+                <NavList to='home'>
+                <Item sx={{mt: '0'}}>
                     <ListItemIcon>
                         <Img src={home}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='home'>Главная</NavList>
+                        Главная
                     </ListItemText>
                 </Item>
-
+                </NavList>
+                <NavList to='orders'>
                 <Item >
                     <ListItemIcon>
                         <Img src={orders}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='orders'>Заказы</NavList>
+                        Заказы
                     </ListItemText>
                 </Item>
+                </NavList>
+                <NavList to='employers'>
                 <Item>
                     <ListItemIcon>
                         <Img src={employers}/>
                     </ListItemIcon>
-                    <ListItemText>
-                        <NavList to='employers'>Сотрудники</NavList>
-                    </ListItemText>
+                    <ListText>
+                       Сотрудники
+                    </ListText>
                 </Item>
+               </NavList>
+                <NavList to='products'>
                 <Item>
                     <ListItemIcon>
                         <Img src={products}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='products'>Товары</NavList>
+                        Товары
                     </ListItemText>
                 </Item>
+                </NavList>
+                <NavList to='statistics'>
                 <Item>
                     <ListItemIcon>
                         <Img src={statistic}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='statistics'>Статистка</NavList>
+                       Статистка
                     </ListItemText>
                 </Item>
+                </NavList>
+                <NavList to='contacts'>
                 <Item>
                     <ListItemIcon>
                         <Img src={contacts}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='contacts'>Контакты</NavList>
+                       Контакты
                     </ListItemText>
                 </Item>
+                </NavList>
+                <NavList to='#' onClick={logoutHandler}>
                 <Item sx={{mt: '100px'}}>
                     <ListItemIcon>
                         <Img src={exist}/>
                     </ListItemIcon>
                     <ListItemText>
-                        <NavList to='exist'>Выход</NavList>
+                       Выход
                     </ListItemText>
                 </Item>
+                </NavList>
             </List>
         </Box>
     );
             const container = window !== undefined ? () => window().document.body : undefined;
-
             return (
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
@@ -125,7 +152,7 @@ function ResponsiveDrawer(props) {
                             color="inherit"
                             aria-label="open drawer"
                             edge="start"
-                            font-size='95px'
+                            fontSize='95px'
                             onClick={handleDrawerToggle}
                             sx={{ position: 'absolute', top: '45px', display: { md: 'none' } }}
                         >
@@ -134,8 +161,7 @@ function ResponsiveDrawer(props) {
                     </Toolbar>
                 <Box
                     component="nav"
-                    sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
-                    aria-label="mailbox folders"
+                    sx={{ width: { md: '180px' }, flexShrink: { md: 0 } }}
                     position="static"
                 >
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -149,7 +175,7 @@ function ResponsiveDrawer(props) {
                         }}
                         sx={{
                             display: { md: 'block', lg: 'none' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
                         }}
                     >
                         {drawer}
@@ -158,14 +184,13 @@ function ResponsiveDrawer(props) {
                         variant="permanent"
                         sx={{
                             display: { xs: 'none', md: 'block' },
-                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
                         }}
                         open
                     >
                         {drawer}
                     </Drawer>
                 </Box>
-
             </Box>
             );
             }

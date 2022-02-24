@@ -1,11 +1,13 @@
 import {useState, useCallback, useEffect} from 'react'
 
-const storageName = 'userData'
+const storageName = 'adminData'
 
 export const useAuth = () => {
     const [token, setToken] = useState(null)
     const [ready, setReady] = useState(false)
     const [userId, setUserId] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(null)
+    const [isSuperAdmin, setSuperAdmin] = useState(null)
 
     const login = useCallback((jwtToken, id) => {
         setToken(jwtToken)
@@ -15,7 +17,6 @@ export const useAuth = () => {
             userId: id, token: jwtToken
         }))
     }, [])
-
 
     const logout = useCallback(() => {
         setToken(null)
@@ -31,7 +32,6 @@ export const useAuth = () => {
         }
         setReady(true)
     }, [login])
-
 
     return {login, logout, token, userId, ready}
 }

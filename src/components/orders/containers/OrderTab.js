@@ -7,14 +7,12 @@ import {useState} from "react";
 import {CurrentOrders} from "../view/CurrentOrders/CurrentOrders";
 import {CompletedOrders} from "../view/CompletedOrders/CompletedOrders";
 import {CanceledOrders} from "../view/CanceledOrders/CanceledOrders";
-import Container from "@mui/material/Container";
 
 export const OrderTab = () => {
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
 
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
@@ -38,17 +36,17 @@ export const OrderTab = () => {
 
     return (
         <Box>
-            <Box sx={{mb: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Typography
-                    sx={{
-                        color: 'black',
-                        fontSize: 24,
-                        fontWeight: 600,
-                    }}
-                >
-                   Заказы
-                </Typography>
-            </Box>
+            {/*<Box sx={{mb: '24px', display: 'flex', justifyContent: 'space-between'}}>*/}
+            {/*    <Typography*/}
+            {/*        sx={{*/}
+            {/*            color: 'black',*/}
+            {/*            fontSize: 24,*/}
+            {/*            fontWeight: 600,*/}
+            {/*        }}*/}
+            {/*    >*/}
+            {/*       Заказы*/}
+            {/*    </Typography>*/}
+            {/*</Box>*/}
             <Tabs
                 value={value}
                 indicatorColor="primary"
@@ -62,7 +60,7 @@ export const OrderTab = () => {
                 <Tab label="Отмененные заказы" />
             </Tabs>
             <TabPanel value={value} index={0}>
-               <CurrentOrders/>
+               <CurrentOrders />
             </TabPanel>
             <TabPanel value={value} index={1}>
                <CompletedOrders/>

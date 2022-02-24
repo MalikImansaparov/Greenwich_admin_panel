@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import {Item} from "../../../../style";
 import {useDispatch, useSelector} from "react-redux";
 import {AsyncOrders} from "../../../../store/asyncAction/asyncOrders";
-import {orderReducer} from "../../../../store/reducers/orderReducer";
 
 export const CurrentOrders = () => {
     const [data, setData] = useState(userRows);
@@ -28,7 +27,7 @@ export const CurrentOrders = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-
+            width: 150,
             renderCell: (params) => {
                 return (
                     <div>
@@ -45,7 +44,7 @@ export const CurrentOrders = () => {
         {
             field: 'phone',
             headerName: 'Номер получателя',
-
+            width: 200,
             renderCell: (params) => {
                 return <div>{params.row.phone}</div>;
             },
@@ -53,7 +52,7 @@ export const CurrentOrders = () => {
         {
             field: 'sum',
             headerName: 'Сумма',
-
+            width: 100,
             renderCell: (params) => {
                 return <div>{params.row.sum}</div>;
             },
@@ -61,7 +60,7 @@ export const CurrentOrders = () => {
         {
             field: 'address',
             headerName: 'Email',
-
+            width: 150,
             renderCell: (params) => {
                 return <div>{params.row.address}</div>;
             },
@@ -69,7 +68,7 @@ export const CurrentOrders = () => {
         {
             field: 'courier',
             headerName: 'Курьер',
-
+            width: 200,
             renderCell: (params) => {
                 return <div>{params.row.courier}</div>;
             },
@@ -77,7 +76,7 @@ export const CurrentOrders = () => {
         {
             field: 'phoneCourier',
             headerName: 'Номер курьера',
-
+            width: 150,
             renderCell: (params) => {
                 return <div>{params.row.phoneCourier}</div>;
             },
@@ -85,7 +84,7 @@ export const CurrentOrders = () => {
         {
             field: 'status',
             headerName: 'Действие',
-
+            width: 150,
             renderCell: (params) => {
                 return <Box sx={{
                     borderRadius: '12px',
@@ -97,30 +96,30 @@ export const CurrentOrders = () => {
             },
         },
     ];
+
     useEffect(() => {
         dispatch(AsyncOrders())
     },[])
 
-     // const tableData  = useSelector(state => state.orders.order)
-    // const ordersSelector = ;
     const tableData  = useSelector(state => state.orders.order)
 
     return (
-        <Grid container >
+        <Grid container>
             <Grid item xs={12}>
                 <Item sx={{
-                    height: '658px',
+                    height: '630px',
                     width: '100%',
                     borderRadius: '20px',
-                    mt: '48px'
+                    mt: '38px',
+
                 }}>
                     <DataGrid
-                        className="grid"
                         rows={tableData}
                         columns={columns}
                         pageSize={10}
                         rowsPerPageOptions={[2]}
                         disableSelectionOnClick
+                        sx={{borderRadius:'20px'}}
                     />
                 </Item>
             </Grid>

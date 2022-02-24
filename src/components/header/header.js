@@ -5,8 +5,7 @@ import * as React from "react";
 
 export const Header = () => {
     return (
-        <div>
-            <Box sx={{display: 'flex', justifyContent: 'flex-end', my: '40px',}}>
+            <Box sx={{display: 'flex', justifyContent: 'flex-end', my: '40px', mr: '15px'}}>
                 <Box sx={{display: 'flex',
                     color: '#487349',
                     cursor:'pointer',
@@ -24,7 +23,5 @@ export const Header = () => {
                     <img src={avatar} alt='avatar' sx={{mt:'20px'}}/>
                 </Box>
             </Box>
-        </div>
-
     );
 };

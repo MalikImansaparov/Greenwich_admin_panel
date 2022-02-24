@@ -46,7 +46,7 @@ export const EmployersTable = () => {
         {
             field: 'id',
             headerName: 'ID',
-            width: 100,
+            width: 50,
             renderCell: (params) => {
                 return <div className="user-l-id">{params.row.id}</div>;
             },
@@ -54,7 +54,7 @@ export const EmployersTable = () => {
         {
             field: 'user',
             headerName: 'ФИО',
-            width: 180,
+            width: 270,
             renderCell: (params) => {
                 return (
                     <div>
@@ -71,7 +71,7 @@ export const EmployersTable = () => {
         {
             field: 'phone',
             headerName: 'Номер телефона',
-            width: 200,
+            width: 180,
             renderCell: (params) => {
                 return <div>{params.row.phone}</div>;
             },
@@ -79,23 +79,15 @@ export const EmployersTable = () => {
         {
             field: 'email',
             headerName: 'Электронная почта',
-            width: 100,
+            width: 200,
             renderCell: (params) => {
                 return <div>{params.row.sum}</div>;
             },
         },
         {
-            field: 'address',
-            headerName: 'Email',
-            width: 200,
-            renderCell: (params) => {
-                return <div>{params.row.address}</div>;
-            },
-        },
-        {
             field: 'Role',
             headerName: 'Роль',
-            width: 100,
+            width: 150,
             renderCell: (params) => {
                 return <Box sx={{
                     borderRadius: '12px',
@@ -109,7 +101,7 @@ export const EmployersTable = () => {
         {
             field: 'salary',
             headerName: 'Зарплата',
-            width: 170,
+            width: 120,
             renderCell: (params) => {
                 return <div>{params.row.phoneCourier}</div>;
             },
@@ -117,7 +109,7 @@ export const EmployersTable = () => {
         {
             field: 'action',
             headerName: 'Действие',
-            width: 150,
+            width: 100,
             renderCell: (params) => {
                 return (
                     <>
@@ -152,7 +144,7 @@ export const EmployersTable = () => {
             <Grid container >
                 <Grid item xs={12}>
                     <Item sx={{
-                        height: '658px',
+                        height: '630px',
                         width: '100%',
                         borderRadius: '20px',
                         mt: '48px'
@@ -164,6 +156,7 @@ export const EmployersTable = () => {
                             pageSize={10}
                             rowsPerPageOptions={[2]}
                             disableSelectionOnClick
+                            sx={{borderRadius:'20px'}}
                         />
                     </Item>
                 </Grid>

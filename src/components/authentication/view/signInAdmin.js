@@ -65,8 +65,7 @@ export const SignInAdmin = () => {
             password: '',
         },
 
-        onSubmit: (values, { setSubmitting }) =>
-        {
+        onSubmit: (values, { setSubmitting }) => {
             console.log(values);
             dispatch(AsyncSignIn(values));
             setSubmitting(false);

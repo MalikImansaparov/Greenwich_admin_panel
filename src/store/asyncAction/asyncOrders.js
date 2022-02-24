@@ -12,6 +12,5 @@ export const AsyncOrders = () => {
             dispatch(ordersFail())
             console.log('error:', e)
         }
-
     }
 }

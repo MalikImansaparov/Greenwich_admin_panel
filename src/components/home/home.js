@@ -1,6 +1,6 @@
 import {Outlet} from "react-router";
 import Box from "@mui/material/Box";
-import ResponsiveDrawer from "../../components/sidebar/drawer";
+import ResponsiveDrawer from "../sidebar/drawer";
 
 export const Home = () => {
   return (

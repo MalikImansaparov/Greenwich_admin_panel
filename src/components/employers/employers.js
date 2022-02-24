@@ -8,13 +8,15 @@ import Box from "@mui/material/Box";
 export const Employers = () => {
 
 return (
-  <div sx={{ ml: '10px' }}>
-     <Header/>
-      <Box sx={{display: 'flex', mb: '40px', maxWidth: '800px' }}>
-          <BreadCrumb/>
-          <Search/>
-      </Box>
-    <Outlet/>
-  </div>
+    <Box>
+        <Box sx={{mx:3}}>
+            <Header/>
+            <Box sx={{display: 'flex', mb: '40px'}}>
+                <BreadCrumb/>
+                <Search/>
+            </Box>
+            <Outlet/>
+        </Box>
+    </Box>
 );
 }

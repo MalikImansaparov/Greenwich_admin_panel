@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-export const BreadcrubsWrapper = styled('div')`
+export const BreadcrubWrapper = styled('div')`
   justify-content: end;
-  width: 780px;
-  border-radius:  20px 0 0 20px;
+  width: 1050px;
+  border-radius: 20px;
   background: #ffffff;
   border: none;
   outline: none;
@@ -16,24 +16,24 @@ export const BreadcrubsWrapper = styled('div')`
   margin-bottom: 30px;
 `;
 
- const BreadCrumb = () => {
+export const OnlyBreadCrumbs = () => {
     const location = useLocation();
     const {pathname} = location
     return (
         <div>
-            {pathname && <BreadcrubsWrapper>
-                {pathname === "/products" ? "Продукты > " : null}
-                {pathname === "/orders" ? "Заказы > " : null}
-                {pathname === "/employers" ? "Сотрудники > " : null}
-                {pathname === "/employers/add" ? "Сотрудники > Добавление" : null}
-                {pathname === "/employers/edit" ? "Сотрудники > Редактирование" : null}
-                {/*{pathname === `/employers/edit${id}` ? `Сотрудники > Редактирование > ${id}` : null}*/}
-            </BreadcrubsWrapper>}
+            {pathname && <BreadcrubWrapper>
+                {/*{pathname === "/products" ? "Продукты > " : null}*/}
+                {/*{pathname === "/orders" ? "Заказы > " : null}*/}
+                {/*{pathname === "/employers" ? "Сотрудники > " : null}*/}
+                {/*{pathname === "/employers/add" ? "Сотрудники > Добавление" : null}*/}
+                {/*{pathname === "/employers/edit" ? "Сотрудники > Редактирование" : null}*/}
+                {/*/!*{pathname === `/employers/edit${id}` ? `Сотрудники > Редактирование > ${id}` : null}*!/*/}
+                {pathname === "/contacts" ? "Контакты" : null}
+                {pathname === "/statistics" ? "Статистика" : null}
+            </BreadcrubWrapper>}
         </div>
     )
 };
-
- export default BreadCrumb
 
 //const breadCrumbView = () => {
 //         const { pathname } = location;

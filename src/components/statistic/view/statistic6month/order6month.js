@@ -141,7 +141,7 @@ const data = [
 export const Order6Month = () => {
 
   return (
-    <ResponsiveContainer width="100%" height="70%">
+    <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         width={500}
         height={400}

@@ -96,10 +96,10 @@ export const CompletedOrders = () => {
         <Grid container>
             <Grid item xs={12}>
                 <Item sx={{
-                    height: '658px',
+                    height: '630px',
                     width: '100%',
                     borderRadius: '20px',
-                    mt: '48px'
+                    mt: '38px'
                 }}>
                     <DataGrid
                         className="grid"
@@ -108,6 +108,7 @@ export const CompletedOrders = () => {
                         pageSize={10}
                         rowsPerPageOptions={[2]}
                         disableSelectionOnClick
+                        sx={{borderRadius:'20px'}}
                     />
                 </Item>
             </Grid>

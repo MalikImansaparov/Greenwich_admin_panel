@@ -1,12 +1,14 @@
 import React from "react";
-import {BrowserRouter as Router, Routes} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import {UseRoutes} from './routes'
-import {Main} from "./pages/main/main";
+import {MainContainer} from "./components/home/main/mainContainer";
 import { useAuth} from "./hooks/auth.hook";
 import {AuthContext} from "./context/authContext";
 import CircularIndeterminate from "./components/preloader";
+import {useSelector} from "react-redux";
 
 const App = () => {
+
     const {token, login, logout, userId, ready} = useAuth()
     const isAuthenticated = !!token
     // const routes = useRoutes(isAuthenticated)
@@ -15,12 +17,13 @@ const App = () => {
         return <CircularIndeterminate/>
     }
 
+
     return (
         <AuthContext.Provider value={{
             token, login, logout, userId, isAuthenticated
         }}>
             <Router>
-                { isAuthenticated && <Main/> }
+                { isAuthenticated && <MainContainer/> }
                     <>
                     <UseRoutes isAuthenticated={isAuthenticated} userId={userId}/>
                     </>

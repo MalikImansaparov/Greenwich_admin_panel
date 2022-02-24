@@ -142,7 +142,7 @@ export const Income6Month = () => {
   const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
   return (
-    <ResponsiveContainer width="100%" height="70%">
+    <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         width={500}
         height={400}
