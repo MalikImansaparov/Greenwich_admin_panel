@@ -15,19 +15,18 @@ import {Navigate} from "react-router";
 import {Statistic} from "./components/statistic/statistic";
 import {useSelector} from "react-redux";
 
-function PrivateRoute({ children }) {
-    const [isSuperAdmin, setSuperAdmin] = useState(null)
-    const role = useSelector((state => state.role))
-    if( role == 'Суперадмин'){
-        setSuperAdmin(role)
-    }
-    console.log(role)
-    return isSuperAdmin ? children : <Navigate to="/home" />
-}
+// export const PrivateRoute = ({ children }) => {
+//     const [isSuperAdmin, setSuperAdmin] = useState(null)
+//     const role = useSelector((state => state.role))
+//     if( role === 'Суперадмин'){
+//         setSuperAdmin(role)
+//         return isSuperAdmin ? children : <Navigate to="/home" />
+//     }
+//     return children
+// }
 export const UseRoutes = (isAuthenticated) => {
 
     // const isSuperAdmin = useAuth();
-
 
     if(isAuthenticated){
         return (

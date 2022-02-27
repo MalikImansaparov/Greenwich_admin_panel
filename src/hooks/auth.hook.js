@@ -1,5 +1,4 @@
 import {useState, useCallback, useEffect} from 'react'
-
 const storageName = 'adminData'
 
 export const useAuth = () => {

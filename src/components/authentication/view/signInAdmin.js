@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import {AsyncSignIn} from "../../../store/asyncAction/asyncSignIn";
 import {useDispatch} from "react-redux";
+import {instance} from "../../../api/api";
 
 const TextFieldsWrapper = styled(TextField)`
    width: 320px;
@@ -46,7 +47,7 @@ const validationSchema = Yup.object({
         .required('Пароль обязателный')
         .min(5, 'Не правилный пароль')
         .max(10, 'Не правилный пароль'),
-    number: Yup.string()
+    phone_number: Yup.string()
         .required('Номер обязателный')
         .min(10, 'Не правилный номер')
         .max(16, 'Не правилный номер'),
@@ -61,14 +62,14 @@ export const SignInAdmin = () => {
 
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
-            number: '',
+            phone_number: '',
             password: '',
         },
-
-        onSubmit: (values, { setSubmitting }) => {
-            console.log(values);
-            dispatch(AsyncSignIn(values));
-            setSubmitting(false);
+        // const data = JSON.stringify({data:values})
+        onSubmit: ({phone_number, password}, { setSubmitting }) => {
+             dispatch(AsyncSignIn(JSON.stringify({phone_number, password})))
+            console.log(values)
+            setSubmitting(false)
             navigate('/home')
         },
         validationSchema
@@ -79,7 +80,7 @@ export const SignInAdmin = () => {
           <Box sx={{ mb: '48px' }}>
             <TextFieldsWrapper
               id="outlined-number"
-              name="number"
+              name="phone_number"
               onChange={handleChange}
               type="tel"
               value={values.number}
@@ -87,7 +88,7 @@ export const SignInAdmin = () => {
               label="Номер телефона"
               vaiant="outlined"
             />
-            {errors.number && touched.number && (
+            {errors.phone_number && touched.phone_number && (
               <Typography
                 sx={{
                   textAlign: 'left',
@@ -97,7 +98,7 @@ export const SignInAdmin = () => {
                   ml: '14px',
                 }}
               >
-                {errors.number}
+                {errors.phone_number}
               </Typography>
             )}
           </Box>

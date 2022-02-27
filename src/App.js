@@ -17,7 +17,6 @@ const App = () => {
         return <CircularIndeterminate/>
     }
 
-
     return (
         <AuthContext.Provider value={{
             token, login, logout, userId, isAuthenticated
