@@ -1,34 +1,51 @@
-import React from "react";
-import {BrowserRouter as Router} from 'react-router-dom';
-import {UseRoutes} from './routes'
-import {MainContainer} from "./components/home/main/mainContainer";
-import { useAuth} from "./hooks/auth.hook";
-import {AuthContext} from "./context/authContext";
-import CircularIndeterminate from "./components/preloader";
-import {useSelector} from "react-redux";
+import React from 'react';
+import { MainContainer } from './components/home/main/mainContainer';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import { SignInPage } from './components/authentication/signIn';
+import { Home } from './components/home/home';
+import { Orders } from './components/orders/order';
+import { Employers } from './components/employers/Employers';
+import { EmployersTable } from './components/employers/EmployersTable/EmployersTable';
+import { AddEmployers } from './components/employers/addEployers/AddEployers';
+import { EditEmployersTab } from './components/employers/EditEmployers/EditEmployersTab';
+import { Products } from './components/products/Products';
+import { ProductsTable } from './components/products/ProductsTable/ProductsTable';
+import { Contacts } from './components/contacts/contacts';
+import { Statistic } from './components/statistic/statistic';
+import {Navigate} from "react-router";
 
-const App = () => {
-
-    const {token, login, logout, userId, ready} = useAuth()
-    const isAuthenticated = !!token
-    // const routes = useRoutes(isAuthenticated)
-
-    if (!ready){
-        return <CircularIndeterminate/>
-    }
-
-    return (
-        <AuthContext.Provider value={{
-            token, login, logout, userId, isAuthenticated
-        }}>
-            <Router>
-                { isAuthenticated && <MainContainer/> }
-                    <>
-                    <UseRoutes isAuthenticated={isAuthenticated} userId={userId}/>
-                    </>
-            </Router>
-        </AuthContext.Provider>
-    )
+const PrivateRoute = () => {
+  return (
+      localStorage.getItem('role') === 'суперадмин' ?
+          <Outlet/> : <Navigate to="/home" />
+  )
 }
-export default App;
 
+  const App = () => {
+  return (
+      <>
+    <Routes>
+      <Route index path="/auth" element={<SignInPage />} />
+      <Route path="/" element={<Home />}>
+        <Route index path="home" element={<MainContainer />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="employers" element={<PrivateRoute/>}>
+        <Route path="employers" element={<Employers/>}>
+          <Route index element={<EmployersTable />} />
+          <Route path="add" element={<AddEmployers />} />
+          <Route path="edit" element={<EditEmployersTab />} />
+        </Route>
+        </Route>
+        <Route path="products" element={<Products />}>
+          <Route index element={<ProductsTable />} />
+          {/*<Route path="add" element={<AddProducts/>} />*!/*/}
+          {/*<Route path="edit" element={<EditProducts/>}/>*!/*/}
+        </Route>
+        <Route path="statistics" element={<Statistic />} />
+        <Route path="contacts" element={<Contacts />} />
+      </Route>
+    </Routes>
+        </>
+  );
+};
+export default App;

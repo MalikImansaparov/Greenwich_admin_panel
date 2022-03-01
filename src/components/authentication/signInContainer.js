@@ -3,9 +3,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import {SignInAdmin} from "../components/authentication/view/signInAdmin";
+import {SignInAdmin} from "./view/signInAdmin";
 
-export const SignInTab = () => {
+export const SignInContainer = () => {
   const paperStyle = { maxWidth: 585};
 
   return (

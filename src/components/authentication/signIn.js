@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import {SignInLogo} from "./view/signInLogo";
-import  {SignInTab} from "../../containers/signInTab";
+import  {SignInContainer} from "./signInContainer";
 import Container from "@mui/material/Container";
 
 export const SignInPage = () => {
@@ -8,7 +8,7 @@ export const SignInPage = () => {
       <Box maxWidth="xl">
         <Container sx={{ display: 'flex', mt: '40px' }} maxWidth="lg">
           <SignInLogo />
-          <SignInTab />
+          <SignInContainer />
         </Container>
       </Box>
     );

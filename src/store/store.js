@@ -3,11 +3,11 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {orderReducer} from "./reducers/orderReducer";
-
+import { authReducer } from './reducers/authReducer';
 
 const rootReducer = combineReducers({
-   signin :SignInReducer,
-   orders :orderReducer,
-})
+  auth: authReducer,
+  orders: orderReducer,
+});
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
