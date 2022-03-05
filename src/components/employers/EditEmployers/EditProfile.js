@@ -49,7 +49,7 @@ export const EditEmployers = () => {
         validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1000px'}}>
+        <Item sx={{width: '1140px'}}>
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{
@@ -211,7 +211,7 @@ export const EditEmployers = () => {
                     <Box sx={{display: 'flex', justifyContent:'space-between'}}>
                         <GoBack/>
                         <CustomButton type="submit" disabled={isSubmitting}>
-                            Создать
+                            Сохранить
                         </CustomButton>
                     </Box>
 

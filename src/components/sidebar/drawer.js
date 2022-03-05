@@ -56,6 +56,10 @@ function ResponsiveDrawer(props) {
     &: hover {
       background: #e6f0e6;
       border-radius: 20px;
+    };
+    &: active {
+      background: main;
+      border-radius: 20px;
     }
   `;
   const NavList = styled(NavLink)`
@@ -92,7 +96,6 @@ function ResponsiveDrawer(props) {
               <ListItemText>Заказы</ListItemText>
             </Item>
           </NavList>
-          {isSuperAdmin && (
           <NavList to="employers">
             <Item>
               <ListItemIcon>
@@ -100,7 +103,7 @@ function ResponsiveDrawer(props) {
               </ListItemIcon>
               <ListText>Сотрудники</ListText>
             </Item>
-          </NavList> )}
+          </NavList>
           <NavList to="products">
             <Item>
               <ListItemIcon>
@@ -126,7 +129,7 @@ function ResponsiveDrawer(props) {
             </Item>
           </NavList>
           <NavList to="/auth" onClick={logoutHandler}>
-            <Item sx={{ mt: '130px' }}>
+            <Item sx={{ mt: '120px' }}>
               <ListItemIcon>
                 <Img src={exist} />
               </ListItemIcon>

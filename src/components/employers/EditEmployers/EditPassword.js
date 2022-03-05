@@ -45,7 +45,7 @@ export const EditPassword = () => {
         validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1000px', borderRadius:'20px'}}>
+        <Item sx={{width: '1140px', borderRadius:'20px'}}>
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{
@@ -107,7 +107,7 @@ export const EditPassword = () => {
                     <Box sx={{display: 'flex', justifyContent:'space-between'}}>
                         <GoBack/>
                         <CustomButton type="submit" disabled={isSubmitting}>
-                            Создать
+                            Сохранить
                         </CustomButton>
                     </Box>
                 </form>

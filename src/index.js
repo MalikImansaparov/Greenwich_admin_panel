@@ -10,14 +10,14 @@ import {store} from "./store/store";
 
 ReactDOM.render(
   <React.StrictMode>
+      <BrowserRouter>
       <Provider store={store}>
-          <BrowserRouter>
               <ThemeProvider theme={theme} >
                   <CssBaseline />
                   <App/>
               </ThemeProvider>
-          </BrowserRouter>
       </Provider>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

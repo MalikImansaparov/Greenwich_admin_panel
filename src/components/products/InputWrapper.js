@@ -1,5 +1,6 @@
 import {styled} from "@mui/system";
 import {Typography} from "@mui/material";
+import Button from "@mui/material/Button";
 
 export const InputWrapper = styled('input')`
   width: 500px;
@@ -8,6 +9,19 @@ export const InputWrapper = styled('input')`
   border: 1px solid #000000;
   outline: none;
   padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000
+`;
+
+export const ScheduleWrapper = styled('input')`
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  outline: none;
+  margin: 20px;
+  padding: 15px 15px;
   font-size: 16px;
   font-weight: 600;
   color: #000000
@@ -35,4 +49,34 @@ font-size: 12px;
 text-align: left;
 color: #969696;
 `;
+
+export const PhotoWrapper = styled(Button)`
+  width: 200px;
+  height: 160px;
+  display: block;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  background: #E6F0E6;
+  outline: none;
+  padding: 20px 20px;
+  font-weight: 600;
+  color: #000000
+`;
+
+export const TextareaWrapper = styled('input')`
+  width: 500px;
+  height: 166px;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000
+`;
+
+export const InputWrap = styled('input')`
+display: none
+`
 

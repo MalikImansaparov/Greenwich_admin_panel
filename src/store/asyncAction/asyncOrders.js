@@ -1,4 +1,3 @@
-
 import {
   getOrders,
   ordersFail,
@@ -10,7 +9,7 @@ export const AsyncOrders = () => {
   return async (dispatch) => {
     dispatch(ordersStart());
     try {
-      const data = await axiosInstance.get('orders/order');
+      const {data} = await axiosInstance.get('posts');
       dispatch(getOrders(data));
     } catch (e) {
       dispatch(ordersFail());

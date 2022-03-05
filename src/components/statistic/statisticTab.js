@@ -35,16 +35,16 @@ export const StatisticTab = () => {
 
   return (
       <Box>
-              {/*<Typography*/}
-              {/*    sx={{*/}
-              {/*        color: 'black',*/}
-              {/*        fontSize: 32,*/}
-              {/*        fontWeight: 600,*/}
-              {/*        mb: '22px'*/}
-              {/*    }}*/}
-              {/*>*/}
-              {/*    Приветствуем, Администратор*/}
-              {/*</Typography>*/}
+          <Typography
+              sx={{
+                  color: 'black',
+                  fontSize: 30,
+                  fontWeight: 600,
+                  my: '30px'
+              }}
+          >
+              Статистика
+          </Typography>
         <Tabs
           value={value}
           indicatorColor="primary"

@@ -1,25 +1,17 @@
 import { Header } from "../header/header";
-import {ProductsTable} from "./ProductsTable/ProductsTable";
-import {styled} from "@mui/system";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import * as React from "react";
-import {useNavigate, Outlet} from "react-router";
-import BreadCrumb from "../breadCrumbs";
-import {Search} from "../search";
+import {Outlet} from "react-router";
+import {Divider} from "@mui/material";
 
 export const Products = () => {
 
 return (
     <Box>
-        <Box sx={{mx: 3}}>
+        <Box>
             <Header/>
-            <Box sx={{display: 'flex', mb: '40px'}}>
-                <BreadCrumb/>
-                <Search/>
-            </Box>
             <Outlet/>
+            <Divider sx={{width:'1080px', my:'30px'}}/>
         </Box>
     </Box>
 

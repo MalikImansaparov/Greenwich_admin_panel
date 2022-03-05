@@ -10,13 +10,17 @@ import { AddEmployers } from './components/employers/addEployers/AddEployers';
 import { EditEmployersTab } from './components/employers/EditEmployers/EditEmployersTab';
 import { Products } from './components/products/Products';
 import { ProductsTable } from './components/products/ProductsTable/ProductsTable';
-import { Contacts } from './components/contacts/contacts';
+import { Contacts } from './components/contacts/ContactsCart/contacts';
 import { Statistic } from './components/statistic/statistic';
 import {Navigate} from "react-router";
+import {AddProducts} from "./components/products/addProducts/AddProducts";
+import {ContactsEdit} from "./components/contacts/ContactsEditCart/ContactsEdit";
+import {EditProducts} from "./components/products/EditProducts/ProductsEdit";
+
 
 const PrivateRoute = () => {
   return (
-      localStorage.getItem('role') === 'суперадмин' ?
+      localStorage.getItem('role') === 'Суперадмин' ?
           <Outlet/> : <Navigate to="/home" />
   )
 }
@@ -29,20 +33,21 @@ const PrivateRoute = () => {
       <Route path="/" element={<Home />}>
         <Route index path="home" element={<MainContainer />} />
         <Route path="orders" element={<Orders />} />
-        <Route path="employers" element={<PrivateRoute/>}>
         <Route path="employers" element={<Employers/>}>
           <Route index element={<EmployersTable />} />
-          <Route path="add" element={<AddEmployers />} />
-          <Route path="edit" element={<EditEmployersTab />} />
-        </Route>
         </Route>
         <Route path="products" element={<Products />}>
           <Route index element={<ProductsTable />} />
-          {/*<Route path="add" element={<AddProducts/>} />*!/*/}
-          {/*<Route path="edit" element={<EditProducts/>}/>*!/*/}
+          <Route path="add" element={<AddProducts/>} />
+          <Route path="edit" element={<EditProducts/>}/>
         </Route>
         <Route path="statistics" element={<Statistic />} />
         <Route path="contacts" element={<Contacts />} />
+        <Route path="contacts/edit" element={<ContactsEdit />} />
+      </Route>
+      <Route  element={<PrivateRoute/>}>
+      <Route path="employers/add" element={<AddEmployers />} />
+      <Route path="employers/edit" element={<EditEmployersTab />} />
       </Route>
     </Routes>
         </>

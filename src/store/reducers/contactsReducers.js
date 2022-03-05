@@ -1,23 +1,27 @@
-import { ORDER_FAILED, ORDER_STARTED, ORDER_SUCCESS} from "../constants";
+import {
+    CONTACT_FAILURE,
+    CONTACT_REQUEST,
+    CONTACT_SUCCESS,
+} from "../constants";
 
 const initialState = {
-    order: [],
+    contacts: [],
     loading: 'false'
 }
-export const orderReducer = (state = initialState, action) => {
+export const contactsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ORDER_STARTED:
+        case CONTACT_REQUEST:
             return {
-            ...state,
-            loading: true,
+                ...state,
+                loading: true,
                 order: null
-        }
-        case ORDER_SUCCESS:
+            }
+        case CONTACT_SUCCESS:
             return {
                 ...state,
                 order: action.payload
             }
-        case ORDER_FAILED:
+        case CONTACT_FAILURE:
             return {
                 ...state,
                 loading: false

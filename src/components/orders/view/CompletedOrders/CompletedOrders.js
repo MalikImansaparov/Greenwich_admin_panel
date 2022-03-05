@@ -1,19 +1,32 @@
 import { DataGrid } from '@mui/x-data-grid';
-import Box from "@mui/material/Box";
-import { DeleteOutline } from '@mui/icons-material';
-import { userRows } from './orderData'
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {Item} from "../../../../style";
-
+import {useDispatch} from "react-redux";
+import axiosInstance from "../../../../api/utils/axiosInstance";
 
 export const CompletedOrders = () => {
-    const [data, setData] = useState(userRows);
+    const [rowData, setRowData] = useState([]);
+    const dispatch = useDispatch()
 
-    const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
-    };
+    const rowDatas = rowData?.map( order => {
+        return {
+            id: order?.id,
+            user: order?.first_name,
+            total: order?.total_price,
+            number: order?.phone_number,
+            address: order?.address,
+            data: order?.data,
+        }
+    })
+
+    useEffect(() => {
+        axiosInstance.get("orders/order")
+            .then((response) => {
+                console.log(response.data.client);
+                setRowData(response.data);
+            });
+    }, []);
 
     const columns = [
         {
@@ -31,22 +44,17 @@ export const CompletedOrders = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        {/*<img*/}
-                        {/*    className="user-list-avatar"*/}
-                        {/*    src={params.row.avatar}*/}
-                        {/*    alt="avatar"*/}
-                        {/*/>*/}
                         {params.row.user}
                     </div>
                 );
             },
         },
         {
-            field: 'phone',
+            field: 'number',
             headerName: 'Номер получателя',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.phone}</div>;
+                return <div>{params.row.number}</div>;
             },
         },
         {
@@ -66,30 +74,13 @@ export const CompletedOrders = () => {
             },
         },
         {
-            field: 'sum',
+            field: 'total',
             headerName: 'Сумма',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.sum}</div>;
+                return <div>{params.row.total}</div>;
             },
         },
-        // {
-        //     field: 'courier',
-        //     headerName: 'Курьер',
-        //     width: 200,
-        //     renderCell: (params) => {
-        //         return <div>{params.row.email}</div>;
-        //     },
-        // },
-        // {
-        //     field: 'phoneCourier',
-        //     headerName: 'Номер курьера',
-        //     width: 200,
-        //     renderCell: (params) => {
-        //         return <div>{params.row.email}</div>;
-        //     },
-        // },
-
     ];
 
     return (
@@ -103,7 +94,7 @@ export const CompletedOrders = () => {
                 }}>
                     <DataGrid
                         className="grid"
-                        rows={data}
+                        rows={rowData}
                         columns={columns}
                         pageSize={10}
                         rowsPerPageOptions={[2]}
@@ -116,21 +107,3 @@ export const CompletedOrders = () => {
     );
 }
 
-//{
-//             field: 'action',
-//             headerName: 'Action',
-//             width: 150,
-//             renderCell: (params) => {
-//                 return (
-//                     <>
-//                         <Link to={'/user/' + params.row.id}>
-//                             <button className="user-l-edit">Edit</button>
-//                         </Link>
-//                         <DeleteOutline
-//                             className="user-l-delete"
-//                             onClick={() => handleDelete(params.row.id)}
-//                         />
-//                     </>
-//                 );
-//             },
-//         },

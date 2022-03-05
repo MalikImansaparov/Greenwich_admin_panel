@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Grid from "@mui/material/Grid";
 import {Item} from "../../../style";
 import Typography from "@mui/material/Typography";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {styled} from "@mui/system";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -31,12 +31,15 @@ const CustomButton = styled(Link)`
   }
 `;
 
+const Content = styled(Box)`
+margin-left: 15px;
+`
+
 export const ProductsTable = () => {
     const [data, setData] = useState(userRows);
     const navigate = useNavigate()
-    // const onChange = () => {
-    //     navigate('add', { replace: true })
-    // }
+    const {id}  = useParams()
+
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
@@ -46,72 +49,49 @@ export const ProductsTable = () => {
         {
             field: 'id',
             headerName: 'ID',
-            width: 100,
+            width: 70,
             renderCell: (params) => {
-                return <div className="user-l-id">{params.row.id}</div>;
+                return <Content>{params.row.id}</Content>;
             },
         },
         {
-            field: 'user',
-            headerName: 'ФИО',
-            width: 180,
+            field: 'photo',
+            headerName: 'Фото',
+            width: 150,
             renderCell: (params) => {
                 return (
-                    <div>
-                        {/*<img*/}
-                        {/*    className="user-list-avatar"*/}
-                        {/*    src={params.row.avatar}*/}
-                        {/*    alt="avatar"*/}
-                        {/*/>*/}
-                        {params.row.user}
-                    </div>
+                    <div >
+                        <Box component="img"
+                            src={params.row.avatar}
+                            alt="product_photo"
+                            sx={{height: '79px', width: '74px', ml:'30px'}}
+                        />
+                    </div >
                 );
             },
         },
         {
             field: 'phone',
-            headerName: 'Номер телефона',
-            width: 200,
+            headerName: 'Название',
+            width: 250,
             renderCell: (params) => {
-                return <div>{params.row.phone}</div>;
+                return <Content>{params.row.phone}</Content>;
             },
         },
         {
             field: 'email',
-            headerName: 'Электронная почта',
+            headerName: 'Цена',
             width: 100,
             renderCell: (params) => {
-                return <div>{params.row.sum}</div>;
+                return <Content>{params.row.sum}</Content>;
             },
         },
         {
             field: 'address',
-            headerName: 'Email',
+            headerName: 'Категории',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.address}</div>;
-            },
-        },
-        {
-            field: 'Role',
-            headerName: 'Роль',
-            width: 100,
-            renderCell: (params) => {
-                return <Box sx={{
-                    borderRadius: '12px',
-                    padding: '5px 10px',
-                    background: '#C1E7BE;',
-                    cursor: 'pointer',
-                }}>
-                    {params.row.role}</Box>;
-            },
-        },
-        {
-            field: 'salary',
-            headerName: 'Зарплата',
-            width: 170,
-            renderCell: (params) => {
-                return <div>{params.row.phoneCourier}</div>;
+                return <Content>{params.row.address}</Content>;
             },
         },
         {
@@ -120,7 +100,7 @@ export const ProductsTable = () => {
             width: 150,
             renderCell: (params) => {
                 return (
-                    <>
+                    <Content>
                         <Link to={'edit/' + params.row.id}>
                             <EditIcon sx={{color: '#000000', mr: '15px'}}/>
                         </Link>
@@ -128,7 +108,7 @@ export const ProductsTable = () => {
                             sx={{color: '#000000',  fontSize: "30px"}}
                             onClick={() => handleDelete(params.row.id)}
                         />
-                    </>
+                    </Content>
                 );
             }
         }
@@ -139,15 +119,16 @@ export const ProductsTable = () => {
                 <Typography
                     sx={{
                         color: 'black',
-                        fontSize: '24px',
+                        fontSize: '30px',
                         fontWeight: 600,
                     }}
                 >
-                    Сотрудники
+                    Товары
                 </Typography>
                 <CustomButton to='add' sx={{textDecoration: 'none'}}>
-                    Добавить сотрудника
+                    Добавить товара
                 </CustomButton>
+
             </Box>
             <Grid container >
                 <Grid item xs={12}>
@@ -162,6 +143,7 @@ export const ProductsTable = () => {
                             rows={data}
                             columns={columns}
                             pageSize={10}
+                            checkboxSelection
                             rowsPerPageOptions={[2]}
                             disableSelectionOnClick
                             sx={{borderRadius:'20px'}}
@@ -170,7 +152,6 @@ export const ProductsTable = () => {
                 </Grid>
             </Grid>
         </Box>
-
     );
 }
 

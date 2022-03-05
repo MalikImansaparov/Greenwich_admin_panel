@@ -1,7 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import { DeleteOutline } from '@mui/icons-material';
-import { userRows } from './orderData'
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import Grid from "@mui/material/Grid";
@@ -9,7 +8,7 @@ import {Item} from "../../../../style";
 
 
 export const CanceledOrders = () => {
-    const [data, setData] = useState(userRows);
+    const [data, setData] = useState();
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));

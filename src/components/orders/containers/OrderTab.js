@@ -36,17 +36,16 @@ export const OrderTab = () => {
 
     return (
         <Box>
-            {/*<Box sx={{mb: '24px', display: 'flex', justifyContent: 'space-between'}}>*/}
-            {/*    <Typography*/}
-            {/*        sx={{*/}
-            {/*            color: 'black',*/}
-            {/*            fontSize: 24,*/}
-            {/*            fontWeight: 600,*/}
-            {/*        }}*/}
-            {/*    >*/}
-            {/*       Заказы*/}
-            {/*    </Typography>*/}
-            {/*</Box>*/}
+            <Typography
+                sx={{
+                    color: 'black',
+                    fontSize: 30,
+                    fontWeight: 600,
+                    my: '30px'
+                }}
+            >
+                Заказы
+            </Typography>
             <Tabs
                 value={value}
                 indicatorColor="primary"

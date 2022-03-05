@@ -1,6 +1,7 @@
 import logo from "../../../assets/img/Greenwich.svg"
 import flowers from "../../../assets/img/Flowers.svg"
 import Box from "@mui/material/Box";
+import React from "react";
 
 export const SignInLogo = () => {
     return (
@@ -12,8 +13,8 @@ export const SignInLogo = () => {
         width: '525px',
         marginRight: '50px',
         alignSelf: 'center',
-        marginBottom: '25px',
-        marginTop: '135px',
+        marginBottom: '20px',
+        marginTop: '70px',
         paddingLeft: '25px'
     }}
     />
