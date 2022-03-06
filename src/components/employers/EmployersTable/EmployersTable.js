@@ -10,9 +10,9 @@ import {Link} from "react-router-dom";
 import {styled} from "@mui/system";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
-import axiosInstance from "../../../api/utils/axiosInstance";
 import {AsyncEmployers} from "../../../store/asyncAction/asyncEmployers";
 import {useDispatch, useSelector} from "react-redux";
+import {getEmployers} from "../../../store/actionType/ordersAction";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -37,32 +37,28 @@ const CustomButton = styled(Link)`
 export const EmployersTable = () => {
     const [data, setData] = useState(userRows);
     const navigate = useNavigate()
-    const [rowData, setRowData] = useState([]);
     const [isSuperAdmin, setSuperAdmin] = useState(null);
-    const employers = useSelector((state) => state.employers.user)
+    const employersData = useSelector(state => state.employers.user || [])
     const dispatch = useDispatch()
-    const {title} = employers
 
-    console.log(title)
     useEffect(() => {
         if (localStorage.getItem('role') === 'Суперадмин') {
             setSuperAdmin('суперадмин');
         }
-console.log(employers);
-        console.log(title)
+        dispatch(AsyncEmployers())
     }, []);
 
-    // const rowDatas = rowData?.map( order => {
-    //     return {
-    //         id: order?.id,
-    //         user: order?.first_name,
-    //         email: order?.total_price,
-    //         number: order?.phone_number,
-    //         role: order?.role,
-    //         salary: order?.salary,
-    //     }
-    // })
-    //
+    const rowData = employersData.map( employer => {
+        return {
+            id: employer?.id,
+            user: employer?.user.first_name,
+            email: employer?.user.total_price,
+            number: employer?.user.phone_number,
+            role: employer?.user.role,
+            salary: employer?.salary,
+        }
+    })
+
     // useEffect(() => {
     //     axiosInstance.get("employers")
     //         .then((response) => {
@@ -84,6 +80,9 @@ console.log(employers);
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
     };
+    const handleClick = (id) => {
+        return navigate(`edit:${id}`)
+    }
 
     const columns = [
         {
@@ -146,19 +145,20 @@ console.log(employers);
         },
         {
             field: 'action',
-            headerName: 'Действие',
+            headerName:'',
             width: 100,
             renderCell: (params) => {
                 return (
                     <> {isSuperAdmin &&
-                    <Link to={'edit/' + params.row.id}>
-                        <EditIcon sx={{color: '#000000', mr: '15px'}}/>
-                    </Link>
-                    }
+                    <>
+                        <EditIcon sx={{color: '#000000', mr: '15px'}}
+                                  onClick={() => handleClick(params.row.id)}/>
                         <DeleteOutlineIcon
-                            sx={{color: '#000000',  fontSize: "30px"}}
-                            onClick={() => handleDelete(params.row.id)}
+                        sx={{color: '#000000', fontSize: "30px"}}
+                        onClick={() => handleDelete(params.row.id)}
                         />
+                        </>
+                    }
                     </>
                 );
             }

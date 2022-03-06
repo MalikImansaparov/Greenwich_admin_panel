@@ -1,5 +1,5 @@
-// export const API_DOMAIN = 'https://flowerdelivery5.herokuapp.com';
-export const API_DOMAIN = 'https://my-json-server.typicode.com/typicode/demo/';
+export const API_DOMAIN = 'https://flowerdelivery5.herokuapp.com';
+// export const API_DOMAIN = 'https://my-json-server.typicode.com/typicode/demo/';
 export const TOKEN_REFRESH_REQUEST = 'TOKEN_REFRESH_REQUEST';
 export const TOKEN_REFRESH_SUCCESS = 'TOKEN_REFRESH_SUCCESS';
 export const TOKEN_REFRESH_FAILURE = 'TOKEN_REFRESH_FAILURE';

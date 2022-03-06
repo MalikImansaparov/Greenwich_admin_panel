@@ -1,7 +1,7 @@
 import {EMPLOYER_FAILURE, EMPLOYER_REQUEST, EMPLOYER_SUCCESS} from "../constants";
 
 const initialState = {
-    user: null,
+    user: [],
 }
 export const employersReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -14,7 +14,7 @@ export const employersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching,
-                user: action.user,
+                user: action.payload,
             };
         case EMPLOYER_FAILURE:
             return {

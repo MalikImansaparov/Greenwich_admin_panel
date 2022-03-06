@@ -10,7 +10,7 @@ export const AsyncEmployers = () => {
     return async (dispatch) => {
         dispatch(ordersStart());
         try {
-            const {data} = await axiosInstance.get('posts');
+            const {data} = await axiosInstance.get('all-users');
             dispatch(getEmployers(data));
         } catch (e) {
             dispatch(ordersFail());

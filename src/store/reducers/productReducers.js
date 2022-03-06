@@ -1,7 +1,7 @@
 import {PRODUCT_FAILURE, PRODUCT_REQUEST, PRODUCT_SUCCESS} from "../constants";
 
 const initialState = {
-    order: [],
+    product: [],
     loading: 'false'
 }
 export const productsReducer = (state = initialState, action) => {
@@ -10,17 +10,17 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-                order: null
+                product: null
             }
         case PRODUCT_SUCCESS:
             return {
                 ...state,
-                order: action.payload
+                product: action.payload
             }
         case PRODUCT_FAILURE:
             return {
                 ...state,
-                loading: false
+                product: false
             }
 
         default:

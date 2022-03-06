@@ -39,15 +39,16 @@ const PrivateRoute = () => {
         <Route path="products" element={<Products />}>
           <Route index element={<ProductsTable />} />
           <Route path="add" element={<AddProducts/>} />
-          <Route path="edit" element={<EditProducts/>}/>
         </Route>
+        <Route path="products/edit:id" element={<EditProducts/>}/>
         <Route path="statistics" element={<Statistic />} />
         <Route path="contacts" element={<Contacts />} />
-        <Route path="contacts/edit" element={<ContactsEdit />} />
       </Route>
+      <Route path="edit:id" element={<ContactsEdit />} />
       <Route  element={<PrivateRoute/>}>
       <Route path="employers/add" element={<AddEmployers />} />
-      <Route path="employers/edit" element={<EditEmployersTab />} />
+      <Route path="employers/edit:id" element={<EditEmployersTab />} />
+        <Route path="products/edit:id" element={<EditProducts/>}/>
       </Route>
     </Routes>
         </>

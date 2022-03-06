@@ -9,7 +9,7 @@ export const AsyncOrders = () => {
   return async (dispatch) => {
     dispatch(ordersStart());
     try {
-      const {data} = await axiosInstance.get('posts');
+      const {data} = await axiosInstance.get('orders/order');
       dispatch(getOrders(data));
     } catch (e) {
       dispatch(ordersFail());

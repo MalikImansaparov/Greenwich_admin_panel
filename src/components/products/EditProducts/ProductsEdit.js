@@ -12,6 +12,7 @@ import {Item} from "../../../style";
 import {GoBack} from "../../goBack";
 import BreadCrumb from "../../breadCrumbs";
 import Upload from "../../../assets/img/upload.svg";
+import {Header} from "../../header/header";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -60,7 +61,8 @@ export const EditProducts = () => {
         validationSchema
     });
     return (
-        <Box mx={1}>
+        <Box mx={2}>
+            <Header/>
             <BreadCrumb/>
             <Item sx={{width: '1060px'}}>
                 <FormControl>

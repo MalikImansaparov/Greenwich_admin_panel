@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { useLocation } from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 export const BreadcrubsWrapper = styled('div')`
   justify-content: end;
@@ -18,6 +18,7 @@ export const BreadcrubsWrapper = styled('div')`
 
  const BreadCrumb = () => {
     const location = useLocation();
+    const {id} = useParams()
     const {pathname} = location
     return (
         <div>
@@ -26,11 +27,10 @@ export const BreadcrubsWrapper = styled('div')`
                 {pathname === "/orders" ? "Заказы > " : null}
                 {pathname === "/employers" ? "Сотрудники > " : null}
                 {pathname === "/employers/add" ? "Сотрудники  >  Добавление сотрудника" : null}
-                {pathname === "/employers/edit" ? "Сотрудники  >  Редактирование сотрудника" : null}
+                {pathname === `/employers/edit${id}` ? "Сотрудники  >  Редактирование сотрудника" : null}
                 {pathname === "/products/add" ? "Продукты  >  Добавление продукта" : null}
-                {pathname === "/products/edit" ? "Продукты  >  Редактирование продукта" : null}
-                {pathname === "/contacts/edit" ? "Контакты  >  Редактирование контактов " : null}
-                {/*{pathname === `/employers/edit${id}` ? `Сотрудники > Редактирование > ${id}` : null}*/}
+                {pathname === `/products/edit${id}` ? "Продукты  >  Редактирование продукта" : null}
+                {pathname === `/contacts/edit:${id}` ? "Контакты  >  Редактирование контактов " : null}
             </BreadcrubsWrapper>}
         </div>
     )

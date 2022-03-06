@@ -23,7 +23,6 @@ const CartItem = styled(Item)`
 export const ContactsCarts = () => {
     const navigate = useNavigate();
     const {id} = useParams()
-
     return (
         <Box>
             <Box sx={{mb: '24px'}}>

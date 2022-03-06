@@ -1,7 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
-import { userRows } from './orderData'
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {Item} from "../../../style";
 import Typography from "@mui/material/Typography";
@@ -10,6 +9,8 @@ import {Link} from "react-router-dom";
 import {styled} from "@mui/system";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
+import {useDispatch, useSelector} from "react-redux";
+import {AsyncProducts} from "../../../store/asyncAction/asyncProducts";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -36,15 +37,30 @@ margin-left: 15px;
 `
 
 export const ProductsTable = () => {
-    const [data, setData] = useState(userRows);
+    const [data, setData] = useState();
+    const productData = useSelector(state => state.products.product || [])
     const navigate = useNavigate()
     const {id}  = useParams()
+    const dispatch = useDispatch()
 
+    const rowData = productData?.map( product => {
+        return {
+            id: product?.id,
+            name: product?.first_name,
+            total: product?.total_price,
+            photo: product?.photo,
+            category: product?.category,
+        }
+    })
+
+    useEffect(() => { dispatch(AsyncProducts())}, []);
 
     const handleDelete = (id) => {
         setData(data.filter((item) => item.id !== id));
     };
-
+    const handleClick = (id) => {
+        return navigate(`edit:${id}`)
+    }
     const columns = [
         {
             field: 'id',
@@ -62,7 +78,7 @@ export const ProductsTable = () => {
                 return (
                     <div >
                         <Box component="img"
-                            src={params.row.avatar}
+                            src={params.row.photo}
                             alt="product_photo"
                             sx={{height: '79px', width: '74px', ml:'30px'}}
                         />
@@ -71,7 +87,7 @@ export const ProductsTable = () => {
             },
         },
         {
-            field: 'phone',
+            field: 'name',
             headerName: 'Название',
             width: 250,
             renderCell: (params) => {
@@ -79,7 +95,7 @@ export const ProductsTable = () => {
             },
         },
         {
-            field: 'email',
+            field: 'total',
             headerName: 'Цена',
             width: 100,
             renderCell: (params) => {
@@ -87,7 +103,7 @@ export const ProductsTable = () => {
             },
         },
         {
-            field: 'address',
+            field: 'category',
             headerName: 'Категории',
             width: 200,
             renderCell: (params) => {
@@ -101,9 +117,9 @@ export const ProductsTable = () => {
             renderCell: (params) => {
                 return (
                     <Content>
-                        <Link to={'edit/' + params.row.id}>
-                            <EditIcon sx={{color: '#000000', mr: '15px'}}/>
-                        </Link>
+                            <EditIcon sx={{color: '#000000', mr: '15px'}}
+                                      onClick={() => handleClick(params.row.id)}
+                            />
                         <DeleteOutlineIcon
                             sx={{color: '#000000',  fontSize: "30px"}}
                             onClick={() => handleDelete(params.row.id)}
@@ -140,7 +156,7 @@ export const ProductsTable = () => {
                     }}>
                         <DataGrid
                             className="grid"
-                            rows={data}
+                            rows={rowData}
                             columns={columns}
                             pageSize={10}
                             checkboxSelection

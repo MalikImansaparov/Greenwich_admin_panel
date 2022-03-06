@@ -143,7 +143,6 @@ export const userRows = [
     },
 ];
 
-/* Users used in the products page table */
 export const productRows = [
     {
         id: 1,
