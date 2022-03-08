@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import { userRows } from './orderData'
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {ItemWrapper} from "../../../style";
 import Typography from "@mui/material/Typography";
@@ -35,18 +35,27 @@ const CustomButton = styled(Link)`
 `;
 
 export const EmployersTable = () => {
-    const [data, setData] = useState(userRows);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [data, setData] = useState(userRows);
     const [isSuperAdmin, setSuperAdmin] = useState(null);
+    const [isAdmin, setAdmin] = useState(null);
+    const [isFlorist, setFlorist] = useState(null);
     const employersData = useSelector(state => state.employers.user || [])
     const isFetching = useSelector((state) => state.employers.loading)
-    const dispatch = useDispatch()
+
 
     useEffect(() => {
         if (localStorage.getItem('role') === 'Суперадмин') {
             setSuperAdmin('суперадмин');
         }
         dispatch(AsyncEmployers())
+        if ( rowData.role === 'админ') {
+            setAdmin('админ');
+        }
+        if ( rowData.role === 'флористь') {
+            setFlorist('флористь');
+        }
     }, []);
 
     const rowData = employersData.map( employer => {
@@ -59,6 +68,15 @@ export const EmployersTable = () => {
             salary: employer?.salary,
         }
     })
+
+    // useLayoutEffect(() => {
+    //     if ( rowData.role === 'админ') {
+    //         setAdmin('админ');
+    //     }
+    //     if ( rowData.role === 'флористь') {
+    //         setFlorist('флористь');
+    //     }
+    // },[])
 
     // useEffect(() => {
     //     axiosInstance.get("employers")
@@ -127,14 +145,17 @@ export const EmployersTable = () => {
             headerName: 'Роль',
             width: 150,
             renderCell: (params) => {
-                return <Box sx={{
-                    borderRadius: '12px',
-                    padding: '5px 10px',
-                    background: '#C1E7BE;',
-                    cursor: 'pointer',
-                }}>
-                    {params.row.role}</Box>;
-            },
+                return (
+                    <>
+                        {isAdmin &&
+                        <Box sx={{
+                            background: 'red',
+                        }}>
+                            {params.row.role}</Box>
+                        }
+                    </>
+                )
+            }
         },
         {
             field: 'salary',
