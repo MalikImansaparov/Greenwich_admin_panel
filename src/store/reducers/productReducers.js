@@ -15,12 +15,14 @@ export const productsReducer = (state = initialState, action) => {
         case PRODUCT_SUCCESS:
             return {
                 ...state,
+                loading: false,
                 product: action.payload
             }
         case PRODUCT_FAILURE:
             return {
                 ...state,
-                product: false
+                loading: false,
+                product: null
             }
 
         default:

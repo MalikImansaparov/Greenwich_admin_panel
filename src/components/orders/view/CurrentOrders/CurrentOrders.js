@@ -2,13 +2,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import {Item} from "../../../../style";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AsyncOrders} from "../../../../store/asyncAction/asyncOrders";
 import axiosInstance from "../../../../api/utils/axiosInstance";
+import CircularPreloader from "../../../preloader";
+import {ItemWrapper} from "../../../../style";
 
 export const CurrentOrders = () => {
     const [rowData, setRowData] = useState([]);
+    const isFetching = useSelector((state) => state.orders.loading)
     const dispatch = useDispatch()
 
    const rowDatas = rowData?.map( order => {
@@ -108,21 +110,17 @@ export const CurrentOrders = () => {
     return (
         <Grid container >
             <Grid item xs={12} >
-                <Item sx={{
-                    height: '630px',
-                    width: '100%',
-                    borderRadius: '20px',
-                    mt: '38px',
-                }}>
+                <ItemWrapper>
+                 {isFetching ? <CircularPreloader/> :
                     <DataGrid
                         rows={rowDatas}
                         columns={columns}
                         pageSize={10}
-                        rowsPerPageOptions={[2]}
+                        rowsPerPageOptions={[10]}
                         disableSelectionOnClick
                         sx={{borderRadius:'20px'}}
-                    />
-                </Item>
+                    /> }
+                </ItemWrapper>
             </Grid>
         </Grid>
     );

@@ -19,6 +19,7 @@ export const contactsReducer = (state = initialState, action) => {
         case CONTACT_SUCCESS:
             return {
                 ...state,
+                loading: false,
                 order: action.payload
             }
         case CONTACT_FAILURE:

@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import {
   AreaChart,
   Area,
@@ -54,15 +54,15 @@ const data = [
   },
   {
     name: '4 неделя',
-    orders: 2000,
+    uv: 2000,
   },
   {
     name: 'Март',
-    orders: 4000,
+    uv: 4000,
   },
   {
     name: '2 неделя',
-    orders: 2200,
+    uv: 2200,
   },
   {
     name: '3 неделя',

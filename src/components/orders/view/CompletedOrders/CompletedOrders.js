@@ -1,13 +1,14 @@
 import { DataGrid } from '@mui/x-data-grid';
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import {Item} from "../../../../style";
-import {useDispatch} from "react-redux";
+import {Item, ItemWrapper} from "../../../../style";
+import {useDispatch, useSelector} from "react-redux";
 import axiosInstance from "../../../../api/utils/axiosInstance";
+import CircularPreloader from "../../../preloader";
 
 export const CompletedOrders = () => {
     const [rowData, setRowData] = useState([]);
-    const dispatch = useDispatch()
+    const isFetching = useSelector((state) => state.orders.loading)
 
     const rowDatas = rowData?.map( order => {
         return {
@@ -17,8 +18,11 @@ export const CompletedOrders = () => {
             number: order?.phone_number,
             address: order?.address,
             data: order?.data,
+            active: order?.is_active,
         }
     })
+
+    const CompletedOrders = rowDatas.filter(active => active === 'true')
 
     useEffect(() => {
         axiosInstance.get("orders/order")
@@ -86,22 +90,18 @@ export const CompletedOrders = () => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Item sx={{
-                    height: '630px',
-                    width: '100%',
-                    borderRadius: '20px',
-                    mt: '38px'
-                }}>
+                <ItemWrapper>
+                    {isFetching ? <CircularPreloader/> :
                     <DataGrid
                         className="grid"
                         rows={rowData}
                         columns={columns}
                         pageSize={10}
-                        rowsPerPageOptions={[2]}
+                        rowsPerPageOptions={[10]}
                         disableSelectionOnClick
                         sx={{borderRadius:'20px'}}
-                    />
-                </Item>
+                    /> }
+                </ItemWrapper>
             </Grid>
         </Grid>
     );

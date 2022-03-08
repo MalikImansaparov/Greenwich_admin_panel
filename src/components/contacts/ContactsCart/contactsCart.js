@@ -8,6 +8,7 @@ import {useNavigate, useParams} from "react-router";
 import {Item} from "../../../style";
 import {styled} from "@mui/material";
 
+
 const CartItem = styled(Item)`
       height: 458px;
       width: 445px;
@@ -16,7 +17,8 @@ const CartItem = styled(Item)`
       cursor: pointer;
       &: hover {
       transform: scale(1.1);
-      transition: transform .2s   
+      transition: transform .9s; 
+      border: 1px solid #487349 
       }         
 `
 

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { userRows } from './orderData'
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import {Item} from "../../../style";
+import {ItemWrapper} from "../../../style";
 import Typography from "@mui/material/Typography";
 import { useNavigate} from "react-router";
 import {Link} from "react-router-dom";
@@ -12,7 +12,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {AsyncEmployers} from "../../../store/asyncAction/asyncEmployers";
 import {useDispatch, useSelector} from "react-redux";
-import {getEmployers} from "../../../store/actionType/ordersAction";
+import CircularPreloader from "../../preloader";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -39,6 +39,7 @@ export const EmployersTable = () => {
     const navigate = useNavigate()
     const [isSuperAdmin, setSuperAdmin] = useState(null);
     const employersData = useSelector(state => state.employers.user || [])
+    const isFetching = useSelector((state) => state.employers.loading)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -184,22 +185,18 @@ export const EmployersTable = () => {
             </Box>
             <Grid container >
                 <Grid item xs={12}>
-                    <Item sx={{
-                        height: '630px',
-                        width: '100%',
-                        borderRadius: '20px',
-                        mt: '48px'
-                    }}>
+                    <ItemWrapper>
+                    { isFetching ? <CircularPreloader/> :
                         <DataGrid
                             rows={rowData}
                             columns={columns}
                             pageSize={10}
                             // checkboxSelection
-                            rowsPerPageOptions={[2]}
+                            rowsPerPageOptions={[10]}
                             disableSelectionOnClick
                             sx={{borderRadius:'20px'}}
-                        />
-                    </Item>
+                        />}
+                    </ItemWrapper>
                 </Grid>
             </Grid>
         </Box>

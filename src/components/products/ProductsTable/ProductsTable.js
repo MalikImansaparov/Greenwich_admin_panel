@@ -2,7 +2,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import {Item} from "../../../style";
+import {ItemWrapper} from "../../../style";
 import Typography from "@mui/material/Typography";
 import {useNavigate, useParams} from "react-router";
 import {Link} from "react-router-dom";
@@ -11,6 +11,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {useDispatch, useSelector} from "react-redux";
 import {AsyncProducts} from "../../../store/asyncAction/asyncProducts";
+import CircularPreloader from "../../preloader";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -39,6 +40,7 @@ margin-left: 15px;
 export const ProductsTable = () => {
     const [data, setData] = useState();
     const productData = useSelector(state => state.products.product || [])
+    const isFetching = useSelector((state) => state.products.loading)
     const navigate = useNavigate()
     const {id}  = useParams()
     const dispatch = useDispatch()
@@ -46,10 +48,10 @@ export const ProductsTable = () => {
     const rowData = productData?.map( product => {
         return {
             id: product?.id,
-            name: product?.first_name,
-            total: product?.total_price,
-            photo: product?.photo,
-            category: product?.category,
+            name: product?.name,
+            total: product?.price,
+            photo: product?.picture,
+            category: product?.category.name,
         }
     })
 
@@ -148,23 +150,19 @@ export const ProductsTable = () => {
             </Box>
             <Grid container >
                 <Grid item xs={12}>
-                    <Item sx={{
-                        height: '630px',
-                        width: '100%',
-                        borderRadius: '20px',
-                        mt: '48px'
-                    }}>
+                    <ItemWrapper>
+                        { isFetching ? <CircularPreloader/> :
                         <DataGrid
                             className="grid"
                             rows={rowData}
                             columns={columns}
-                            pageSize={10}
+                            pageSize={5}
                             checkboxSelection
-                            rowsPerPageOptions={[2]}
+                            rowsPerPageOptions={[5]}
                             disableSelectionOnClick
                             sx={{borderRadius:'20px'}}
-                        />
-                    </Item>
+                        />}
+                    </ItemWrapper>
                 </Grid>
             </Grid>
         </Box>

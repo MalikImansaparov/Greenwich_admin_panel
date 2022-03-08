@@ -1,5 +1,5 @@
 import {StatisticTab} from "./statisticTab";
-import StatisticCourier from "./view/statisticCourier";
+import StatisticCourier from "./view/statisticCourier/statisticCourier";
 import Box from "@mui/material/Box";
 import {Divider} from "@mui/material";
 import * as React from "react";

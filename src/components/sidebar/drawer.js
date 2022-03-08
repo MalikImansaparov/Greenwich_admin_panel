@@ -77,8 +77,8 @@ function ResponsiveDrawer(props) {
   `;
 
   const drawer = (
-    <Box>
-      <Toolbar />
+      <Box>
+        <Toolbar />
         <List>
           <NavList to="home">
             <Item sx={{ mt: '0' }}>
@@ -137,59 +137,58 @@ function ResponsiveDrawer(props) {
             </Item>
           </NavList>
         </List>
-    </Box>
+      </Box>
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          fontSize="95px"
-          onClick={handleDrawerToggle}
-          sx={{ position: 'absolute', top: '45px', display: { md: 'none' } }}
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <Toolbar>
+          <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              fontSize="95px"
+              onClick={handleDrawerToggle}
+              sx={{ position: 'absolute', top: '45px', display: { md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+        <Box
+            component="nav"
+            sx={{ width: { md: '180px' }, flexShrink: { md: 0 } }}
+            position="static"
         >
-          <MenuIcon />
-        </IconButton>
-      </Toolbar>
-      <Box
-        component="nav"
-        sx={{ width: { md: '180px' }, flexShrink: { md: 0 } }}
-        position="static"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { md: 'block', lg: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', md: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { md: 'block', lg: 'none' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
+              }}
+          >
+            {drawer}
+          </Drawer>
+          <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '230px' },
+              }}
+              open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
       </Box>
-    </Box>
   );
 }
 export default ResponsiveDrawer;
-

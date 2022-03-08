@@ -7,3 +7,13 @@ export const Item = styled(Paper)(({ theme }) => ({
     borderRadius: '20px',
 }));
 
+export const ItemWrapper = styled(Item)`
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 630px;
+ width: 100%;
+ border-radius: 20px;
+ margin-top: 38px;                  
+`
+
