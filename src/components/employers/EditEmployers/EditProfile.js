@@ -49,7 +49,7 @@ export const EditEmployers = () => {
         validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1140px'}}>
+        <Item sx={{width: '1060px'}}>
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{
@@ -116,7 +116,7 @@ export const EditEmployers = () => {
                             type="number"
                             value={values.number}
                             onBlur={handleBlur}
-                            placeholder="+996555112233"
+                            placeholder="+99670967656"
                         />
                         {errors.number && touched.number && (
                             <Typography
@@ -140,7 +140,7 @@ export const EditEmployers = () => {
                             type="email"
                             value={values.email}
                             onBlur={handleBlur}
-                            placeholder="greenwich@gmail.com"
+                            placeholder="greenwich12@gmail.com"
                         />
                         {errors.email && touched.email && (
                             <Typography
@@ -192,7 +192,7 @@ export const EditEmployers = () => {
                             type="number"
                             value={values.salary}
                             onBlur={handleBlur}
-                            placeholder="30000"
+                            placeholder="35000"
                         />
                         {errors.salary && touched.salary && (
                             <Typography

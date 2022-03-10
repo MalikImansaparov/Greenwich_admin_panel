@@ -91,7 +91,7 @@ export const ContactsEditCart = () => {
                                 type="string"
                                 value={values.name}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="ул. Абдрахманова 117"
                             />
                             {errors.name && touched.name && (
                                 <Typography
@@ -115,7 +115,7 @@ export const ContactsEditCart = () => {
                                 type="number"
                                 value={values.category}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="0555 11-22-33"
                             />
                             {errors.number && touched.number && (
                                 <Typography
@@ -141,7 +141,7 @@ export const ContactsEditCart = () => {
                                     type="string"
                                     value={values.category}
                                     onBlur={handleBlur}
-                                    placeholder=""
+                                    placeholder="9:00"
                                 />
                                 <Typography>До</Typography>
                                 <ScheduleWrapper
@@ -150,7 +150,7 @@ export const ContactsEditCart = () => {
                                     type="string"
                                     value={values.category}
                                     onBlur={handleBlur}
-                                    placeholder=""
+                                    placeholder=" 21:00"
                                 />
                                 {errors.schedule && touched.schedule && (
                                     <Typography

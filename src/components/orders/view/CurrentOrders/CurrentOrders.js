@@ -38,7 +38,7 @@ export const CurrentOrders = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-            width: 180,
+            width: 140,
             renderCell: (params) => {
                 return (
                     <div>
@@ -74,7 +74,7 @@ export const CurrentOrders = () => {
         {
             field: 'courier',
             headerName: 'Курьер',
-            width: 170,
+            width: 140,
             renderCell: (params) => {
                 return <div>{params.row.courier}</div>;
             },
@@ -90,7 +90,7 @@ export const CurrentOrders = () => {
         {
             field: 'status',
             headerName: 'Действие',
-            width: 150,
+            width: 170,
             renderCell: (params) => {
                 return <Box sx={{
                     borderRadius: '12px',
@@ -115,8 +115,8 @@ export const CurrentOrders = () => {
                     <DataGrid
                         rows={rowDatas}
                         columns={columns}
-                        pageSize={10}
-                        rowsPerPageOptions={[10]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
                         disableSelectionOnClick
                         sx={{borderRadius:'20px'}}
                     /> }

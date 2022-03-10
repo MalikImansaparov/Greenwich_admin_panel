@@ -51,7 +51,7 @@ export const StatisticTab = () => {
           textColor="primary"
           onChange={handleChange}
           aria-label="disabled tabs example"
-          sx={{ mb: '42px', fontSize: '20px' }}
+          sx={{ mb: '15px', fontSize: '20px' }}
         >
           <Tab label="Последние 3 месяцев" sx={{mr: '30px', ml: '15px'}}/>
           <Tab label="Последние 6 месяцев" sx={{mr: '30px'}}/>

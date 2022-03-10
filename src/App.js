@@ -30,11 +30,15 @@ const PrivateRoute = () => {
       <>
     <Routes>
       <Route index path="/auth" element={<SignInPage />} />
+      <Route index path="home" element={<MainContainer />} />
       <Route path="/" element={<Home />}>
-        <Route index path="home" element={<MainContainer />} />
         <Route path="orders" element={<Orders />} />
-        <Route path="employers" element={<Employers/>}>
-          <Route index element={<EmployersTable />} />
+          <Route path="employers" element={<Employers/>}>
+             <Route index element={<EmployersTable />} />
+            <Route path="" element={<PrivateRoute/>}>
+             <Route path="add" element={<AddEmployers />} />
+             <Route path="edit:id" element={<EditEmployersTab />} />
+          </Route>
         </Route>
         <Route path="products" element={<Products />}>
           <Route index element={<ProductsTable />} />
@@ -42,14 +46,14 @@ const PrivateRoute = () => {
         </Route>
         <Route path="products/edit:id" element={<EditProducts/>}/>
         <Route path="statistics" element={<Statistic />} />
-        <Route path="contacts" element={<Contacts />} />
+        <Route path="contacts" element={<Contacts />}/>
+        <Route path="contacts/edit" element={<ContactsEdit />} />
       </Route>
-      <Route path="edit:id" element={<ContactsEdit />} />
-      <Route  element={<PrivateRoute/>}>
-      <Route path="employers/add" element={<AddEmployers />} />
-      <Route path="employers/edit:id" element={<EditEmployersTab />} />
-        <Route path="products/edit:id" element={<EditProducts/>}/>
-      </Route>
+      {/*<Route  element={<PrivateRoute/>}>*/}
+      {/*<Route path="employers/add" element={<AddEmployers />} />*/}
+      {/*<Route path="employers/edit:id" element={<EditEmployersTab />} />*/}
+      {/*  <Route path="products/edit:id" element={<EditProducts/>}/>*/}
+      {/*</Route>*/}
     </Routes>
         </>
   );

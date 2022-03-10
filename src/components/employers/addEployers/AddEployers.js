@@ -33,10 +33,7 @@ const CustomButton = styled(Button)`
   }
 `;
 
-export const AddEmployers = (
-
-) => {
-
+export const AddEmployers = () => {
     const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
@@ -55,15 +52,12 @@ export const AddEmployers = (
     });
     return (
         <Box>
-            <Box sx={{mx:3}}>
-                <Header/>
-            </Box>
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
                 <Box>
-                    <Box sx={{display: 'flex', mb: '40px'}}>
+                    <Box sx={{display: 'flex', mb: '20px'}}>
                         <BreadCrumb />
                     </Box>
-                    <Item sx={{width: '1140px'}}>
+                    <Item sx={{width: '1060px'}}>
                         <FormControl>
                             <form onSubmit={handleSubmit}>
                                 <Typography sx={{

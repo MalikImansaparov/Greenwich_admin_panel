@@ -97,7 +97,7 @@ export const EditProducts = () => {
                                 type="string"
                                 value={values.name}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="Грунт для суккулентов"
                             />
                             {errors.name && touched.name && (
                                 <Typography
@@ -121,7 +121,7 @@ export const EditProducts = () => {
                                 type="string"
                                 value={values.category}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="Грунт"
                             />
                             {errors.category && touched.category && (
                                 <Typography
@@ -145,7 +145,7 @@ export const EditProducts = () => {
                                 type="number"
                                 value={values.price}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="1800"
                             />
                             {errors.price && touched.price && (
                                 <Typography
@@ -193,7 +193,7 @@ export const EditProducts = () => {
                                 type="password"
                                 value={values.count}
                                 onBlur={handleBlur}
-                                placeholder=""
+                                placeholder="10"
                             />
                             {errors.count && touched.count && (
                                 <Typography

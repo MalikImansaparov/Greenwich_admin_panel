@@ -17,7 +17,7 @@ export const CompletedOrders = () => {
             total: order?.total_price,
             number: order?.phone_number,
             address: order?.address,
-            data: order?.data,
+            data: order?.date_created,
             active: order?.is_active,
         }
     })
@@ -66,7 +66,7 @@ export const CompletedOrders = () => {
             headerName: 'Дата',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.data}</div>;
+                return <div>12.03.2022</div>;
             },
         },
         {
@@ -94,7 +94,7 @@ export const CompletedOrders = () => {
                     {isFetching ? <CircularPreloader/> :
                     <DataGrid
                         className="grid"
-                        rows={rowData}
+                        rows={rowDatas}
                         columns={columns}
                         pageSize={10}
                         rowsPerPageOptions={[10]}

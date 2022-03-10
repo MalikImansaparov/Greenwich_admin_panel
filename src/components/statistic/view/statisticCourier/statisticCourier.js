@@ -8,6 +8,8 @@ import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import {Order6Month} from "../statistic6month/order6month";
 import {Income6Month} from "../statistic6month/income6month";
+import {OrderCourier} from "./orderCourier";
+import {Item} from "../../../../style";
 
 const Accordion = styled((props) => (
     <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -19,7 +21,7 @@ const Accordion = styled((props) => (
     '&:before': {
         display: 'none',
     },
-    width: '1000px'
+    width: '1080px'
 }));
 
 const AccordionSummary = styled((props) => (
@@ -55,55 +57,73 @@ export default function StatisticCourier() {
     };
 
     return (
-        <Box sx={{marginTop: '100px'}}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography>Иванов Иван Иванович</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Order6Month/>
-                </AccordionDetails>
+        <Item sx={{marginTop: '50px'}}>
+            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}
+            sx={{ borderRadius: '20px 20px 0 0 '}}>
+                <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: '10px 30px'}}>
+                    <Typography sx={{ width: '45%', flexShrink: 0, fontSize: '24px' }}>
+                        Резултативность курьеров
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary', fontSize: '20px' }}>1245 доставок</Typography>
+                </Box>
+
             </Accordion>
             <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
                 <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>Иванов Иван Ивановиx</Typography>
+                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
+                        Адилет Маратов
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> 378 доставок</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-
-                    <Income6Month/>
-
+                    <OrderCourier/>
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>Иванов Иван Ивановиx</Typography>
+                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
+                        Темирлан Исабеков
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> 370 доставок</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-
-                    <Order6Month/>
-
+                    <OrderCourier/>
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography>Иванов Иван Ивановиx</Typography>
+                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
+                        Азамат Байгазиев
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> 308 доставок</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-
-                    <Income6Month/>
-
+                    <OrderCourier/>
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}>
                 <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography>Иванов Иван Ивановиx</Typography>
+                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
+                        Дастан Кадырбеков
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> 278 доставок</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-
-                    <Order6Month/>
-
+                    <OrderCourier/>
                 </AccordionDetails>
             </Accordion>
-        </Box>
+            <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}
+            sx={{ borderRadius: '0 0 20px 20px '}}>
+                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
+                        Султан Муратов
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}> 208 доставок</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <OrderCourier/>
+                </AccordionDetails>
+            </Accordion>
+        </Item>
     );
 }

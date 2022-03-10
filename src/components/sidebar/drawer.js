@@ -151,7 +151,7 @@ function ResponsiveDrawer(props) {
               edge="start"
               fontSize="95px"
               onClick={handleDrawerToggle}
-              sx={{ position: 'absolute', top: '45px', display: { md: 'none' } }}
+              sx={{ position: 'absolute', top: '45px', right: '15px', display: { md: 'none' } }}
           >
             <MenuIcon />
           </IconButton>

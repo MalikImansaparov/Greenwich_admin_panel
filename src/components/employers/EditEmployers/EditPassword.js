@@ -6,7 +6,7 @@ import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {InputWrapper, SelectWrapper, LabelWrapper,} from "../InputWrapper";
+import {InputWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
 import {validationSchema} from "../../authentication/validateForm";
 import {GoBack} from "../../goBack";
@@ -45,7 +45,7 @@ export const EditPassword = () => {
         validationSchema: validationSchema
     });
     return (
-        <Item sx={{width: '1140px', borderRadius:'20px'}}>
+        <Item sx={{width: '1060px', borderRadius:'20px'}}>
             <FormControl>
                 <form onSubmit={handleSubmit}>
                     <Typography sx={{

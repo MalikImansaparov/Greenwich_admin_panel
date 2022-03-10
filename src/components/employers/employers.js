@@ -10,7 +10,7 @@ return (
         <Box>
             <Header/>
             <Outlet/>
-            <Divider sx={{width:'1080px', my:'30px'}}/>
+            <Divider sx={{width:'1080px', my:'20px'}}/>
         </Box>
     </Box>
 );

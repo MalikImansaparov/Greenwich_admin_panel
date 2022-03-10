@@ -56,16 +56,12 @@ export const OrderTab = () => {
             >
                 <Tab label="Текущие заказы" sx={{mr: '30px', ml: '15px'}}/>
                 <Tab label="Завершеные заказы" sx={{mr: '30px'}}/>
-                <Tab label="Отмененные заказы" />
             </Tabs>
             <TabPanel value={value} index={0}>
                <CurrentOrders />
             </TabPanel>
             <TabPanel value={value} index={1}>
                <CompletedOrders/>
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <CanceledOrders/>
             </TabPanel>
         </Box>
     );

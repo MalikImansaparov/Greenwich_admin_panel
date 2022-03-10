@@ -3,8 +3,13 @@ import Typography from "@mui/material/Typography";
 import avatar from "../../assets/img/avater.svg";
 import * as React from "react";
 import {Search} from "../search";
+import {useEffect} from "react";
 
 export const Header = () => {
+    // useEffect(() => {
+    //     const firstName = JSON.parse(localStorage.getItem("firstName"));
+    //     const lastName = JSON.parse(localStorage.getItem("lastName"))
+    // }, [])
     return (
             <Box sx={{display: 'flex', justifyContent: 'space-between', my: '40px', mr: '15px'}}>
                 <Box>
@@ -22,7 +27,8 @@ export const Header = () => {
                         mt: '8px',
                         mr: '10px',
                     }}>
-                        Малик Имансапаров
+                     {/*<span>{firstName}</span>*/}
+                     {/*   <span>{lastName}</span>*/}
                     </Typography>
                     <img src={avatar} alt='avatar' sx={{mt:'20px'}}/>
                 </Box>

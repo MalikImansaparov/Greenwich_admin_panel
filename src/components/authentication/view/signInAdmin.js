@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useFormik } from 'formik';
 import { useNavigate, Navigate } from 'react-router';
 import TextField from "@mui/material/TextField";
@@ -81,9 +81,12 @@ export const SignInAdmin = () => {
     },
     validationSchema,
   });
-  if(isAuthenticated) {
-    return <Navigate to="/home" />
-  }
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      return <Navigate to="/home" />
+    }
+  },[])
 
   return (
     <FormControl>

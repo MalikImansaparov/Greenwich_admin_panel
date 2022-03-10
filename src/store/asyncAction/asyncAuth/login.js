@@ -16,6 +16,8 @@ function loginSuccess(tokens) {
     access: tokens.access,
     refresh: tokens.refresh,
     role: tokens.role,
+    name: tokens.name,
+    lastName: tokens.lastName,
   };
 }
 
@@ -32,16 +34,16 @@ export const asyncLogin =
   ({ phone_number, password }) =>
   (dispatch) => {
     dispatch(requestLogin());
-
     AuthApi.login(phone_number, password)
-      .then(({ reason, access, refresh, role }) => {
+      .then(({ reason, access, refresh, role, last_name, first_name }) => {
         if (reason) throw new Error(reason);
 
         localStorage.setItem('access', access);
         localStorage.setItem('refresh', refresh);
         localStorage.setItem('role', role);
-
-        dispatch(loginSuccess({ access, refresh, role }));
+        localStorage.setItem('firstName', first_name);
+        localStorage.setItem('lastName', last_name);
+        dispatch(loginSuccess({ access, refresh, role, first_name, last_name }));
       })
       .catch((err) => dispatch(loginError(err)));
   };

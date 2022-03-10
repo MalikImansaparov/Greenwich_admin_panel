@@ -8,12 +8,11 @@ import {useNavigate, useParams} from "react-router";
 import {Item} from "../../../style";
 import {styled} from "@mui/material";
 
-
 const CartItem = styled(Item)`
       height: 458px;
       width: 445px;
       border-radius: 20px;
-      margin: 38px;
+      margin-left: 40px;
       cursor: pointer;
       &: hover {
       transform: scale(1.1);
@@ -33,20 +32,21 @@ export const ContactsCarts = () => {
                         color: 'black',
                         fontSize: '30px',
                         fontWeight: 600,
-                        ml: '30px'
+                        ml: '30px',
+                        mb: '50px',
                     }}
                 >
                     Контакты
                 </Typography>
             </Box>
-        <Grid container spacing={3}>
+        <Grid container spacing={7}>
             <Grid item xl={6}>
                 <CartItem onClick={() => {navigate('/contacts/edit')}}>
                 <ContactsCartLeft/>
                 </CartItem>
             </Grid>
             <Grid item xl={6}>
-                <CartItem >
+                <CartItem>
                     <ContactsCartRight onClick={() => {navigate('/contacts/edit')}}/>
                 </CartItem>
             </Grid>

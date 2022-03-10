@@ -30,7 +30,7 @@ export const BreadcrubsWrapper = styled('div')`
                 {pathname === `/employers/edit${id}` ? "Сотрудники  >  Редактирование сотрудника" : null}
                 {pathname === "/products/add" ? "Продукты  >  Добавление продукта" : null}
                 {pathname === `/products/edit${id}` ? "Продукты  >  Редактирование продукта" : null}
-                {pathname === `/contacts/edit:${id}` ? "Контакты  >  Редактирование контактов " : null}
+                {pathname === `/contacts/edit` ? "Контакты  >  Редактирование контактов " : null}
             </BreadcrubsWrapper>}
         </div>
     )

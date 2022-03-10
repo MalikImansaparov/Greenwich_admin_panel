@@ -9,7 +9,6 @@ import {EditEmployers} from "./EditProfile";
 import {EditPassword} from "./EditPassword";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
-import {Header} from "../../header/header";
 import BreadCrumb from "../../breadCrumbs";
 
 export const EditEmployersTab = () => {
@@ -19,7 +18,7 @@ export const EditEmployersTab = () => {
     };
 
     const paperStyle = {
-        width: '1140px',
+        width: '1060px',
         marginBottom: '40px',
         height: '90px',
         borderRadius: '20px',
@@ -49,15 +48,12 @@ export const EditEmployersTab = () => {
 
     return (
         <Box>
-            <Box sx={{mx:3}}>
-                <Header/>
-            </Box>
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
                 <Box>
-                    <Box sx={{display: 'flex', mb: '40px'}}>
+                    <Box sx={{display: 'flex', mb: '20px'}}>
                         <BreadCrumb />
                     </Box>
-                    <Box sx={{textAlign: 'center', my: '50px', }}>
+                    <Box sx={{textAlign: 'center', }}>
                         <Paper
                             elevation={3}
                             style={paperStyle}
@@ -87,6 +83,5 @@ export const EditEmployersTab = () => {
                 </Box>
             </Box>
         </Box>
-
     );
 };

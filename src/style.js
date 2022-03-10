@@ -11,8 +11,8 @@ export const ItemWrapper = styled(Item)`
  display: flex;
  justify-content: center;
  align-items: center;
- height: 630px;
- width: 100%;
+ height: 550px;
+ width: 1060px;
  border-radius: 20px;
  margin-top: 38px;                  
 `

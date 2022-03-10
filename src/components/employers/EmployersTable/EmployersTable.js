@@ -1,6 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
-import { userRows } from './orderData'
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {ItemWrapper} from "../../../style";
@@ -34,13 +33,22 @@ const CustomButton = styled(Link)`
   }
 `;
 
+const actionIcon = styled('Box')`
+color: '#000000';
+ margin-right: '15px';
+ cursor:pointer;
+ &: hover {
+ color: '#487349'
+ }
+`
+
 export const EmployersTable = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [data, setData] = useState(userRows);
+    const [data, setData] = useState(null);
     const [isSuperAdmin, setSuperAdmin] = useState(null);
-    const [isAdmin, setAdmin] = useState(null);
-    const [isFlorist, setFlorist] = useState(null);
+    // const [isAdmin, setAdmin] = useState(null);
+    // const [isFlorist, setFlorist] = useState(null);
     const employersData = useSelector(state => state.employers.user || [])
     const isFetching = useSelector((state) => state.employers.loading)
 
@@ -50,18 +58,13 @@ export const EmployersTable = () => {
             setSuperAdmin('суперадмин');
         }
         dispatch(AsyncEmployers())
-        if ( rowData.role === 'админ') {
-            setAdmin('админ');
-        }
-        if ( rowData.role === 'флористь') {
-            setFlorist('флористь');
-        }
     }, []);
 
     const rowData = employersData.map( employer => {
         return {
             id: employer?.id,
             user: employer?.user.first_name,
+            user2: employer?.user.last_name,
             email: employer?.user.total_price,
             number: employer?.user.phone_number,
             role: employer?.user.role,
@@ -76,6 +79,7 @@ export const EmployersTable = () => {
     //     if ( rowData.role === 'флористь') {
     //         setFlorist('флористь');
     //     }
+    //     console.log('isAdmin', rowData[1].role)
     // },[])
 
     // useEffect(() => {
@@ -115,11 +119,12 @@ export const EmployersTable = () => {
         {
             field: 'user',
             headerName: 'ФИО',
-            width: 270,
+            width: 250,
             renderCell: (params) => {
                 return (
-                    <div>
-                        {params.row.user}
+                    <div sx={{display: 'flex'}}>
+                       <span sx={{ml: '5px'}}>{params.row.user}</span>
+                        <span sx={{mr: '5px'}}> {params.row.user2}</span>
                     </div>
                 );
             },
@@ -137,7 +142,7 @@ export const EmployersTable = () => {
             headerName: 'Электронная почта',
             width: 200,
             renderCell: (params) => {
-                return <div>{params.row.email}</div>;
+                return <div>greenwich12@gmail.com</div>;
             },
         },
         {
@@ -146,14 +151,13 @@ export const EmployersTable = () => {
             width: 150,
             renderCell: (params) => {
                 return (
-                    <>
-                        {isAdmin &&
                         <Box sx={{
-                            background: 'red',
+                            borderRadius: '12px',
+                            padding: '5px 10px',
+                            background: '#e6f0e6',
+                            cursor: 'pointer',
                         }}>
                             {params.row.role}</Box>
-                        }
-                    </>
                 )
             }
         },
@@ -162,7 +166,7 @@ export const EmployersTable = () => {
             headerName: 'Зарплата',
             width: 120,
             renderCell: (params) => {
-                return <div>{params.row.salary}</div>;
+                return <div>35000</div>;
             },
         },
         {
@@ -173,10 +177,10 @@ export const EmployersTable = () => {
                 return (
                     <> {isSuperAdmin &&
                     <>
-                        <EditIcon sx={{color: '#000000', mr: '15px'}}
+                        <EditIcon sx={{cursor: 'pointer', mr: '15px'}}
                                   onClick={() => handleClick(params.row.id)}/>
                         <DeleteOutlineIcon
-                        sx={{color: '#000000', fontSize: "30px"}}
+                        sx={{cursor: 'pointer', fontSize: "30px",}}
                         onClick={() => handleDelete(params.row.id)}
                         />
                         </>
@@ -211,9 +215,9 @@ export const EmployersTable = () => {
                         <DataGrid
                             rows={rowData}
                             columns={columns}
-                            pageSize={10}
+                            pageSize={8}
                             // checkboxSelection
-                            rowsPerPageOptions={[10]}
+                            rowsPerPageOptions={[8]}
                             disableSelectionOnClick
                             sx={{borderRadius:'20px'}}
                         />}

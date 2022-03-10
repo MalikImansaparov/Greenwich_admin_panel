@@ -48,10 +48,10 @@ export const ProductsTable = () => {
     const rowData = productData?.map( product => {
         return {
             id: product?.id,
-            name: product?.name,
+            name: product?.description,
             total: product?.price,
             photo: product?.picture,
-            category: product?.category.name,
+            category: product?.choice,
         }
     })
 
@@ -68,6 +68,7 @@ export const ProductsTable = () => {
             field: 'id',
             headerName: 'ID',
             width: 70,
+            height: 150,
             renderCell: (params) => {
                 return <Content>{params.row.id}</Content>;
             },
@@ -75,7 +76,8 @@ export const ProductsTable = () => {
         {
             field: 'photo',
             headerName: 'Фото',
-            width: 150,
+            width: 140,
+            height: 150,
             renderCell: (params) => {
                 return (
                     <div >
@@ -91,39 +93,43 @@ export const ProductsTable = () => {
         {
             field: 'name',
             headerName: 'Название',
-            width: 250,
+            width: 340,
+            height: 150,
             renderCell: (params) => {
-                return <Content>{params.row.phone}</Content>;
+                return <Content>{params.row.name}</Content>;
             },
         },
         {
             field: 'total',
             headerName: 'Цена',
             width: 100,
+            height: 150,
             renderCell: (params) => {
-                return <Content>{params.row.sum}</Content>;
+                return <Content>{params.row.total}</Content>;
             },
         },
         {
             field: 'category',
             headerName: 'Категории',
             width: 200,
+            height: 150,
             renderCell: (params) => {
-                return <Content>{params.row.address}</Content>;
+                return <Content>{params.row.category}</Content>;
             },
         },
         {
             field: 'action',
             headerName: 'Действие',
             width: 150,
+            height: 150,
             renderCell: (params) => {
                 return (
                     <Content>
-                            <EditIcon sx={{color: '#000000', mr: '15px'}}
+                            <EditIcon sx={{cursor: 'pointer', mr: '15px'}}
                                       onClick={() => handleClick(params.row.id)}
                             />
                         <DeleteOutlineIcon
-                            sx={{color: '#000000',  fontSize: "30px"}}
+                            sx={{cursor: 'pointer',  fontSize: "30px"}}
                             onClick={() => handleDelete(params.row.id)}
                         />
                     </Content>
@@ -133,7 +139,7 @@ export const ProductsTable = () => {
     ];
     return (
         <Box>
-            <Box sx={{mb: '24px', ml: '20px', display: 'flex', justifyContent: 'space-between'}}>
+            <Box sx={{mb: '24px', mr: '10px', display: 'flex', justifyContent: 'space-between'}}>
                 <Typography
                     sx={{
                         color: 'black',
@@ -156,9 +162,9 @@ export const ProductsTable = () => {
                             className="grid"
                             rows={rowData}
                             columns={columns}
-                            pageSize={5}
+                            pageSize={8}
                             checkboxSelection
-                            rowsPerPageOptions={[5]}
+                            rowsPerPageOptions={[8]}
                             disableSelectionOnClick
                             sx={{borderRadius:'20px'}}
                         />}
