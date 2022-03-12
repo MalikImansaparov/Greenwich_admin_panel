@@ -19,7 +19,7 @@ const Accordion = styled((props) => (
     '&:before': {
         display: 'none',
     },
-    width: '1080px'
+    width: '1060px'
 }));
 
 const AccordionSummary = styled((props) => (
@@ -55,12 +55,12 @@ export default function StatisticFlorist() {
     };
 
     return (
-        <Item sx={{marginTop: '50px'}}>
+        <Item sx={{marginTop: '50px', width: '1060px'}}>
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}
                        sx={{ borderRadius: '20px 20px 0 0 '}}>
                 <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: '10px 30px'}}>
-                    <Typography sx={{ width: '45%', flexShrink: 0, fontSize: '24px' }}>
-                        Резултативность флористов
+                    <Typography sx={{ width: '40%', flexShrink: 0, fontSize: '24px' }}>
+                        Динамика работы флористов
                     </Typography>
                     <Typography sx={{ color: 'text.secondary', fontSize: '20px' }}>1245 продаж</Typography>
                 </Box>

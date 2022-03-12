@@ -12,13 +12,13 @@ export default function Statistic6month() {
                     <Grid item xl={12}>
                         <Item sx={{
                             height: '458px',
-                            width: '1070px',
+                            width: '1060px',
                             borderRadius: '20px',
                             mt: '48px'
                         }}>
-                            <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx:'55px'}}>
+                            <Box sx={{display: 'flex', justifyContent: 'space-between', py:'8px', mx:'55px'}}>
                                 <Typography variant={'h5'} mt={'8px'}>
-                                    Общий доход
+                                    Общий доход $
                                 </Typography>
                                 <Typography variant={'h6'} >
                                     $76685.41
@@ -27,22 +27,21 @@ export default function Statistic6month() {
                                     </Typography>
                                 </Typography>
                             </Box>
-
                             <Order6Month/></Item>
                     </Grid>
             <Grid item xl={12}>
                 <Item sx={{
                     height: '458px',
-                    width: '1070px',
+                    width: '1060px',
                     borderRadius: '20px',
                     mt: '48px'
                 }}>
-                    <Box sx={{display: 'flex', justifyContent: 'space-between', py:'22px', mx:'55px'}}>
+                    <Box sx={{display: 'flex', justifyContent: 'space-between', py:'8px', mx:'55px'}}>
                         <Typography variant={'h5'} mt={'8px'}>
-                            Общий доход
+                            Общее количество заказов
                         </Typography>
                         <Typography variant={'h6'} >
-                            $76685.41
+                            1125
                             <Typography color='green' >
                                 ↑7,00%
                             </Typography>

@@ -1,5 +1,5 @@
 import logo from '../../../assets/img/Greenwich.svg'
-import main from '../../../assets/img/Union.png'
+import main from '../../../assets/img/Group 15.svg'
 import Typography from "@mui/material/Typography";
 import {CustomButton} from "../../customButton";
 import React from "react";
@@ -7,7 +7,10 @@ import Box from "@mui/material/Box";
 import {useNavigate} from "react-router";
 import Grid from "@mui/material/Grid";
 import {styled} from "@mui/system";
-import cartInfo from "../../../assets/img/Frame 1515.png";
+import viewStatistic from "../../../assets/img/Frame 1515.png";
+import inspectOrders from "../../../assets/img/Frame 1514.svg";
+import addEmployers from "../../../assets/img/Frame 1517.svg";
+import addProducts from "../../../assets/img/Frame 1518.svg";
 
 const CartImg = styled('img')`
  height: 400px;
@@ -19,8 +22,8 @@ export const Main = () => {
     const navigate = useNavigate()
     return(
         <>
-        <Grid container sx={{display: 'flex', mt:{lg:'50px',md:'20px'},mx:'100px'}}>
-            <Grid item xl={6} sx={{my:{lg:'150px', md:'100px', sm: '70px'}}}>
+        <Grid container sx={{display: 'flex',mx:'100px', mt:'50px'}}>
+            <Grid item xl={6} sx={{mt:{lg:'200px', md:'150px', sm: '70px'}}}>
                 <Typography sx={{
                     fontSize: {lg:'30px', md:'24px', sm:'22px'},
                     fontWeight: '700',
@@ -40,35 +43,35 @@ export const Main = () => {
                 </Typography>
                 <CustomButton onClick={() => navigate('/orders')} sx={{width:{md:'275px'}}}>Перейти в панель</CustomButton>
             </Grid>
-            <Grid item xl={6} ml={{lg: '180px', md: '100px'}}>
+            <Grid item xl={6} ml={{lg: '80px', md: '100px'}}>
                 <Box component='img'
                      src={main}
                      alt='main'
                      sx={{
                          display:{md: 'block', lg: 'block', sm: 'none'},
-                         height: {md:'460px', lg:'600px',},
-                         width: {md:'250px',lg: '345px',}
+                         height: {md:'560px', lg:'650px',},
+                         width: {md:'350px',lg: '525px',}
                      }}/>
             </Grid>
         </Grid>
-           <Grid container spacing={2} sx={{ mx:'20px' , mb:'50px', justifyContent: 'center'}}>
+           <Grid container spacing={2} sx={{ mx:'20px' , mt:{lg:'100px',md:'20px'}, mb:'20px', justifyContent: 'center'}}>
                <Grid item lg={6}>
-                   <CartImg component='img' src={cartInfo} alt='info'
+                   <CartImg component='img' src={inspectOrders} alt='info'
                             sx={{width: {md:'430px', lg:'600px'},
                                 height: {md:'300px', lg: '400px'}}}/>
                </Grid>
                <Grid item lg={6}>
-                   <CartImg component='img' src={cartInfo} alt='info'
+                   <CartImg component='img' src={viewStatistic} alt='info'
                             sx={{width: {md:'430px', lg:'600px'},
                                 height: {md:'300px', lg: '400px'}}}/>
                </Grid>
                <Grid item lg={6}>
-                   <CartImg component='img' src={cartInfo} alt='info'
+                   <CartImg component='img' src={addProducts} alt='info'
                             sx={{width: {md:'430px', lg:'600px'},
                                 height: {md:'300px', lg: '400px'}}}/>
                </Grid>
                <Grid item lg={6}>
-                   <CartImg component='img' src={cartInfo} alt='info'
+                   <CartImg component='img' src={addEmployers} alt='info'
                             sx={{width: {md:'430px', lg:'600px'},
                                 height: {md:'300px', lg: '400px'}}}/>
                </Grid>

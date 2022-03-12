@@ -11,97 +11,97 @@ import {
 
 const data = [
   {
-    name: 'Январь',
+    name: 'Янв',
     заказы: 2500,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: '2 неделя',
+    name: '2нед',
     заказы: 3000,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: '3 неделя',
-    заказы: 1000,
+    name: '3нед',
+    заказы: 2000,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: '4 неделя',
-    заказы: 1890,
+    name: '4нед',
+    заказы: 2890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: 'Февраль',
-    заказы: 2780,
+    name: 'Фев',
+    заказы: 3780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: '2 неделя',
-    заказы: 1890,
+    name: '2нед',
+    заказы: 2990,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: '3 неделя',
+    name: '3нед',
     заказы: 2390,
     pv: 3800,
     amt: 2500,
   },
   {
-    name: '4 неделя',
+    name: '4нед',
     заказы: 3490,
     pv: 4300,
     amt: 2100,
   },
   {
     name: 'Март',
-    заказы: 4000,
+    заказы: 2000,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: '2 неделя',
-    заказы: 2200,
+    name: '2нед',
+    заказы: 2700,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: '3 неделя',
-    заказы: 3400,
+    name: '3нед',
+    заказы: 2400,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: '4 неделя',
-    заказы: 2780,
+    name: '4нед',
+    заказы: 3780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: 'Апрель',
+    name: 'Апр',
     заказы: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: '2 неделя',
+    name: '2нед',
     заказы: 2390,
     pv: 3800,
     amt: 2500,
   },
   {
-    name: '3 неделя',
+    name: '3нед',
     заказы: 3490,
     pv: 4300,
     amt: 2100,
   },
   {
-    name: '4 неделя',
+    name: '4нед',
     заказы: 3000,
     pv: 2400,
     amt: 2400,
@@ -113,25 +113,25 @@ const data = [
     amt: 2210,
   },
   {
-    name: '2 неделя',
+    name: '2нед',
     заказы: 2000,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: '3 неделя',
+    name: '3нед',
     заказы: 2780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: '4 неделя',
+    name: '4нед',
     заказы: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: 'Июнь',
+    name: 'Июн',
     заказы: 2390,
     pv: 3800,
     amt: 2500,
@@ -139,10 +139,9 @@ const data = [
 ];
 
 export const Income6Month = () => {
-  const demoUrl = 'https://codesandbox.io/s/simple-area-chart-4ujxw';
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="80%">
       <AreaChart
         width={500}
         height={400}
@@ -155,9 +154,9 @@ export const Income6Month = () => {
         }}
       >
         <defs>
-          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray="3 3" />
@@ -167,9 +166,9 @@ export const Income6Month = () => {
         <Area
           type="monotone"
           dataKey="заказы"
-          stroke="#82ca9d"
+          stroke="#8884d8"
           fillOpacity={1}
-          fill="url(#colorPv)"
+          fill="url(#colorUv)"
         />
       </AreaChart>
     </ResponsiveContainer>

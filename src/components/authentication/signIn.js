@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 export const SignInPage = () => {
     return (
       <Box maxWidth="xl">
-        <Container sx={{ display: 'flex', mt: '50px' }} maxWidth="lg">
+        <Container sx={{ display: 'flex', mt: '90px' }} maxWidth="lg">
           <SignInLogo />
           <SignInContainer />
         </Container>

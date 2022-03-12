@@ -20,8 +20,8 @@ import {EditProducts} from "./components/products/EditProducts/ProductsEdit";
 
 const PrivateRoute = () => {
   return (
-      localStorage.getItem('role') === 'Суперадмин' ?
-          <Outlet/> : <Navigate to="/home" />
+      localStorage.getItem('role') !== 'Суперадмин' ?
+          <Outlet/> : <Navigate to="/auth" />
   )
 }
 

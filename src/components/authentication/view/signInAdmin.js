@@ -98,9 +98,9 @@ export const SignInAdmin = () => {
             onChange={handleChange}
             type="tel"
             value={values.number}
-            onBlur={handleBlur}
+            onBlur='none'
             label="Номер телефона"
-            vaiant="outlined"
+
           />
           {errors.phone_number && touched.phone_number && (
             <Typography

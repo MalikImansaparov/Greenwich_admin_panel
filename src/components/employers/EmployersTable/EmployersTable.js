@@ -54,7 +54,7 @@ export const EmployersTable = () => {
 
 
     useEffect(() => {
-        if (localStorage.getItem('role') === 'Суперадмин') {
+        if (localStorage.getItem('role') !== 'Суперадмин') {
             setSuperAdmin('суперадмин');
         }
         dispatch(AsyncEmployers())

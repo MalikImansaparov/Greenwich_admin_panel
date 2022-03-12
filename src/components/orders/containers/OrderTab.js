@@ -55,7 +55,7 @@ export const OrderTab = () => {
                 sx={{ mb: '24px', fontSize: '20px' }}
             >
                 <Tab label="Текущие заказы" sx={{mr: '30px', ml: '15px'}}/>
-                <Tab label="Завершеные заказы" sx={{mr: '30px'}}/>
+                <Tab label="Завершенные заказы" sx={{mr: '30px'}}/>
             </Tabs>
             <TabPanel value={value} index={0}>
                <CurrentOrders />

@@ -33,7 +33,7 @@ function ResponsiveDrawer(props) {
   const [isSuperAdmin, setSuperAdmin] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem('role') === 'Суперадмин') {
+    if (localStorage.getItem('role') !== 'Админ') {
       setSuperAdmin('суперадмин');
     }
   }, []);
@@ -44,9 +44,8 @@ function ResponsiveDrawer(props) {
   };
 
   const ListText = styled(ListItemText)`
-   font-size: 28px;
+   font-size: 20px;
    font-weight: 700;
-   }
   `;
 
   const Item = styled(ListItem)`
@@ -72,8 +71,8 @@ function ResponsiveDrawer(props) {
     }
   `;
   const Img = styled('img')`
-    width: '17px';
-    height: '20px';
+    width: 30px;
+    height: 40px;
   `;
 
   const drawer = (
@@ -85,7 +84,7 @@ function ResponsiveDrawer(props) {
               <ListItemIcon>
                 <Img src={home} />
               </ListItemIcon>
-              <ListItemText>Главная</ListItemText>
+              <ListText>Главная</ListText>
             </Item>
           </NavList>
           <NavList to="orders">
@@ -93,7 +92,7 @@ function ResponsiveDrawer(props) {
               <ListItemIcon>
                 <Img src={orders} />
               </ListItemIcon>
-              <ListItemText>Заказы</ListItemText>
+              <ListText>Заказы</ListText>
             </Item>
           </NavList>
           <NavList to="employers">
@@ -109,7 +108,7 @@ function ResponsiveDrawer(props) {
               <ListItemIcon>
                 <Img src={products} />
               </ListItemIcon>
-              <ListItemText>Товары</ListItemText>
+              <ListText>Товары</ListText>
             </Item>
           </NavList>
           <NavList to="statistics">
@@ -117,7 +116,7 @@ function ResponsiveDrawer(props) {
               <ListItemIcon>
                 <Img src={statistic} />
               </ListItemIcon>
-              <ListItemText>Статистка</ListItemText>
+              <ListItemText>Статистика</ListItemText>
             </Item>
           </NavList>
           <NavList to="contacts">
@@ -125,15 +124,15 @@ function ResponsiveDrawer(props) {
               <ListItemIcon>
                 <Img src={contacts} />
               </ListItemIcon>
-              <ListItemText>Контакты</ListItemText>
+              <ListText>Контакты</ListText>
             </Item>
           </NavList>
           <NavList to="/auth" onClick={logoutHandler}>
-            <Item sx={{ mt: '120px' }}>
+            <Item sx={{ mt: '150px' }}>
               <ListItemIcon>
                 <Img src={exist} />
               </ListItemIcon>
-              <ListItemText>Выход</ListItemText>
+              <ListText>Выход</ListText>
             </Item>
           </NavList>
         </List>

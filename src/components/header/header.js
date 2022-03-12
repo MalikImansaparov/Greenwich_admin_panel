@@ -20,13 +20,13 @@ export const Header = () => {
                     cursor:'pointer',
                 }}>
                     <Typography sx={{
-                        width: '250px',
+                        width: '200px',
                         textAlign: 'center',
                         fontSize: 22,
                         fontWeight: 600,
                         mt: '8px',
-                        mr: '10px',
-                    }}>
+                        mr: '5px',
+                    }}> Тимур Одинцев
                      {/*<span>{firstName}</span>*/}
                      {/*   <span>{lastName}</span>*/}
                     </Typography>

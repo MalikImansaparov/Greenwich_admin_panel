@@ -4,10 +4,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import {useState} from "react";
-import Statistic3month from "./containers/statistic3month";
-import Statistic6month from "./containers/statistic6month";
+import StatisticCourier from "../view/statisticCourier/statisticCourier";
+import StatisticFlorist from "../view/statisticFlorist/statisticFlorist";
 
-export const StatisticTab = () => {
+export const EmployersStatisticTab = () => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -43,7 +43,7 @@ export const StatisticTab = () => {
                   my: '30px'
               }}
           >
-              Общая статистика
+              Статистика по сотрудникам
           </Typography>
         <Tabs
           value={value}
@@ -53,14 +53,14 @@ export const StatisticTab = () => {
           aria-label="disabled tabs example"
           sx={{ mb: '15px', fontSize: '20px' }}
         >
-          <Tab label="Последние 3 месяцев" sx={{mr: '30px', ml: '15px'}}/>
-          <Tab label="Последние 6 месяцев" sx={{mr: '30px'}}/>
+          <Tab label="Список курьеров" sx={{mr: '30px', ml: '15px'}}/>
+          <Tab label="Список флористов" sx={{mr: '30px'}}/>
         </Tabs>
-        <TabPanel value={value} index={0}>
-         <Statistic3month/>
+        <TabPanel value={value} index={0} width={100}>
+         <StatisticCourier/>
         </TabPanel>
-          <TabPanel value={value} index={1}>
-          <Statistic6month/>
+          <TabPanel value={value} index={1} width={100}>
+          <StatisticFlorist/>
           </TabPanel>
       </Box>
   );

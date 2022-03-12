@@ -14,7 +14,7 @@ export const SignInLogo = () => {
         marginRight: '50px',
         alignSelf: 'center',
         marginBottom: '20px',
-        marginTop: '70px',
+        marginTop: '103px',
         paddingLeft: '25px'
     }}
     />
