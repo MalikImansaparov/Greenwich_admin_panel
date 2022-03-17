@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import Box from "@mui/material/Box";
@@ -13,6 +13,9 @@ import {GoBack} from "../../goBack";
 import BreadCrumb from "../../breadCrumbs";
 import Upload from "../../../assets/img/upload.svg";
 import {Header} from "../../header/header";
+import {AsyncEditEmployers, AsyncGetProfile} from "../../../store/asyncAction/asyncEmployers";
+import {useDispatch, useSelector} from "react-redux";
+import {AsyncEditProduct, AsyncGetProduct} from "../../../store/asyncAction/asyncProducts";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -44,19 +47,28 @@ const validationSchema = Yup.object({
         .max(12, 'Не правилный номер'),
 })
 
-export const EditProducts = () => {
+export const EditProducts = (id) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const product = useSelector((state) => state.product )
+
+    useEffect(() => {
+        dispatch(AsyncGetProduct(id))
+    },[product])
+
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
-            photo: 'Добавить фото',
+            photo: '',
             name: '',
             category: '',
             price: '',
             description: '',
             count: '',
         },
-        onSubmit: () => {
-            navigate('/')
+        onSubmit: (values,{ setSubmitting }) => {
+            dispatch(AsyncEditProduct(values, id))
+            setSubmitting(false);
+            navigate(-1)
         },
         validationSchema
     });

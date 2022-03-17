@@ -1,31 +1,28 @@
 import {
     CONTACT_FAILURE,
     CONTACT_REQUEST,
-    CONTACT_SUCCESS,
+    CONTACT_SUCCESS, EDIT_CONTACT, GET_CONTACT,
 } from "../constants";
 
 const initialState = {
-    contacts: [],
-    loading: 'false'
+    contact: [],
 }
 export const contactsReducer = (state = initialState, action) => {
     switch (action.type) {
         case CONTACT_REQUEST:
             return {
                 ...state,
-                loading: true,
-                order: null
+                contact: action.payload
             }
-        case CONTACT_SUCCESS:
+        case EDIT_CONTACT:
             return {
                 ...state,
-                loading: false,
-                order: action.payload
+                contact: action.payload
             }
-        case CONTACT_FAILURE:
+        case GET_CONTACT:
             return {
                 ...state,
-                loading: false
+                contact: action.payload
             }
 
         default:

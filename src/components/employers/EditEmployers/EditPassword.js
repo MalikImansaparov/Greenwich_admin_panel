@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
-import {validationSchema} from "../../authentication/validateForm";
+import {validationSchema} from "../../signinAuth/validateForm";
 import {GoBack} from "../../goBack";
 
 const CustomButton = styled(Button)`
@@ -64,7 +64,6 @@ export const EditPassword = () => {
                             type="password"
                             value={values.password}
                             onBlur={handleBlur}
-                            placeholder="*******"
                         />
                         {errors.password && touched.password && (
                             <LabelWrapper
@@ -88,7 +87,7 @@ export const EditPassword = () => {
                             type="password"
                             value={values.confirm}
                             onBlur={handleBlur}
-                            placeholder="*******"
+
                         />
                         {errors.confirmPassword && touched.confirmPassword && (
                             <Typography

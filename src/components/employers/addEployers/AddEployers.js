@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from 'formik';
-import {Outlet, useNavigate} from 'react-router';
+import {useNavigate, useParams} from 'react-router';
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
@@ -8,10 +8,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputWrapper, SelectWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
-import {validationSchema} from "../../authentication/validateForm";
-import {Header} from "../../header/header";
+import {validationSchema} from "../../signinAuth/validateForm";
 import BreadCrumb from "../../breadCrumbs";
 import {GoBack} from "../../goBack";
+import {useDispatch} from "react-redux";
+import {AsyncAddEmployers} from "../../../store/asyncAction/asyncEmployers";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -34,19 +35,25 @@ const CustomButton = styled(Button)`
 `;
 
 export const AddEmployers = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {id} = useParams()
+
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
-            name: '',
-            surname: '',
-            number: '',
+            first_name: '',
+            last_name: '',
+            phone_number: '',
             email: '',
             role: '',
+            salary: '',
             password: '',
             confirmPassword: '',
         },
-        onSubmit: () => {
-            navigate()
+        onSubmit: (values) => {
+            console.log(values)
+            dispatch(AsyncAddEmployers(values, id))
+            navigate(-1)
         },
         validationSchema: validationSchema
     });
@@ -71,14 +78,14 @@ export const AddEmployers = () => {
                                 <Box sx={{ mb: '30px' }}>
                                     <LabelWrapper>Имя</LabelWrapper>
                                     <InputWrapper
-                                        name="name"
+                                        name="first_name"
                                         onChange={handleChange}
                                         type="string"
-                                        value={values.name}
+                                        value={values.first_name}
                                         onBlur={handleBlur}
-                                        placeholder="Малик"
+                                        placeholder=""
                                     />
-                                    {errors.name && touched.name && (
+                                    {errors.first_name && touched.first_name && (
                                         <Typography
                                             sx={{
                                                 textAlign: 'left',
@@ -88,21 +95,21 @@ export const AddEmployers = () => {
                                                 ml: '14px',
                                             }}
                                         >
-                                            {errors.name}
+                                            {errors.first_name}
                                         </Typography>
                                     )}
                                 </Box>
                                 <Box sx={{ mb: '30px' }}>
                                     <LabelWrapper>Фамилия</LabelWrapper>
                                     <InputWrapper
-                                        name="surname"
+                                        name="last_name"
                                         onChange={handleChange}
                                         type="string"
-                                        value={values.surname}
+                                        value={values.last_name}
                                         onBlur={handleBlur}
-                                        placeholder="Имансапаров"
+                                        placeholder=""
                                     />
-                                    {errors.surname && touched.surname && (
+                                    {errors.last_name && touched.last_name && (
                                         <Typography
                                             sx={{
                                                 textAlign: 'left',
@@ -112,21 +119,20 @@ export const AddEmployers = () => {
                                                 ml: '14px',
                                             }}
                                         >
-                                            {errors.surname}
+                                            {errors.last_name}
                                         </Typography>
                                     )}
                                 </Box>
                                 <Box sx={{ mb: '30px' }}>
                                     <LabelWrapper>Номер телефона</LabelWrapper>
                                     <InputWrapper
-                                        name="number"
+                                        name="phone_number"
                                         onChange={handleChange}
-                                        type="number"
-                                        value={values.number}
-                                        onBlur={handleBlur}
-                                        placeholder="+996555112233"
+                                        type="tel"
+                                        value={values.phone_number}
+                                        placeholder=""
                                     />
-                                    {errors.number && touched.number && (
+                                    {errors.phone_number && touched.phone_number && (
                                         <Typography
                                             sx={{
                                                 textAlign: 'left',
@@ -136,7 +142,7 @@ export const AddEmployers = () => {
                                                 ml: '14px',
                                             }}
                                         >
-                                            {errors.number}
+                                            {errors.phone_number}
                                         </Typography>
                                     )}
                                 </Box>
@@ -148,7 +154,7 @@ export const AddEmployers = () => {
                                         type="email"
                                         value={values.email}
                                         onBlur={handleBlur}
-                                        placeholder="greenwich@gmail.com"
+                                        placeholder=""
                                     />
                                     {errors.email && touched.email && (
                                         <Typography
@@ -174,9 +180,9 @@ export const AddEmployers = () => {
                                         onBlur={handleBlur}
                                         sx={{ display: 'block'}}
                                     >
-                                        <option value="florist" label="Флорист" />
-                                        <option value="courier" label="Курьер" />
-                                        <option value="admin" label="Админ" />
+                                        <option value="Флорист" label="Флорист" />
+                                        <option value="Курьер" label="Курьер" />
+                                        <option value="Админ" label="Админ" />
                                     </SelectWrapper>
                                     {errors.role && touched.role && (
                                         <Typography
@@ -197,10 +203,9 @@ export const AddEmployers = () => {
                                     <InputWrapper
                                         name="salary"
                                         onChange={handleChange}
-                                        type="number"
+                                        type="text"
                                         value={values.salary}
-                                        onBlur={handleBlur}
-                                        placeholder="30000"
+                                        placeholder=""
                                     />
                                     {errors.salary && touched.salary && (
                                         <Typography
@@ -224,7 +229,7 @@ export const AddEmployers = () => {
                                         type="password"
                                         value={values.password}
                                         onBlur={handleBlur}
-                                        placeholder="*******"
+                                        placeholder=""
                                     />
                                     {errors.password && touched.password && (
                                         <LabelWrapper
@@ -248,7 +253,7 @@ export const AddEmployers = () => {
                                         type="password"
                                         value={values.confirm}
                                         onBlur={handleBlur}
-                                        placeholder="*******"
+                                        placeholder=""
                                     />
                                     {errors.confirmPassword && touched.confirmPassword && (
                                         <Typography

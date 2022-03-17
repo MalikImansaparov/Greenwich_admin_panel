@@ -7,13 +7,11 @@ import {Divider} from "@mui/material";
 export const Products = () => {
 
 return (
+  <Box>
     <Box>
-        <Box>
-            <Header/>
-            <Outlet/>
-            <Divider sx={{width:'1080px', my:'30px'}}/>
-        </Box>
+      <Outlet />
+      <Divider sx={{ width: '1080px', my: '30px' }} />
     </Box>
-
+  </Box>
 );
 }

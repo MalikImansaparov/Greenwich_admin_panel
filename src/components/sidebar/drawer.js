@@ -30,13 +30,6 @@ function ResponsiveDrawer(props) {
   };
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const [isSuperAdmin, setSuperAdmin] = useState(null);
-
-  useEffect(() => {
-    if (localStorage.getItem('role') !== 'Админ') {
-      setSuperAdmin('суперадмин');
-    }
-  }, []);
 
   function logoutHandler(){
     dispatch(logoutAdmins())

@@ -3,11 +3,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import React, {useState} from "react";
 import Box from "@mui/material/Box";
 import {useDispatch} from "react-redux";
-import {searchOrders} from "../store/actionType/ordersAction";
+import {searchOrders} from "../store/actionType/actionTypes";
 import {AsyncOrders} from "../store/asyncAction/asyncOrders";
 
 
-const SearchWrapper = styled('input')`
+export const SearchWrapper = styled('input')`
   max-width: 380px;
   height: 48px;
   background: #E6F0E6;

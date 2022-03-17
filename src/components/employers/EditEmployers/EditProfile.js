@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import Box from "@mui/material/Box";
@@ -8,8 +8,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import {InputWrapper, SelectWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
-import {validationSchema} from "../../authentication/validateForm";
+import {validationSchema} from "../../signinAuth/validateForm";
 import {GoBack} from "../../goBack";
+import {useDispatch, useSelector} from "react-redux";
+import {AsyncEditEmployers, AsyncGetEmployers, AsyncGetProfile} from "../../../store/asyncAction/asyncEmployers";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -31,22 +33,38 @@ const CustomButton = styled(Button)`
   }
 `;
 
-export const EditEmployers = () => {
+export const EditEmployers = (id) => {
     const navigate = useNavigate()
-    const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
-        initialValues: {
-            name: '',
-            surname: '',
-            number: '',
-            email: '',
-            role: '',
-            password: '',
-            confirmPassword: '',
-        },
-        onSubmit: () => {
-            navigate()
-        },
-        validationSchema: validationSchema
+    const dispatch = useDispatch()
+    const profile = useSelector((state) => state.employers.profile);
+
+    // useEffect(() => {
+    //   dispatch(AsyncGetProfile(id));
+
+    // }, []);
+
+    const {
+      handleSubmit,
+      handleChange,
+      handleBlur,
+      values,
+      errors,
+      touched,
+      isSubmitting,
+    } = useFormik({
+      initialValues: {
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        phone_number: profile.phone_number,
+        role: profile.role,
+        salary: '',
+      },
+      onSubmit: (values, { setSubmitting }) => {
+        dispatch(AsyncEditEmployers(values, id));
+        setSubmitting(false);
+        navigate(-1);
+      },
+      validationSchema: validationSchema,
     });
     return (
         <Item sx={{width: '1060px'}}>
@@ -66,9 +84,9 @@ export const EditEmployers = () => {
                             name="name"
                             onChange={handleChange}
                             type="string"
-                            value={values.name}
+                            value={values.first_name}
                             onBlur={handleBlur}
-                            placeholder="Малик"
+                            placeholder={profile.first_name}
                         />
                         {errors.name && touched.name && (
                             <Typography
@@ -90,9 +108,9 @@ export const EditEmployers = () => {
                             name="surname"
                             onChange={handleChange}
                             type="string"
-                            value={values.surname}
+                            value={values.last_name}
                             onBlur={handleBlur}
-                            placeholder="Имансапаров"
+
                         />
                         {errors.surname && touched.surname && (
                             <Typography
@@ -113,10 +131,10 @@ export const EditEmployers = () => {
                         <InputWrapper
                             name="number"
                             onChange={handleChange}
-                            type="number"
-                            value={values.number}
+                            type="text"
+                            value={values.phone_number}
                             onBlur={handleBlur}
-                            placeholder="+99670967656"
+
                         />
                         {errors.number && touched.number && (
                             <Typography
@@ -140,7 +158,7 @@ export const EditEmployers = () => {
                             type="email"
                             value={values.email}
                             onBlur={handleBlur}
-                            placeholder="greenwich12@gmail.com"
+
                         />
                         {errors.email && touched.email && (
                             <Typography
@@ -192,7 +210,7 @@ export const EditEmployers = () => {
                             type="number"
                             value={values.salary}
                             onBlur={handleBlur}
-                            placeholder="35000"
+
                         />
                         {errors.salary && touched.salary && (
                             <Typography

@@ -18,7 +18,7 @@ export default function Statistic6month() {
                         }}>
                             <Box sx={{display: 'flex', justifyContent: 'space-between', py:'8px', mx:'55px'}}>
                                 <Typography variant={'h5'} mt={'8px'}>
-                                    Общий доход $
+                                    Общий доход
                                 </Typography>
                                 <Typography variant={'h6'} >
                                     $76685.41

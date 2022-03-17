@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import {SignInLogo} from "./view/signInLogo";
 import  {SignInContainer} from "./signInContainer";
 import Container from "@mui/material/Container";
+import React from "react";
 
 export const SignInPage = () => {
     return (

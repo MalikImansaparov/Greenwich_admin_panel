@@ -1,4 +1,11 @@
-import {PRODUCT_FAILURE, PRODUCT_REQUEST, PRODUCT_SUCCESS} from "../constants";
+import {
+    ADD_PRODUCT,
+    DELETE_PRODUCT, GET_PRODUCT,
+    PRODUCT_FAILURE,
+    PRODUCT_REQUEST,
+    PRODUCT_SUCCESS,
+    UPDATE_PRODUCT
+} from "../constants";
 
 const initialState = {
     product: [],
@@ -24,7 +31,26 @@ export const productsReducer = (state = initialState, action) => {
                 loading: false,
                 product: null
             }
-
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
+            }
+        case ADD_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
+            }
+        case UPDATE_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
+            }
+        case DELETE_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
+            }
         default:
             return state
     }

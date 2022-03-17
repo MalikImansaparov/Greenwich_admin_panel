@@ -1,5 +1,5 @@
 export const API_DOMAIN = 'https://flowerdelivery5.herokuapp.com';
-// export const API_DOMAIN = 'https://my-json-server.typicode.com/typicode/demo/';
+
 export const TOKEN_REFRESH_REQUEST = 'TOKEN_REFRESH_REQUEST';
 export const TOKEN_REFRESH_SUCCESS = 'TOKEN_REFRESH_SUCCESS';
 export const TOKEN_REFRESH_FAILURE = 'TOKEN_REFRESH_FAILURE';
@@ -20,11 +20,21 @@ export const SEARCH_ORDERS = 'SEARCH_ORDERS'
 export const PRODUCT_REQUEST = 'PRODUCT_REQUEST';
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_FAILURE = 'PRODUCT_FAILURE';
-
-export const EMPLOYER_REQUEST = 'EMPLOYER_REQUEST';
-export const EMPLOYER_SUCCESS = 'EMPLOYER_SUCCESS';
-export const EMPLOYER_FAILURE = 'EMPLOYER_FAILURE';
+export const GET_PRODUCT = 'GET_PRODUCT';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
 export const CONTACT_REQUEST = 'CONTACT_REQUEST';
 export const CONTACT_SUCCESS = 'CONTACT_SUCCESS';
 export const CONTACT_FAILURE = 'CONTACT_FAILURE';
+export const GET_CONTACT = 'GET_CONTACT';
+export const EDIT_CONTACT = 'EDIT_CONTACT';
+
+export const EMPLOYER_REQUEST = 'EMPLOYER_REQUEST';
+export const EMPLOYER_SUCCESS = 'EMPLOYER_SUCCESS';
+export const EMPLOYER_FAILURE = 'EMPLOYER_FAILURE';
+export const ADD_EMPLOYER = 'ADD_EMPLOYER';
+export const DELETE_EMPLOYER = 'DELETE_EMPLOYER';
+export const UPDATE_EMPLOYER = 'UPDATE_EMPLOYER';
+export const EMPLOYER_PROFILE = 'EMPLOYER_PROFILE';

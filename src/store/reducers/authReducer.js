@@ -12,9 +12,9 @@ import {
 const initialAuthState = {
   isFetching: false,
   isAuthenticated: !!localStorage.getItem('access'),
-  isAdmin: localStorage.getItem('role') ? 'админ'  : 'cуперадмин',
   access: localStorage.getItem('access'),
   refresh: localStorage.getItem('refresh'),
+  is_superuser: localStorage.getItem('is_superuser'),
 };
 
 export const authReducer = (state = initialAuthState, action) => {
@@ -31,7 +31,8 @@ export const authReducer = (state = initialAuthState, action) => {
         isAuthenticated: action.isAuthenticated,
         access: action.access,
         refresh: action.refresh,
-        role: action.role
+        role: action.role,
+        is_superuser: action.payload,
       };
     case LOGIN_FAILURE:
       return {
@@ -59,6 +60,7 @@ export const authReducer = (state = initialAuthState, action) => {
         access: action.access,
         refresh: action.refresh,
         role: action.role,
+        is_superuser: action.payload,
         errorMessage: action.errorMessage,
       };
     default:

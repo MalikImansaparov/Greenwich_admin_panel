@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainContainer } from './components/home/main/mainContainer';
 import { Route, Routes, Outlet } from 'react-router-dom';
-import { SignInPage } from './components/authentication/signIn';
+import { SignInPage } from './components/signinAuth/signIn';
 import { Home } from './components/home/home';
 import { Orders } from './components/orders/order';
 import { Employers } from './components/employers/Employers';
@@ -47,7 +47,7 @@ const PrivateRoute = () => {
         <Route path="products/edit:id" element={<EditProducts/>}/>
         <Route path="statistics" element={<Statistic />} />
         <Route path="contacts" element={<Contacts />}/>
-        <Route path="contacts/edit" element={<ContactsEdit />} />
+        <Route path="contacts/edit:id" element={<ContactsEdit />} />
       </Route>
       {/*<Route  element={<PrivateRoute/>}>*/}
       {/*<Route path="employers/add" element={<AddEmployers />} />*/}

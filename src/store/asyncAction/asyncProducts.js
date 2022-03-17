@@ -1,11 +1,15 @@
 import {
+    addProduct,
+    deleteProduct,
+    getProduct,
     getProducts,
     ordersFail,
     ordersStart,
-} from '../actionType/ordersAction';
+    updateProduct,
+} from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
 
-export const AsyncProducts = () => {
+export const AsyncAllProducts = () => {
     return async (dispatch) => {
         dispatch(ordersStart());
         try {
@@ -13,6 +17,48 @@ export const AsyncProducts = () => {
             dispatch(getProducts(data));
         } catch (e) {
             dispatch(ordersFail());
+            console.log('error:', e);
+        }
+    };
+};
+export const AsyncGetProduct = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.get('products/plant-care/');
+            dispatch(getProduct(data));
+        } catch (e) {
+            console.log('error:', e);
+        }
+    };
+};
+
+export const AsyncAddProduct = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.get('products/plant-care/');
+            dispatch(addProduct(data));
+        } catch (e) {
+            console.log('error:', e);
+        }
+    };
+};
+
+export const AsyncEditProduct = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.get('products/plant-care/');
+            dispatch(updateProduct(data));
+        } catch (e) {
+            console.log('error:', e);
+        }
+    };
+};
+export const AsyncDeleteProduct = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.delete('products/plant-care/');
+            dispatch(deleteProduct(data));
+        } catch (e) {
             console.log('error:', e);
         }
     };

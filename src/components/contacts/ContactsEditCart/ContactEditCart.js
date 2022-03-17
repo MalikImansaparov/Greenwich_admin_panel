@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import Box from "@mui/material/Box";
@@ -11,6 +11,8 @@ import {InputWrap, InputWrapper, LabelWrapper, PhotoWrapper, ScheduleWrapper} fr
 import {GoBack} from "../../goBack";
 import Upload from "../../../assets/img/upload.svg"
 import {Item} from "../../../style";
+import {useDispatch, useSelector} from "react-redux";
+import {AsyncEditContact, AsyncGetContact} from "../../../store/asyncAction/asyncContacts";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -42,8 +44,15 @@ const validationSchema = Yup.object({
         .max(12, 'Не правилный номер'),
 })
 
-export const ContactsEditCart = () => {
+export const ContactsEditCart = (id) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const contacts = useSelector((state) => state.contacts )
+
+    useEffect(() => {
+        dispatch(AsyncGetContact(id))
+    },[])
+
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
             photo: 'Добавить фото',
@@ -51,8 +60,10 @@ export const ContactsEditCart = () => {
             number: '',
             schedule: '',
         },
-        onSubmit: () => {
-            navigate('/')
+        onSubmit: (values,{ setSubmitting }) => {
+            dispatch(AsyncEditContact(values, id))
+            setSubmitting(false);
+            navigate(-1)
         },
         validationSchema
     });
@@ -62,8 +73,8 @@ export const ContactsEditCart = () => {
                 <FormControl>
                     <form onSubmit={handleSubmit}>
                         <Box sx={{my: '30px', display: 'grid', justifyContent: "center"}}>
-                            <label htmlFor="contained-button-file">
-                                <InputWrap accept="image/*" id="contained-button-file" multiple type="file" />
+                            <label htmlFor="photo">
+                                <InputWrap accept="image/*" name="photo" id="photo" multiple type="file" />
                                 <PhotoWrapper>
                                     <Box component='img' src={Upload} alt='upload' />
                                     <Typography>Добавить фото</Typography>

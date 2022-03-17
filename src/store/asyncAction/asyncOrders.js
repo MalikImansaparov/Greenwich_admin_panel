@@ -2,7 +2,7 @@ import {
   getOrders,
   ordersFail,
   ordersStart,
-} from '../actionType/ordersAction';
+} from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
 
 export const AsyncOrders = () => {

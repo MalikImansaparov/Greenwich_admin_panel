@@ -1,20 +1,37 @@
 import {
-    getContacts,
-    getEmployers,
-    getOrders,
-    ordersFail,
-    ordersStart,
-} from '../actionType/ordersAction';
+    editContact, getAllContacts,
+    getContact,
+} from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
 
-export const AsyncContacts = () => {
+export const AsyncAllContacts = () => {
     return async (dispatch) => {
-        dispatch(ordersStart());
         try {
             const {data} = await axiosInstance.get('contacts');
-            dispatch(getContacts(data));
+            dispatch(getAllContacts(data));
         } catch (e) {
-            dispatch(ordersFail());
+            console.log('error:', e);
+        }
+    };
+};
+
+export const AsyncGetContact = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.get('contacts');
+            dispatch(editContact(data));
+        } catch (e) {
+            console.log('error:', e);
+        }
+    };
+};
+
+export const AsyncEditContact = () => {
+    return async (dispatch) => {
+        try {
+            const {data} = await axiosInstance.get('contacts');
+            dispatch((data));
+        } catch (e) {
             console.log('error:', e);
         }
     };

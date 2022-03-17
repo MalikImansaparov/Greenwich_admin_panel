@@ -4,14 +4,14 @@ import {
   LOGOUT_FAILURE
 } from '../../constants';
 
-function requestLogout() {
+const requestLogout = () => {
   return {
     type: LOGOUT_REQUEST,
     isFetching: true
   };
 }
 
-function logoutSuccess() {
+  const logoutSuccess = () => {
   return {
     type: LOGOUT_SUCCESS,
     isFetching: false,
@@ -19,7 +19,7 @@ function logoutSuccess() {
   };
 }
 
-function logoutError(errorMessage) {
+  const logoutError = (errorMessage) => {
   return {
     type: LOGOUT_FAILURE,
     isFetching: false,

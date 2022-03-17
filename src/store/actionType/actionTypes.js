@@ -1,0 +1,35 @@
+import {
+    ADD_EMPLOYER, ADD_PRODUCT,
+    CONTACT_SUCCESS, DELETE_EMPLOYER, DELETE_PRODUCT, EDIT_CONTACT, EMPLOYER_FAILURE,
+    EMPLOYER_PROFILE, EMPLOYER_REQUEST,
+    EMPLOYER_SUCCESS, GET_CONTACT, GET_PRODUCT,
+    ORDER_FAILED,
+    ORDER_STARTED,
+    ORDER_SUCCESS,
+    PRODUCT_SUCCESS,
+    SEARCH_ORDERS, UPDATE_EMPLOYER, UPDATE_PRODUCT
+} from "../constants";
+
+export const ordersStart = () => ({type: ORDER_STARTED})
+export const ordersFail = (payload) => ({type: ORDER_FAILED, payload})
+export const getOrders = (payload) => ({type: ORDER_SUCCESS, payload})
+
+export const searchOrders = (payload) => ({type: SEARCH_ORDERS, payload})
+
+export const getAllContacts = (payload) => ({type: CONTACT_SUCCESS,  payload})
+export const getContact = (payload) => ({type: GET_CONTACT,  payload})
+export const editContact = (payload) => ({type: EDIT_CONTACT,  payload})
+
+export const employersStart = () => ({type: EMPLOYER_REQUEST})
+export const employersFail = (payload) => ({type: EMPLOYER_FAILURE, payload})
+export const getEmployers = (payload) => ({type: EMPLOYER_SUCCESS, payload})
+export const getProfile = (payload) => ({type: EMPLOYER_PROFILE,  payload})
+export const addEmployers = (payload) => ({type: ADD_EMPLOYER,  payload})
+export const updateEmployers = (payload) => ({type: UPDATE_EMPLOYER,  payload})
+export const deleteEmployers = (payload) => ({type: DELETE_EMPLOYER,  payload})
+
+export const getProducts = (payload) => ({type: PRODUCT_SUCCESS, payload})
+export const getProduct = (payload) => ({type: GET_PRODUCT,  payload})
+export const addProduct = (payload) => ({type: ADD_PRODUCT,  payload})
+export const updateProduct = (payload) => ({type: UPDATE_PRODUCT,  payload})
+export const deleteProduct = (payload) => ({type: DELETE_PRODUCT,  payload})

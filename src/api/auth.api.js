@@ -1,4 +1,5 @@
 import axiosInstance from './utils/axiosInstance';
+
 export class AuthApi {
   static async login(phone_number, password) {
     try {
@@ -7,7 +8,7 @@ export class AuthApi {
         password,
       });
 
-      axiosInstance.defaults.headers['X-Access-Token'] = data.access;
+      axiosInstance.defaults.headers['Authorization'] = data.access;
 
       return data;
     } catch (error) {
@@ -15,12 +16,4 @@ export class AuthApi {
     }
   }
 
-  static async getUserInfo() {
-    try {
-      const { data } = await axiosInstance.get(`/me`);
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
 }

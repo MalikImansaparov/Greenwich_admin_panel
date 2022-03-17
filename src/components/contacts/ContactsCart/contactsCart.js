@@ -7,6 +7,9 @@ import {ContactsCartRight} from "./ContactCartRigth";
 import {useNavigate, useParams} from "react-router";
 import {Item} from "../../../style";
 import {styled} from "@mui/material";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {AsyncAllContacts} from "../../../store/asyncAction/asyncContacts";
 
 const CartItem = styled(Item)`
       height: 458px;
@@ -23,7 +26,13 @@ const CartItem = styled(Item)`
 
 export const ContactsCarts = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {id} = useParams()
+
+    useEffect(() => {
+        dispatch(AsyncAllContacts(id))
+    },[])
+
     return (
         <Box>
             <Box sx={{mb: '24px'}}>
@@ -41,13 +50,13 @@ export const ContactsCarts = () => {
             </Box>
         <Grid container spacing={7}>
             <Grid item xl={6}>
-                <CartItem onClick={() => {navigate('/contacts/edit')}}>
+                <CartItem onClick={() => {navigate(`/contacts/edit/${id}`)}}>
                 <ContactsCartLeft/>
                 </CartItem>
             </Grid>
             <Grid item xl={6}>
                 <CartItem>
-                    <ContactsCartRight onClick={() => {navigate('/contacts/edit')}}/>
+                    <ContactsCartRight onClick={() => {navigate(`/contacts/edit/${id}`)}}/>
                 </CartItem>
             </Grid>
         </Grid>

@@ -6,13 +6,14 @@ import {
 } from '../../store/constants';
 import {store} from '../../store/store';
 import axios from 'axios';
+const token = localStorage.getItem('access');
 
 const axiosInstance = axios.create({
   baseURL: API_DOMAIN,
   headers: {
     contentType: 'application/json',
     accept: 'application/json',
-    'X-Access-Token': localStorage.getItem('access'),
+    Authorization: token ? `Bearer ${token}` : ' ',
   },
 });
 
@@ -30,7 +31,7 @@ axiosInstance.interceptors.response.use(
       });
 
       return axiosInstance
-        .post('/refresh', { refresh })
+        .post('/token/refresh', { refresh })
         .then(({ data }) => {
           store.dispatch({
             type: TOKEN_REFRESH_SUCCESS,
@@ -41,8 +42,8 @@ axiosInstance.interceptors.response.use(
 
           localStorage.setItem('access', data.access);
 
-          axiosInstance.defaults.headers['X-Access-Token'] = data.access;
-          originalRequest.headers['X-Access-Token'] = data.access;
+          axiosInstance.defaults.headers['Authorization'] = data.access;
+          originalRequest.headers['Authorization'] = data.access;
 
           return axios(originalRequest);
         })
@@ -53,7 +54,7 @@ axiosInstance.interceptors.response.use(
             isAuthenticated: false,
             access: undefined,
             refresh: undefined,
-              role: undefined,
+            role: undefined,
             errorMessage: err,
           });
         });

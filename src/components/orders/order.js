@@ -6,13 +6,12 @@ import {Divider} from "@mui/material";
 
 export const Orders = () => {
     return (
-            <Box>
-                <Box>
-                    <Header/>
-                    <OrderTab/>
-                    <Divider sx={{width:'1080px', my:'30px'}}/>
-                </Box>
-            </Box>
+      <Box>
+        <Box>
+          <OrderTab />
+          <Divider sx={{ width: '1080px', my: '30px' }} />
+        </Box>
+      </Box>
     );
 };
 

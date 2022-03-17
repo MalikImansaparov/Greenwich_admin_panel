@@ -1,17 +1,20 @@
 import React from "react";
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router';
+import {useNavigate, useParams} from 'react-router';
 import Box from "@mui/material/Box";
 import { styled } from '@mui/system';
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
-import {InputWrap, InputWrapper, LabelWrapper, PhotoWrapper, TextareaWrapper,} from "../InputWrapper";
+import {InputWrap, InputWrapper, LabelWrapper, PhotoWrapper, SelectWrapper, TextareaWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
 import {GoBack} from "../../goBack";
 import BreadCrumb from "../../breadCrumbs";
 import Upload from "../../../assets/img/upload.svg";
+import {AsyncAddEmployers} from "../../../store/asyncAction/asyncEmployers";
+import {AsyncAddProduct} from "../../../store/asyncAction/asyncProducts";
+import {useDispatch} from "react-redux";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -45,6 +48,9 @@ const validationSchema = Yup.object({
 
 export const AddProducts = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {id} = useParams()
+
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
             photo: 'Добавить фото',
@@ -54,8 +60,10 @@ export const AddProducts = () => {
             description: '',
             count: '',
         },
-        onSubmit: () => {
-            navigate('/')
+        onSubmit: (values) => {
+            console.log(values)
+            dispatch(AsyncAddProduct(values, id))
+            navigate(-1)
         },
         validationSchema
     });
@@ -113,14 +121,19 @@ export const AddProducts = () => {
                         </Box>
                         <Box sx={{ mb: '30px' }}>
                             <LabelWrapper>Категория</LabelWrapper>
-                            <InputWrapper
+                            <SelectWrapper
                                 name="category"
-                                onChange={handleChange}
-                                type="string"
+                                type='string'
                                 value={values.category}
+                                onChange={handleChange}
                                 onBlur={handleBlur}
-                                placeholder=""
-                            />
+                                sx={{ display: 'block'}}
+                            >
+                                <option value="Удобрения" label="Удобрения" />
+                                <option value="Средства защиты" label="Средства защиты" />
+                                <option value="Грунт" label="Грунт" />
+                                <option value="Почва" label="Почва" />
+                            </SelectWrapper>
                             {errors.category && touched.category && (
                                 <Typography
                                     sx={{
