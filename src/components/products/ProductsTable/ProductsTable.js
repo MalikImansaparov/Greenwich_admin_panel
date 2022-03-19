@@ -106,9 +106,9 @@ export const ProductsTable = () => {
     setRows(filteredRows);
   };
 
-  useEffect(() => {
-    setRows(productData);
-  }, [productData]);
+  // useEffect(() => {
+  //   setRows(productData);
+  // }, [productData]);
 
   const rowData = rows?.map((product) => {
     return {
@@ -121,7 +121,7 @@ export const ProductsTable = () => {
   });
 
   useEffect(() => {
-    dispatch(AsyncAllProducts(id));
+    dispatch(AsyncAllProducts());
   }, []);
 
   const handleDelete = (id) => {

@@ -10,6 +10,7 @@ import { styled } from '@mui/system';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {
+  AsyncDeleteEmployers,
   AsyncEditEmployers,
   AsyncGetEmployers,
   AsyncGetProfile,
@@ -67,6 +68,10 @@ const SearchWrapper = styled('input')`
   }
 `;
 
+const TextAdjust = styled('span')`
+  margin-left: 5px;
+`;
+
 const ButtonWrapper = styled('button')`
   width: 60px;
   height: 48px;
@@ -98,7 +103,6 @@ export const EmployersTable = () => {
   // const [isFlorist, setFlorist] = useState(null);
   const employersData = useSelector((state) => state.employers.user || []);
   const isFetching = useSelector((state) => state.employers.loading);
-  // const [employers, setEmployers] = useState([])
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
 
@@ -115,24 +119,29 @@ export const EmployersTable = () => {
     setRows(filteredRows);
   };
 
-  useEffect(() => {
-    setRows(employersData);
-  }, [employersData]);
+  // useEffect(() => {
+  //   setRows(employersData);
+  // }, [employersData]);
 
   useEffect(() => {
     dispatch(AsyncGetEmployers());
     if (localStorage.getItem('is_superuser') === 'true') {
       setSuperAdmin('суперадмин');
     }
-    // setEmployers(employersData)
   }, []);
+
+  useEffect(() => {
+    dispatch(AsyncGetEmployers());
+  }, [dispatch]);
 
   const rowData = rows.map((employer) => {
     return {
       id: employer?.id,
-      user: employer?.user.first_name,
-      user2: employer?.user.last_name,
-      email: employer?.user.total_price,
+      name: !employer?.user.first_name
+        ? 'Тимур Одинцев'
+        : employer?.user.first_name,
+      lastName: employer?.user.last_name,
+      allowance: employer?.courier_allowance,
       number: employer?.user.phone_number,
       role: employer?.user.role,
       salary: employer?.salary,
@@ -164,13 +173,15 @@ export const EmployersTable = () => {
   // const onChange = () => {
   //     navigate('add', { replace: true })
   // }
+  const handleDelete = (id) => {
+    dispatch(AsyncDeleteEmployers(id));
+    dispatch(AsyncGetEmployers());
+  };
 
-  // const handleDelete = (id) => {
-  //     setData(data.filter((item) => item.id !== id));
-  // };
   const handleClick = (id) => {
     dispatch(AsyncGetProfile(id));
-    navigate(`edit:${id}`);
+
+    navigate(`${id}`);
   };
   const roleColors = {
     админ: 'red',
@@ -194,8 +205,8 @@ export const EmployersTable = () => {
       renderCell: (params) => {
         return (
           <div sx={{ display: 'flex' }}>
-            <span sx={{ ml: '5px' }}>{params.row.user}</span>
-            <span sx={{ mr: '5px' }}> {params.row.user2}</span>
+            <TextAdjust>{params.row.name}</TextAdjust>
+            <TextAdjust> {params.row.lastName}</TextAdjust>
           </div>
         );
       },
@@ -205,7 +216,7 @@ export const EmployersTable = () => {
       headerName: 'Номер телефона',
       width: 180,
       renderCell: (params) => {
-        return <div>{params.row.number}</div>;
+        return <TextAdjust>{params.row.number}</TextAdjust>;
       },
     },
     {
@@ -237,15 +248,15 @@ export const EmployersTable = () => {
       headerName: 'Зарплата',
       width: 120,
       renderCell: (params) => {
-        return <div>{params.row.salary}</div>;
+        return <TextAdjust>{params.row.salary}</TextAdjust>;
       },
     },
     {
-      field: 'email',
-      headerName: 'Электронная почта',
-      width: 200,
+      field: 'allowance',
+      headerName: 'Надбавка',
+      width: 120,
       renderCell: (params) => {
-        return <div>{params.row.email}</div>;
+        return <TextAdjust>{params.row.allowance}</TextAdjust>;
       },
     },
     {
@@ -257,16 +268,16 @@ export const EmployersTable = () => {
           <>
             {' '}
             {isSuperAdmin && (
-              <>
+              <TextAdjust>
                 <EditIcon
                   sx={{ cursor: 'pointer', mr: '15px' }}
                   onClick={() => handleClick(params.row.id)}
                 />
                 <DeleteOutlineIcon
                   sx={{ cursor: 'pointer', fontSize: '30px' }}
-                  // onClick={() => handleDelete(params.row.id)}
+                  onClick={() => handleDelete(params.row.id)}
                 />
-              </>
+              </TextAdjust>
             )}
           </>
         );

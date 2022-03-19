@@ -30,7 +30,11 @@ const requestLogout = () => {
 export const logoutAdmins = () => dispatch => {
   dispatch(requestLogout());
 try {
-        localStorage.clear();
+         localStorage.removeItem('access');
+         localStorage.removeItem('refresh');
+         localStorage.removeItem('firstName');
+         localStorage.removeItem('lastName');
+         localStorage.removeItem('is_superuser');
         dispatch(logoutSuccess());
 }
     catch (err) {

@@ -50,21 +50,21 @@ text-align: left;
 color: #969696;
 `;
 
-export const PhotoWrapper = styled(Button)`
+export const PhotoWrapper = styled('span')`
   width: 200px;
   height: 160px;
   display: block;
   justify-content: center;
   border-radius: 20px;
   border: 1px solid #000000;
-  background: #E6F0E6;
+  background: #e6f0e6;
   outline: none;
   padding: 20px 20px;
   font-weight: 600;
-  color: #000000
+  color: #000000;
 `;
 
-export const TextareaWrapper = styled('input')`
+export const TextareaWrapper = styled('textarea')`
   width: 500px;
   height: 166px;
   border-radius: 20px;
@@ -73,7 +73,7 @@ export const TextareaWrapper = styled('input')`
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 600;
-  color: #000000
+  color: #000000;
 `;
 
 export const InputWrap = styled('input')`

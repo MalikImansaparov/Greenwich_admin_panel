@@ -35,201 +35,212 @@ const CustomButton = styled(Button)`
     background-color: #9C9C9C;
   }
 `;
+
 const validationSchema = Yup.object({
-    password: Yup.string()
-        .required('Пароль обязателный')
-        .min(6, 'Не правилный пароль')
-        .max(10, 'Не правилный пароль'),
-    number: Yup.string()
-        .required('Номер обязателный')
-        .min(9, 'Не правилный номер')
-        .max(12, 'Не правилный номер'),
-})
+  description: Yup.string()
+    .required('Пароль обязателный')
+    .min(6, 'Не правилный пароль')
+    .max(20, 'Не правилный пароль'),
+  price: Yup.string().required('Цена обязателный'),
+});
 
 export const AddProducts = () => {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const {id} = useParams()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-    const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
-        initialValues: {
-            photo: 'Добавить фото',
-            name: '',
-            category: '',
-            price: '',
-            description: '',
-            count: '',
-        },
-        onSubmit: (values) => {
-            console.log(values)
-            dispatch(AsyncAddProduct(values, id))
-            navigate(-1)
-        },
-        validationSchema
-    });
-    return (
-        <Box mx={1}>
-            <BreadCrumb/>
-            <Item sx={{width: '1060px'}}>
-                <FormControl>
-                    <form onSubmit={handleSubmit}>
-                        <Box sx={{my: '30px', display: 'grid', justifyContent: "center"}}>
-                            <label htmlFor="contained-button-file">
-                                <InputWrap accept="image/*" id="contained-button-file" multiple type="file" />
-                                <PhotoWrapper>
-                                    <Box component='img' src={Upload} alt='upload' />
-                                    <Typography>Добавить фото</Typography>
-                                </PhotoWrapper>
-                            </label>
-                            {errors.photo && touched.photo&& (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.photo}
-                                </Typography>
-                            )}
-                        </Box>
-                        <Box sx={{ mb: '30px' }}>
-                            <LabelWrapper>Наименование</LabelWrapper>
-                            <InputWrapper
-                                name="name"
-                                onChange={handleChange}
-                                type="string"
-                                value={values.name}
-                                onBlur={handleBlur}
-                                placeholder=""
-                            />
-                            {errors.name && touched.name && (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.name}
-                                </Typography>
-                            )}
-                        </Box>
-                        <Box sx={{ mb: '30px' }}>
-                            <LabelWrapper>Категория</LabelWrapper>
-                            <SelectWrapper
-                                name="category"
-                                type='string'
-                                value={values.category}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                sx={{ display: 'block'}}
-                            >
-                                <option value="Удобрения" label="Удобрения" />
-                                <option value="Средства защиты" label="Средства защиты" />
-                                <option value="Грунт" label="Грунт" />
-                                <option value="Почва" label="Почва" />
-                            </SelectWrapper>
-                            {errors.category && touched.category && (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.category}
-                                </Typography>
-                            )}
-                        </Box>
-                        <Box sx={{ mb: '30px' }}>
-                            <LabelWrapper>Цена</LabelWrapper>
-                            <InputWrapper
-                                name="price"
-                                onChange={handleChange}
-                                type="number"
-                                value={values.price}
-                                onBlur={handleBlur}
-                                placeholder=""
-                            />
-                            {errors.price && touched.price && (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.price}
-                                </Typography>
-                            )}
-                        </Box>
-                        <Box sx={{ mb: '30px' }}>
-                            <LabelWrapper>Описания</LabelWrapper>
-                            <TextareaWrapper
-                                name="password"
-                                onChange={handleChange}
-                                type="string"
-                                value={values.description}
-                                onBlur={handleBlur}
-                                placeholder=""
-                            />
-                            {errors.description && touched.description && (
-                                <LabelWrapper
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.description}
-                                </LabelWrapper>
-                            )}
-                        </Box>
-                        <Box sx={{ mb: '30px' }}>
-                            <LabelWrapper>Количество</LabelWrapper>
-                            <InputWrapper
-                                name="count"
-                                onChange={handleChange}
-                                type="password"
-                                value={values.count}
-                                onBlur={handleBlur}
-                                placeholder=""
-                            />
-                            {errors.count && touched.count && (
-                                <Typography
-                                    sx={{
-                                        textAlign: 'left',
-                                        fontSize: '13px',
-                                        color: 'error.main',
-                                        mt: '12px',
-                                        ml: '14px',
-                                    }}
-                                >
-                                    {errors.count}
-                                </Typography>
-                            )}
-                        </Box>
-                        <Box sx={{display: 'flex', justifyContent:'space-between'}}>
-                            <GoBack/>
-                            <CustomButton type="submit" disabled={isSubmitting}>
-                                Сохранить
-                            </CustomButton>
-                        </Box>
-                    </form>
-                </FormControl>
-            </Item>
-        </Box>
-
-    );
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      photo: '',
+      category: '',
+      price: '',
+      description: '',
+      // count: '',
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      console.log(values);
+      dispatch(AsyncAddProduct(values));
+      setSubmitting(false);
+      navigate(-1);
+    },
+    validationSchema,
+  });
+  return (
+    <Box mx={1}>
+      <BreadCrumb />
+      <Item sx={{ width: '1060px' }}>
+        <FormControl>
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}>
+              <label htmlFor="contained-button-file">
+                <InputWrap
+                  name="photo"
+                  // value={values.photo}
+                  accept="image/*"
+                  id="contained-button-file"
+                  multiple
+                  type="file"
+                />
+                <PhotoWrapper>
+                  <Box component="img" src={Upload} alt="upload" />
+                  <Typography>Добавить фото</Typography>
+                </PhotoWrapper>
+              </label>
+              {errors.photo && touched.photo && (
+                <Typography
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.photo}
+                </Typography>
+              )}
+            </Box>
+            {/* <Box sx={{ mb: '30px' }}>
+                <LabelWrapper>Наименование</LabelWrapper>
+                <InputWrapper
+                  name="name"
+                  onChange={handleChange}
+                  type="string"
+                  value={values.name}
+                  onBlur={handleBlur}
+                  placeholder=""
+                />
+                {errors.name && touched.name && (
+                  <Typography
+                    sx={{
+                      textAlign: 'left',
+                      fontSize: '13px',
+                      color: 'error.main',
+                      mt: '12px',
+                      ml: '14px',
+                    }}
+                  >
+                    {errors.name}
+                  </Typography>
+                )}
+              </Box> */}
+            <Box sx={{ mb: '30px' }}>
+              <LabelWrapper>Категория</LabelWrapper>
+              <SelectWrapper
+                name="category"
+                type="string"
+                value={values.category}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                sx={{ display: 'block' }}
+              >
+                <option value="Удобрения" label="Удобрения" />
+                <option value="Средства защиты" label="Средства защиты" />
+                <option value="Грунт" label="Грунт" />
+                <option value="Почва" label="Почва" />
+              </SelectWrapper>
+              {errors.category && touched.category && (
+                <Typography
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.category}
+                </Typography>
+              )}
+            </Box>
+            <Box sx={{ mb: '30px' }}>
+              <LabelWrapper>Цена</LabelWrapper>
+              <InputWrapper
+                name="price"
+                onChange={handleChange}
+                type="text"
+                value={values.price}
+                onBlur={handleBlur}
+                placeholder=""
+              />
+              {errors.price && touched.price && (
+                <Typography
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.price}
+                </Typography>
+              )}
+            </Box>
+            <Box sx={{ mb: '30px' }}>
+              <LabelWrapper>Описания</LabelWrapper>
+              <TextareaWrapper
+                name="description"
+                onChange={handleChange}
+                type="text"
+                value={values.description}
+                onBlur={handleBlur}
+              />
+              {errors.description && touched.description && (
+                <LabelWrapper
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.description}
+                </LabelWrapper>
+              )}
+            </Box>
+            {/* <Box sx={{ mb: '30px' }}>
+                <LabelWrapper>Количество</LabelWrapper>
+                <InputWrapper
+                  name="count"
+                  onChange={handleChange}
+                  type="text"
+                  value={values.count}
+                  onBlur={handleBlur}
+                  placeholder=""
+                />
+                {errors.count && touched.count && (
+                  <Typography
+                    sx={{
+                      textAlign: 'left',
+                      fontSize: '13px',
+                      color: 'error.main',
+                      mt: '12px',
+                      ml: '14px',
+                    }}
+                  >
+                    {errors.count}
+                  </Typography>
+                )}
+              </Box> */}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <GoBack />
+              <CustomButton type="submit" disabled={isSubmitting}>
+                Сохранить
+              </CustomButton>
+            </Box>
+          </form>
+        </FormControl>
+      </Item>
+    </Box>
+  );
 };
