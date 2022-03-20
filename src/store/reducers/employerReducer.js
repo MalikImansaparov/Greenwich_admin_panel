@@ -19,28 +19,23 @@ export const employersReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-        user: null,
-        profile: null,
       };
     case EMPLOYER_SUCCESS:
       return {
         ...state,
         loading: false,
         user: action.payload,
-        profile: null,
       };
     case EMPLOYER_FAILURE:
       return {
         ...state,
         loading: false,
         user: null,
-        profile: null,
       };
     case ADD_EMPLOYER:
       return {
         ...state,
         user: action.payload,
-        profile: null,
       };
     case EMPLOYER_PROFILE:
       return {
@@ -50,13 +45,13 @@ export const employersReducer = (state = initialState, action) => {
     case DELETE_EMPLOYER:
       return {
         ...state,
-        user: state.user.filter((item) => item.id != action.payload),
+        user: state.user.filter((item) => item.id !== action.payload),
       };
     case UPDATE_EMPLOYER:
       return {
         ...state,
         user: state.user.map((item) =>
-          item.id == action.payload.id ? action.payload : item
+          item.id === action.payload.id ? action.payload : item
         ),
       };
 

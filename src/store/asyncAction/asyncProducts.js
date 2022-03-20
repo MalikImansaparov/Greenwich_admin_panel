@@ -43,23 +43,26 @@ export const AsyncAddProduct = (values) => {
   };
 };
 
-export const AsyncEditProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('products/plant-care/');
-            dispatch(updateProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncEditProduct = ({ values, id }) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `products/plant-care/${id}`,
+        values
+      );
+      dispatch(updateProduct(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
-export const AsyncDeleteProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.delete('products/plant-care/');
-            dispatch(deleteProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncDeleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.delete(`products/plant-care/${id}`);
+      dispatch(deleteProduct());
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };

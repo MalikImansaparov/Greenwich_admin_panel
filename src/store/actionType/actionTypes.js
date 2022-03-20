@@ -23,13 +23,19 @@ export const editContact = (id) => ({ type: EDIT_CONTACT, payload: id });
 export const employersStart = () => ({ type: EMPLOYER_REQUEST });
 export const employersFail = (payload) => ({ type: EMPLOYER_FAILURE, payload });
 export const getEmployers = (payload) => ({ type: EMPLOYER_SUCCESS, payload });
-export const getProfile = (id) => ({ type: EMPLOYER_PROFILE, payload: id });
+export const getProfile = (payload) => ({ type: EMPLOYER_PROFILE, payload });
 export const addEmployers = (payload) => ({ type: ADD_EMPLOYER, payload });
-export const updateEmployers = (id) => ({ type: UPDATE_EMPLOYER, payload: id });
+export const updateEmployers = (payload) => ({
+  type: UPDATE_EMPLOYER,
+  payload,
+});
 export const deleteEmployers = (id) => ({ type: DELETE_EMPLOYER, payload: id });
 
 export const getProducts = (payload) => ({ type: PRODUCT_SUCCESS, payload });
 export const getProduct = (id) => ({ type: GET_PRODUCT, payload: id });
 export const addProduct = (payload) => ({ type: ADD_PRODUCT, payload });
-export const updateProduct = (id) => ({ type: UPDATE_PRODUCT, payload: id });
+export const updateProduct = (payload) => ({
+  type: UPDATE_PRODUCT,
+  payload,
+});
 export const deleteProduct = (id) => ({ type: DELETE_PRODUCT, payload: id });

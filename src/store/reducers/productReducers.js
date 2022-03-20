@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   product: [],
-  productInfo: [],
+  care: [],
   loading: 'false',
 };
 export const productsReducer = (state = initialState, action) => {
@@ -35,7 +35,7 @@ export const productsReducer = (state = initialState, action) => {
     case GET_PRODUCT:
       return {
         ...state,
-        productInfo: action.payload,
+        care: action.payload,
       };
     case ADD_PRODUCT:
       return {
@@ -46,13 +46,13 @@ export const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         product: state.product.map((item) =>
-          item.id == action.payload.id ? action.payload : item
+          item.id === action.payload.id ? action.payload : item
         ),
       };
     case DELETE_PRODUCT:
       return {
         ...state,
-        product: state.product.filter((item) => item.id != action.payload),
+        product: state.product.filter((item) => item.id !== action.payload),
       };
     default:
       return state;

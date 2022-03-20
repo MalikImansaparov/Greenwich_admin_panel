@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import BreadCrumb from '../../breadCrumbs';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { useNavigate, useParams } from 'react-router';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
@@ -9,7 +10,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { InputWrapper, SelectWrapper, LabelWrapper } from '../InputWrapper';
 import { Item } from '../../../style';
-import { validationSchema } from '../../signinAuth/validateForm';
 import { GoBack } from '../../goBack';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -37,13 +37,38 @@ const CustomButton = styled(Button)`
   }
 `;
 
+const validationSchema = Yup.object().shape({
+  first_name: Yup.string().required('Имя обязателный'),
+  last_name: Yup.string().required('Фамилия обязателный'),
+  phone_number: Yup.string()
+    .required('Номер обязателный')
+    .min(9, 'Не правилный номер')
+    .max(14, 'Не правилный номер'),
+  courier_allowance: Yup.string().required('Логин обязателный'),
+  role: Yup.string().required('Роль обязателный'),
+  salary: Yup.number().required('зарплата обязателный'),
+  password: Yup.string()
+    .required('Пароль обязателный')
+    .min(6, 'Небезопасный пароль'),
+});
+
 export const EditEmployers = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const profile = useSelector((state) => state.employers.profile);
-  console.log(profile);
-  React.useEffect(() => {}, []);
+  const employers = useSelector((state) => state.employers.profile);
+  const [profile, setProfile] = useState(employers);
+  console.log(employers);
+
+  useEffect(() => {
+    dispatch(AsyncGetProfile(id));
+  }, []);
+
+  useEffect(() => {
+    if (employers) {
+      setProfile({ ...employers });
+    }
+  }, [id]);
 
   const {
     handleSubmit,
@@ -60,12 +85,13 @@ export const EditEmployers = () => {
       last_name: profile?.user.last_name,
       phone_number: profile?.user.phone_number,
       role: profile?.user.role,
-      courier_allowance: profile?.courier_allowance,
+      florist_allowance: profile?.florist_allowance,
       salary: profile?.salary,
       password: profile?.password,
     },
     onSubmit: (values, { setSubmitting }) => {
-      dispatch(AsyncEditEmployers(values, id));
+      console.log(values);
+      dispatch(AsyncEditEmployers({ values, id }));
       setSubmitting(false);
       navigate(-1);
     },
@@ -170,6 +196,7 @@ export const EditEmployers = () => {
                       onBlur={handleBlur}
                       sx={{ display: 'block' }}
                     >
+                      <option value="" label="Выберите роль" />
                       <option value="florist" label="Флорист" />
                       <option value="courier" label="Курьер" />
                       <option value="admin" label="Админ" />
@@ -214,13 +241,12 @@ export const EditEmployers = () => {
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Надбавка</LabelWrapper>
                     <InputWrapper
-                      name="courier_allowance"
+                      name="florist_allowance"
                       onChange={handleChange}
                       type="text"
-                      value={values.courier_allowance}
-                      placeholder=""
+                      value={values.florist_allowance}
                     />
-                    {errors.courier_allowance && touched.courier_allowance && (
+                    {errors.florist_allowance && touched.florist_allowance && (
                       <Typography
                         sx={{
                           textAlign: 'left',
@@ -230,7 +256,7 @@ export const EditEmployers = () => {
                           ml: '14px',
                         }}
                       >
-                        {errors.courier_allowance}
+                        {errors.florist_allowance}
                       </Typography>
                     )}
                   </Box>

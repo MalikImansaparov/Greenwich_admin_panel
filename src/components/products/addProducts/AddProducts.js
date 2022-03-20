@@ -1,20 +1,29 @@
 import React from "react";
 import { useFormik } from 'formik';
-import {useNavigate, useParams} from 'react-router';
-import Box from "@mui/material/Box";
+import { Formik } from 'formik';
+import { useNavigate, useParams } from 'react-router';
+import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
-import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import * as Yup from "yup";
-import {InputWrap, InputWrapper, LabelWrapper, PhotoWrapper, SelectWrapper, TextareaWrapper,} from "../InputWrapper";
-import {Item} from "../../../style";
-import {GoBack} from "../../goBack";
-import BreadCrumb from "../../breadCrumbs";
-import Upload from "../../../assets/img/upload.svg";
-import {AsyncAddEmployers} from "../../../store/asyncAction/asyncEmployers";
-import {AsyncAddProduct} from "../../../store/asyncAction/asyncProducts";
-import {useDispatch} from "react-redux";
+import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import * as Yup from 'yup';
+import {
+  InputWrap,
+  InputWrapper,
+  LabelWrapper,
+  PhotoWrapper,
+  SelectWrapper,
+  TextareaWrapper,
+} from '../InputWrapper';
+import { Item } from '../../../style';
+import { GoBack } from '../../goBack';
+import BreadCrumb from '../../breadCrumbs';
+import Upload from '../../../assets/img/upload.svg';
+import { AsyncAddEmployers } from '../../../store/asyncAction/asyncEmployers';
+import { AsyncAddProduct } from '../../../store/asyncAction/asyncProducts';
+import axiosInstance from '../../../api/utils/axiosInstance';
+import { useDispatch } from 'react-redux';
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -32,9 +41,26 @@ const CustomButton = styled(Button)`
   text-align: center;
   margin-bottom: 70px;
   &:hover {
-    background-color: #9C9C9C;
+    background-color: #9c9c9c;
   }
 `;
+
+//  const fileUploadHandler = async (e) => {
+//   try {
+//     const formData = new FormData();
+//     const file = e.target.files[0];
+
+//     formData.append('adImages', file)
+//     formData.append('name', file.name)
+//     formData.append('imgInfo', userId || ownerId)
+
+//     const { data } = await uploadImage(formData);
+
+//     setState((prev) => ({ ...prev, photo: [...prev.photo, data] }));
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+// }
 
 const validationSchema = Yup.object({
   description: Yup.string()
@@ -57,17 +83,35 @@ export const AddProducts = () => {
     errors,
     touched,
     isSubmitting,
+    setFieldValue,
   } = useFormik({
     initialValues: {
-      photo: '',
-      category: '',
+      photo: [],
+      choice: '',
       price: '',
       description: '',
       // count: '',
     },
     onSubmit: (values, { setSubmitting }) => {
+      let data = new FormData();
+      data.append('picture', values.picture);
+      data.append('choice', values.choice);
+      data.append('price', values.price);
+      data.append('description', values.description);
+      axiosInstance
+        .post('products/plant-care', data, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       console.log(values);
-      dispatch(AsyncAddProduct(values));
+      // dispatch(AsyncAddProduct(values));
       setSubmitting(false);
       navigate(-1);
     },
@@ -88,6 +132,9 @@ export const AddProducts = () => {
                   id="contained-button-file"
                   multiple
                   type="file"
+                  onChange={(event) => {
+                    setFieldValue('picture', event.currentTarget.files[0]);
+                  }}
                 />
                 <PhotoWrapper>
                   <Box component="img" src={Upload} alt="upload" />

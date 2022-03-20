@@ -26,6 +26,7 @@ export const AsyncAddEmployers = (values) => {
       const { data } = await axiosInstance.post(`employee-register`, values);
       console.log(data);
       dispatch(addEmployers(data));
+      dispatch(AsyncGetEmployers());
     } catch (e) {
       console.log('error:', e);
     }
@@ -47,7 +48,7 @@ export const AsyncGetProfile = (id) => {
 export const AsyncEditEmployers = (values, id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.put(
+      const { data } = await axiosInstance.patch(
         `employee-register/${id}`,
         values
       );
@@ -59,13 +60,16 @@ export const AsyncEditEmployers = (values, id) => {
 };
 
 export const AsyncDeleteEmployers = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.delete(`all-users/${id}`);
-      dispatch(deleteEmployers(data));
-    } catch (e) {
-      console.log('error:', e);
-    }
+  return (dispatch) => {
+    axiosInstance
+      .delete(`all-users/${id}`)
+      .then(() => {
+        dispatch(deleteEmployers(id));
+        dispatch(AsyncGetEmployers());
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };
 

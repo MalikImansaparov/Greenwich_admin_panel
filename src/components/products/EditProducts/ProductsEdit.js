@@ -1,21 +1,42 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router';
-import Box from "@mui/material/Box";
+import { useNavigate, useParams } from 'react-router';
+import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
-import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import * as Yup from "yup";
-import {InputWrap, InputWrapper, LabelWrapper, PhotoWrapper, TextareaWrapper,} from "../InputWrapper";
-import {Item} from "../../../style";
-import {GoBack} from "../../goBack";
-import BreadCrumb from "../../breadCrumbs";
-import Upload from "../../../assets/img/upload.svg";
-import {Header} from "../../header/header";
-import {AsyncEditEmployers, AsyncGetProfile} from "../../../store/asyncAction/asyncEmployers";
-import {useDispatch, useSelector} from "react-redux";
-import {AsyncEditProduct, AsyncGetProduct} from "../../../store/asyncAction/asyncProducts";
+import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import * as Yup from 'yup';
+import {
+  InputWrap,
+  InputWrapper,
+  LabelWrapper,
+  PhotoWrap,
+  TextareaWrapper,
+} from '../InputWrapper';
+import { Item } from '../../../style';
+import { GoBack } from '../../goBack';
+import BreadCrumb from '../../breadCrumbs';
+import Upload from '../../../assets/img/upload.svg';
+import { Header } from '../../header/header';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  AsyncEditProduct,
+  AsyncGetProduct,
+} from '../../../store/asyncAction/asyncProducts';
+import axiosInstance from '../../../api/utils/axiosInstance';
+
+const PhotoWrapper = styled('span')`
+  width: 230px;
+  height: 210px;
+  display: block;
+  justify-content: center;
+  border-radius: 20px;
+  padding-top: 10px;
+  border: 1px solid #000000;
+  font-weight: 600;
+  color: #000000;
+`;
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -33,23 +54,33 @@ const CustomButton = styled(Button)`
   text-align: center;
   margin-bottom: 70px;
   &:hover {
-    background-color: #9C9C9C;
+    background-color: #9c9c9c;
   }
 `;
 const validationSchema = Yup.object({
   description: Yup.string().required('описание обязателный'),
-  category: Yup.string().required('Выберите категорию'),
+  choice: Yup.string().required('Выберите категорию'),
   price: Yup.number().required('Укажите цену'),
+  quantity: Yup.number().required('Укажите количество'),
 });
 
-export const EditProducts = (id) => {
+export const EditProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const product = useSelector((state) => state.product);
+  const { id } = useParams();
+  const productInfo = useSelector((state) => state.products.care);
+  const [product, setProduct] = useState(productInfo);
+  console.log(productInfo);
 
   useEffect(() => {
-    dispatch(AsyncGetProduct(id));
-  }, [product]);
+    if (productInfo) {
+      setProduct({ ...productInfo });
+    }
+  }, [productInfo]);
+
+  // useEffect(() => {
+  //   dispatch(AsyncGetProduct(id));
+  // }, []);
 
   const {
     handleSubmit,
@@ -61,15 +92,20 @@ export const EditProducts = (id) => {
     isSubmitting,
   } = useFormik({
     initialValues: {
-      photo: '',
-      category: '',
-      price: '',
-      description: '',
+      id: product?.id,
+      picture: product?.picture,
+      choice: product?.choice,
+      price: product?.price,
+      description: product?.description,
+      quantity: product?.quantity,
     },
     onSubmit: (values, { setSubmitting }) => {
-      dispatch(AsyncEditProduct(values, id));
+    
+
+      dispatch(AsyncEditProduct(values));
+      console.log('запрос', values);
       setSubmitting(false);
-      navigate(-1);
+      // navigate(-1);
     },
     validationSchema,
   });
@@ -82,18 +118,23 @@ export const EditProducts = (id) => {
           <form onSubmit={handleSubmit}>
             <Box sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}>
               <label htmlFor="contained-button-file">
-                <InputWrap
-                  accept="image/*"
-                  id="contained-button-file"
-                  multiple
-                  type="file"
-                />
                 <PhotoWrapper>
-                  <Box component="img" src={Upload} alt="upload" />
+                  <InputWrap
+                    name="picture"
+                    accept="image/*"
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                  />
+                  <PhotoWrap
+                    component="img"
+                    src={values.picture}
+                    alt="upload"
+                  />
                   <Typography>Изменить фото</Typography>
                 </PhotoWrapper>
               </label>
-              {errors.photo && touched.photo && (
+              {errors.picture && touched.picture && (
                 <Typography
                   sx={{
                     textAlign: 'left',
@@ -103,7 +144,7 @@ export const EditProducts = (id) => {
                     ml: '14px',
                   }}
                 >
-                  {errors.photo}
+                  {errors.picture}
                 </Typography>
               )}
             </Box>
@@ -115,7 +156,6 @@ export const EditProducts = (id) => {
                 type="string"
                 value={values.description}
                 onBlur={handleBlur}
-                placeholder="Грунт для суккулентов"
               />
               {errors.description && touched.description && (
                 <Typography
@@ -134,14 +174,13 @@ export const EditProducts = (id) => {
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Категория</LabelWrapper>
               <InputWrapper
-                name="category"
+                name="choice"
                 onChange={handleChange}
                 type="string"
-                value={values.category}
+                value={values.choice}
                 onBlur={handleBlur}
-                placeholder="Грунт"
               />
-              {errors.category && touched.category && (
+              {errors.choice && touched.choice && (
                 <Typography
                   sx={{
                     textAlign: 'left',
@@ -151,7 +190,7 @@ export const EditProducts = (id) => {
                     ml: '14px',
                   }}
                 >
-                  {errors.category}
+                  {errors.choice}
                 </Typography>
               )}
             </Box>
@@ -163,7 +202,6 @@ export const EditProducts = (id) => {
                 type="number"
                 value={values.price}
                 onBlur={handleBlur}
-                placeholder="1800"
               />
               {errors.price && touched.price && (
                 <Typography
@@ -179,7 +217,7 @@ export const EditProducts = (id) => {
                 </Typography>
               )}
             </Box>
-            <Box sx={{ mb: '30px' }}>
+            {/* <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Описания</LabelWrapper>
               <TextareaWrapper
                 name="password"
@@ -187,7 +225,6 @@ export const EditProducts = (id) => {
                 type="string"
                 value={values.description}
                 onBlur={handleBlur}
-                placeholder=""
               />
               {errors.description && touched.description && (
                 <LabelWrapper
@@ -202,18 +239,17 @@ export const EditProducts = (id) => {
                   {errors.description}
                 </LabelWrapper>
               )}
-            </Box>
+            </Box> */}
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Количество</LabelWrapper>
               <InputWrapper
-                name="count"
+                name="quantity"
                 onChange={handleChange}
-                type="password"
-                value={values.count}
+                type="text"
+                value={values.quantity}
                 onBlur={handleBlur}
-                placeholder="10"
               />
-              {errors.count && touched.count && (
+              {errors.quantity && touched.quantity && (
                 <Typography
                   sx={{
                     textAlign: 'left',
@@ -223,7 +259,7 @@ export const EditProducts = (id) => {
                     ml: '14px',
                   }}
                 >
-                  {errors.count}
+                  {errors.quantity}
                 </Typography>
               )}
             </Box>
@@ -239,4 +275,3 @@ export const EditProducts = (id) => {
     </Box>
   );
 };
-

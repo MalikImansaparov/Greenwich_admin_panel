@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { ItemWrapper } from '../../../style';
 import Typography from '@mui/material/Typography';
@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
 import avatar from '../../../assets/img/avater.svg';
+import { updateEmployers } from '../../../store/actionType/actionTypes';
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -99,9 +100,7 @@ export const EmployersTable = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSuperAdmin, setSuperAdmin] = useState(null);
-  // const [isAdmin, setAdmin] = useState(null);
-  // const [isFlorist, setFlorist] = useState(null);
-  const employersData = useSelector((state) => state.employers.user || []);
+  const employersData = useSelector((state) => state.employers.user);
   const isFetching = useSelector((state) => state.employers.loading);
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
@@ -119,9 +118,11 @@ export const EmployersTable = () => {
     setRows(filteredRows);
   };
 
-  // useEffect(() => {
-  //   setRows(employersData);
-  // }, [employersData]);
+  const updataEmployers = () => {
+    return setRows(employersData);
+  };
+
+  useCallback(() => {}, []);
 
   useEffect(() => {
     dispatch(AsyncGetEmployers());
@@ -129,10 +130,6 @@ export const EmployersTable = () => {
       setSuperAdmin('суперадмин');
     }
   }, []);
-
-  useEffect(() => {
-    dispatch(AsyncGetEmployers());
-  }, [dispatch]);
 
   const rowData = rows.map((employer) => {
     return {
@@ -148,39 +145,14 @@ export const EmployersTable = () => {
     };
   });
 
-  // useLayoutEffect(() => {
-  //     if ( rowData.role === 'админ') {
-  //         setAdmin('админ');
-  //     }
-  //     if ( rowData.role === 'флористь') {
-  //         setFlorist('флористь');
-  //     }
-  //     console.log('isAdmin', rowData[1].role)
-  // },[])
-
-  // useEffect(() => {
-  //     axiosInstance.get("employers")
-  //         .then((response) => {
-  //             console.log(response.data.client);
-  //             setRowData(response.data);
-  //         });
-  // }, []);
-
-  // const async asyncEmpoyersEdit = dispatch => {
-  //      const employers = await instance.get(`employers${id}`)
-  //      dispatch(getUsers(employers))
-  // }
-  // const onChange = () => {
-  //     navigate('add', { replace: true })
-  // }
   const handleDelete = (id) => {
     dispatch(AsyncDeleteEmployers(id));
-    dispatch(AsyncGetEmployers());
+    updateEmployers();
+    // dispatch(AsyncGetEmployers());
   };
 
   const handleClick = (id) => {
     dispatch(AsyncGetProfile(id));
-
     navigate(`${id}`);
   };
   const roleColors = {
@@ -226,19 +198,18 @@ export const EmployersTable = () => {
       renderCell: (params) => {
         return (
           <>
-            {' '}
-            {Object.entries(roleColors).map(([key, value]) => {
-              <Box
-                sx={{
-                  background: key === params.row.role ? value : null,
-                  borderRadius: '12px',
-                  padding: '5px 10px',
-                  cursor: 'pointer',
-                }}
-              >
-                {params.row.role}
-              </Box>;
-            })}
+            {/* {Object.entries(roleColors).map(([key, value]) => { */}
+            <Box
+              sx={{
+                // background: key === params.row.role ? value : null,
+                borderRadius: '12px',
+                padding: '5px 10px',
+                cursor: 'pointer',
+              }}
+            >
+              {params.row.role}
+            </Box>
+            {/* })} */}
           </>
         );
       },

@@ -189,6 +189,7 @@ export const AddEmployers = () => {
                     onBlur={handleBlur}
                     sx={{ display: 'block' }}
                   >
+                    <option value="" label="Выберите роль" />
                     <option value="Флорист" label="Флорист" />
                     <option value="Курьер" label="Курьер" />
                     <option value="Админ" label="Админ" />

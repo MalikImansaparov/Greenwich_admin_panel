@@ -44,10 +44,10 @@ const App = () => {
             <Route index element={<ProductsTable />} />
             <Route path="add" element={<AddProducts />} />
           </Route>
-          <Route path="products/edit:id" element={<EditProducts />} />
+          <Route path="products/:id" element={<EditProducts />} />
           <Route path="statistics" element={<Statistic />} />
           <Route path="contacts" element={<Contacts />} />
-          <Route path="contacts/edit:id" element={<ContactsEdit />} />
+          <Route path="contacts/id" element={<ContactsEdit />} />
         </Route>
       </Routes>
     </>
