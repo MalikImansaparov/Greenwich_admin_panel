@@ -47,9 +47,10 @@ export const AsyncEditProduct = ({ values, id }) => {
   return async (dispatch) => {
     try {
       const { data } = await axiosInstance.patch(
-        `products/plant-care/${id}`,
+        `products/plant-care/${id}/`,
         values
       );
+      console.log(data);
       dispatch(updateProduct(data));
     } catch (e) {
       console.log('error:', e);

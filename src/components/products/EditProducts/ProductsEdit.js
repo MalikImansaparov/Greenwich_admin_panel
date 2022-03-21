@@ -70,17 +70,17 @@ export const EditProducts = () => {
   const { id } = useParams();
   const productInfo = useSelector((state) => state.products.care);
   const [product, setProduct] = useState(productInfo);
-  console.log(productInfo);
+  console.log('i', productInfo);
+  console.log('p', product);
 
   useEffect(() => {
-    if (productInfo) {
-      setProduct({ ...productInfo });
-    }
-  }, [productInfo]);
+    dispatch(AsyncGetProduct(id));
+    setProduct(productInfo);
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(AsyncGetProduct(id));
-  // }, []);
+  useEffect(() => {
+    setProduct(productInfo);
+  }, [productInfo]);
 
   const {
     handleSubmit,
@@ -100,12 +100,10 @@ export const EditProducts = () => {
       quantity: product?.quantity,
     },
     onSubmit: (values, { setSubmitting }) => {
-    
-
-      dispatch(AsyncEditProduct(values));
+      dispatch(AsyncEditProduct(values, id));
       console.log('запрос', values);
       setSubmitting(false);
-      // navigate(-1);
+      navigate(-1);
     },
     validationSchema,
   });

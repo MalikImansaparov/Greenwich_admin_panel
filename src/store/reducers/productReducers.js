@@ -40,14 +40,15 @@ export const productsReducer = (state = initialState, action) => {
     case ADD_PRODUCT:
       return {
         ...state,
-        product: action.payload,
+        product: [...state.product, ...action.payload],
       };
     case UPDATE_PRODUCT:
       return {
         ...state,
-        product: state.product.map((item) =>
-          item.id === action.payload.id ? action.payload : item
-        ),
+        care: action.payload,
+        // product: state.product.map((item) =>
+        //   item.id === action.payload.id ? action.payload : item
+        // ),
       };
     case DELETE_PRODUCT:
       return {

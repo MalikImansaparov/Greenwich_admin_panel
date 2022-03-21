@@ -35,7 +35,7 @@ export const employersReducer = (state = initialState, action) => {
     case ADD_EMPLOYER:
       return {
         ...state,
-        user: action.payload,
+        user: [...state.user, ...action.payload],
       };
     case EMPLOYER_PROFILE:
       return {

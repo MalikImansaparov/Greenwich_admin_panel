@@ -16,6 +16,7 @@ import {
   AsyncEditEmployers,
 } from '../../../store/asyncAction/asyncEmployers';
 import BreadCrumb from '../../breadCrumbs';
+import { Header } from '../../header/header';
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -71,6 +72,7 @@ export const AddEmployers = () => {
   });
   return (
     <Box>
+      <Header />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
           <Box sx={{ display: 'flex', mb: '20px' }}>

@@ -16,6 +16,7 @@ import {
   AsyncEditEmployers,
   AsyncGetProfile,
 } from '../../../store/asyncAction/asyncEmployers';
+import { Header } from '../../header/header';
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -99,6 +100,7 @@ export const EditEmployers = () => {
   });
   return (
     <Box>
+      <Header />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Box>
           <Box sx={{ display: 'flex', mb: '20px' }}>

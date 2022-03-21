@@ -104,10 +104,11 @@ export const EmployersTable = () => {
   const isFetching = useSelector((state) => state.employers.loading);
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
+console.log('e',employersData)
+console.log('r', rows)
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
-
     const filteredRows = employersData.filter((row) => {
       return (
         row.user.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -118,20 +119,23 @@ export const EmployersTable = () => {
     setRows(filteredRows);
   };
 
-  const updataEmployers = () => {
-    return setRows(employersData);
-  };
+  // const updateEmployers = () => {
+  //   return setRows(employersData);
+  // };
 
-  useCallback(() => {}, []);
+ useEffect(() => {
+    setRows(employersData);
+  }, [employersData]);
 
   useEffect(() => {
+    setRows(employersData);
     dispatch(AsyncGetEmployers());
     if (localStorage.getItem('is_superuser') === 'true') {
       setSuperAdmin('суперадмин');
     }
   }, []);
 
-  const rowData = rows.map((employer) => {
+  const rowData = rows?.map((employer) => {
     return {
       id: employer?.id,
       name: !employer?.user.first_name
@@ -147,7 +151,7 @@ export const EmployersTable = () => {
 
   const handleDelete = (id) => {
     dispatch(AsyncDeleteEmployers(id));
-    updateEmployers();
+   
     // dispatch(AsyncGetEmployers());
   };
 
@@ -155,11 +159,12 @@ export const EmployersTable = () => {
     dispatch(AsyncGetProfile(id));
     navigate(`${id}`);
   };
-  const roleColors = {
-    админ: 'red',
-    флорист: 'black',
-    курьер: 'blue',
-  };
+
+  // const roleColors = {
+  //   админ: 'red',
+  //   флорист: 'black',
+  //   курьер: 'blue',
+  // };
 
   const columns = [
     {
@@ -341,7 +346,7 @@ export const EmployersTable = () => {
       </Grid>
     </Box>
   );
-};
+};;
 
 
 

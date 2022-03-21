@@ -32,7 +32,7 @@ export const updateEmployers = (payload) => ({
 export const deleteEmployers = (id) => ({ type: DELETE_EMPLOYER, payload: id });
 
 export const getProducts = (payload) => ({ type: PRODUCT_SUCCESS, payload });
-export const getProduct = (id) => ({ type: GET_PRODUCT, payload: id });
+export const getProduct = (payload) => ({ type: GET_PRODUCT, payload });
 export const addProduct = (payload) => ({ type: ADD_PRODUCT, payload });
 export const updateProduct = (payload) => ({
   type: UPDATE_PRODUCT,

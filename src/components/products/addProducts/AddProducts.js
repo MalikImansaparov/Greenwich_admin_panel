@@ -24,6 +24,7 @@ import { AsyncAddEmployers } from '../../../store/asyncAction/asyncEmployers';
 import { AsyncAddProduct } from '../../../store/asyncAction/asyncProducts';
 import axiosInstance from '../../../api/utils/axiosInstance';
 import { useDispatch } from 'react-redux';
+import { Header } from '../../header/header';
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -119,6 +120,7 @@ export const AddProducts = () => {
   });
   return (
     <Box mx={1}>
+      <Header />
       <BreadCrumb />
       <Item sx={{ width: '1060px' }}>
         <FormControl>

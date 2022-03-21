@@ -96,7 +96,6 @@ export const ProductsTable = () => {
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
-
     const filteredRows = productData.filter((row) => {
       return (
         row.description.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -106,12 +105,18 @@ export const ProductsTable = () => {
     setRows(filteredRows);
   };
 
-  // useEffect(() => {
-  //   setRows(productData);
-  // }, [productData]);
+  useEffect(() => {
+    setRows(productData);
+    dispatch(AsyncAllProducts());
+  }, []);
 
-  const rowData = rows?.map((product) => {
+  useEffect(() => {
+    setRows(productData);
+  }, [productData]);
+
+  const rowData = rows?.map((product, index) => {
     return {
+      key: index,
       id: product?.id,
       name: product?.description,
       total: product?.price,
@@ -119,10 +124,6 @@ export const ProductsTable = () => {
       category: product?.choice,
     };
   });
-
-  useEffect(() => {
-    dispatch(AsyncAllProducts());
-  }, []);
 
   const handleDelete = (id) => {
     dispatch(AsyncDeleteProduct(id));
