@@ -1,7 +1,6 @@
 import {styled} from "@mui/system";
 import {Typography} from "@mui/material";
-import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
 export const InputWrapper = styled('input')`
   width: 500px;
@@ -11,8 +10,8 @@ export const InputWrapper = styled('input')`
   outline: none;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 500;
-  color: #000000;
+  font-weight: 600;
+  color: #000000
 `;
 
 export const ScheduleWrapper = styled('input')`
@@ -25,7 +24,7 @@ export const ScheduleWrapper = styled('input')`
   padding: 15px 15px;
   font-size: 16px;
   font-weight: 600;
-  color: #000000;
+  color: #000000
 `;
 
 export const SelectWrapper = styled('select')`
@@ -41,38 +40,31 @@ export const SelectWrapper = styled('select')`
   -moz-appearance: none;
   appearance: none;
   color: #969696;
-  background: transparent
-    url('http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png')
-    no-repeat 95% center;
+  background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat 95% center;
 `;
 
 export const LabelWrapper = styled(Typography)`
-  margin: 0 0 6px 12px;
-  font-size: 12px;
-  text-align: left;
-  color: #969696;
+margin: 0 0 6px 12px;
+font-size: 12px;
+text-align: left;
+color: #969696;
 `;
 
-export const PhotoWrap = styled(Box)`
-  width: 200px;
-  height: 160px;
-`;
-
-export const PhotoWrapper = styled('span')`
+export const PhotoWrapper = styled(Button)`
   width: 200px;
   height: 160px;
   display: block;
   justify-content: center;
   border-radius: 20px;
   border: 1px solid #000000;
-  background: #e6f0e6;
+  background: #E6F0E6;
   outline: none;
   padding: 20px 20px;
   font-weight: 600;
-  color: #000000;
+  color: #000000
 `;
 
-export const TextareaWrapper = styled('textarea')`
+export const TextareaWrapper = styled('input')`
   width: 500px;
   height: 166px;
   border-radius: 20px;
@@ -81,7 +73,7 @@ export const TextareaWrapper = styled('textarea')`
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 600;
-  color: #000000;
+  color: #000000
 `;
 
 export const InputWrap = styled('input')`

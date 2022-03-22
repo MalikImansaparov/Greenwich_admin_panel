@@ -23,7 +23,7 @@ export const CompletedOrders = () => {
       active: order?.is_active,
     };
   });
-
+  console.log(rowDatas);
   let result = {};
   for (let i in rowDatas) {
     if (rowDatas[i].active === false) {

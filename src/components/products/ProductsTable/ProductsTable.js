@@ -11,12 +11,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {useDispatch, useSelector} from "react-redux";
 import {
-  AsyncAllProducts,
-  AsyncDeleteProduct,
-  AsyncEditProduct,
-  AsyncGetProduct,
-} from '../../../store/asyncAction/asyncProducts';
-import CircularPreloader from '../../preloader';
+    AsyncAllProducts,
+    AsyncDeleteProduct,
+    AsyncEditProduct,
+} from "../../../store/asyncAction/asyncProducts";
+import CircularPreloader from "../../preloader";
 import avatar from '../../../assets/img/avater.svg';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -87,15 +86,17 @@ const Content = styled(Box)`
 `;
 
 export const ProductsTable = () => {
-  const productData = useSelector((state) => state.products.product);
+  const productData = useSelector((state) => state.products.product || []);
   const isFetching = useSelector((state) => state.products.loading);
   const navigate = useNavigate();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(productData);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
+
     const filteredRows = productData.filter((row) => {
       return (
         row.description.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -107,16 +108,10 @@ export const ProductsTable = () => {
 
   useEffect(() => {
     setRows(productData);
-    dispatch(AsyncAllProducts());
-  }, []);
-
-  useEffect(() => {
-    setRows(productData);
   }, [productData]);
 
-  const rowData = rows?.map((product, index) => {
+  const rowData = rows?.map((product) => {
     return {
-      key: index,
       id: product?.id,
       name: product?.description,
       total: product?.price,
@@ -125,12 +120,16 @@ export const ProductsTable = () => {
     };
   });
 
+  useEffect(() => {
+    dispatch(AsyncAllProducts(id));
+  }, []);
+
   const handleDelete = (id) => {
     dispatch(AsyncDeleteProduct(id));
   };
   const handleClick = (id) => {
-    dispatch(AsyncGetProduct(id));
-    navigate(`${id}`);
+    dispatch(AsyncEditProduct(id));
+    navigate(`edit:${id}`);
   };
   const columns = [
     {

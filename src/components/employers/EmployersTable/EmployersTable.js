@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import { ItemWrapper } from '../../../style';
 import Typography from '@mui/material/Typography';
@@ -10,7 +10,6 @@ import { styled } from '@mui/system';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {
-  AsyncDeleteEmployers,
   AsyncEditEmployers,
   AsyncGetEmployers,
   AsyncGetProfile,
@@ -19,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
 import avatar from '../../../assets/img/avater.svg';
-import { updateEmployers } from '../../../store/actionType/actionTypes';
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -69,10 +67,6 @@ const SearchWrapper = styled('input')`
   }
 `;
 
-const TextAdjust = styled('span')`
-  margin-left: 5px;
-`;
-
 const ButtonWrapper = styled('button')`
   width: 60px;
   height: 48px;
@@ -100,15 +94,17 @@ export const EmployersTable = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSuperAdmin, setSuperAdmin] = useState(null);
-  const employersData = useSelector((state) => state.employers.user);
+  // const [isAdmin, setAdmin] = useState(null);
+  // const [isFlorist, setFlorist] = useState(null);
+  const employersData = useSelector((state) => state.employers.user || []);
   const isFetching = useSelector((state) => state.employers.loading);
+  // const [employers, setEmployers] = useState([])
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
-console.log('e',employersData)
-console.log('r', rows)
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
+
     const filteredRows = employersData.filter((row) => {
       return (
         row.user.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -119,52 +115,68 @@ console.log('r', rows)
     setRows(filteredRows);
   };
 
-  // const updateEmployers = () => {
-  //   return setRows(employersData);
-  // };
-
- useEffect(() => {
+  useEffect(() => {
     setRows(employersData);
   }, [employersData]);
 
   useEffect(() => {
-    setRows(employersData);
     dispatch(AsyncGetEmployers());
     if (localStorage.getItem('is_superuser') === 'true') {
       setSuperAdmin('суперадмин');
     }
+    // setEmployers(employersData)
   }, []);
 
-  const rowData = rows?.map((employer) => {
+  const rowData = rows.map((employer) => {
     return {
       id: employer?.id,
-      name: !employer?.user.first_name
-        ? 'Тимур Одинцев'
-        : employer?.user.first_name,
-      lastName: employer?.user.last_name,
-      allowance: employer?.courier_allowance,
+      user: employer?.user.first_name,
+      user2: employer?.user.last_name,
+      email: employer?.user.total_price,
       number: employer?.user.phone_number,
       role: employer?.user.role,
       salary: employer?.salary,
     };
   });
 
-  const handleDelete = (id) => {
-    dispatch(AsyncDeleteEmployers(id));
-   
-    // dispatch(AsyncGetEmployers());
-  };
+  // useLayoutEffect(() => {
+  //     if ( rowData.role === 'админ') {
+  //         setAdmin('админ');
+  //     }
+  //     if ( rowData.role === 'флористь') {
+  //         setFlorist('флористь');
+  //     }
+  //     console.log('isAdmin', rowData[1].role)
+  // },[])
 
+  // useEffect(() => {
+  //     axiosInstance.get("employers")
+  //         .then((response) => {
+  //             console.log(response.data.client);
+  //             setRowData(response.data);
+  //         });
+  // }, []);
+
+  // const async asyncEmpoyersEdit = dispatch => {
+  //      const employers = await instance.get(`employers${id}`)
+  //      dispatch(getUsers(employers))
+  // }
+  // const onChange = () => {
+  //     navigate('add', { replace: true })
+  // }
+
+  // const handleDelete = (id) => {
+  //     setData(data.filter((item) => item.id !== id));
+  // };
   const handleClick = (id) => {
     dispatch(AsyncGetProfile(id));
-    navigate(`${id}`);
+    navigate(`edit:${id}`);
   };
-
-  // const roleColors = {
-  //   админ: 'red',
-  //   флорист: 'black',
-  //   курьер: 'blue',
-  // };
+  const roleColors = {
+    админ: 'red',
+    флорист: 'black',
+    курьер: 'blue',
+  };
 
   const columns = [
     {
@@ -182,8 +194,8 @@ console.log('r', rows)
       renderCell: (params) => {
         return (
           <div sx={{ display: 'flex' }}>
-            <TextAdjust>{params.row.name}</TextAdjust>
-            <TextAdjust> {params.row.lastName}</TextAdjust>
+            <span sx={{ ml: '5px' }}>{params.row.user}</span>
+            <span sx={{ mr: '5px' }}> {params.row.user2}</span>
           </div>
         );
       },
@@ -193,7 +205,7 @@ console.log('r', rows)
       headerName: 'Номер телефона',
       width: 180,
       renderCell: (params) => {
-        return <TextAdjust>{params.row.number}</TextAdjust>;
+        return <div>{params.row.number}</div>;
       },
     },
     {
@@ -203,18 +215,19 @@ console.log('r', rows)
       renderCell: (params) => {
         return (
           <>
-            {/* {Object.entries(roleColors).map(([key, value]) => { */}
-            <Box
-              sx={{
-                // background: key === params.row.role ? value : null,
-                borderRadius: '12px',
-                padding: '5px 10px',
-                cursor: 'pointer',
-              }}
-            >
-              {params.row.role}
-            </Box>
-            {/* })} */}
+            {' '}
+            {Object.entries(roleColors).map(([key, value]) => {
+              <Box
+                sx={{
+                  background: key === params.row.role ? value : null,
+                  borderRadius: '12px',
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                }}
+              >
+                {params.row.role}
+              </Box>;
+            })}
           </>
         );
       },
@@ -224,15 +237,15 @@ console.log('r', rows)
       headerName: 'Зарплата',
       width: 120,
       renderCell: (params) => {
-        return <TextAdjust>{params.row.salary}</TextAdjust>;
+        return <div>{params.row.salary}</div>;
       },
     },
     {
-      field: 'allowance',
-      headerName: 'Надбавка',
-      width: 120,
+      field: 'email',
+      headerName: 'Электронная почта',
+      width: 200,
       renderCell: (params) => {
-        return <TextAdjust>{params.row.allowance}</TextAdjust>;
+        return <div>{params.row.email}</div>;
       },
     },
     {
@@ -244,16 +257,16 @@ console.log('r', rows)
           <>
             {' '}
             {isSuperAdmin && (
-              <TextAdjust>
+              <>
                 <EditIcon
                   sx={{ cursor: 'pointer', mr: '15px' }}
                   onClick={() => handleClick(params.row.id)}
                 />
                 <DeleteOutlineIcon
                   sx={{ cursor: 'pointer', fontSize: '30px' }}
-                  onClick={() => handleDelete(params.row.id)}
+                  // onClick={() => handleDelete(params.row.id)}
                 />
-              </TextAdjust>
+              </>
             )}
           </>
         );
@@ -346,7 +359,7 @@ console.log('r', rows)
       </Grid>
     </Box>
   );
-};;
+};
 
 
 

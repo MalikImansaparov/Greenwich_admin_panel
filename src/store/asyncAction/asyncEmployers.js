@@ -7,26 +7,24 @@ import {
 import axiosInstance from "../../api/utils/axiosInstance";
 
 export const AsyncGetEmployers = () => {
-  return async (dispatch) => {
-    dispatch(employersStart());
-    try {
-      const { data } = await axiosInstance.get('all-users');
-      console.log(data);
-      dispatch(getEmployers(data));
-    } catch (e) {
-      dispatch(employersFail());
-      console.log('error:', e);
-    }
-  };
+    return async (dispatch) => {
+        dispatch(employersStart());
+        try {
+            const {data} = await axiosInstance.get('all-users');
+            dispatch(getEmployers(data));
+        } catch (e) {
+            dispatch(employersFail());
+            console.log('error:', e);
+        }
+    };
 };
 
 export const AsyncAddEmployers = (values) => {
   return async (dispatch) => {
     try {
       const { data } = await axiosInstance.post(`employee-register`, values);
-      console.log(data);
+
       dispatch(addEmployers(data));
-      dispatch(AsyncGetEmployers());
     } catch (e) {
       console.log('error:', e);
     }
@@ -45,13 +43,10 @@ export const AsyncGetProfile = (id) => {
   };
 };
 
-export const AsyncEditEmployers = (values, id) => {
+export const AsyncEditEmployers = (values) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.patch(
-        `employee-register/${id}`,
-        values
-      );
+      const { data } = await axiosInstance.patch(`employee-register`, values);
       dispatch(updateEmployers(data));
     } catch (e) {
       console.log('error:', e);
@@ -60,16 +55,14 @@ export const AsyncEditEmployers = (values, id) => {
 };
 
 export const AsyncDeleteEmployers = (id) => {
-  return (dispatch) => {
-    axiosInstance
-      .delete(`all-users/${id}`)
-      .then(() => {
-        dispatch(deleteEmployers(id));
-        dispatch(AsyncGetEmployers());
-      })
-      .catch((error) => {
-        console.log('error:', error);
-      });
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.delete(`all-users/${id}`);
+      console.log(data);
+      dispatch(deleteEmployers(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
   };
 };
 
