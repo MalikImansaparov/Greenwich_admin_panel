@@ -1,27 +1,32 @@
 import {rowData} from './EmployersTable'
+import 
 
 export const RoleStyle = () => {
     const roleColors = {
-        админ: "red",
+        admin: "red",
         флорист: "black",
         курьер: "blue"
     };
 
     return (
         <> {roleColors.map((item, index) => {
+               return (
                 <Box
                     sx={{
-                        background: item[key] === params.row.role,
+                        // background: 
                         borderRadius: '12px',
                         padding: '5px 10px',
                         cursor: 'pointer',
                     }}
                 >
-                    {params.row.role}
+                    {item.admin}
                 </Box>
-            }
-        )}
+            
+);
+                
+         })}
         </>
     );
 }
+console.log(RoleStyle)
 

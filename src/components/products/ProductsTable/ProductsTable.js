@@ -11,11 +11,12 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {useDispatch, useSelector} from "react-redux";
 import {
-    AsyncAllProducts,
-    AsyncDeleteProduct,
-    AsyncEditProduct,
-} from "../../../store/asyncAction/asyncProducts";
-import CircularPreloader from "../../preloader";
+  AsyncAllProducts,
+  AsyncDeleteProduct,
+  AsyncEditProduct,
+  AsyncGetProduct,
+} from '../../../store/asyncAction/asyncProducts';
+import CircularPreloader from '../../preloader';
 import avatar from '../../../assets/img/avater.svg';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -86,51 +87,50 @@ const Content = styled(Box)`
 `;
 
 export const ProductsTable = () => {
-  const productData = useSelector((state) => state.products.product || []);
+  const productData = useSelector((state) => state.products.product);
   const isFetching = useSelector((state) => state.products.loading);
   const navigate = useNavigate();
-  const { id } = useParams();
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(productData);
+console.log('useSelector', productData);
+console.log('useState', rows);
 
-  const requestSearch = (searchValue) => {
-    setSearchText(searchValue);
-
-    const filteredRows = productData.filter((row) => {
-      return (
-        row.description.toLowerCase().includes(searchText.toLowerCase()) ||
-        row.choice.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    setRows(filteredRows);
-  };
-
-  useEffect(() => {
-    setRows(productData);
-  }, [productData]);
-
-  const rowData = rows?.map((product) => {
-    return {
-      id: product?.id,
-      name: product?.description,
-      total: product?.price,
-      photo: product?.picture,
-      category: product?.choice,
-    };
+const requestSearch = (searchValue) => {
+  setSearchText(searchValue);
+  const filteredRows = productData.filter((row) => {
+    return (
+      row.description.toLowerCase().includes(searchText.toLowerCase()) ||
+      row.choice.toLowerCase().includes(searchText.toLowerCase())
+    );
   });
+  setRows(filteredRows);
+};
 
-  useEffect(() => {
-    dispatch(AsyncAllProducts(id));
-  }, []);
+useEffect(() => {
+  setRows(productData);
+}, [productData]);
 
-  const handleDelete = (id) => {
-    dispatch(AsyncDeleteProduct(id));
+useEffect(() => {
+  dispatch(AsyncAllProducts());
+}, []);
+
+const rowData = rows?.map((product) => {
+  return {
+    id: product?.id,
+    name: product?.description,
+    total: product?.price,
+    photo: product?.picture,
+    category: product?.choice,
   };
-  const handleClick = (id) => {
-    dispatch(AsyncEditProduct(id));
-    navigate(`edit:${id}`);
-  };
+});
+
+const handleDelete = (id) => {
+  dispatch(AsyncDeleteProduct(id));
+};
+const handleClick = (id) => {
+  navigate(`${id}`);
+};
   const columns = [
     {
       field: 'id',

@@ -21,19 +21,31 @@ export const BreadcrubsWrapper = styled('div')`
     const {id} = useParams()
     const {pathname} = location
     return (
-        <div>
-            {pathname && <BreadcrubsWrapper>
-                {pathname === "/products" ? "Продукты > " : null}
-                {pathname === "/orders" ? "Заказы > " : null}
-                {pathname === "/employers" ? "Сотрудники > " : null}
-                {pathname === "/employers/add" ? "Сотрудники  >  Добавление сотрудника" : null}
-                {pathname === `/employers/edit${id}` ? "Сотрудники  >  Редактирование сотрудника" : null}
-                {pathname === "/products/add" ? "Продукты  >  Добавление продукта" : null}
-                {pathname === `/products/edit${id}` ? "Продукты  >  Редактирование продукта" : null}
-                {pathname === `/contacts/edit` ? "Контакты  >  Редактирование контактов " : null}
-            </BreadcrubsWrapper>}
-        </div>
-    )
+      <div>
+        {pathname && (
+          <BreadcrubsWrapper>
+            {pathname === '/products' ? 'Продукты > ' : null}
+            {pathname === '/orders' ? 'Заказы > ' : null}
+            {pathname === '/employers' ? 'Сотрудники > ' : null}
+            {pathname === '/employers/add'
+              ? 'Сотрудники  >  Добавление сотрудника'
+              : null}
+            {pathname === `/employers/${id}`
+              ? 'Сотрудники  >  Редактирование сотрудника'
+              : null}
+            {pathname === '/products/add'
+              ? 'Продукты  >  Добавление продукта'
+              : null}
+            {pathname === `/products/${id}`
+              ? 'Продукты  >  Редактирование продукта'
+              : null}
+            {pathname === `/contacts/edit`
+              ? 'Контакты  >  Редактирование контактов '
+              : null}
+          </BreadcrubsWrapper>
+        )}
+      </div>
+    );
 };
 
  export default BreadCrumb

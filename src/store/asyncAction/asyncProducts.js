@@ -21,45 +21,49 @@ export const AsyncAllProducts = () => {
         }
     };
 };
-export const AsyncGetProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('products/plant-care/');
-            dispatch(getProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncGetProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get(`products/plant-care/${id}`);
+      dispatch(getProduct(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
 
-export const AsyncAddProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('products/plant-care/');
-            dispatch(addProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncAddProduct = (values) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.post('products/plant-care/', values);
+      dispatch(addProduct(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
 
-export const AsyncEditProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('products/plant-care/');
-            dispatch(updateProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncEditProduct = ({ values, id }) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `products/plant-care/${id}/`,
+        values
+      );
+      console.log(data);
+      dispatch(updateProduct(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
-export const AsyncDeleteProduct = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.delete('products/plant-care/');
-            dispatch(deleteProduct(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncDeleteProduct = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.delete(`products/plant-care/${id}`);
+      dispatch(deleteProduct());
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };

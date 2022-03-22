@@ -23,21 +23,18 @@ export const CompletedOrders = () => {
       active: order?.is_active,
     };
   });
-  console.log(rowDatas);
-  let result = {};
-  for (let i in rowDatas) {
-    if (rowDatas[i].active === false) {
-      Object.assign(result, { [i]: rowDatas[i] });
-    }
-  }
 
-  // useEffect(() => {
-  //     axiosInstance.get("orders/order")
-  //         .then((response) => {
-  //             console.log(response.data.client);
-  //             setRowData(response.data);
-  //         });
-  // }, []);
+  // let result = {};
+  // for (let i in rowDatas) {
+  //   if (rowDatas[i].active === false) {
+  //     Object.assign(result, { [i]: rowDatas[i] });
+  //   }
+  // }
+
+  const showDatas = rowDatas?.map((item) => {
+    return item.data.split('T').slice(0, 1).join();
+  });
+  console.log(showDatas);
 
   const columns = [
     {
@@ -69,7 +66,7 @@ export const CompletedOrders = () => {
       headerName: 'Дата',
       width: 200,
       renderCell: (params) => {
-        return <div>12.03.2022</div>;
+        return <div>{showDatas}</div>;
       },
     },
     {
@@ -102,7 +99,7 @@ export const CompletedOrders = () => {
             <CircularPreloader />
           ) : (
             <DataGrid
-              rows={result}
+              rows={rowDatas}
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[10]}
