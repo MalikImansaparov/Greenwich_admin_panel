@@ -37,7 +37,6 @@ const CustomButton = styled(Button)`
     background-color: #9c9c9c;
   }
 `;
-;
 
 const validationSchema = Yup.object().shape({
   first_name: Yup.string().required('Имя обязателный'),
