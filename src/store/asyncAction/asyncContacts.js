@@ -5,34 +5,42 @@ import {
 import axiosInstance from "../../api/utils/axiosInstance";
 
 export const AsyncAllContacts = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('contacts');
-            dispatch(getAllContacts(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get('branches/branches/');
+      dispatch(getAllContacts(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
 
-export const AsyncGetContact = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('contacts');
-            dispatch(editContact(data));
-        } catch (e) {
-            console.log('error:', e);
-        }
-    };
+export const AsyncGetContact = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get(`branches/branches/${id}/`);
+      dispatch(editContact(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };
 
-export const AsyncEditContact = () => {
-    return async (dispatch) => {
-        try {
-            const {data} = await axiosInstance.get('contacts');
-            dispatch((data));
-        } catch (e) {
-            console.log('error:', e);
+export const AsyncEditContact = ({ contact, id }) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `branches/branches/${id}/`,
+        contact,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         }
-    };
+      );
+      dispatch(data);
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
 };

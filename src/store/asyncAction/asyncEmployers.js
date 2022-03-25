@@ -11,7 +11,6 @@ export const AsyncGetEmployers = () => {
     dispatch(employersStart());
     try {
       const { data } = await axiosInstance.get('all-users');
-      console.log(data);
       dispatch(getEmployers(data));
     } catch (e) {
       dispatch(employersFail());
@@ -33,11 +32,10 @@ export const AsyncAddEmployers = (values) => {
   };
 };
 
-// {first_name, last_name, phone_number, salary, email, role, password}
 export const AsyncGetProfile = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.get(`all-users/${id}`);
+      const { data } = await axiosInstance.get(`all-users/${id}/`);
       dispatch(getProfile(data));
     } catch (e) {
       console.log('error:', e);
@@ -45,14 +43,12 @@ export const AsyncGetProfile = (id) => {
   };
 };
 
-export const AsyncEditEmployers = (values, id) => {
+export const AsyncEditEmployers = ({ values, id }) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.patch(
-        `employee-register/${id}`,
-        values
-      );
+      const { data } = await axiosInstance.patch(`all-users/${id}/`, values);
       dispatch(updateEmployers(data));
+      dispatch(AsyncGetEmployers());
     } catch (e) {
       console.log('error:', e);
     }

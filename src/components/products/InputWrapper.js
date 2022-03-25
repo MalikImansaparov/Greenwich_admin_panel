@@ -1,7 +1,6 @@
 import {styled} from "@mui/system";
 import {Typography} from "@mui/material";
 import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
 
 export const InputWrapper = styled('input')`
   width: 500px;

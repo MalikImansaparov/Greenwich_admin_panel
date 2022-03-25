@@ -100,12 +100,10 @@ export const EmployersTable = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSuperAdmin, setSuperAdmin] = useState(null);
-  const employersData = useSelector((state) => state.employers.user);
+  const employersData = useSelector((state) => state.employers.user || []);
   const isFetching = useSelector((state) => state.employers.loading);
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
-  console.log('e', employersData);
-  console.log('r', rows);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -118,10 +116,6 @@ export const EmployersTable = () => {
     });
     setRows(filteredRows);
   };
-
-  // const updateEmployers = () => {
-  //   return setRows(employersData);
-  // };
 
   useEffect(() => {
     setRows(employersData);
@@ -137,7 +131,7 @@ export const EmployersTable = () => {
     // сonst lastName = localStorage.getItem('firstName')
   }, []);
 
-  const rowData = rows?.map((employer) => {
+  const rowData = rows.map((employer) => {
     return {
       id: employer?.id,
       name: !employer?.user.first_name
@@ -153,12 +147,10 @@ export const EmployersTable = () => {
 
   const handleDelete = (id) => {
     dispatch(AsyncDeleteEmployers(id));
-   
-    // dispatch(AsyncGetEmployers());
   };
 
   const handleClick = (id) => {
-    dispatch(AsyncGetProfile(id));
+    // dispatch(AsyncGetProfile(id));
     navigate(`${id}`);
   };
 

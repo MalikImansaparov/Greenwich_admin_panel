@@ -63,7 +63,6 @@ export const AddEmployers = () => {
       confirmPassword: '',
     },
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       dispatch(AsyncAddEmployers(values));
       setSubmitting(false);
       navigate(-1);

@@ -6,6 +6,7 @@ import {
   EMPLOYER_SUCCESS,
   DELETE_EMPLOYER,
   UPDATE_EMPLOYER,
+  CLEAR_PROFILE,
 } from '../constants';
 
 const initialState = {
@@ -42,6 +43,11 @@ export const employersReducer = (state = initialState, action) => {
         ...state,
         profile: action.payload,
       };
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+      };
     case DELETE_EMPLOYER:
       return {
         ...state,
@@ -50,9 +56,7 @@ export const employersReducer = (state = initialState, action) => {
     case UPDATE_EMPLOYER:
       return {
         ...state,
-        user: state.user.map((item) =>
-          item.id === action.payload.id ? action.payload : item
-        ),
+        profile: action.payload,
       };
 
     default:

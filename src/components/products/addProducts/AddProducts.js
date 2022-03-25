@@ -64,11 +64,10 @@ const CustomButton = styled(Button)`
 // }
 
 const validationSchema = Yup.object({
-  description: Yup.string()
-    .required('Пароль обязателный')
-    .min(6, 'Не правилный пароль')
-    .max(20, 'Не правилный пароль'),
+  choice: Yup.string().required('Выберите категорию'),
+  description: Yup.string().required('Названия обязателный'),
   price: Yup.string().required('Цена обязателный'),
+  quantity: Yup.string().required('Количество обязателный'),
 });
 
 export const AddProducts = () => {
@@ -87,11 +86,11 @@ export const AddProducts = () => {
     setFieldValue,
   } = useFormik({
     initialValues: {
-      photo: [],
+      picture: '',
       choice: '',
       price: '',
       description: '',
-      // count: '',
+      quantity: '',
     },
     onSubmit: (values, { setSubmitting }) => {
       let data = new FormData();
@@ -99,20 +98,8 @@ export const AddProducts = () => {
       data.append('choice', values.choice);
       data.append('price', values.price);
       data.append('description', values.description);
-      axiosInstance
-        .post('products/plant-care', data, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log(values);
-      // dispatch(AsyncAddProduct(values));
+      data.append('quantity', values.quantity);
+      dispatch(AsyncAddProduct(data));
       setSubmitting(false);
       navigate(-1);
     },
@@ -128,8 +115,7 @@ export const AddProducts = () => {
             <Box sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}>
               <label htmlFor="contained-button-file">
                 <InputWrap
-                  name="photo"
-                  // value={values.photo}
+                  name="picture"
                   accept="image/*"
                   id="contained-button-file"
                   multiple
@@ -143,7 +129,7 @@ export const AddProducts = () => {
                   <Typography>Добавить фото</Typography>
                 </PhotoWrapper>
               </label>
-              {errors.photo && touched.photo && (
+              {errors.picture && touched.picture && (
                 <Typography
                   sx={{
                     textAlign: 'left',
@@ -153,50 +139,50 @@ export const AddProducts = () => {
                     ml: '14px',
                   }}
                 >
-                  {errors.photo}
+                  {errors.picture}
                 </Typography>
               )}
             </Box>
-            {/* <Box sx={{ mb: '30px' }}>
-                <LabelWrapper>Наименование</LabelWrapper>
-                <InputWrapper
-                  name="name"
-                  onChange={handleChange}
-                  type="string"
-                  value={values.name}
-                  onBlur={handleBlur}
-                  placeholder=""
-                />
-                {errors.name && touched.name && (
-                  <Typography
-                    sx={{
-                      textAlign: 'left',
-                      fontSize: '13px',
-                      color: 'error.main',
-                      mt: '12px',
-                      ml: '14px',
-                    }}
-                  >
-                    {errors.name}
-                  </Typography>
-                )}
-              </Box> */}
+            <Box sx={{ mb: '30px' }}>
+              <LabelWrapper>Наименование</LabelWrapper>
+              <InputWrapper
+                name="description"
+                onChange={handleChange}
+                type="string"
+                value={values.description}
+                onBlur={handleBlur}
+              />
+              {errors.description && touched.description && (
+                <Typography
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.description}
+                </Typography>
+              )}
+            </Box>
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Категория</LabelWrapper>
               <SelectWrapper
-                name="category"
+                name="choice"
                 type="string"
-                value={values.category}
+                value={values.choice}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 sx={{ display: 'block' }}
               >
+                <option value="" label="Выберите категорию" />
                 <option value="Удобрения" label="Удобрения" />
                 <option value="Средства защиты" label="Средства защиты" />
                 <option value="Грунт" label="Грунт" />
                 <option value="Почва" label="Почва" />
               </SelectWrapper>
-              {errors.category && touched.category && (
+              {errors.choice && touched.choice && (
                 <Typography
                   sx={{
                     textAlign: 'left',
@@ -206,7 +192,7 @@ export const AddProducts = () => {
                     ml: '14px',
                   }}
                 >
-                  {errors.category}
+                  {errors.choice}
                 </Typography>
               )}
             </Box>
@@ -218,7 +204,6 @@ export const AddProducts = () => {
                 type="text"
                 value={values.price}
                 onBlur={handleBlur}
-                placeholder=""
               />
               {errors.price && touched.price && (
                 <Typography
@@ -234,7 +219,7 @@ export const AddProducts = () => {
                 </Typography>
               )}
             </Box>
-            <Box sx={{ mb: '30px' }}>
+            {/* <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Описания</LabelWrapper>
               <TextareaWrapper
                 name="description"
@@ -256,31 +241,30 @@ export const AddProducts = () => {
                   {errors.description}
                 </LabelWrapper>
               )}
+            </Box> */}
+            <Box sx={{ mb: '30px' }}>
+              <LabelWrapper>Количество</LabelWrapper>
+              <InputWrapper
+                name="quantity"
+                onChange={handleChange}
+                type="text"
+                value={values.quantity}
+                onBlur={handleBlur}
+              />
+              {errors.quantity && touched.quantity && (
+                <Typography
+                  sx={{
+                    textAlign: 'left',
+                    fontSize: '13px',
+                    color: 'error.main',
+                    mt: '12px',
+                    ml: '14px',
+                  }}
+                >
+                  {errors.quantity}
+                </Typography>
+              )}
             </Box>
-            {/* <Box sx={{ mb: '30px' }}>
-                <LabelWrapper>Количество</LabelWrapper>
-                <InputWrapper
-                  name="count"
-                  onChange={handleChange}
-                  type="text"
-                  value={values.count}
-                  onBlur={handleBlur}
-                  placeholder=""
-                />
-                {errors.count && touched.count && (
-                  <Typography
-                    sx={{
-                      textAlign: 'left',
-                      fontSize: '13px',
-                      color: 'error.main',
-                      mt: '12px',
-                      ml: '14px',
-                    }}
-                  >
-                    {errors.count}
-                  </Typography>
-                )}
-              </Box> */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <GoBack />
               <CustomButton type="submit" disabled={isSubmitting}>

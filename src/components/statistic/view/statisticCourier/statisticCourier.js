@@ -6,41 +6,43 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import {Order6Month} from "../statistic6month/order6month";
-import {Income6Month} from "../statistic6month/income6month";
-import {OrderCourier} from "./orderCourier";
-import {Item} from "../../../../style";
+import { OrderCourier } from './orderCourier';
+import { Item } from '../../../../style';
 
 const Accordion = styled((props) => (
-    <MuiAccordion disableGutters elevation={0} square {...props} />
+  <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
-    border: `1px solid ${theme.palette.divider}`,
-    '&:not(:last-child)': {
-        borderBottom: 0,
-    },
-    '&:before': {
-        display: 'none',
-    },
-    width: '1060px'
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+  width: '1060px',
 }));
 
 const AccordionSummary = styled((props) => (
-    <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-        {...props}
-    />
+  <MuiAccordionSummary
+    expandIcon={
+      <ArrowForwardIosSharpIcon
+        sx={{ fontSize: '0.9rem', justifyItems: 'flex-end' }}
+      />
+    }
+    {...props}
+  />
 ))(({ theme }) => ({
-    backgroundColor:
-        theme.palette.mode === 'dark'
-            ? 'rgba(255, 255, 255, .05)'
-            : 'rgba(0, 0, 0, .03)',
-    flexDirection: 'row-reverse',
-    '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-        transform: 'rotate(90deg)',
-    },
-    '& .MuiAccordionSummary-content': {
-        marginLeft: theme.spacing(1),
-    },
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({

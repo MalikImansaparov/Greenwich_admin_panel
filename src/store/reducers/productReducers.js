@@ -1,14 +1,17 @@
 import {
-    ADD_PRODUCT,
-    DELETE_PRODUCT, GET_PRODUCT,
-    PRODUCT_FAILURE,
-    PRODUCT_REQUEST,
-    PRODUCT_SUCCESS,
-    UPDATE_PRODUCT
-} from "../constants";
+  ADD_PRODUCT,
+  CLEAR_PRODUCT,
+  DELETE_PRODUCT,
+  GET_PRODUCT,
+  PRODUCT_FAILURE,
+  PRODUCT_REQUEST,
+  PRODUCT_SUCCESS,
+  UPDATE_PRODUCT,
+} from '../constants';
 
 const initialState = {
   product: [],
+  care: null,
   loading: 'false',
 };
 export const productsReducer = (state = initialState, action) => {
@@ -37,6 +40,11 @@ export const productsReducer = (state = initialState, action) => {
         care: action.payload,
         loading: false,
       };
+    case CLEAR_PRODUCT:
+      return {
+        ...state,
+        care: null,
+      };
     case ADD_PRODUCT:
       return {
         ...state,
@@ -46,9 +54,6 @@ export const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         care: action.payload,
-        // product: state.product.map((item) =>
-        //   item.id === action.payload.id ? action.payload : item
-        // ),
       };
     case DELETE_PRODUCT:
       return {

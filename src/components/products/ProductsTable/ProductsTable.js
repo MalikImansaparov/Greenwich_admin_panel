@@ -13,8 +13,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   AsyncAllProducts,
   AsyncDeleteProduct,
-  AsyncEditProduct,
-  AsyncGetProduct,
 } from '../../../store/asyncAction/asyncProducts';
 import CircularPreloader from '../../preloader';
 import avatar from '../../../assets/img/avater.svg';
@@ -93,44 +91,44 @@ export const ProductsTable = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(productData);
-console.log('useSelector', productData);
-console.log('useState', rows);
 
-const requestSearch = (searchValue) => {
-  setSearchText(searchValue);
-  const filteredRows = productData.filter((row) => {
-    return (
-      row.description.toLowerCase().includes(searchText.toLowerCase()) ||
-      row.choice.toLowerCase().includes(searchText.toLowerCase())
-    );
-  });
-  setRows(filteredRows);
-};
-
-useEffect(() => {
-  setRows(productData);
-}, [productData]);
-
-useEffect(() => {
-  dispatch(AsyncAllProducts());
-}, []);
-
-const rowData = rows?.map((product) => {
-  return {
-    id: product?.id,
-    name: product?.description,
-    total: product?.price,
-    photo: product?.picture,
-    category: product?.choice,
+  const requestSearch = (searchValue) => {
+    setSearchText(searchValue);
+    const filteredRows = productData.filter((row) => {
+      return (
+        row.description.toLowerCase().includes(searchText.toLowerCase()) ||
+        row.choice.toLowerCase().includes(searchText.toLowerCase())
+      );
+    });
+    setRows(filteredRows);
   };
-});
 
-const handleDelete = (id) => {
-  dispatch(AsyncDeleteProduct(id));
-};
-const handleClick = (id) => {
-  navigate(`${id}`);
-};
+  useEffect(() => {
+    setRows(productData);
+  }, [productData]);
+
+  useEffect(() => {
+    setRows(productData);
+    dispatch(AsyncAllProducts());
+  }, []);
+
+  const rowData = rows.map((product) => {
+    return {
+      id: product?.id,
+      name: product?.description,
+      total: product?.price,
+      photo: product?.picture,
+      category: product?.choice,
+      count: product?.quantity,
+    };
+  });
+
+  const handleDelete = (id) => {
+    dispatch(AsyncDeleteProduct(id));
+  };
+  const handleClick = (id) => {
+    navigate(`${id}`);
+  };
   const columns = [
     {
       field: 'id',
@@ -184,6 +182,15 @@ const handleClick = (id) => {
       height: 150,
       renderCell: (params) => {
         return <Content>{params.row.category}</Content>;
+      },
+    },
+    {
+      field: 'count',
+      headerName: 'Количество',
+      width: 100,
+      height: 150,
+      renderCell: (params) => {
+        return <Content>{params.row.count}</Content>;
       },
     },
     {

@@ -24,7 +24,7 @@ export const AsyncAllProducts = () => {
 export const AsyncGetProduct = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.get(`products/plant-care/${id}`);
+      const { data } = await axiosInstance.get(`products/plant-care/${id}/`);
       dispatch(getProduct(data));
     } catch (e) {
       console.log('error:', e);
@@ -32,10 +32,18 @@ export const AsyncGetProduct = (id) => {
   };
 };
 
-export const AsyncAddProduct = (values) => {
+export const AsyncAddProduct = (formData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.post('products/plant-care/', values);
+      const { data } = await axiosInstance.post(
+        'products/plant-care/',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       dispatch(addProduct(data));
     } catch (e) {
       console.log('error:', e);
@@ -43,27 +51,37 @@ export const AsyncAddProduct = (values) => {
   };
 };
 
-export const AsyncEditProduct = ({ values, id }) => {
+export const AsyncEditProduct = ({ formData, id }) => {
   return async (dispatch) => {
     try {
       const { data } = await axiosInstance.patch(
         `products/plant-care/${id}/`,
-        values
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
-      console.log(data);
       dispatch(updateProduct(data));
+
+      dispatch(AsyncAllProducts());
     } catch (e) {
       console.log('error:', e);
     }
   };
 };
+
 export const AsyncDeleteProduct = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.delete(`products/plant-care/${id}`);
-      dispatch(deleteProduct());
-    } catch (e) {
-      console.log('error:', e);
-    }
+  return (dispatch) => {
+    axiosInstance
+      .delete(`products/plant-care/${id}`)
+      .then(() => {
+        dispatch(deleteProduct(id));
+        dispatch(AsyncAllProducts());
+      })
+      .catch((e) => {
+        console.log('error:', e);
+      });
   };
 };
