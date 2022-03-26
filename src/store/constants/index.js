@@ -32,6 +32,11 @@ export const CONTACT_SUCCESS = 'CONTACT_SUCCESS';
 export const CONTACT_FAILURE = 'CONTACT_FAILURE';
 export const GET_CONTACT = 'GET_CONTACT';
 export const EDIT_CONTACT = 'EDIT_CONTACT';
+export const CLEAR_CONTACT = 'CLEAR_CONTACT';
+export const ADD_CONTACT = 'ADD_CONTACT';
+export const GET_ABOUT = 'GET_ABOUT';
+export const EDIT_ABOUT = 'EDIT_ABOUT';
+export const CLEAR_ABOUT = 'CLEAR_ABOUT';
 
 export const EMPLOYER_REQUEST = 'EMPLOYER_REQUEST';
 export const EMPLOYER_SUCCESS = 'EMPLOYER_SUCCESS';

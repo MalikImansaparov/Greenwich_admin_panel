@@ -73,7 +73,6 @@ const validationSchema = Yup.object({
 export const AddProducts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
 
   const {
     handleSubmit,

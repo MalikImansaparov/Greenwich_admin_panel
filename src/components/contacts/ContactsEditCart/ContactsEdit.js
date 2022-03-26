@@ -7,11 +7,11 @@ import BreadCrumb from "../../breadCrumbs";
 
 export const ContactsEdit = () => {
     return (
-        <Box>
-           <Header/>
-           <BreadCrumb/>
-           <ContactsEditCart/>
-           <Divider sx={{width:'1080px', my:'30px'}}/>
-        </Box>
-    )
+      <Box>
+        {/* <Header/> */}
+        <BreadCrumb />
+        <ContactsEditCart />
+        <Divider sx={{ width: '1080px', my: '30px' }} />
+      </Box>
+    );
  }

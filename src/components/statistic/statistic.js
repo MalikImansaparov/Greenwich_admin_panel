@@ -7,11 +7,11 @@ import {EmployersStatisticTab} from "./employersStatisticTab/employersStatisticT
 
 export const Statistic = () => {
     return (
-       <Box>
-           <Header/>
-           <StatisticTab/>
-           <EmployersStatisticTab/>
-           <Divider sx={{width:'1080px', my:'30px'}}/>
-       </Box>
-    )
+      <Box>
+        {/* <Header/> */}
+        <StatisticTab />
+        <EmployersStatisticTab />
+        <Divider sx={{ width: '1080px', my: '30px' }} />
+      </Box>
+    );
 }

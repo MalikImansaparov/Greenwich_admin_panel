@@ -10,6 +10,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AsyncAllContacts } from '../../../store/asyncAction/asyncContacts';
 import address from '../../../assets/img/address.png';
 import { AboutUs } from './about';
+import { Link } from 'react-router-dom';
+
+const CustomButton = styled(Link)`
+  height: 52px;
+  width: 320px;
+  background-color: #487349;
+  padding: 14px 30px;
+  border-radius: 20px;
+  color: white;
+  transition: all 150ms ease;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  text-decoration: none
+  &:hover {
+    background-color: #9C9C9C;
+  }
+`;
 
 const CartItem = styled(Item)`
   height: 458px;
@@ -33,42 +54,11 @@ const CartList = styled(Box)`
 export const CartText = styled('span')`
   color: #487349;
 `;
-// const CartItem = styled(Box)`
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     left: 0;
-//     bottom: 0;
-//     width: 0;
-//     box-sizing: border-box;
-//     height: 0;
-//     border-bottom: 3px solid transparent;
-//     border-left: 3px solid transparent;
-//     transition: all 0.8s ease;
-//   }
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     right: 0;
-//     top: 0;
-//     width: 0;
-//     box-sizing: border-box;
-//     height: 0;
-//     border-top: 3px solid transparent;
-//     border-right: 3px solid transparent;
-//     transition: all 0.8s ease;
-//   }
-//   &:hover &::before {
-//     border-color: red;
-//     width: 100%;
-//     height: 100%;
-//   }
-// `;
 
 export const ContactsCarts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.contacts || []);
+  const contacts = useSelector((state) => state.contacts.contacts);
 
   useEffect(() => {
     dispatch(AsyncAllContacts());
@@ -76,18 +66,26 @@ export const ContactsCarts = () => {
 
   return (
     <Box>
-      <Box sx={{ mb: '24px' }}>
+      <Box
+        sx={{
+          mb: '24px',
+          mr: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <Typography
           sx={{
             color: 'black',
             fontSize: '30px',
             fontWeight: 600,
-            ml: '30px',
-            mb: '50px',
           }}
         >
           Контакты
         </Typography>
+        <CustomButton to="add" sx={{ textDecoration: 'none' }}>
+          Добавить филиалы
+        </CustomButton>
       </Box>
       <Grid container spacing={7}>
         {contacts?.map((contact) => {
@@ -111,8 +109,7 @@ export const ContactsCarts = () => {
                 <CartList>
                   <CartText>Время работы</CartText>
                   <span>
-                    {contact.open_from.split('T').slice(1, 2).join()}-
-                    {contact.closed_from.split('T').slice(1, 2).join()}
+                    {contact.open_from}-{contact.closed_from}
                   </span>
                 </CartList>
               </CartItem>

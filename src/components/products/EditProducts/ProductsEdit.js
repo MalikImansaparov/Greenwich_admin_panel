@@ -78,6 +78,7 @@ export const EditProducts = () => {
   }, [dispatch, id]);
 
   const handleSubmit = (values) => {
+    console.log(values);
     let data = new FormData();
     data.append('picture', values.picture);
     data.append('choice', values.choice);
@@ -85,7 +86,7 @@ export const EditProducts = () => {
     data.append('description', values.description);
     data.append('quantity', values.quantity);
     dispatch(AsyncEditProduct({ data, id }));
-    navigate(-2);
+    navigate('/products');
   };
 
   // onSubmit={(values) => {
@@ -145,7 +146,9 @@ export const EditProducts = () => {
               isSubmitting,
               handleChange,
               handleBlur,
+              handleSubmit,
             }) => (
+                <>
               <form onSubmit={handleSubmit}>
                 <Box
                   sx={{
@@ -308,6 +311,7 @@ export const EditProducts = () => {
                   </CustomButton>
                 </Box>
               </form>
+              </>
             )}
           </Formik>
         </FormControl>

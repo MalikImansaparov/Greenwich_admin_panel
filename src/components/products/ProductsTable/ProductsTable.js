@@ -142,7 +142,7 @@ export const ProductsTable = () => {
     {
       field: 'photo',
       headerName: 'Фото',
-      width: 140,
+      width: 100,
       height: 150,
       renderCell: (params) => {
         return (
@@ -151,7 +151,7 @@ export const ProductsTable = () => {
               component="img"
               src={params.row.photo}
               alt="product_photo"
-              sx={{ height: '79px', width: '74px', ml: '30px' }}
+              sx={{ height: '79px', width: '74px', ml: '0px' }}
             />
           </div>
         );
@@ -187,16 +187,16 @@ export const ProductsTable = () => {
     {
       field: 'count',
       headerName: 'Количество',
-      width: 100,
+      width: 120,
       height: 150,
       renderCell: (params) => {
-        return <Content>{params.row.count}</Content>;
+        return <Content sx={{ ml: '40px' }}>{params.row.count}</Content>;
       },
     },
     {
       field: 'action',
       headerName: 'Действие',
-      width: 150,
+      width: 100,
       height: 150,
       renderCell: (params) => {
         return (
@@ -286,7 +286,6 @@ export const ProductsTable = () => {
                 rows={rowData}
                 columns={columns}
                 pageSize={8}
-                checkboxSelection
                 rowsPerPageOptions={[8]}
                 disableSelectionOnClick
                 sx={{ borderRadius: '20px' }}

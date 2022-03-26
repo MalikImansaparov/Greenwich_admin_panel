@@ -42,6 +42,12 @@ export const BreadcrubsWrapper = styled('div')`
             {pathname === `/contacts/${id}`
               ? 'Контакты  >  Редактирование контактов '
               : null}
+            {pathname === `/contacts/add}`
+              ? 'Контакты  >  Добавление контактов '
+              : null}
+            {pathname === `contacts/about}`
+              ? 'Контакты  >  Редактирование о нас '
+              : null}
           </BreadcrubsWrapper>
         )}
       </div>

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router';
 import Box from '@mui/material/Box';
@@ -13,13 +13,16 @@ import {
   LabelWrapper,
   PhotoWrapper,
   ScheduleWrapper,
+  TextareaWrapper,
 } from '../../products/InputWrapper';
 import { GoBack } from '../../goBack';
 import Upload from '../../../assets/img/upload.svg';
 import { Item } from '../../../style';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  AsyncEditAbout,
   AsyncEditContact,
+  AsyncGetAbout,
   AsyncGetContact,
 } from '../../../store/asyncAction/asyncContacts';
 import BreadCrumb from '../../breadCrumbs';
@@ -53,7 +56,7 @@ const validationSchema = Yup.object({
     .max(14, 'Не правилный номер'),
 });
 
-export const ContactsEditCart = () => {
+export const AboutEdit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.contact);
@@ -61,7 +64,7 @@ export const ContactsEditCart = () => {
   console.log(contacts);
 
   useEffect(() => {
-    dispatch(AsyncGetContact(id));
+    dispatch(AsyncGetAbout(id));
     return dispatch(clearContact());
   }, [dispatch, id]);
 
@@ -79,9 +82,7 @@ export const ContactsEditCart = () => {
     data.append('picture', values.picture);
     data.append('phone', values.phone);
     data.append('address', values.address);
-    data.append('open_from', values.open_from);
-    data.append('close_from', values.close_from);
-    dispatch(AsyncEditContact(values, id));
+    dispatch(AsyncEditAbout(values, id));
     setSubmitting(false);
     navigate(-1);
   };
@@ -159,7 +160,7 @@ export const ContactsEditCart = () => {
                   )}
                 </Box>
                 <Box sx={{ mb: '30px' }}>
-                  <LabelWrapper>Адрес</LabelWrapper>
+                  <LabelWrapper>Заголовок</LabelWrapper>
                   <InputWrapper
                     name="address"
                     onChange={handleChange}
@@ -182,16 +183,16 @@ export const ContactsEditCart = () => {
                   )}
                 </Box>
                 <Box sx={{ mb: '30px' }}>
-                  <LabelWrapper>Номер телефона</LabelWrapper>
-                  <InputWrapper
-                    name="phone"
+                  <LabelWrapper>Описания</LabelWrapper>
+                  <TextareaWrapper
+                    name="description"
                     onChange={handleChange}
-                    type="number"
-                    value={values.phone}
+                    type="text"
+                    value={values.description}
                     onBlur={handleBlur}
                   />
-                  {errors.phone && touched.phone && (
-                    <Typography
+                  {errors.description && touched.description && (
+                    <LabelWrapper
                       sx={{
                         textAlign: 'left',
                         fontSize: '13px',
@@ -200,44 +201,11 @@ export const ContactsEditCart = () => {
                         ml: '14px',
                       }}
                     >
-                      {errors.phone}
-                    </Typography>
+                      {errors.description}
+                    </LabelWrapper>
                   )}
                 </Box>
-                <Box sx={{ mb: '30px' }}>
-                  <LabelWrapper>Время работы</LabelWrapper>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography sx={{ ml: '10px' }}>C</Typography>
-                    <ScheduleWrapper
-                      name="open"
-                      onChange={handleChange}
-                      type="string"
-                      value={values.open}
-                      onBlur={handleBlur}
-                    />
-                    <Typography>До</Typography>
-                    <ScheduleWrapper
-                      name="close"
-                      onChange={handleChange}
-                      type="string"
-                      value={values.close}
-                      onBlur={handleBlur}
-                    />
-                    {errors.open && touched.open && (
-                      <Typography
-                        sx={{
-                          textAlign: 'left',
-                          fontSize: '13px',
-                          color: 'error.main',
-                          mt: '12px',
-                          ml: '14px',
-                        }}
-                      >
-                        {errors.open}
-                      </Typography>
-                    )}
-                  </Box>
-                </Box>
+
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <GoBack />
                   <CustomButton type="submit" disabled={isSubmitting}>

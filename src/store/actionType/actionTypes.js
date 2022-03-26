@@ -1,6 +1,7 @@
 import {
   ADD_EMPLOYER,
   ADD_PRODUCT,
+  ADD_CONTACT,
   CLEAR_PRODUCT,
   CLEAR_PROFILE,
   CONTACT_SUCCESS,
@@ -20,6 +21,9 @@ import {
   SEARCH_ORDERS,
   UPDATE_EMPLOYER,
   UPDATE_PRODUCT,
+  GET_ABOUT,
+  EDIT_ABOUT,
+  CLEAR_ABOUT,
 } from '../constants';
 
 export const ordersStart = () => ({ type: ORDER_STARTED });
@@ -29,8 +33,14 @@ export const getOrders = (payload) => ({ type: ORDER_SUCCESS, payload });
 export const searchOrders = (payload) => ({ type: SEARCH_ORDERS, payload });
 
 export const getAllContacts = (payload) => ({ type: CONTACT_SUCCESS, payload });
-export const getContact = (id) => ({ type: GET_CONTACT, payload: id });
+export const getContact = (payload) => ({ type: GET_CONTACT, payload });
 export const editContact = (payload) => ({ type: EDIT_CONTACT, payload });
+export const clearContact = (payload) => ({ type: EDIT_CONTACT, payload });
+export const addContact = (payload) => ({ type: ADD_CONTACT, payload });
+
+export const getAbout = (payload) => ({ type: GET_ABOUT, payload });
+export const editAbout = (payload) => ({ type: EDIT_ABOUT, payload });
+export const clearAbout = (payload) => ({ type: CLEAR_ABOUT, payload });
 
 export const employersStart = () => ({ type: EMPLOYER_REQUEST });
 export const employersFail = (payload) => ({ type: EMPLOYER_FAILURE, payload });
