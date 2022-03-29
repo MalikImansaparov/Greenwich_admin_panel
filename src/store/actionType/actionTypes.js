@@ -23,12 +23,15 @@ import {
   UPDATE_PRODUCT,
   GET_ABOUT,
   EDIT_ABOUT,
-  CLEAR_ABOUT,
+  CLEAR_ABOUT, GET_CONTENT, GET_COURIER, CLEAR_COURIER, CONFIRM_ORDERS, DELETE_ORDERS, COMPLETED_ORDERS,
 } from '../constants';
 
 export const ordersStart = () => ({ type: ORDER_STARTED });
 export const ordersFail = (payload) => ({ type: ORDER_FAILED, payload });
 export const getOrders = (payload) => ({ type: ORDER_SUCCESS, payload });
+export const deleteOrders = (id) => ({ type: DELETE_ORDERS, payload: id });
+export const confrimOrders = (payload) => ({ type: CONFIRM_ORDERS, payload });
+export const completedOrders = (payload) => ({ type: COMPLETED_ORDERS, payload });
 
 export const searchOrders = (payload) => ({ type: SEARCH_ORDERS, payload });
 
@@ -41,6 +44,7 @@ export const addContact = (payload) => ({ type: ADD_CONTACT, payload });
 export const getAbout = (payload) => ({ type: GET_ABOUT, payload });
 export const editAbout = (payload) => ({ type: EDIT_ABOUT, payload });
 export const clearAbout = (payload) => ({ type: CLEAR_ABOUT, payload });
+export const getContent = (payload) => ({ type: GET_CONTENT, payload });
 
 export const employersStart = () => ({ type: EMPLOYER_REQUEST });
 export const employersFail = (payload) => ({ type: EMPLOYER_FAILURE, payload });
@@ -53,6 +57,8 @@ export const updateEmployers = (payload) => ({
   payload,
 });
 export const deleteEmployers = (id) => ({ type: DELETE_EMPLOYER, payload: id });
+export const getCourier = (payload) => ({ type: GET_COURIER, payload });
+export const clearCourier = (payload) => ({ type: CLEAR_COURIER, payload });
 
 export const getProducts = (payload) => ({ type: PRODUCT_SUCCESS, payload });
 export const getProduct = (payload) => ({ type: GET_PRODUCT, payload });

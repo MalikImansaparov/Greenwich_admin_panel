@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Formik } from 'formik';
-import { useNavigate, useParams } from 'react-router';
+import {useNavigate, useParams} from 'react-router';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import FormControl from '@mui/material/FormControl';
@@ -11,23 +11,33 @@ import {
   InputWrap,
   InputWrapper,
   LabelWrapper,
-  PhotoWrapper,
-  ScheduleWrapper,
+  PhotoWrap,
   TextareaWrapper,
 } from '../../products/InputWrapper';
 import { GoBack } from '../../goBack';
-import Upload from '../../../assets/img/upload.svg';
 import { Item } from '../../../style';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  AsyncEditAbout,
-  AsyncEditContact,
-  AsyncGetAbout,
-  AsyncGetContact,
+  AsyncAllAbout,
+
+  AsyncEditAbout, AsyncGetAbout,
 } from '../../../store/asyncAction/asyncContacts';
 import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
-import { clearContact } from '../../../store/actionType/actionTypes';
+import {clearAbout,} from '../../../store/actionType/actionTypes';
+import {Header} from "../../header/header";
+
+const PhotoWrapper = styled('span')`
+  width: 230px;
+  height: 210px;
+  display: block;
+  justify-content: center;
+  border-radius: 20px;
+  padding-top: 10px;
+  border: 1px solid #000000;
+  font-weight: 600;
+  color: #000000;
+`;
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -49,45 +59,44 @@ const CustomButton = styled(Button)`
   }
 `;
 const validationSchema = Yup.object({
-  address: Yup.string().required('Укажите адресс'),
-  phone: Yup.string()
-    .required('Номер обязателный')
-    .min(9, 'Не правилный номер')
-    .max(14, 'Не правилный номер'),
+  name: Yup.string().required('Заголовок обязательный'),
+  description: Yup.string().required('Описание обязательный'),
 });
 
 export const AboutEdit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contacts.contact);
-  const { id } = useParams();
-  console.log(contacts);
+  const {id} = useParams();
+  const about = useSelector((state) => state.contacts.content);
+  console.log(about);
+
+  // useEffect(() => {
+  //   dispatch(AsyncAllAbout());
+  // }, []);
 
   useEffect(() => {
     dispatch(AsyncGetAbout(id));
-    return dispatch(clearContact());
+    return dispatch(clearAbout());
   }, [dispatch, id]);
 
-  // const initialValues = {
-  //   id: contacts?.id,
-  //   address: contacts?.address,
-  //   phone: contacts?.phone,
-  //   open: contacts?.open_from,
-  //   close: contacts?.closed_from,
-  // };
+
+  const initialValues = {
+    picture: about?.picture,
+    name: about?.name,
+    description: about?.description,
+  };
 
   const handleSubmit = (values, { setSubmitting }) => {
-    dispatch(clearContact());
     let data = new FormData();
     data.append('picture', values.picture);
-    data.append('phone', values.phone);
-    data.append('address', values.address);
-    dispatch(AsyncEditAbout(values, id));
+    data.append('name', values.name);
+    data.append('description', values.description);
+    dispatch(AsyncEditAbout(data, id));
     setSubmitting(false);
     navigate(-1);
   };
 
-  if (!contacts) {
+  if (!about) {
     return (
       <Box mx={2}>
         <BreadCrumb />
@@ -108,10 +117,16 @@ export const AboutEdit = () => {
 
   return (
     <Box>
+      <Header />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box>
+          <Box sx={{ display: 'flex', mb: '20px' }}>
+            <BreadCrumb />
+          </Box>
       <Item sx={{ width: '1060px' }}>
         <FormControl>
           <Formik
-            initialValues={contacts}
+            initialValues={initialValues}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}
           >
@@ -129,19 +144,23 @@ export const AboutEdit = () => {
                 <Box
                   sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}
                 >
-                  <label htmlFor="photo">
-                    <InputWrap
-                      accept="image/*"
-                      name="photo"
-                      id="photo"
-                      multiple
-                      type="file"
-                      onChange={(event) => {
-                        setFieldValue('picture', event.currentTarget.files[0]);
-                      }}
-                    />
+                  <label htmlFor="contained-button-file">
                     <PhotoWrapper>
-                      <Box component="img" src={Upload} alt="upload" />
+                      <InputWrap
+                        name="picture"
+                        // value={values.picture}
+                        accept="image/*"
+                        id="contained-button-file"
+                        multiple
+                        type="file"
+                        onChange={(event) => {
+                          setFieldValue(
+                            'picture',
+                            event.currentTarget.files[0]
+                          );
+                        }}
+                      />
+                      <PhotoWrap component="img" src={values.picture} alt="" />
                       <Typography>Изменить фото</Typography>
                     </PhotoWrapper>
                   </label>
@@ -162,13 +181,13 @@ export const AboutEdit = () => {
                 <Box sx={{ mb: '30px' }}>
                   <LabelWrapper>Заголовок</LabelWrapper>
                   <InputWrapper
-                    name="address"
+                    name="name"
                     onChange={handleChange}
                     type="string"
-                    value={values.address}
+                    value={values.name}
                     onBlur={handleBlur}
                   />
-                  {errors.address && touched.address && (
+                  {errors.name && touched.name && (
                     <Typography
                       sx={{
                         textAlign: 'left',
@@ -178,7 +197,7 @@ export const AboutEdit = () => {
                         ml: '14px',
                       }}
                     >
-                      {errors.address}
+                      {errors.name}
                     </Typography>
                   )}
                 </Box>
@@ -205,7 +224,6 @@ export const AboutEdit = () => {
                     </LabelWrapper>
                   )}
                 </Box>
-
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                   <GoBack />
                   <CustomButton type="submit" disabled={isSubmitting}>
@@ -217,6 +235,8 @@ export const AboutEdit = () => {
           </Formik>
         </FormControl>
       </Item>
+    </Box>
+      </Box>
     </Box>
   );
 };

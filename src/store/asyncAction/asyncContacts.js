@@ -1,9 +1,9 @@
 import {
-  addContact,
+  addContact, editAbout,
   editContact,
   getAbout,
   getAllContacts,
-  getContact,
+  getContact, getContent,
 } from '../actionType/actionTypes';
 import axiosInstance from '../../api/utils/axiosInstance';
 
@@ -42,13 +42,14 @@ export const AsyncAddContact = (formData) => {
         }
       );
       dispatch(addContact(data));
+      dispatch(getAllContacts(data));
     } catch (e) {
       console.log('error:', e);
     }
   };
 };
 
-export const AsyncEditContact = ({ contact, id }) => {
+export const AsyncEditContact = (contact, id) => {
   return async (dispatch) => {
     try {
       const { data } = await axiosInstance.patch(
@@ -61,25 +62,38 @@ export const AsyncEditContact = ({ contact, id }) => {
         }
       );
       dispatch(editContact(data));
+      dispatch(getAllContacts(data))
     } catch (e) {
       console.log('error:', e);
     }
   };
 };
 
-export const AsyncEditAbout = ({ contact, id }) => {
+export const AsyncEditAbout = (formData, id) => {
   return async (dispatch) => {
     try {
       const { data } = await axiosInstance.patch(
-        `branches/branches/${id}/`,
-        contact,
+        `branches/about-us/${id}/`,
+        formData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         }
       );
-      dispatch(data);
+      dispatch(editAbout(data));
+      dispatch(getAbout(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
+  };
+};
+
+export const AsyncAllAbout = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get(`branches/about-us/`);
+      dispatch(getAbout(data));
     } catch (e) {
       console.log('error:', e);
     }
@@ -89,8 +103,8 @@ export const AsyncEditAbout = ({ contact, id }) => {
 export const AsyncGetAbout = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axiosInstance.get(`branches/branches/${id}/`);
-      dispatch(getAbout(data));
+      const { data } = await axiosInstance.get(`branches/about-us/${id}`);
+      dispatch(getContent(data));
     } catch (e) {
       console.log('error:', e);
     }

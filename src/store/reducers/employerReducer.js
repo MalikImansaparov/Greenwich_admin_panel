@@ -6,13 +6,14 @@ import {
   EMPLOYER_SUCCESS,
   DELETE_EMPLOYER,
   UPDATE_EMPLOYER,
-  CLEAR_PROFILE,
+  CLEAR_PROFILE, GET_COURIER, CLEAR_COURIER,
 } from '../constants';
 
 const initialState = {
   user: [],
   profile: null,
   loading: false,
+  courier: null,
 };
 export const employersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -57,6 +58,16 @@ export const employersReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.payload,
+      };
+    case GET_COURIER:
+      return {
+        ...state,
+        courier: action.payload,
+      };
+    case CLEAR_COURIER:
+      return {
+        ...state,
+        courier: null,
       };
 
     default:

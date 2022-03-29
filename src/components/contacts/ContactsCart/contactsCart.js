@@ -7,8 +7,10 @@ import { Item } from '../../../style';
 import { styled } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AsyncAllContacts } from '../../../store/asyncAction/asyncContacts';
-import address from '../../../assets/img/address.png';
+import {
+  AsyncAllContacts,
+  AsyncGetAbout,
+} from '../../../store/asyncAction/asyncContacts';
 import { AboutUs } from './about';
 import { Link } from 'react-router-dom';
 
@@ -65,7 +67,7 @@ export const ContactsCarts = () => {
   }, []);
 
   return (
-    <Box>
+    <>
       <Box
         sx={{
           mb: '24px',
@@ -87,37 +89,39 @@ export const ContactsCarts = () => {
           Добавить филиалы
         </CustomButton>
       </Box>
-      <Grid container spacing={7}>
+      <Box sx={{ display: 'flex', mt: '70px' }}>
         {contacts?.map((contact) => {
           return (
-            <Grid item xl={6} key={contact.id}>
-              <CartItem onClick={() => navigate(`${contact.id}`)}>
-                <Box
-                  component="img"
-                  src={contact.picture}
-                  alt="address"
-                  sx={{ width: '445px', height: '270px' }}
-                />
-                <CartList>
-                  <CartText>Адрес:</CartText>
-                  <span>{contact.address}</span>
-                </CartList>
-                <CartList>
-                  <CartText>Номер работы:</CartText>
-                  <span>{contact.phone}</span>
-                </CartList>
-                <CartList>
-                  <CartText>Время работы</CartText>
-                  <span>
-                    {contact.open_from}-{contact.closed_from}
-                  </span>
-                </CartList>
-              </CartItem>
+            <Grid container spacing={2} key={contact.id}>
+              <Grid item lg={6} >
+                <CartItem onClick={() => navigate(`${contact.id}`)}>
+                  <Box
+                    component="img"
+                    src={contact.picture}
+                    alt="address"
+                    sx={{ width: '445px', height: '270px' }}
+                  />
+                  <CartList>
+                    <CartText>Адрес:</CartText>
+                    <span>{contact.address}</span>
+                  </CartList>
+                  <CartList>
+                    <CartText>Номер работы:</CartText>
+                    <span>{contact.phone}</span>
+                  </CartList>
+                  <CartList>
+                    <CartText>Время работы</CartText>
+                    <span>
+                      {contact.open_from.split(':').slice(0,2).join(':')}-{contact.closed_from.split(':').slice(0,2).join(':')}
+                    </span>
+                  </CartList>
+                </CartItem>
+              </Grid>
             </Grid>
           );
         })}
-      </Grid>
+      </Box>
       <AboutUs />
-    </Box>
+    </>
   );
 };

@@ -8,6 +8,7 @@ import { styled } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import about from '../../../assets/img/about.svg';
+import {AsyncAbout, AsyncAllAbout} from "../../../store/asyncAction/asyncContacts";
 
 const CartItem = styled(Item)`
   height: 266px;
@@ -24,12 +25,12 @@ const CartItem = styled(Item)`
 
 export const AboutUs = () => {
     const navigate = useNavigate();
-    //   const dispatch = useDispatch();
-    //   const contacts = useSelector((state) => state.contacts.contacts || []);
+      const dispatch = useDispatch();
+      const about = useSelector((state) => state.contacts.about || []);
 
-    //   useEffect(() => {
-    //     dispatch();
-    //   }, []);
+      useEffect(() => {
+        dispatch(AsyncAllAbout());
+      }, []);
 
     return (
       <>
@@ -46,26 +47,29 @@ export const AboutUs = () => {
             О нас
           </Typography>
         </Box>
-        <CartItem sx={{ display: 'flex' }} onClick={() => navigate('about')}>
-          <Box>
-            <Box component="img" src={about} alt="about" />
-          </Box>
-          <Box sx={{ width: '376px', mx: '100px', my: '40px' }}>
-            <Typography sx={{ fontWeight: 'bold', mb: '27px' }}>
-              Магазин комнатных растений “Greenwich”
-            </Typography>
-            <Typography
-              sx={{ fontSize: '16px', fontWeight: 400, lineHeight: '16px' }}
-            >
-              Наш магазин предоставляет всегда свежие комнатные растения и цветы
-              из лучших питомников. Строгий отбор растений и доставка до двери в
-              любую погоду. Самый большой выбор комнатных растений и цветов -
-              более 5000 наименований! Постоянный товарный запас на складе в
-              Бишкеке, а также растения выращенные нашими флористами
-              собственноручно.{' '}
-            </Typography>
-          </Box>
+          <>
+              {about.map((value) => {
+                  return (
+        <CartItem onClick={() => navigate(`edit/${value.id}`)} key={value.id}>
+                    <Box sx={{ display: 'flex' }} >
+                <Box>
+                    <Box component="img" src={value.picture} alt="about" sx={{width: '379px', height: '240px'}}/>
+                </Box>
+                <Box sx={{ width: '376px', mx: '100px', my: '40px' }}>
+                    <Typography sx={{ fontWeight: 'bold', mb: '27px' }}>
+                        {value.name}
+                    </Typography>
+                    <Typography
+                        sx={{ fontSize: '16px', fontWeight: 400, lineHeight: '16px' }}
+                    >
+                        {value.description}
+                    </Typography>
+                </Box>
+                 </Box>
         </CartItem>
+                  )}
+              )}
+              </>
       </>
     );
 };

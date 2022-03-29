@@ -12,20 +12,21 @@ import {
   InputWrapper,
   LabelWrapper,
   PhotoWrap,
-} from "../InputWrapper";
-import { Item } from "../../../style";
-import { GoBack } from "../../goBack";
-import BreadCrumb from "../../breadCrumbs";
-import { Header } from "../../header/header";
-import { useDispatch, useSelector } from "react-redux";
+  SelectWrapper,
+} from '../InputWrapper';
+import { Item } from '../../../style';
+import { GoBack } from '../../goBack';
+import BreadCrumb from '../../breadCrumbs';
+import { Header } from '../../header/header';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   AsyncEditProduct,
   AsyncGetProduct,
-} from "../../../store/asyncAction/asyncProducts";
-import { clearProduct } from "../../../store/actionType/actionTypes";
-import CircularPreloader from "../../preloader";
+} from '../../../store/asyncAction/asyncProducts';
+import { clearProduct } from '../../../store/actionType/actionTypes';
+import CircularPreloader from '../../preloader';
 
-const PhotoWrapper = styled("span")`
+const PhotoWrapper = styled('span')`
   width: 230px;
   height: 210px;
   display: block;
@@ -57,11 +58,11 @@ const CustomButton = styled(Button)`
   }
 `;
 const validationSchema = Yup.object({
-  picture: Yup.string().required("Загрузите картину"),
-  description: Yup.string().required("Описание обязателный"),
-  choice: Yup.string().required("Выберите категорию"),
-  price: Yup.number().required("Укажите цену"),
-  quantity: Yup.number().required("Укажите количество"),
+  picture: Yup.string().required('Загрузите картину'),
+  description: Yup.string().required('Описание обязателный'),
+  choice: Yup.string().required('Выберите категорию'),
+  price: Yup.number().required('Укажите цену'),
+  quantity: Yup.number().required('Укажите количество'),
 });
 
 export const EditProducts = () => {
@@ -80,13 +81,13 @@ export const EditProducts = () => {
   const handleSubmit = (values) => {
     console.log(values);
     let data = new FormData();
-    data.append("picture", values.picture);
-    data.append("choice", values.choice);
-    data.append("price", values.price);
-    data.append("description", values.description);
-    data.append("quantity", values.quantity);
+    data.append('picture', values.picture);
+    data.append('choice', values.choice);
+    data.append('price', values.price);
+    data.append('description', values.description);
+    data.append('quantity', values.quantity);
     dispatch(AsyncEditProduct(data, id));
-    navigate("/products");
+    navigate('/products');
   };
 
   // onSubmit={(values) => {
@@ -115,11 +116,11 @@ export const EditProducts = () => {
         <BreadCrumb />
         <Item
           sx={{
-            width: "1060px",
-            height: "700px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            width: '1060px',
+            height: '700px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <CircularPreloader />
@@ -132,7 +133,7 @@ export const EditProducts = () => {
     <Box mx={2}>
       <Header />
       <BreadCrumb />
-      <Item sx={{ width: "1060px" }}>
+      <Item sx={{ width: '1060px' }}>
         <FormControl>
           <Formik
             initialValues={initialValues}
@@ -147,14 +148,15 @@ export const EditProducts = () => {
               handleChange,
               handleBlur,
               handleSubmit,
+              setFieldValue,
             }) => (
               <>
                 <form onSubmit={handleSubmit}>
                   <Box
                     sx={{
-                      my: "30px",
-                      display: "grid",
-                      justifyContent: "center",
+                      my: '30px',
+                      display: 'grid',
+                      justifyContent: 'center',
                     }}
                   >
                     <label htmlFor="contained-button-file">
@@ -165,6 +167,12 @@ export const EditProducts = () => {
                           id="contained-button-file"
                           multiple
                           type="file"
+                          onChange={(event) => {
+                            setFieldValue(
+                              'picture',
+                              event.currentTarget.files[0]
+                            );
+                          }}
                         />
                         <PhotoWrap
                           component="img"
@@ -177,18 +185,18 @@ export const EditProducts = () => {
                     {errors.picture && touched.picture && (
                       <Typography
                         sx={{
-                          textAlign: "left",
-                          fontSize: "13px",
-                          color: "error.main",
-                          mt: "12px",
-                          ml: "14px",
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
                         }}
                       >
                         {errors.picture}
                       </Typography>
                     )}
                   </Box>
-                  <Box sx={{ mb: "30px" }}>
+                  <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Наименование</LabelWrapper>
                     <InputWrapper
                       name="description"
@@ -200,41 +208,48 @@ export const EditProducts = () => {
                     {errors.description && touched.description && (
                       <Typography
                         sx={{
-                          textAlign: "left",
-                          fontSize: "13px",
-                          color: "error.main",
-                          mt: "12px",
-                          ml: "14px",
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
                         }}
                       >
                         {errors.description}
                       </Typography>
                     )}
                   </Box>
-                  <Box sx={{ mb: "30px" }}>
+                  <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Категория</LabelWrapper>
-                    <InputWrapper
+                    <SelectWrapper
                       name="choice"
-                      onChange={handleChange}
                       type="string"
                       value={values.choice}
+                      onChange={handleChange}
                       onBlur={handleBlur}
-                    />
+                      sx={{ display: 'block' }}
+                    >
+                      <option value="" label="Выберите категорию" />
+                      <option value="Удобрения" label="Удобрения" />
+                      <option value="Средства защиты" label="Средства защиты" />
+                      <option value="Грунт" label="Грунт" />
+                      <option value="Почва" label="Почва" />
+                    </SelectWrapper>
                     {errors.choice && touched.choice && (
                       <Typography
                         sx={{
-                          textAlign: "left",
-                          fontSize: "13px",
-                          color: "error.main",
-                          mt: "12px",
-                          ml: "14px",
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
                         }}
                       >
                         {errors.choice}
                       </Typography>
                     )}
                   </Box>
-                  <Box sx={{ mb: "30px" }}>
+                  <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Цена</LabelWrapper>
                     <InputWrapper
                       name="price"
@@ -246,11 +261,11 @@ export const EditProducts = () => {
                     {errors.price && touched.price && (
                       <Typography
                         sx={{
-                          textAlign: "left",
-                          fontSize: "13px",
-                          color: "error.main",
-                          mt: "12px",
-                          ml: "14px",
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
                         }}
                       >
                         {errors.price}
@@ -280,7 +295,7 @@ export const EditProducts = () => {
                 </LabelWrapper>
               )}
             </Box> */}
-                  <Box sx={{ mb: "30px" }}>
+                  <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Количество</LabelWrapper>
                     <InputWrapper
                       name="quantity"
@@ -292,11 +307,11 @@ export const EditProducts = () => {
                     {errors.quantity && touched.quantity && (
                       <Typography
                         sx={{
-                          textAlign: "left",
-                          fontSize: "13px",
-                          color: "error.main",
-                          mt: "12px",
-                          ml: "14px",
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
                         }}
                       >
                         {errors.quantity}
@@ -305,8 +320,8 @@ export const EditProducts = () => {
                   </Box>
                   <Box
                     sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
+                      display: 'flex',
+                      justifyContent: 'space-between',
                     }}
                   >
                     <GoBack />

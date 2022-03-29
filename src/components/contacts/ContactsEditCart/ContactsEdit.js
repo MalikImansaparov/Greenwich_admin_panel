@@ -8,7 +8,7 @@ import BreadCrumb from "../../breadCrumbs";
 export const ContactsEdit = () => {
     return (
       <Box>
-        {/* <Header/> */}
+        <Header />
         <BreadCrumb />
         <ContactsEditCart />
         <Divider sx={{ width: '1080px', my: '30px' }} />

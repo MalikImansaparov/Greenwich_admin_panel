@@ -51,7 +51,7 @@ const App = () => {
           <Route path="contacts" element={<Contacts />} />
           <Route path="contacts/add" element={<ContactsAddCart />} />
           <Route path="contacts/:id" element={<ContactsEdit />} />
-          <Route path="contacts/about" element={<AboutEdit />} />
+          <Route path="contacts/edit/:id" element={<AboutEdit />} />
         </Route>
       </Routes>
     </>

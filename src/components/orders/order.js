@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import {OrderTab} from "./containers/OrderTab";
-import {Header} from "../header/header";
 import React from "react";
 import {Divider} from "@mui/material";
 

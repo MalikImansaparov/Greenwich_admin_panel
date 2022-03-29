@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import Grid from "@mui/material/Grid";
 import {ItemWrapper} from "../../../style";
 import Typography from "@mui/material/Typography";
-import {useNavigate, useParams} from "react-router";
+import {useNavigate} from "react-router";
 import {Link} from "react-router-dom";
 import {styled} from "@mui/system";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';

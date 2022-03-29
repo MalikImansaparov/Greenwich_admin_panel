@@ -21,7 +21,7 @@ export const ScheduleWrapper = styled('input')`
   border: 1px solid #000000;
   outline: none;
   margin: 20px;
-  padding: 15px 15px;
+  padding: 15px 18.5px;
   font-size: 16px;
   font-weight: 600;
   color: #000000;
@@ -79,7 +79,7 @@ export const TextareaWrapper = styled('textarea')`
   outline: none;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000000;
 `;
 

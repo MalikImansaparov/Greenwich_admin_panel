@@ -1,8 +1,8 @@
 import {
-    addEmployers, deleteEmployers, employersFail, employersStart,
-    getEmployers, getProfile,
-    ordersFail,
-    ordersStart, updateEmployers,
+  addEmployers, deleteEmployers, employersFail, employersStart, getCourier,
+  getEmployers, getProfile,
+  ordersFail,
+  ordersStart, updateEmployers,
 } from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
 
@@ -66,6 +66,17 @@ export const AsyncDeleteEmployers = (id) => {
       .catch((error) => {
         console.log('error:', error);
       });
+  };
+};
+
+export const AsyncGetCourier = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axiosInstance.get(`courier-profile`);
+      dispatch(getCourier(data));
+    } catch (e) {
+      console.log('error:', e);
+    }
   };
 };
 

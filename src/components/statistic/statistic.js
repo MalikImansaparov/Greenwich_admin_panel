@@ -8,7 +8,7 @@ import {EmployersStatisticTab} from "./employersStatisticTab/employersStatisticT
 export const Statistic = () => {
     return (
       <Box>
-        {/* <Header/> */}
+         <Header/>
         <StatisticTab />
         <EmployersStatisticTab />
         <Divider sx={{ width: '1080px', my: '30px' }} />

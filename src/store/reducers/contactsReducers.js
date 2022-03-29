@@ -6,13 +6,14 @@ import {
   EDIT_ABOUT,
   EDIT_CONTACT,
   GET_ABOUT,
-  GET_CONTACT,
+  GET_CONTACT, GET_CONTENT,
 } from '../constants';
 
 const initialState = {
   contacts: [],
-  contact: null,
+  contact: [],
   about: null,
+  content: null
 };
 export const contactsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,7 +25,7 @@ export const contactsReducer = (state = initialState, action) => {
     case EDIT_CONTACT:
       return {
         ...state,
-        contacts: action.payload,
+        contact: action.payload,
       };
     case GET_CONTACT:
       return {
@@ -55,6 +56,11 @@ export const contactsReducer = (state = initialState, action) => {
       return {
         ...state,
         about: null,
+      };
+    case GET_CONTENT:
+      return {
+        ...state,
+        content: action.payload,
       };
 
     default:

@@ -11,11 +11,10 @@ import {
   InputWrap,
   InputWrapper,
   LabelWrapper,
-  PhotoWrapper,
+  PhotoWrap,
   ScheduleWrapper,
 } from '../../products/InputWrapper';
 import { GoBack } from '../../goBack';
-import Upload from '../../../assets/img/upload.svg';
 import { Item } from '../../../style';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -25,6 +24,18 @@ import {
 import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
 import { clearContact } from '../../../store/actionType/actionTypes';
+
+const PhotoWrapper = styled('span')`
+  width: 230px;
+  height: 210px;
+  display: block;
+  justify-content: center;
+  border-radius: 20px;
+  padding-top: 10px;
+  border: 1px solid #000000;
+  font-weight: 600;
+  color: #000000;
+`;
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -48,7 +59,7 @@ const CustomButton = styled(Button)`
 const validationSchema = Yup.object({
   address: Yup.string().required('Укажите адресс'),
   phone: Yup.string()
-    .required('Номер обязателный')
+    .required('Номер обязательный')
     .min(9, 'Не правилный номер')
     .max(14, 'Не правилный номер'),
 });
@@ -65,31 +76,31 @@ export const ContactsEditCart = () => {
     return dispatch(clearContact());
   }, [dispatch, id]);
 
-  // const initialValues = {
-  //   id: contacts?.id,
-  //   address: contacts?.address,
-  //   phone: contacts?.phone,
-  //   open: contacts?.open_from,
-  //   close: contacts?.closed_from,
-  // };
+  const initialValues = {
+    picture: contacts?.picture,
+    address: contacts?.address,
+    phone: contacts?.phone,
+    open: contacts?.open_from,
+    close: contacts?.closed_from,
+  };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    console.log(values);
     dispatch(clearContact());
     let data = new FormData();
     data.append('picture', values.picture);
     data.append('phone', values.phone);
     data.append('address', values.address);
-    data.append('open_from', values.open_from);
-    data.append('close_from', values.close_from);
-    dispatch(AsyncEditContact(values, id));
+    data.append('open_from', values.open);
+    data.append('close_from', values.close);
+    dispatch(AsyncEditContact(data, id));
+    navigate(-1)
     setSubmitting(false);
-    navigate(-1);
   };
 
   if (!contacts) {
     return (
       <Box mx={2}>
-        <BreadCrumb />
         <Item
           sx={{
             width: '1060px',
@@ -110,7 +121,7 @@ export const ContactsEditCart = () => {
       <Item sx={{ width: '1060px' }}>
         <FormControl>
           <Formik
-            initialValues={contacts}
+            initialValues={initialValues}
             onSubmit={handleSubmit}
             validationSchema={validationSchema}
           >
@@ -128,19 +139,22 @@ export const ContactsEditCart = () => {
                 <Box
                   sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}
                 >
-                  <label htmlFor="photo">
-                    <InputWrap
-                      accept="image/*"
-                      name="photo"
-                      id="photo"
-                      multiple
-                      type="file"
-                      onChange={(event) => {
-                        setFieldValue('picture', event.currentTarget.files[0]);
-                      }}
-                    />
+                  <label htmlFor="contained-button-file">
                     <PhotoWrapper>
-                      <Box component="img" src={Upload} alt="upload" />
+                      <InputWrap
+                        name="picture"
+                        accept="image/*"
+                        id="contained-button-file"
+                        multiple
+                        type="file"
+                        onChange={(event) => {
+                          setFieldValue(
+                            'picture',
+                            event.currentTarget.files[0]
+                          );
+                        }}
+                      />
+                      <PhotoWrap component="img" src={values.picture} alt="" />
                       <Typography>Изменить фото</Typography>
                     </PhotoWrapper>
                   </label>
