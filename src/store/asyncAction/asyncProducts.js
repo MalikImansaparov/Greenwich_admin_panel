@@ -64,7 +64,6 @@ export const AsyncEditProduct = (formData, id) => {
         }
       );
       dispatch(updateProduct(data));
-      dispatch(AsyncAllProducts());
     } catch (e) {
       console.log("error:", e);
     }

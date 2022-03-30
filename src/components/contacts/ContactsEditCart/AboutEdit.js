@@ -24,7 +24,7 @@ import {
 } from '../../../store/asyncAction/asyncContacts';
 import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
-import {clearAbout,} from '../../../store/actionType/actionTypes';
+import {clearAbout, clearContact,} from '../../../store/actionType/actionTypes';
 import {Header} from "../../header/header";
 
 const PhotoWrapper = styled('span')`
@@ -68,17 +68,21 @@ export const AboutEdit = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
   const about = useSelector((state) => state.contacts.content);
-  console.log(about);
 
-  // useEffect(() => {
-  //   dispatch(AsyncAllAbout());
-  // }, []);
 
   useEffect(() => {
     dispatch(AsyncGetAbout(id));
     return dispatch(clearAbout());
   }, [dispatch, id]);
 
+  const handleSubmit = (values) => {
+    let data = new FormData();
+    data.append('picture', values.picture);
+    data.append('name', values.name);
+    data.append('description', values.description);
+    dispatch(AsyncEditAbout(data, id));
+    dispatch(clearAbout());
+  };
 
   const initialValues = {
     picture: about?.picture,
@@ -86,15 +90,6 @@ export const AboutEdit = () => {
     description: about?.description,
   };
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    let data = new FormData();
-    data.append('picture', values.picture);
-    data.append('name', values.name);
-    data.append('description', values.description);
-    dispatch(AsyncEditAbout(data, id));
-    setSubmitting(false);
-    navigate(-1);
-  };
 
   if (!about) {
     return (

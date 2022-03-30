@@ -61,7 +61,7 @@ export const ContactsCarts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.contacts);
-
+  const data = Array.from(contacts)
   useEffect(() => {
     dispatch(AsyncAllContacts());
   }, []);
@@ -90,7 +90,7 @@ export const ContactsCarts = () => {
         </CustomButton>
       </Box>
       <Box sx={{ display: 'flex', mt: '70px' }}>
-        {contacts?.map((contact) => {
+        {data?.map((contact) => {
           return (
             <Grid container spacing={2} key={contact.id}>
               <Grid item lg={6} >

@@ -11,8 +11,8 @@ import {
 
 const initialState = {
   contacts: [],
-  contact: [],
-  about: null,
+  contact: null,
+  about: [],
   content: null
 };
 export const contactsReducer = (state = initialState, action) => {
@@ -50,12 +50,12 @@ export const contactsReducer = (state = initialState, action) => {
     case EDIT_ABOUT:
       return {
         ...state,
-        about: action.payload,
+        content: action.payload,
       };
     case CLEAR_ABOUT:
       return {
         ...state,
-        about: null,
+        content: null,
       };
     case GET_CONTENT:
       return {

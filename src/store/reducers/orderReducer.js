@@ -8,9 +8,10 @@ import {
 } from "../constants";
 
 const initialState = {
-    order: [],
+    orders: [],
+    completedOrders: [],
     loading: 'false',
-    completed: [],
+    order: [],
 }
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,24 +19,25 @@ export const orderReducer = (state = initialState, action) => {
             return {
             ...state,
             loading: true,
-                order: null
+                orders: null
         }
         case ORDER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                order: action.payload
+                orders: action.payload
             }
         case ORDER_FAILED:
             return {
                 ...state,
-                loading: false
+                loading: false,
+                orders: null
             }
         case COMPLETED_ORDERS:
             return {
                 ...state,
-                completed: false
-            }
+                completedOrders: action.payload,
+            };
         case GET_PRODUCT:
             return {
                 ...state,
@@ -45,7 +47,7 @@ export const orderReducer = (state = initialState, action) => {
         case CLEAR_PRODUCT:
             return {
                 ...state,
-                order: null,
+                orders: null,
             };
         case CONFIRM_ORDERS:
             return {
@@ -60,7 +62,7 @@ export const orderReducer = (state = initialState, action) => {
         case DELETE_ORDERS:
             return {
                 ...state,
-                order: state.order.filter((item) => item.id !== action.payload),
+                order: state.orders.filter((item) => item.id !== action.payload),
             };
 
         default:

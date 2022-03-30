@@ -48,7 +48,6 @@ export const AsyncEditEmployers = ({ values, id }) => {
     try {
       const { data } = await axiosInstance.patch(`all-users/${id}/`, values);
       dispatch(updateEmployers(data));
-      dispatch(AsyncGetEmployers());
     } catch (e) {
       console.log('error:', e);
     }

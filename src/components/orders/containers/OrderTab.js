@@ -24,6 +24,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import Checkbox from "@mui/material/Checkbox";
 import {AsyncDeleteEmployers} from "../../../store/asyncAction/asyncEmployers";
 import {useNavigate} from "react-router";
+import axiosInstance from "../../../api/utils/axiosInstance";
 
 
 const SearchWrapper = styled('input')`
@@ -75,46 +76,23 @@ const NumberAdjust = styled('span')`
   margin: 0 auto;
 `;
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-//    const activeOrders = useSelector((state) => state.orders.active || []);
-//     const completedOrders = useSelector((state) => state.orders.completed || []);
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-//       const [searchText, setSearchText] = React.useState('');
-//       const [rows, setRows] = React.useState(isOrders);
-//
-//     const requestSearch = (searchValue) => {
-//         setSearchText(searchValue);
-//         const filteredRows = isOrders.filter((row) => {
-//             return (
-//                 row.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
-//                 row.phone_number.toLowerCase().includes(searchText.toLowerCase())
-//             );
-//         });
-//         setRows(filteredRows);
-//     };
-//
-//       useEffect(() => {
-//         setRows(activeOrders);
-//       }, [activeOrders]);
-
 export const OrderTab = () => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
     const isFetching = useSelector((state) => state.orders.loading);
-    const isOrders = useSelector((state) => state.orders.order || []);
+    const isOrders = useSelector((state) => state.orders.orders || []);
     const completedOrders = useSelector((state) => state.orders.completed || []);
+    const confirmOrders = useSelector((state) => state.orders.completed || []);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-      const [searchText, setSearchText] = React.useState('');
-      const [rows, setRows] = React.useState(isOrders);
-    const [checked, setChecked] = React.useState({is_active: 'false'});
+    const [searchText, setSearchText] = React.useState('');
+    const [rows, setRows] = React.useState(isOrders);
+    const [checked, setChecked] = React.useState(false);
+    const data = Array.from(rows)
 
-
-    const requestSearch = (searchValue) => {
+       const requestSearch = (searchValue) => {
         setSearchText(searchValue);
         const filteredRows = isOrders.filter((row) => {
             return (
@@ -136,15 +114,11 @@ export const OrderTab = () => {
             total: order?.total_price,
             number: order?.phone_number,
             address: order?.address,
-            courier: order?.courier.user.first_name,
-            phone: order?.courier.user.phone_number,
-            status: order?.courier_status,
             data: order?.date_created,
-            is_confirm: order?.is_confirm,
         };
     });
 
-    const rowDatas = rows.map((order) => {
+    const rowDatas = data.map((order) => {
         return {
             id: order?.id,
             user: order?.first_name,
@@ -154,26 +128,29 @@ export const OrderTab = () => {
             courier: order?.courier.user.first_name,
             phone: order?.courier.user.phone_number,
             status: order?.courier_status,
-            data: order?.date_created,
-            is_confirm: order?.is_confirm,
+            confirm: order?.is_confirmed,
         };
     });
 
     useEffect(() => {
         dispatch(AsyncOrders());
         dispatch(AsyncCompletedOrders())
-        console.log(isOrders)
     }, []);
+
+        setTimeout(() => {
+            AsyncOrders()
+        },5000)
 
     const handleDelete = (id) => {
         dispatch(AsyncDeleteOrder(id));
     };
-    const handleConfirm = (event,checked, id) => {
-        setChecked(event.target.checked);
-        dispatch(AsyncConfirmOrder(checked,id));
-    };
+
+    let confirm = true;
+    const handleCheck = (id) => {
+        axiosInstance.patch(`orders/order/${id}/`, {confirm})
+            .then((data) => {setChecked(data.confirm)})
+    }
     const handleClick = (id) => {
-        // dispatch(AsyncGetProfile(id));
         navigate(`${id}`);
     };
 
@@ -181,7 +158,7 @@ export const OrderTab = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-            width: 120,
+            width: 150,
             renderCell: (params) => {
                 return <div>{params.row.user}</div>;
             },
@@ -213,7 +190,7 @@ export const OrderTab = () => {
         {
             field: 'courier',
             headerName: 'Курьер',
-            width: 130,
+            width: 120,
             renderCell: (params) => {
                 return <div>{params.row.courier}</div>;
             },
@@ -229,7 +206,7 @@ export const OrderTab = () => {
         {
             field: 'status',
             headerName: 'Статусы',
-            width: 170,
+            width: 150,
             renderCell: (params) => {
                 return (
                     <Box
@@ -252,9 +229,10 @@ export const OrderTab = () => {
             renderCell: (params) => {
                 return (
                     <>
-
                         <Checkbox
-                            onChange={handleConfirm}
+                            value={params.checked}
+                            // onChange={handleConfirm}
+                            onChange={() => handleCheck(params.row.id)}
                             inputProps={{ 'aria-label': 'controlled' }}
                         />
                                 <EditIcon

@@ -12,10 +12,10 @@ export const AsyncOrders = () => {
   return async (dispatch) => {
     dispatch(ordersStart());
     try {
-      const {data} = await axiosInstance.get('orders/order/?is_active=true', {
-        // params: {
-        //   is_active: true
-        // }
+      const {data} = await axiosInstance.get('orders/order/',{
+        params: {
+          is_active: false
+        }
       });
       dispatch(getOrders(data));
     } catch (e) {
@@ -31,7 +31,7 @@ export const AsyncCompletedOrders= () => {
     try {
       const {data} = await axiosInstance.get('orders/order/', {
         params: {
-          is_active: false
+          is_active: true
         }
       });
       dispatch(completedOrders(data));
@@ -54,10 +54,10 @@ export const AsyncDeleteOrder = (id) => {
   };
 };
 
-export const AsyncConfirmOrder = (data, id) => {
+export const AsyncConfirmOrder = (confirm, id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.patch('orders/order/', {data, id});
+      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {confirm});
       dispatch(confrimOrders(data));
     } catch (e) {
       console.log('error:', e);
@@ -79,7 +79,7 @@ export const AsyncGetOrder = (id) => {
 export const AsyncEditOrder = (data, id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.patch('orders/order', {data, id});
+      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {data});
       dispatch(getOrders(data));
     } catch (e) {
       console.log('error:', e);

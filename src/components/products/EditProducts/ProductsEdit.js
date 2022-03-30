@@ -87,19 +87,10 @@ export const EditProducts = () => {
     data.append('description', values.description);
     data.append('quantity', values.quantity);
     dispatch(AsyncEditProduct(data, id));
-    navigate('/products');
+    dispatch(clearProduct())
+
   };
 
-  // onSubmit={(values) => {
-  //             let data = new FormData();
-  //             data.append('picture', values.picture);
-  //             data.append('choice', values.choice);
-  //             data.append('price', values.price);
-  //             data.append('description', values.description);
-  //             data.append('quantity', values.quantity);
-  //             dispatch(AsyncEditProduct({ data, id }));
-  //             navigate(-1);
-  //           }}
 
   const initialValues = {
     picture: productInfo?.picture,

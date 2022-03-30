@@ -57,7 +57,6 @@ export const AddEmployers = () => {
       last_name: '',
       phone_number: '',
       role: '',
-      salary: '',
       courier_allowance: '',
       password: '',
       confirmPassword: '',
@@ -206,29 +205,6 @@ export const AddEmployers = () => {
                       }}
                     >
                       {errors.role}
-                    </Typography>
-                  )}
-                </Box>
-                <Box sx={{ mb: '30px' }}>
-                  <LabelWrapper>Зарплата</LabelWrapper>
-                  <InputWrapper
-                    name="salary"
-                    onChange={handleChange}
-                    type="text"
-                    value={values.salary}
-                    placeholder=""
-                  />
-                  {errors.salary && touched.salary && (
-                    <Typography
-                      sx={{
-                        textAlign: 'left',
-                        fontSize: '13px',
-                        color: 'error.main',
-                        mt: '12px',
-                        ml: '14px',
-                      }}
-                    >
-                      {errors.salary}
                     </Typography>
                   )}
                 </Box>

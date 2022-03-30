@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router';
 import Box from '@mui/material/Box';
@@ -23,7 +23,8 @@ import {
 } from '../../../store/asyncAction/asyncContacts';
 import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
-import { clearContact } from '../../../store/actionType/actionTypes';
+import {clearContact, clearProduct} from '../../../store/actionType/actionTypes';
+import {AsyncGetProduct} from "../../../store/asyncAction/asyncProducts";
 
 const PhotoWrapper = styled('span')`
   width: 230px;
@@ -69,12 +70,30 @@ export const ContactsEditCart = () => {
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.contact);
   const { id } = useParams();
-  console.log(contacts);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
 
   useEffect(() => {
     dispatch(AsyncGetContact(id));
     return dispatch(clearContact());
   }, [dispatch, id]);
+
+  const handleSubmit = (values) => {
+    let data = new FormData();
+    data.append('picture', values.picture);
+    data.append('phone', values.phone);
+    data.append('address', values.address);
+    data.append('open_from', values.open);
+    data.append('closed_from', values.close);
+    dispatch(AsyncEditContact(data, id));
+    dispatch(clearContact());
+  };
 
   const initialValues = {
     picture: contacts?.picture,
@@ -82,20 +101,6 @@ export const ContactsEditCart = () => {
     phone: contacts?.phone,
     open: contacts?.open_from,
     close: contacts?.closed_from,
-  };
-
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    dispatch(clearContact());
-    let data = new FormData();
-    data.append('picture', values.picture);
-    data.append('phone', values.phone);
-    data.append('address', values.address);
-    data.append('open_from', values.open);
-    data.append('close_from', values.close);
-    dispatch(AsyncEditContact(data, id));
-    navigate(-1)
-    setSubmitting(false);
   };
 
   if (!contacts) {
@@ -152,9 +157,12 @@ export const ContactsEditCart = () => {
                             'picture',
                             event.currentTarget.files[0]
                           );
+                          setSelectedImage(event.target.files[0])
                         }}
                       />
-                      <PhotoWrap component="img" src={values.picture} alt="" />
+                      { imageUrl && selectedImage ?<PhotoWrap component="img" src={imageUrl} alt='' /> :
+                        <PhotoWrap component="img" src={values.picture} alt="" />
+                      }
                       <Typography>Изменить фото</Typography>
                     </PhotoWrapper>
                   </label>

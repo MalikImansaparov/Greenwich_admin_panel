@@ -1,5 +1,5 @@
 import {
-  addContact, editAbout,
+  addContact, clearContact, editAbout,
   editContact,
   getAbout,
   getAllContacts,
@@ -62,7 +62,6 @@ export const AsyncEditContact = (contact, id) => {
         }
       );
       dispatch(editContact(data));
-      dispatch(getAllContacts(data))
     } catch (e) {
       console.log('error:', e);
     }
@@ -74,15 +73,14 @@ export const AsyncEditAbout = (formData, id) => {
     try {
       const { data } = await axiosInstance.patch(
         `branches/about-us/${id}/`,
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
+        formData
+        // {
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        // }
       );
       dispatch(editAbout(data));
-      dispatch(getAbout(data));
     } catch (e) {
       console.log('error:', e);
     }
