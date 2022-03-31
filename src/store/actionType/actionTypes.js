@@ -23,7 +23,15 @@ import {
   UPDATE_PRODUCT,
   GET_ABOUT,
   EDIT_ABOUT,
-  CLEAR_ABOUT, GET_CONTENT, GET_COURIER, CLEAR_COURIER, CONFIRM_ORDERS, DELETE_ORDERS, COMPLETED_ORDERS,
+  CLEAR_ABOUT,
+  GET_CONTENT,
+  GET_COURIER,
+  CLEAR_COURIER,
+  CONFIRM_ORDERS,
+  DELETE_ORDERS,
+  COMPLETED_ORDERS,
+  GET_ORDER,
+  CLEAR_ORDER, UPDATE_ORDER,
 } from '../constants';
 
 export const ordersStart = () => ({ type: ORDER_STARTED });
@@ -32,6 +40,9 @@ export const getOrders = (payload) => ({ type: ORDER_SUCCESS, payload });
 export const deleteOrders = (id) => ({ type: DELETE_ORDERS, payload: id });
 export const confrimOrders = (payload) => ({ type: CONFIRM_ORDERS, payload });
 export const completedOrders = (payload) => ({ type: COMPLETED_ORDERS, payload });
+export const reciveOrder = (payload) => ({ type: GET_ORDER, payload });
+export const editOrders = (payload) => ({ type: UPDATE_ORDER, payload });
+export const clearOrders = (payload) => ({ type: CLEAR_ORDER, payload });
 
 export const searchOrders = (payload) => ({ type: SEARCH_ORDERS, payload });
 

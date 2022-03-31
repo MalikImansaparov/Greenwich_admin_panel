@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Formik } from 'formik';
 import {useNavigate, useParams} from 'react-router';
 import Box from '@mui/material/Box';
@@ -68,7 +68,14 @@ export const AboutEdit = () => {
   const dispatch = useDispatch();
   const {id} = useParams();
   const about = useSelector((state) => state.contacts.content);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
 
+    useEffect(() => {
+        if (selectedImage) {
+            setImageUrl(URL.createObjectURL(selectedImage));
+        }
+    }, [selectedImage]);
 
   useEffect(() => {
     dispatch(AsyncGetAbout(id));

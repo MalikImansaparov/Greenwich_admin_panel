@@ -13,6 +13,8 @@ import {
 } from '../../../store/asyncAction/asyncContacts';
 import { AboutUs } from './about';
 import { Link } from 'react-router-dom';
+import BreadCrumb from "../../breadCrumbs";
+import CircularPreloader from "../../preloader";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -61,10 +63,12 @@ export const ContactsCarts = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contacts.contacts);
+  const isFetching = useSelector((state) => state.contacts.loading);
   const data = Array.from(contacts)
   useEffect(() => {
     dispatch(AsyncAllContacts());
   }, []);
+
 
   return (
     <>
@@ -89,6 +93,12 @@ export const ContactsCarts = () => {
           Добавить филиалы
         </CustomButton>
       </Box>
+      <>
+          {isFetching ? (
+              <Box sx={{height: '300px', justifyContent: 'center', alignItems: 'center'}}>
+                  <CircularPreloader />
+              </Box>
+          ) : (
       <Box sx={{ display: 'flex', mt: '70px' }}>
         {data?.map((contact) => {
           return (
@@ -121,6 +131,8 @@ export const ContactsCarts = () => {
           );
         })}
       </Box>
+          )}
+      </>
       <AboutUs />
     </>
   );

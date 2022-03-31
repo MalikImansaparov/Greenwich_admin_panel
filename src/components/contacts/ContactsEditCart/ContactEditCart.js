@@ -152,6 +152,7 @@ export const ContactsEditCart = () => {
                         id="contained-button-file"
                         multiple
                         type="file"
+                        values={values.picture}
                         onChange={(event) => {
                           setFieldValue(
                             'picture',
@@ -160,7 +161,7 @@ export const ContactsEditCart = () => {
                           setSelectedImage(event.target.files[0])
                         }}
                       />
-                      { imageUrl && selectedImage ?<PhotoWrap component="img" src={imageUrl} alt='' /> :
+                      { imageUrl && selectedImage ? <PhotoWrap component="img" src={imageUrl} alt='' /> :
                         <PhotoWrap component="img" src={values.picture} alt="" />
                       }
                       <Typography>Изменить фото</Typography>

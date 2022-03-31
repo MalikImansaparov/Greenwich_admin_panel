@@ -18,6 +18,7 @@ import { AboutEdit } from "./components/contacts/ContactsEditCart/AboutEdit";
 import { EmployersTable } from "./components/employers/EmployersTable/EmployersTable";
 import { AddEmployers } from "./components/employers/addEployers/AddEployers";
 import { EditEmployers } from "./components/employers/EditEmployers/EditEmployers";
+import {EditOrders} from "./components/orders/view/EditOrders/EditOrders";
 
 const PrivateRoute = () => {
   return localStorage.getItem("role") !== "Суперадмин" ? (
@@ -35,6 +36,7 @@ const App = () => {
         <Route index path="home" element={<MainContainer />} />
         <Route path="/" element={<Home />}>
           <Route path="orders" element={<Orders />} />
+            <Route path="orders/:id" element={<EditOrders/>}/>
           <Route path="employers" element={<Employers />}>
             <Route index element={<EmployersTable />} />
             <Route path="" element={<PrivateRoute />}>

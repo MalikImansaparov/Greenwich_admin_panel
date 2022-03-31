@@ -11,9 +11,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/ModeEditOutline';
 import {
   AsyncDeleteEmployers,
-  AsyncEditEmployers,
   AsyncGetEmployers,
-  AsyncGetProfile,
 } from '../../../store/asyncAction/asyncEmployers';
 import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
@@ -73,6 +71,10 @@ const TextAdjust = styled('span')`
   margin-left: 5px;
 `;
 
+const NumberAdjust = styled('span')`
+  margin-left: 25px;
+`;
+
 const ButtonWrapper = styled('button')`
   width: 60px;
   height: 48px;
@@ -128,7 +130,6 @@ export const EmployersTable = () => {
       setSuperAdmin('суперадмин');
     }
 
-    // сonst lastName = localStorage.getItem('firstName')
   }, []);
 
   const rowData = rows.map((employer) => {
@@ -150,7 +151,6 @@ export const EmployersTable = () => {
   };
 
   const handleClick = (id) => {
-    // dispatch(AsyncGetProfile(id));
     navigate(`${id}`);
   };
 
@@ -164,15 +164,15 @@ export const EmployersTable = () => {
     {
       field: 'id',
       headerName: 'ID',
-      width: 50,
+      width: 80,
       renderCell: (params) => {
-        return <div>{params.row.id}</div>;
+        return <TextAdjust>{params.row.id}</TextAdjust>;
       },
     },
     {
       field: 'user',
       headerName: 'ФИО',
-      width: 250,
+      width: 270,
       renderCell: (params) => {
         return (
           <div sx={{ display: 'flex' }}>
@@ -197,18 +197,25 @@ export const EmployersTable = () => {
       renderCell: (params) => {
         return (
           <>
+            {params.row.role}
             {/* {Object.entries(roleColors).map(([key, value]) => { */}
-            <Box
-              sx={{
-                // background: key === params.row.role ? value : null,
-                borderRadius: '12px',
-                padding: '5px 10px',
-                cursor: 'pointer',
-              }}
-            >
-              {params.row.role}
-            </Box>
-            {/* })} */}
+            {/*{params.role.map((role, index) => {*/}
+            {/*  return (*/}
+            {/*<Box*/}
+            {/*   sx={{*/}
+              //   // background: key === params.row.role ? value : null,
+              //   borderRadius: '12px',
+              //   padding: '5px 10px',
+              //   cursor: 'pointer',
+              // }}
+            {/*>*/}
+            {/*  if(role === 'админ'){*/}
+            {/*    <Box sx={{background:'red'}}>*/}
+            {/*    {params.row.role}*/}
+            {/*    </Box>*/}
+            {/*  }*/}
+            {/*</Box>*/}
+            {/*  )})}*/}
           </>
         );
       },
@@ -216,17 +223,17 @@ export const EmployersTable = () => {
     {
       field: 'salary',
       headerName: 'Зарплата',
-      width: 120,
+      width: 130,
       renderCell: (params) => {
-        return <TextAdjust>{params.row.salary}</TextAdjust>;
+        return <NumberAdjust>{params.row.salary}</NumberAdjust>;
       },
     },
     {
       field: 'allowance',
       headerName: 'Надбавка',
-      width: 120,
+      width: 130,
       renderCell: (params) => {
-        return <TextAdjust>{params.row.allowance}</TextAdjust>;
+        return <NumberAdjust>{params.row.allowance}</NumberAdjust>;
       },
     },
     {
@@ -269,7 +276,7 @@ export const EmployersTable = () => {
           <SearchWrapper
             value={searchText}
             name="search"
-            type="string"
+            type="text"
             placeholder="Поиск"
             onChange={(e) => requestSearch(e.target.value)}
           />
@@ -299,7 +306,7 @@ export const EmployersTable = () => {
       <Box
         sx={{
           mb: '24px',
-          ml: '20px',
+          mr: '10px',
           display: 'flex',
           justifyContent: 'space-between',
         }}

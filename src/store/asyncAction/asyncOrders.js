@@ -1,10 +1,10 @@
 import {
   completedOrders,
   confrimOrders,
-  deleteOrders,
+  deleteOrders, editOrders,
   getOrders,
   ordersFail,
-  ordersStart,
+  ordersStart, reciveOrder,
 } from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
 
@@ -68,19 +68,19 @@ export const AsyncConfirmOrder = (confirm, id) => {
 export const AsyncGetOrder = (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.get('orders/order', id);
-      dispatch(getOrders(data));
+      const {data} = await axiosInstance.get(`orders/order/${id}`, );
+      dispatch(reciveOrder(data));
     } catch (e) {
       console.log('error:', e);
     }
   };
 };
 
-export const AsyncEditOrder = (data, id) => {
+export const AsyncEditOrder = (formData, id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {data});
-      dispatch(getOrders(data));
+      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {formData});
+      dispatch( editOrders(data));
     } catch (e) {
       console.log('error:', e);
     }

@@ -1,9 +1,10 @@
 import {
-    CLEAR_PRODUCT, COMPLETED_ORDERS, CONFIRM_ORDERS, DELETE_ORDERS,
+    CLEAR_ORDER,
+    CLEAR_PRODUCT, COMPLETED_ORDERS, CONFIRM_ORDERS, DELETE_ORDERS, GET_ORDER,
     GET_PRODUCT,
     ORDER_FAILED,
     ORDER_STARTED,
-    ORDER_SUCCESS,
+    ORDER_SUCCESS, UPDATE_ORDER,
     UPDATE_PRODUCT
 } from "../constants";
 
@@ -38,23 +39,23 @@ export const orderReducer = (state = initialState, action) => {
                 ...state,
                 completedOrders: action.payload,
             };
-        case GET_PRODUCT:
+        case GET_ORDER:
             return {
                 ...state,
                 order: action.payload,
                 loading: false,
             };
-        case CLEAR_PRODUCT:
+        case CLEAR_ORDER:
             return {
                 ...state,
-                orders: null,
+                order: null,
             };
         case CONFIRM_ORDERS:
             return {
                 ...state,
                 order: action.payload,
             };
-        case UPDATE_PRODUCT:
+        case UPDATE_ORDER:
             return {
                 ...state,
                 order: action.payload,

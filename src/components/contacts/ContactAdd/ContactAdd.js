@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import FormControl from '@mui/material/FormControl';
@@ -8,9 +8,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import * as Yup from 'yup';
 import {
+  DefaultPhoto,
   InputWrap,
   InputWrapper,
-  LabelWrapper,
+  LabelWrapper, PhotoWrap,
   PhotoWrapper,
   ScheduleWrapper,
 } from '../../products/InputWrapper';
@@ -50,6 +51,14 @@ const validationSchema = Yup.object({
 export const ContactsAddCart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
 
   const initialValues = {
     picture: '',
@@ -69,7 +78,6 @@ export const ContactsAddCart = () => {
     data.append('close_from', values.close);
     dispatch(AsyncAddContact(data));
     setSubmitting(false);
-    navigate(-1);
   };
 
   return (
@@ -95,20 +103,33 @@ export const ContactsAddCart = () => {
                 <Box
                   sx={{ my: '30px', display: 'grid', justifyContent: 'center' }}
                 >
-                  <label htmlFor="photo">
-                    <InputWrap
-                      accept="image/*"
-                      name="photo"
-                      id="photo"
-                      multiple
-                      type="file"
-                      onChange={(event) => {
-                        setFieldValue('picture', event.currentTarget.files[0]);
-                      }}
-                    />
+                  <label htmlFor="contained-button-file">
                     <PhotoWrapper>
-                      <Box component="img" src={Upload} alt="upload" />
-                      <Typography>Добавить фото</Typography>
+                      <InputWrap
+                          name="picture"
+                          accept="image/*"
+                          id="contained-button-file"
+                          multiple
+                          type="file"
+                          onChange={(event) => {
+                            setFieldValue(
+                                'picture',
+                                event.currentTarget.files[0]
+                            );
+                            setSelectedImage(event.target.files[0])
+                          }}
+                      />
+                      { imageUrl && selectedImage ?
+                          <Box>
+                          <PhotoWrap component="img" src={imageUrl} alt='' />
+                            <Typography>Изменить фото</Typography>
+                          </Box>:
+                          <Box>
+                            <DefaultPhoto component="img" src={Upload} alt="" />
+                            <Typography>Добавить фото</Typography>
+                          </Box>
+                      }
+
                     </PhotoWrapper>
                   </label>
                   {errors.photo && touched.photo && (

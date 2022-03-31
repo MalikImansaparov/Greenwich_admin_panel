@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { useNavigate, useParams } from "react-router";
 import Box from "@mui/material/Box";
@@ -57,6 +57,7 @@ const CustomButton = styled(Button)`
     background-color: #9c9c9c;
   }
 `;
+
 const validationSchema = Yup.object({
   picture: Yup.string().required('Загрузите картину'),
   description: Yup.string().required('Описание обязателный'),
@@ -70,6 +71,14 @@ export const EditProducts = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const productInfo = useSelector((state) => state.products.care);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
+
+    useEffect(() => {
+        if (selectedImage) {
+            setImageUrl(URL.createObjectURL(selectedImage));
+        }
+    }, [selectedImage]);
 
   useEffect(() => {
     dispatch(AsyncGetProduct(id));
@@ -90,7 +99,6 @@ export const EditProducts = () => {
     dispatch(clearProduct())
 
   };
-
 
   const initialValues = {
     picture: productInfo?.picture,
@@ -163,13 +171,12 @@ export const EditProducts = () => {
                               'picture',
                               event.currentTarget.files[0]
                             );
+                              setSelectedImage(event.target.files[0])
                           }}
                         />
-                        <PhotoWrap
-                          component="img"
-                          src={values.picture}
-                          alt=""
-                        />
+                          { imageUrl && selectedImage ? <PhotoWrap component="img" src={imageUrl} alt='' /> :
+                              <PhotoWrap component="img" src={values.picture} alt="" />
+                          }
                         <Typography>Изменить фото</Typography>
                       </PhotoWrapper>
                     </label>

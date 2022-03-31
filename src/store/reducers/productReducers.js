@@ -12,7 +12,7 @@ import {
 const initialState = {
   product: [],
   care: null,
-  loading: 'false',
+  loading: false,
 };
 export const productsReducer = (state = initialState, action) => {
   switch (action.type) {

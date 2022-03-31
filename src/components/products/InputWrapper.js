@@ -12,6 +12,7 @@ export const InputWrapper = styled('input')`
   font-size: 16px;
   font-weight: 500;
   color: #000000;
+
 `;
 
 export const ScheduleWrapper = styled('input')`
@@ -57,18 +58,25 @@ export const PhotoWrap = styled(Box)`
   height: 160px;
 `;
 
+export const DefaultPhoto = styled(Box)`
+  width: 180px;
+  height: 150px;
+`;
+
 export const PhotoWrapper = styled('span')`
-  width: 200px;
-  height: 160px;
+  width: 230px;
+  height: 210px;
   display: block;
   justify-content: center;
   border-radius: 20px;
+  padding-top: 10px;
   border: 1px solid #000000;
-  background: #e6f0e6;
-  outline: none;
-  padding: 20px 20px;
   font-weight: 600;
   color: #000000;
+  cursor: pointer;
+  &: hover {
+  background: #e6f0e6; 
+  }
 `;
 
 export const TextareaWrapper = styled('textarea')`
