@@ -88,7 +88,6 @@ export const EditProducts = () => {
   }, [dispatch, id]);
 
   const handleSubmit = (values) => {
-    console.log(values);
     let data = new FormData();
     data.append('picture', values.picture);
     data.append('choice', values.choice);

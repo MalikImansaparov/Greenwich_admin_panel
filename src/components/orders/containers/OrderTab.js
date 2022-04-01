@@ -110,18 +110,21 @@ export const OrderTab = () => {
     const rowData = completedOrders.map((order) => {
         return {
             id: order?.id,
-            user: order?.first_name,
+            first: order?.first_name,
+            last: order?.last_name,
             total: order?.total_price,
             number: order?.phone_number,
             address: order?.address,
             data: order?.date_created,
+            courier: order?.courier.user.first_name,
         };
     });
 
     const rowDatas = data.map((order) => {
         return {
             id: order?.id,
-            user: order?.first_name,
+            first: order?.first_name,
+            last: order?.last_name,
             total: order?.total_price,
             number: order?.phone_number,
             address: order?.address,
@@ -158,11 +161,17 @@ export const OrderTab = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-            width: 150,
+            width: 190,
             renderCell: (params) => {
-                return <div>{params.row.user}</div>;
+                return (
+                    <div sx={{ display: 'flex' }}>
+                        <TextAdjust>{params.row.first}</TextAdjust>
+                        <TextAdjust> {params.row.last}</TextAdjust>
+                    </div>
+                )
             },
         },
+
         {
             field: 'number',
             headerName: 'Номер получ.',
@@ -171,20 +180,21 @@ export const OrderTab = () => {
                 return <div>{params.row.number}</div>;
             },
         },
-        {
-            field: 'total',
-            headerName: 'Сумма',
-            width: 80,
-            renderCell: (params) => {
-                return <div>{params.row.total}</div>;
-            },
-        },
+
         {
             field: 'address',
             headerName: 'Адрес',
-            width: 180,
+            width: 140,
             renderCell: (params) => {
                 return <div>{params.row.address}</div>;
+            },
+        },
+        {
+            field: 'total',
+            headerName: 'Сумма',
+            width: 70,
+            renderCell: (params) => {
+                return <div>{params.row.total}</div>;
             },
         },
         {
@@ -243,7 +253,6 @@ export const OrderTab = () => {
                                     sx={{ cursor: 'pointer', fontSize: '28px', }}
                                     onClick={() => handleDelete(params.row.id)}
                                 />
-
                     </>
                 );
             },
@@ -262,15 +271,20 @@ export const OrderTab = () => {
         {
             field: 'user',
             headerName: 'Получатель',
-            width: 230,
+            width: 200,
             renderCell: (params) => {
-                return <TextAdjust>{params.row.user}</TextAdjust>;
+                return (
+                    <div sx={{ display: 'flex' }}>
+                        <TextAdjust>{params.row.first}</TextAdjust>
+                        <TextAdjust> {params.row.last}</TextAdjust>
+                    </div>
+                )
             },
         },
         {
             field: 'number',
             headerName: 'Номер получателя',
-            width: 200,
+            width: 150,
             renderCell: (params) => {
                 return <TextAdjust>{params.row.number}</TextAdjust>;
             },
@@ -278,7 +292,7 @@ export const OrderTab = () => {
         {
             field: 'data',
             headerName: 'Дата',
-            width: 200,
+            width: 130,
             renderCell: (params) => {
                 return <TextAdjust>{params.row.data.split('T').slice(0, 1)}</TextAdjust>;
             },
@@ -286,7 +300,7 @@ export const OrderTab = () => {
         {
             field: 'address',
             headerName: 'Адрес',
-            width: 200,
+            width: 170,
             renderCell: (params) => {
                 return <TextAdjust>{params.row.address}</TextAdjust>;
             },
@@ -294,9 +308,17 @@ export const OrderTab = () => {
         {
             field: 'total',
             headerName: 'Сумма',
-            width: 100,
+            width: 80,
             renderCell: (params) => {
                 return <NumberAdjust>{params.row.total}</NumberAdjust>;
+            },
+        },
+        {
+            field: 'courier',
+            headerName: 'Курьер',
+            width: 200,
+            renderCell: (params) => {
+                return <NumberAdjust>{params.row.courier}</NumberAdjust>;
             },
         },
     ];

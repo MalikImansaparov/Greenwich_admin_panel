@@ -17,6 +17,7 @@ import CircularPreloader from "../../../preloader";
 import {GoBack} from "../../../goBack";
 import {InputWrapper} from "../../../products/InputWrapper";
 import {LabelWrapper} from "../../../employers/InputWrapper";
+import {Divider} from "@mui/material";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -46,6 +47,7 @@ const validationSchema = Yup.object().shape({
     .min(9, 'Не правилный номер')
     .max(14, 'Не правилный номер'),
   total_price: Yup.string().required('Укажите цену'),
+    price_with_discount: Yup.string().required('Укажите скидку'),
 
 });
 
@@ -62,11 +64,13 @@ export const EditOrders = () => {
     };
   }, [dispatch, id]);
 
-  const handleSubmit = (values) => {
-    dispatch(AsyncEditOrder({ values, id }));
-    // setSubmitting(false);
-    // navigate(-1);
+  const handleSubmit = (values,{setSubmitting}) => {
+    dispatch(AsyncEditOrder(values, id));
+    dispatch(clearOrders());
+    setSubmitting(false);
+     navigate(-1);
   };
+
 
 
   const initialValues = {
@@ -110,7 +114,7 @@ export const EditOrders = () => {
             <Item
               sx={{
                 width: '1060px',
-                height: '1000px',
+                height: '800px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -123,13 +127,13 @@ export const EditOrders = () => {
                   validationSchema={validationSchema}
                 >
                   {({
-                    handleSubmit,
                     handleChange,
                     handleBlur,
                     values,
                     errors,
                     touched,
                     isSubmitting,
+                        handleSubmit,
                   }) => (
                     <>
                       <form onSubmit={handleSubmit}>
@@ -212,35 +216,36 @@ export const EditOrders = () => {
                             </Typography>
                           )}
                         </Box>
-                        <Box sx={{ mb: '30px' }}>
-                          <LabelWrapper>Сумма</LabelWrapper>
-                          <InputWrapper
-                            name="total_price"
-                            onChange={handleChange}
-                            type="text"
-                            value={values.total_price}
-                          />
-                          {errors.total_price &&
-                            touched.total_price && (
-                              <Typography
-                                sx={{
-                                  textAlign: 'left',
-                                  fontSize: '13px',
-                                  color: 'error.main',
-                                  mt: '12px',
-                                  ml: '14px',
-                                }}
-                              >
-                                {errors.total_price}
-                              </Typography>
-                            )}
-                        </Box>
+                        {/*<Box sx={{ mb: '30px' }}>*/}
+                        {/*  <LabelWrapper>Сумма</LabelWrapper>*/}
+                        {/*  <InputWrapper*/}
+                        {/*    name="total_price"*/}
+                        {/*    onChange={handleChange}*/}
+                        {/*    type="number"*/}
+                        {/*    value={values.total_price}*/}
+                        {/*    onBlur={handleBlur}*/}
+                        {/*  />*/}
+                        {/*  {errors.total_price &&*/}
+                        {/*    touched.total_price && (*/}
+                        {/*      <Typography*/}
+                        {/*        sx={{*/}
+                        {/*          textAlign: 'left',*/}
+                        {/*          fontSize: '13px',*/}
+                        {/*          color: 'error.main',*/}
+                        {/*          mt: '12px',*/}
+                        {/*          ml: '14px',*/}
+                        {/*        }}*/}
+                        {/*      >*/}
+                        {/*        {errors.total_price}*/}
+                        {/*      </Typography>*/}
+                        {/*    )}*/}
+                        {/*</Box>*/}
                         <Box sx={{ mb: '30px' }}>
                           <LabelWrapper>Скидка</LabelWrapper>
                           <InputWrapper
                             name="price_with_discount"
                             onChange={handleChange}
-                            type="string"
+                            type="number"
                             value={values.price_with_discount}
                             onBlur={handleBlur}
                           />
@@ -278,6 +283,7 @@ export const EditOrders = () => {
           </Box>
         </Box>
       </Box>
+        <Divider sx={{ width: '1080px', my: '30px' }} />
     </Box>
   );
 };

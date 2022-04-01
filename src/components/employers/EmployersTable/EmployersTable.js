@@ -154,11 +154,13 @@ export const EmployersTable = () => {
     navigate(`${id}`);
   };
 
-  // const roleColors = {
-  //   админ: 'red',
-  //   флорист: 'black',
-  //   курьер: 'blue',
-  // };
+  const roleColors = {
+    админ: 'red',
+    флорист: 'green',
+    курьер: 'blue',
+  };
+  const roles = Object.keys(roleColors)
+
 
   const columns = [
     {
@@ -193,29 +195,26 @@ export const EmployersTable = () => {
     {
       field: 'role',
       headerName: 'Роль',
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         return (
           <>
-            {params.row.role}
-            {/* {Object.entries(roleColors).map(([key, value]) => { */}
-            {/*{params.role.map((role, index) => {*/}
-            {/*  return (*/}
-            {/*<Box*/}
-            {/*   sx={{*/}
-              //   // background: key === params.row.role ? value : null,
-              //   borderRadius: '12px',
-              //   padding: '5px 10px',
-              //   cursor: 'pointer',
-              // }}
-            {/*>*/}
-            {/*  if(role === 'админ'){*/}
-            {/*    <Box sx={{background:'red'}}>*/}
-            {/*    {params.row.role}*/}
-            {/*    </Box>*/}
-            {/*  }*/}
-            {/*</Box>*/}
-            {/*  )})}*/}
+            {
+              roles.map((role, index) => {
+              return (
+                  <Box
+                      key={index}
+                      sx={{
+                        borderRadius: '12px',
+                        padding: '5px 10px',
+                        cursor: 'pointer',
+                        background: roleColors[role]
+                      }}
+                  >
+                    {params.row.role}
+                  </Box>
+              );
+            })}
           </>
         );
       },

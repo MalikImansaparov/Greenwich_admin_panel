@@ -1,18 +1,15 @@
 import {
-    CLEAR_ORDER,
-    CLEAR_PRODUCT, COMPLETED_ORDERS, CONFIRM_ORDERS, DELETE_ORDERS, GET_ORDER,
-    GET_PRODUCT,
+    CLEAR_ORDER, COMPLETED_ORDERS, CONFIRM_ORDERS, DELETE_ORDERS, GET_ORDER,
     ORDER_FAILED,
     ORDER_STARTED,
     ORDER_SUCCESS, UPDATE_ORDER,
-    UPDATE_PRODUCT
 } from "../constants";
 
 const initialState = {
     orders: [],
-    completedOrders: [],
+    completed: [],
     loading: 'false',
-    order: [],
+    order: null,
 }
 export const orderReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -37,7 +34,7 @@ export const orderReducer = (state = initialState, action) => {
         case COMPLETED_ORDERS:
             return {
                 ...state,
-                completedOrders: action.payload,
+                completed: action.payload,
             };
         case GET_ORDER:
             return {

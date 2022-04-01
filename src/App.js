@@ -17,8 +17,8 @@ import { ContactsAddCart } from "./components/contacts/ContactAdd/ContactAdd";
 import { AboutEdit } from "./components/contacts/ContactsEditCart/AboutEdit";
 import { EmployersTable } from "./components/employers/EmployersTable/EmployersTable";
 import { AddEmployers } from "./components/employers/addEployers/AddEployers";
-import { EditEmployers } from "./components/employers/EditEmployers/EditEmployers";
 import {EditOrders} from "./components/orders/view/EditOrders/EditOrders";
+import {EditEmployersTab} from "./components/employers/EditEmployers/EditEmployersTab";
 
 const PrivateRoute = () => {
   return localStorage.getItem("role") !== "Суперадмин" ? (
@@ -41,7 +41,7 @@ const App = () => {
             <Route index element={<EmployersTable />} />
             <Route path="" element={<PrivateRoute />}>
               <Route path="add" element={<AddEmployers />} />
-              <Route path=":id" element={<EditEmployers />} />
+              <Route path=":id" element={<EditEmployersTab />} />
             </Route>
           </Route>
           <Route path="products" element={<Products />}>

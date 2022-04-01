@@ -76,10 +76,10 @@ export const AsyncGetOrder = (id) => {
   };
 };
 
-export const AsyncEditOrder = (formData, id) => {
+export const AsyncEditOrder = (values, id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {formData});
+      const {data} = await axiosInstance.patch(`orders/order/${id}/`, values);
       dispatch( editOrders(data));
     } catch (e) {
       console.log('error:', e);
