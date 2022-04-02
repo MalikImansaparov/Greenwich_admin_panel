@@ -42,7 +42,6 @@ export const Header = () => {
           <span style={{ marginLeft: '10px' }}>{name}</span>
           <span>{surename}</span>
         </Typography>
-        <img src={avatar} alt="avatar" sx={{ mt: '20px' }} />
       </Box>
     </Box>
   );

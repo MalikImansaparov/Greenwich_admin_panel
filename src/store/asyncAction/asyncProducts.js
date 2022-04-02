@@ -8,6 +8,7 @@ import {
   updateProduct,
 } from "../actionType/actionTypes";
 import axiosInstance from "../../api/utils/axiosInstance";
+import {toast} from "react-toastify";
 
 export const AsyncAllProducts = () => {
   return async (dispatch) => {
@@ -21,6 +22,7 @@ export const AsyncAllProducts = () => {
     }
   };
 };
+
 export const AsyncGetProduct = (id) => {
   return async (dispatch) => {
     try {
@@ -33,47 +35,57 @@ export const AsyncGetProduct = (id) => {
 };
 
 export const AsyncAddProduct = (formData) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.post(
-        "products/plant-care/",
+  return (dispatch) => {
+      toast.promise(
+     axiosInstance.post(
+        "products/plant-care/"),
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+          }}, {
+           pending: 'Добавление...',
+            success: 'Успешно добавлен',
+          error: 'Возникла ошибка'
+      }).then((data) => {
       dispatch(addProduct(data));
-    } catch (e) {
-      console.log("error:", e);
-    }
-  };
+      }).catch((error) => {
+            console.log('error:', error);
+          })
+  }
 };
 
 export const AsyncEditProduct = (formData, id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.patch(
-        `products/plant-care/${id}/`,
+  return (dispatch) => {
+      toast.promise(
+     axiosInstance.patch(
+        `products/plant-care/${id}/`),
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      dispatch(updateProduct(data));
-    } catch (e) {
-      console.log("error:", e);
-    }
+          }}, {
+           pending: 'Добавление...',
+           success: 'Успешно добавлен',
+           error: 'Возникла ошибка'
+         }).then((data) => {
+        dispatch(updateProduct(data));
+    })
+        .catch((error) => {
+          console.log('error:', error);
+        })
   };
 };
 
 export const AsyncDeleteProduct = (id) => {
   return (dispatch) => {
+      toast.promise(
     axiosInstance
-      .delete(`products/plant-care/${id}`)
+      .delete(`products/plant-care/${id}`), {
+            pending: 'Удаление...',
+            success: 'Успешно удалено',
+            error: 'Возникла ошибка'
+          })
       .then(() => {
         dispatch(deleteProduct(id));
         dispatch(AsyncAllProducts());

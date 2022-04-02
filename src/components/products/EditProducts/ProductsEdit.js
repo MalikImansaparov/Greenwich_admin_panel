@@ -8,11 +8,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import {
-  InputWrap,
-  InputWrapper,
-  LabelWrapper,
-  PhotoWrap,
-  SelectWrapper,
+    InputWrap,
+    InputWrapper,
+    LabelWrapper,
+    PhotoWrap,
+    SelectWrapper, TextareaWrapper,
 } from '../InputWrapper';
 import { Item } from '../../../style';
 import { GoBack } from '../../goBack';
@@ -269,7 +269,7 @@ export const EditProducts = () => {
                       </Typography>
                     )}
                   </Box>
-                  {/* <Box sx={{ mb: '30px' }}>
+                  <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Описания</LabelWrapper>
               <TextareaWrapper
                 name="password"
@@ -291,7 +291,7 @@ export const EditProducts = () => {
                   {errors.description}
                 </LabelWrapper>
               )}
-            </Box> */}
+            </Box>
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Количество</LabelWrapper>
                     <InputWrapper

@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncLogin } from '../../../store/asyncAction/asyncAuth/login';
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const TextFieldsWrapper = styled(TextField)`
   width: 320px;
@@ -77,7 +79,9 @@ export const SignInAdmin = () => {
     onSubmit: (values, { setSubmitting }) => {
       dispatch(asyncLogin(values));
       setSubmitting(false);
-      navigate('/home');
+      if (isAuthenticated){
+        navigate('/home');
+      }
     },
     validationSchema,
   });
@@ -86,7 +90,12 @@ export const SignInAdmin = () => {
     if(isAuthenticated) {
       return <Navigate to="/home" />
     }
+    else {
+      navigate('/auth');
+    }
   },[])
+
+  const signIn = () => toast('gjkd')
 
   return (
     <FormControl>
@@ -152,7 +161,18 @@ export const SignInAdmin = () => {
             </Typography>
           )}
         </Box>
-        <CustomButton type="submit" disabled={isSubmitting}>
+        <ToastContainer
+            position="top-left"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
+        <CustomButton type="submit" disabled={isSubmitting} onClick={signIn}>
           Войти
         </CustomButton>
       </form>

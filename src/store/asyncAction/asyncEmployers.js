@@ -1,10 +1,9 @@
 import {
   addEmployers, deleteEmployers, employersFail, employersStart, getCourier,
-  getEmployers, getProfile,
-  ordersFail,
-  ordersStart, updateEmployers,
+  getEmployers, getProfile, updateEmployers,
 } from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
+import  {toast}  from "react-toastify";
 
 export const AsyncGetEmployers = () => {
   return async (dispatch) => {
@@ -20,15 +19,21 @@ export const AsyncGetEmployers = () => {
 };
 
 export const AsyncAddEmployers = (values) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.post(`employee-register`, values);
-      console.log(data);
-      dispatch(addEmployers(data));
-      dispatch(AsyncGetEmployers());
-    } catch (e) {
-      console.log('error:', e);
-    }
+  return (dispatch) => {
+    toast.promise(
+     axiosInstance.post(`employee-register`), values,
+         {
+           pending: 'Добавление...',
+           success: 'Успешно добавлен',
+           error: 'Возникла ошибка'
+         })
+         .then((data) => {
+           dispatch(addEmployers(data));
+           dispatch(AsyncGetEmployers());
+         })
+         .catch((error) => {
+           console.log('error:', error);
+         })
   };
 };
 
@@ -44,28 +49,40 @@ export const AsyncGetProfile = (id) => {
 };
 
 export const AsyncEditEmployers = ({ values, id }) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.patch(`all-users/${id}/`, values);
-      dispatch(updateEmployers(data));
-    } catch (e) {
-      console.log('error:', e);
-    }
-  };
+  return (dispatch) => {
+    toast.promise(
+    axiosInstance.patch(`all-users/${id}/`), values,
+        {
+          pending: 'Редактирование...',
+          success: 'Успешно редактировано',
+          error: 'Возникла ошибка'
+        }).then((data) => {
+        dispatch(updateEmployers(data));
+      })
+    .catch((error) => {
+      console.log('error:', error);
+    })
+  }
 };
 
 export const AsyncDeleteEmployers = (id) => {
   return (dispatch) => {
-    axiosInstance
-      .delete(`all-users/${id}`)
-      .then(() => {
-        dispatch(deleteEmployers(id));
-        dispatch(AsyncGetEmployers());
-      })
-      .catch((error) => {
-        console.log('error:', error);
-      });
-  };
+    toast.promise(
+        axiosInstance
+            .delete(`all-users/${id}`),
+    {
+          pending: 'Удаление...',
+          success: 'Продукт удален',
+          error: 'Возникла ошибка'
+    })
+            .then(() => {
+              dispatch(deleteEmployers(id));
+              dispatch(AsyncGetEmployers());
+            })
+            .catch((error) => {
+              console.log('error:', error);
+            })
+  }
 };
 
 export const AsyncGetCourier = () => {

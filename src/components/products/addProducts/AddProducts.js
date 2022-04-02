@@ -221,7 +221,7 @@ export const AddProducts = () => {
                 </Typography>
               )}
             </Box>
-            {/* <Box sx={{ mb: '30px' }}>
+             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Описания</LabelWrapper>
               <TextareaWrapper
                 name="description"
@@ -243,7 +243,7 @@ export const AddProducts = () => {
                   {errors.description}
                 </LabelWrapper>
               )}
-            </Box> */}
+            </Box>
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Количество</LabelWrapper>
               <InputWrapper

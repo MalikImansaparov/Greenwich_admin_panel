@@ -42,6 +42,7 @@ const CartItem = styled(Item)`
   border-radius: 20px;
   margin-left: 40px;
   cursor: pointer;
+  padding-top: 0;
   &: hover {
     transform: scale(1.1);
     transition: transform 0.9s;

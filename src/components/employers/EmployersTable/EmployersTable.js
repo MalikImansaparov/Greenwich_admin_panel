@@ -18,6 +18,8 @@ import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
 import avatar from '../../../assets/img/avater.svg';
 import { updateEmployers } from '../../../store/actionType/actionTypes';
+import {ToastContainer} from "react-toastify";
+import  {toast} from "react-toastify";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -106,6 +108,15 @@ export const EmployersTable = () => {
   const isFetching = useSelector((state) => state.employers.loading);
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(employersData);
+  const [name, setName] = useState(localStorage.getItem('firstName'));
+  const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+
+  useEffect(() => {
+    if (name.length || surename.length === 0) {
+      setName('Тимур ');
+      setSurename('Одинцев');
+    }
+  }, []);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -148,6 +159,10 @@ export const EmployersTable = () => {
 
   const handleDelete = (id) => {
     dispatch(AsyncDeleteEmployers(id));
+    toast.success('Успешно удалено', {
+      position: "top-right",
+      autoClose: 1000,
+    });
   };
 
   const handleClick = (id) => {
@@ -160,6 +175,9 @@ export const EmployersTable = () => {
     курьер: 'blue',
   };
   const roles = Object.keys(roleColors)
+
+  // const roles = Array.from(rowData.role)
+
 
 
   const columns = [
@@ -263,6 +281,17 @@ export const EmployersTable = () => {
 
   return (
     <Box>
+      <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+      />
       <Box
         sx={{
           display: 'flex',
@@ -294,12 +323,9 @@ export const EmployersTable = () => {
               mr: '5px',
             }}
           >
-            {' '}
-            Тимур Одинцев
-            {/*<span>{firstName}</span>*/}
-            {/*   <span>{lastName}</span>*/}
+            <span>{name}</span>
+               <span>{surename}</span>
           </Typography>
-          <img src={avatar} alt="avatar" sx={{ mt: '20px' }} />
         </Box>
       </Box>
       <Box

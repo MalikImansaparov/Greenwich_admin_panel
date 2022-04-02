@@ -1,5 +1,7 @@
+import React from 'react'
 import { AuthApi } from '../../../api';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../../constants';
+import { Navigate} from 'react-router';
 
 const requestLogin = () => {
   return {
@@ -8,7 +10,7 @@ const requestLogin = () => {
   };
 }
 
-const loginSuccess = (tokens) => {
+export const loginSuccess = (tokens) => {
   return {
     type: LOGIN_SUCCESS,
     isFetching: false,
@@ -30,10 +32,16 @@ const loginError = (errorMessage) => {
 };
 
 export const asyncLogin =
+
   ({ phone_number, password }) =>
   (dispatch) => {
     dispatch(requestLogin());
-    AuthApi.login(phone_number, password)
+    toast.promise(
+    AuthApi.login(phone_number, password),{
+               pending: 'Добавление...',
+               success: 'Успешно добавлен',
+               error: 'Возникла ошибка'
+             })
       .then(
         ({ reason, access, refresh, last_name, first_name, is_superuser }) => {
           localStorage.setItem('access', access);

@@ -17,6 +17,7 @@ import {
 } from '../../../store/asyncAction/asyncEmployers';
 import BreadCrumb from '../../breadCrumbs';
 import { Header } from '../../header/header';
+import {toast} from "react-toastify";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -57,13 +58,16 @@ export const AddEmployers = () => {
       last_name: '',
       phone_number: '',
       role: '',
-      courier_allowance: '',
       password: '',
       confirmPassword: '',
     },
     onSubmit: (values, { setSubmitting }) => {
       dispatch(AsyncAddEmployers(values));
       setSubmitting(false);
+      toast.success('Успешно сохранено', {
+        position: "top-right",
+        autoClose: 1000,
+      })
       navigate(-1);
     },
     validationSchema,

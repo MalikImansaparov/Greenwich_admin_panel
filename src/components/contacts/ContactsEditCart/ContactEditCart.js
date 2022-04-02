@@ -25,6 +25,7 @@ import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
 import {clearContact, clearProduct} from '../../../store/actionType/actionTypes';
 import {AsyncGetProduct} from "../../../store/asyncAction/asyncProducts";
+import {toast} from "react-toastify";
 
 const PhotoWrapper = styled('span')`
   width: 230px;
@@ -93,6 +94,10 @@ export const ContactsEditCart = () => {
     data.append('closed_from', values.close);
     dispatch(AsyncEditContact(data, id));
     dispatch(clearContact());
+    toast.success('Успешно сохранено', {
+      position: "top-right",
+      autoClose: 1000,
+    });
   };
 
   const initialValues = {
@@ -123,7 +128,7 @@ export const ContactsEditCart = () => {
 
   return (
     <Box>
-      <Item sx={{ width: '1060px' }}>
+      <Item sx={{ width: '1060px'}}>
         <FormControl>
           <Formik
             initialValues={initialValues}

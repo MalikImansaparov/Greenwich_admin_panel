@@ -91,6 +91,15 @@ export const OrderTab = () => {
     const [rows, setRows] = React.useState(isOrders);
     const [checked, setChecked] = React.useState(false);
     const data = Array.from(rows)
+    const [name, setName] = useState(localStorage.getItem('firstName'));
+    const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+
+    useEffect(() => {
+        if (name.length || surename.length === 0) {
+            setName('Тимур ');
+            setSurename('Одинцев');
+        }
+    }, []);
 
        const requestSearch = (searchValue) => {
         setSearchText(searchValue);
@@ -116,7 +125,8 @@ export const OrderTab = () => {
             number: order?.phone_number,
             address: order?.address,
             data: order?.date_created,
-            courier: order?.courier.user.first_name,
+            name: order?.courier.user.first_name,
+            surename: order?.courier.user.last_name,
         };
     });
 
@@ -306,19 +316,24 @@ export const OrderTab = () => {
             },
         },
         {
+            field: 'courier',
+            headerName: 'Курьер',
+            width: 200,
+            renderCell: (params) => {
+                return (
+                    <div sx={{ display: 'flex' }}>
+                        <TextAdjust>{params.row.name}</TextAdjust>
+                        <TextAdjust> {params.row.surename}</TextAdjust>
+                    </div>
+                )
+            },
+        },
+        {
             field: 'total',
             headerName: 'Сумма',
             width: 80,
             renderCell: (params) => {
                 return <NumberAdjust>{params.row.total}</NumberAdjust>;
-            },
-        },
-        {
-            field: 'courier',
-            headerName: 'Курьер',
-            width: 200,
-            renderCell: (params) => {
-                return <NumberAdjust>{params.row.courier}</NumberAdjust>;
             },
         },
     ];
@@ -378,10 +393,8 @@ export const OrderTab = () => {
                         mr: '5px',
                     }}
                 >
-                    {' '}
-                    Тимур Одинцев
-                    {/*<span>{firstName}</span>*/}
-                    {/*   <span>{lastName}</span>*/}
+                    <span>{name}</span>
+                       <span>{surename}</span>
                 </Typography>
             </Box>
         </Box>

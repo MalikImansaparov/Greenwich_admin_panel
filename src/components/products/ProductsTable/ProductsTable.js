@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import Box from "@mui/material/Box";
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {ItemWrapper} from "../../../style";
 import Typography from "@mui/material/Typography";
@@ -91,6 +91,15 @@ export const ProductsTable = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = React.useState('');
   const [rows, setRows] = React.useState(productData);
+  const [name, setName] = useState(localStorage.getItem('firstName'));
+  const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+
+  useEffect(() => {
+    if (name.length || surename.length === 0) {
+      setName('Тимур ');
+      setSurename('Одинцев');
+    }
+  }, []);
 
   const requestSearch = (searchValue) => {
     setSearchText(searchValue);
@@ -247,12 +256,9 @@ export const ProductsTable = () => {
               mr: '5px',
             }}
           >
-            {' '}
-            Тимур Одинцев
-            {/*<span>{firstName}</span>*/}
-            {/*   <span>{lastName}</span>*/}
+            <span>{name}</span>
+               <span>{surename}</span>
           </Typography>
-          <img src={avatar} alt="avatar" sx={{ mt: '20px' }} />
         </Box>
       </Box>
       <Box

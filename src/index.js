@@ -7,6 +7,7 @@ import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import theme from './theme';
 import {Provider} from "react-redux";
 import {store} from "./store/store";
+import {ToastContainer} from "react-toastify";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Provider store={store}>
               <ThemeProvider theme={theme} >
                   <CssBaseline />
+
                   <App/>
               </ThemeProvider>
       </Provider>

@@ -55,7 +55,7 @@ export default function StatisticFlorist() {
     };
 
     return (
-        <Item sx={{marginTop: '50px', width: '1060px'}}>
+        <Item sx={{marginTop: '50px', width: '1060px', paddingTop: 0}}>
             <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}
                        sx={{ borderRadius: '20px 20px 0 0 '}}>
                 <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: '10px 30px'}}>

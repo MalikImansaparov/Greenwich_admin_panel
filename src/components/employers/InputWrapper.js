@@ -9,7 +9,7 @@ export const InputWrapper = styled('input')`
   outline: none;
   padding: 10px 20px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000000
 `;
 

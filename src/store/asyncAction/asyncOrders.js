@@ -7,6 +7,7 @@ import {
   ordersStart, reciveOrder,
 } from '../actionType/actionTypes';
 import axiosInstance from "../../api/utils/axiosInstance";
+import {toast} from "react-toastify";
 
 export const AsyncOrders = () => {
   return async (dispatch) => {
@@ -43,25 +44,37 @@ export const AsyncCompletedOrders= () => {
 };
 
 export const AsyncDeleteOrder = (id) => {
-  return async (dispatch) => {
-    try {
-      const {data} = await axiosInstance.delete(`orders/order/${id}`);
-      dispatch(deleteOrders(data));
-      dispatch(getOrders());
-    } catch (e) {
-      console.log('error:', e);
+  return (dispatch) => {
+      toast.promise(
+ axiosInstance.delete(`orders/order/${id}`),
+    {
+      pending: 'Удаление...',
+          success: 'Успешно удалено',
+        error: 'Возникла ошибка'
     }
+ ).then((data) => {
+    dispatch(deleteOrders(data));
+    dispatch(getOrders());
+    }).catch((error) => {
+          console.log('error:', error);
+        })
   };
 };
 
 export const AsyncConfirmOrder = (confirm, id) => {
-  return async (dispatch) => {
-    try {
-      const {data} = await axiosInstance.patch(`orders/order/${id}/`, {confirm});
-      dispatch(confrimOrders(data));
-    } catch (e) {
-      console.log('error:', e);
-    }
+  return  (dispatch) => {
+      toast.promise(
+  axiosInstance.patch(`orders/order/${id}/`), {confirm},
+      {
+        pending: 'Подверждение...',
+        success: 'Успешно подверждено',
+        error: 'Возникла ошибка'
+      })
+      .then((data) => {
+        dispatch(confrimOrders(data));
+    }).catch((error) => {
+          console.log('error:', error);
+        })
   };
 };
 
@@ -77,12 +90,18 @@ export const AsyncGetOrder = (id) => {
 };
 
 export const AsyncEditOrder = (values, id) => {
-  return async (dispatch) => {
-    try {
-      const {data} = await axiosInstance.patch(`orders/order/${id}/`, values);
+  return (dispatch) => {
+      toast.promise(
+  axiosInstance.patch(`orders/order/${id}/`), values,
+      {
+        pending: 'Редактирование...',
+        success: 'Успешно редактировано',
+        error: 'Возникла ошибка'
+      }).then((data) => {
       dispatch( editOrders(data));
-    } catch (e) {
-      console.log('error:', e);
-    }
+    })
+        .catch((error) => {
+          console.log('error:', error);
+        })
   };
 };

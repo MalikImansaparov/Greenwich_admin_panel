@@ -5,6 +5,7 @@ export const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
     textAlign: 'center',
     borderRadius: '20px',
+    paddingTop: '20px'
 }));
 
 export const ItemWrapper = styled(Item)`
@@ -14,6 +15,7 @@ export const ItemWrapper = styled(Item)`
  height: 550px;
  width: 1060px;
  border-radius: 20px;
- margin-top: 38px;                  
+ margin-top: 38px; 
+ padding-top: 0;                 
 `
 

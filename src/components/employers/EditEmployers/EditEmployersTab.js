@@ -10,6 +10,7 @@ import {EditPassword} from "./EditPassword";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import BreadCrumb from "../../breadCrumbs";
+import {Header} from "../../header/header";
 
 export const EditEmployersTab = () => {
     const [value, setValue] = useState(0);
@@ -50,6 +51,7 @@ export const EditEmployersTab = () => {
         <Box>
             <Box sx={{display: 'flex', justifyContent: 'center'}}>
                 <Box>
+                    <Header/>
                     <Box sx={{display: 'flex', mb: '20px'}}>
                         <BreadCrumb />
                     </Box>

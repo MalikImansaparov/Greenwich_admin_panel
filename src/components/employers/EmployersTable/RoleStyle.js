@@ -23,7 +23,6 @@ export const RoleStyle = () => {
                    {params.row.role}
                 </Box>
 );
-
          })}
         </>
     );

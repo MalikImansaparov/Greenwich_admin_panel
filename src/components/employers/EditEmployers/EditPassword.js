@@ -10,6 +10,7 @@ import {InputWrapper, LabelWrapper,} from "../InputWrapper";
 import {Item} from "../../../style";
 import {validationSchema} from "../../signinAuth/validateForm";
 import {GoBack} from "../../goBack";
+import {toast} from "react-toastify";
 
 const CustomButton = styled(Button)`
   height: 52px;
@@ -32,7 +33,6 @@ const CustomButton = styled(Button)`
 `;
 
 export const EditPassword = () => {
-
     const navigate = useNavigate()
     const { handleSubmit, handleChange, handleBlur, values, errors,touched, isSubmitting } = useFormik({
         initialValues: {
@@ -40,7 +40,10 @@ export const EditPassword = () => {
             confirmPassword: '',
         },
         onSubmit: () => {
-            navigate()
+            toast.success('Успешно сохранено', {
+                position: "top-right",
+                autoClose: 1000,
+            })
         },
         validationSchema: validationSchema
     });

@@ -47,7 +47,7 @@ const validationSchema = Yup.object().shape({
         .required('Номер обязателный')
         .min(9, 'Не правилный номер')
         .max(14, 'Не правилный номер'),
-    florist_allowance: Yup.string().required('Логин обязателный'),
+    // florist_allowance: Yup.string().required('Логин обязателный'),
     role: Yup.string().required('Роль обязателный'),
     salary: Yup.number().required('зарплата обязателный'),
 });
@@ -76,9 +76,9 @@ export const EditEmployers = () => {
         last_name: !profile?.user.last_name ? 'Одинцев' : profile?.user.last_name,
         phone_number: profile?.user.phone_number,
         role: profile?.user.role,
-        florist_allowance: profile?.florist_allowance,
+        // florist_allowance: profile?.florist_allowance,
         salary: profile?.salary,
-        password: profile?.password,
+        // password: profile?.password,
     };
 
     if (!profile) {
@@ -102,18 +102,13 @@ export const EditEmployers = () => {
     }
 
     return (
-        <Box>
-            <Header />
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <Box>
-                    <Box sx={{ display: 'flex', mb: '20px' }}>
-                        <BreadCrumb />
-                    </Box>
                     <Box sx={{ textAlign: 'center' }}>
                         <Item
                             sx={{
                                 width: '1060px',
-                                height: '1000px',
+                                height: '800px',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -266,52 +261,52 @@ export const EditEmployers = () => {
                                                         </Typography>
                                                     )}
                                                 </Box>
-                                                <Box sx={{ mb: '30px' }}>
-                                                    <LabelWrapper>Надбавка</LabelWrapper>
-                                                    <InputWrapper
-                                                        name="florist_allowance"
-                                                        onChange={handleChange}
-                                                        type="text"
-                                                        value={values.florist_allowance}
-                                                    />
-                                                    {errors.florist_allowance &&
-                                                    touched.florist_allowance && (
-                                                        <Typography
-                                                            sx={{
-                                                                textAlign: 'left',
-                                                                fontSize: '13px',
-                                                                color: 'error.main',
-                                                                mt: '12px',
-                                                                ml: '14px',
-                                                            }}
-                                                        >
-                                                            {errors.florist_allowance}
-                                                        </Typography>
-                                                    )}
-                                                </Box>
-                                                <Box sx={{ mb: '30px' }}>
-                                                    <LabelWrapper>Пароль</LabelWrapper>
-                                                    <InputWrapper
-                                                        name="password"
-                                                        onChange={handleChange}
-                                                        type="string"
-                                                        // value={values.password.split('$$').slice(1, 2).join()}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    {errors.password && touched.password && (
-                                                        <LabelWrapper
-                                                            sx={{
-                                                                textAlign: 'left',
-                                                                fontSize: '13px',
-                                                                color: 'error.main',
-                                                                mt: '12px',
-                                                                ml: '14px',
-                                                            }}
-                                                        >
-                                                            {errors.password}
-                                                        </LabelWrapper>
-                                                    )}
-                                                </Box>
+                                                {/*<Box sx={{ mb: '30px' }}>*/}
+                                                {/*    <LabelWrapper>Надбавка</LabelWrapper>*/}
+                                                {/*    <InputWrapper*/}
+                                                {/*        name="florist_allowance"*/}
+                                                {/*        onChange={handleChange}*/}
+                                                {/*        type="text"*/}
+                                                {/*        value={values.florist_allowance}*/}
+                                                {/*    />*/}
+                                                {/*    {errors.florist_allowance &&*/}
+                                                {/*    touched.florist_allowance && (*/}
+                                                {/*        <Typography*/}
+                                                {/*            sx={{*/}
+                                                {/*                textAlign: 'left',*/}
+                                                {/*                fontSize: '13px',*/}
+                                                {/*                color: 'error.main',*/}
+                                                {/*                mt: '12px',*/}
+                                                {/*                ml: '14px',*/}
+                                                {/*            }}*/}
+                                                {/*        >*/}
+                                                {/*            {errors.florist_allowance}*/}
+                                                {/*        </Typography>*/}
+                                                {/*    )}*/}
+                                                {/*</Box>*/}
+                                                {/*<Box sx={{ mb: '30px' }}>*/}
+                                                {/*    <LabelWrapper>Пароль</LabelWrapper>*/}
+                                                {/*    <InputWrapper*/}
+                                                {/*        name="password"*/}
+                                                {/*        onChange={handleChange}*/}
+                                                {/*        type="string"*/}
+                                                {/*        // value={values.password.split('$$').slice(1, 2).join()}*/}
+                                                {/*        onBlur={handleBlur}*/}
+                                                {/*    />*/}
+                                                {/*    {errors.password && touched.password && (*/}
+                                                {/*        <LabelWrapper*/}
+                                                {/*            sx={{*/}
+                                                {/*                textAlign: 'left',*/}
+                                                {/*                fontSize: '13px',*/}
+                                                {/*                color: 'error.main',*/}
+                                                {/*                mt: '12px',*/}
+                                                {/*                ml: '14px',*/}
+                                                {/*            }}*/}
+                                                {/*        >*/}
+                                                {/*            {errors.password}*/}
+                                                {/*        </LabelWrapper>*/}
+                                                {/*    )}*/}
+                                                {/*</Box>*/}
                                                 <Box
                                                     sx={{
                                                         display: 'flex',
@@ -332,6 +327,6 @@ export const EditEmployers = () => {
                     </Box>
                 </Box>
             </Box>
-        </Box>
+
     );
 };

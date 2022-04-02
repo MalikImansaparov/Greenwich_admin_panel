@@ -1,4 +1,4 @@
-import Grid from '@mui/material/Grid';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
@@ -7,8 +7,7 @@ import { Item } from '../../../style';
 import { styled } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import about from '../../../assets/img/about.svg';
-import {AsyncAbout, AsyncAllAbout} from "../../../store/asyncAction/asyncContacts";
+import { AsyncAllAbout} from "../../../store/asyncAction/asyncContacts";
 
 const CartItem = styled(Item)`
   height: 266px;
@@ -16,6 +15,7 @@ const CartItem = styled(Item)`
   border-radius: 20px;
   margin-left: 40px;
   cursor: pointer;
+  padding-top: 0;
   &: hover {
     transform: scale(1.1);
     transition: transform 0.9s;
