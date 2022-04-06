@@ -33,60 +33,73 @@ export const AsyncGetContact = (id) => {
 
 export const AsyncAddContact = (formData) => {
   return (dispatch) => {
-    toast.promise(
-     axiosInstance.post(
-        `branches/branches/`),
-        formData,
+    toast
+      .promise(
+        axiosInstance.post(`branches/branches/`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }),
         {
-          headers: {'Content-Type': 'multipart/form-data',}
-        }, {
-      pending: 'Удаление...',
+          pending: 'Удаление...',
           success: 'Продукт удален',
-        error: 'Возникла ошибка'
-    }).then((data) => {
-    dispatch(addContact(data));
-    dispatch(getAllContacts(data));
-    })
-        .catch((error) => {
-          console.log('error:', error);
-        })
+          error: 'Возникла ошибка',
+        }
+      )
+      .then((data) => {
+        dispatch(addContact(data));
+        dispatch(getAllContacts(data));
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };
 
 export const AsyncEditContact = (contact, id) => {
   return (dispatch) => {
-    toast.promise(
-       axiosInstance.patch(
-        `branches/branches/${id}/`), contact,
-        {
+    toast
+      .promise(
+        axiosInstance.patch(`branches/branches/${id}/`, contact, {
           headers: {
             'Content-Type': 'multipart/form-data',
-          }}
-          ).then((data) => {
-         dispatch(editContact(data));
-       })
-           .catch((error) => {
-             console.log('error:', error);
-           })
+          },
+        }),
+        {
+          pending: 'Ожидание...',
+          success: 'Успешно изменено',
+          error: 'Возникла ошибка',
+        }
+      )
+      .then((data) => {
+        dispatch(editContact(data));
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };
 
 export const AsyncEditAbout = (formData, id) => {
   return (dispatch) => {
-    toast.promise(
-       axiosInstance.patch(
-        `branches/about-us/${id}/`),
-        formData, {
-           headers: {
+    toast
+      .promise(
+        axiosInstance.patch(`branches/about-us/${id}/`, formData, {
+          headers: {
             'Content-Type': 'multipart/form-data',
-           },}
-      ).then((data) => {
+          },
+        }),
+        {
+          pending: 'Ожидание...',
+          success: 'Успешно изменено',
+          error: 'Возникла ошибка',
+        }
+      )
+      .then((data) => {
         dispatch(editAbout(data));
       })
-          .catch((error) => {
-            console.log('error:', error);
-          })
-  }
+      .catch((error) => {
+        console.log('error:', error);
+      });
+  };
 };
 
 export const AsyncAllAbout = () => {

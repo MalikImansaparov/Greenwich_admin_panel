@@ -24,7 +24,7 @@ export const ScheduleWrapper = styled('input')`
   margin: 20px;
   padding: 15px 18.5px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: #000000;
 `;
 
@@ -75,11 +75,12 @@ export const PhotoWrapper = styled('span')`
   color: #000000;
   cursor: pointer;
   &: hover {
-  background: #e6f0e6; 
+    background: #e6f0e6;
   }
 `;
 
 export const TextareaWrapper = styled('textarea')`
+  font-family: 'Montserrat';
   width: 500px;
   height: 166px;
   border-radius: 20px;

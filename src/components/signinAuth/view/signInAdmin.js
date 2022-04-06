@@ -79,23 +79,20 @@ export const SignInAdmin = () => {
     onSubmit: (values, { setSubmitting }) => {
       dispatch(asyncLogin(values));
       setSubmitting(false);
-      if (isAuthenticated){
-        navigate('/home');
-      }
+
     },
     validationSchema,
   });
 
   useEffect(() => {
     if(isAuthenticated) {
-      return <Navigate to="/home" />
+      navigate('/home')
     }
     else {
       navigate('/auth');
     }
-  },[])
+  },[isAuthenticated])
 
-  const signIn = () => toast('gjkd')
 
   return (
     <FormControl>
@@ -107,6 +104,7 @@ export const SignInAdmin = () => {
             onChange={handleChange}
             type="tel"
             value={values.number}
+            onBlur={handleBlur}
             label="Номер телефона"
           />
           {errors.phone_number && touched.phone_number && (
@@ -161,18 +159,7 @@ export const SignInAdmin = () => {
             </Typography>
           )}
         </Box>
-        <ToastContainer
-            position="top-left"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-        />
-        <CustomButton type="submit" disabled={isSubmitting} onClick={signIn}>
+        <CustomButton type="submit" disabled={isSubmitting} >
           Войти
         </CustomButton>
       </form>

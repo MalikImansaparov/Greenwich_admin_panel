@@ -37,6 +37,10 @@ const PhotoWrapper = styled('span')`
   border: 1px solid #000000;
   font-weight: 600;
   color: #000000;
+cursor: pointer;
+  &: hover {
+  background: #e6f0e6; 
+  }
 `;
 
 const CustomButton = styled(Button)`
@@ -94,10 +98,6 @@ export const ContactsEditCart = () => {
     data.append('closed_from', values.close);
     dispatch(AsyncEditContact(data, id));
     dispatch(clearContact());
-    toast.success('Успешно сохранено', {
-      position: "top-right",
-      autoClose: 1000,
-    });
   };
 
   const initialValues = {

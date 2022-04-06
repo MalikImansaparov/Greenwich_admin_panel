@@ -2,13 +2,14 @@ import React from 'react'
 import { AuthApi } from '../../../api';
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../../constants';
 import { Navigate} from 'react-router';
+import { toast } from 'react-toastify';
 
 const requestLogin = () => {
   return {
     type: LOGIN_REQUEST,
     isFetching: true,
   };
-}
+};
 
 export const loginSuccess = (tokens) => {
   return {
@@ -32,16 +33,15 @@ const loginError = (errorMessage) => {
 };
 
 export const asyncLogin =
-
   ({ phone_number, password }) =>
   (dispatch) => {
     dispatch(requestLogin());
-    toast.promise(
-    AuthApi.login(phone_number, password),{
-               pending: 'Добавление...',
-               success: 'Успешно добавлен',
-               error: 'Возникла ошибка'
-             })
+    toast
+      .promise(AuthApi.login(phone_number, password), {
+        pending: 'Ожидание...',
+        success: 'Успешно регистрированы',
+        error: 'Неверный номер или пароль',
+      })
       .then(
         ({ reason, access, refresh, last_name, first_name, is_superuser }) => {
           localStorage.setItem('access', access);

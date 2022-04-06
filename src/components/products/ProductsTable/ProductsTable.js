@@ -17,6 +17,9 @@ import {
 import CircularPreloader from '../../preloader';
 import avatar from '../../../assets/img/avater.svg';
 import SearchIcon from '@mui/icons-material/Search';
+import ActionButton from "../../ActionButton";
+import {AsyncDeleteEmployers} from "../../../store/asyncAction/asyncEmployers";
+import ConfirmDialog from "../../dialog/confirmPopup";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -80,6 +83,10 @@ const ButtonWrapper = styled('button')`
   }
 `;
 
+const TextAdjust = styled('span')`
+  margin-left: 5px;
+`;
+
 const Content = styled(Box)`
   margin-left: 15px;
 `;
@@ -93,6 +100,11 @@ export const ProductsTable = () => {
   const [rows, setRows] = React.useState(productData);
   const [name, setName] = useState(localStorage.getItem('firstName'));
   const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: '',
+    subTitle: '',
+  });
 
   useEffect(() => {
     if (name.length || surename.length === 0) {
@@ -133,8 +145,13 @@ export const ProductsTable = () => {
   });
 
   const handleDelete = (id) => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false
+    })
     dispatch(AsyncDeleteProduct(id));
   };
+
   const handleClick = (id) => {
     navigate(`${id}`);
   };
@@ -160,7 +177,7 @@ export const ProductsTable = () => {
               component="img"
               src={params.row.photo}
               alt="product_photo"
-              sx={{ height: '79px', width: '74px', ml: '0px' }}
+              sx={{ height: '69px', width: '60px', ml: '0px', py: '10px' }}
             />
           </div>
         );
@@ -209,16 +226,25 @@ export const ProductsTable = () => {
       height: 150,
       renderCell: (params) => {
         return (
-          <Content>
-            <EditIcon
-              sx={{ cursor: 'pointer', mr: '15px' }}
-              onClick={() => handleClick(params.row.id)}
-            />
-            <DeleteOutlineIcon
-              sx={{ cursor: 'pointer', fontSize: '30px' }}
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </Content>
+          <TextAdjust>
+            <span>
+              <EditIcon
+                  sx={{ cursor: 'pointer', mr: '15px' }}
+                  onClick={() => handleClick(params.row.id)}
+              />
+            </span>
+            <ActionButton
+                onClick={() => {
+                  setConfirmDialog({
+                    isOpen: true,
+                    title: 'Вы действительно хотите удалить данный товар?',
+                    subTitle: "You can't undo this operation",
+                    onConfirm: () => { handleDelete(params.row.id) }
+                  })
+                }}>
+              <DeleteOutlineIcon sx={{ cursor: 'pointer', fontSize: '30px' }}/>
+            </ActionButton>
+          </TextAdjust>
         );
       },
     },
@@ -300,6 +326,10 @@ export const ProductsTable = () => {
           </ItemWrapper>
         </Grid>
       </Grid>
+      <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+      />
     </Box>
   );
 };

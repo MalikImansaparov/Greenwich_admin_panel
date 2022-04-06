@@ -37,6 +37,10 @@ const PhotoWrapper = styled('span')`
   border: 1px solid #000000;
   font-weight: 600;
   color: #000000;
+  cursor: pointer;
+  &: hover {
+    background: #e6f0e6;
+  }
 `;
 
 const CustomButton = styled(Button)`

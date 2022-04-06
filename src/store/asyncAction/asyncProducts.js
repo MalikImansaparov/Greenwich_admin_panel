@@ -36,44 +36,51 @@ export const AsyncGetProduct = (id) => {
 
 export const AsyncAddProduct = (formData) => {
   return (dispatch) => {
-      toast.promise(
-     axiosInstance.post(
-        "products/plant-care/"),
-        formData,
-        {
+    toast
+      .promise(
+        axiosInstance.post('products/plant-care/', formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          }}, {
-           pending: 'Добавление...',
-            success: 'Успешно добавлен',
-          error: 'Возникла ошибка'
-      }).then((data) => {
-      dispatch(addProduct(data));
-      }).catch((error) => {
-            console.log('error:', error);
-          })
-  }
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+        {
+          pending: 'Ожидание...',
+          success: 'Успешно добавлено',
+          error: 'Возникла ошибка',
+        }
+      )
+      .then((data) => {
+        dispatch(addProduct(data));
+        dispatch(AsyncAllProducts());
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
+  };
 };
 
 export const AsyncEditProduct = (formData, id) => {
   return (dispatch) => {
-      toast.promise(
-     axiosInstance.patch(
-        `products/plant-care/${id}/`),
-        formData,
-        {
+    toast
+      .promise(
+        axiosInstance.patch(`products/plant-care/${id}/`, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
-          }}, {
-           pending: 'Добавление...',
-           success: 'Успешно добавлен',
-           error: 'Возникла ошибка'
-         }).then((data) => {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+        {
+          pending: 'Ожидание...',
+          success: 'Успешно изменено',
+          error: 'Возникла ошибка',
+        }
+      )
+      .then((data) => {
         dispatch(updateProduct(data));
-    })
-        .catch((error) => {
-          console.log('error:', error);
-        })
+        dispatch(AsyncAllProducts());
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };
 

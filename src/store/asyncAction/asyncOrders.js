@@ -62,26 +62,26 @@ export const AsyncDeleteOrder = (id) => {
 };
 
 export const AsyncConfirmOrder = (confirm, id) => {
-  return  (dispatch) => {
-      toast.promise(
-  axiosInstance.patch(`orders/order/${id}/`), {confirm},
-      {
+  return (dispatch) => {
+    toast
+      .promise(axiosInstance.patch(`orders/order/${id}/`, { confirm }), {
         pending: 'Подверждение...',
         success: 'Успешно подверждено',
-        error: 'Возникла ошибка'
+        error: 'Возникла ошибка',
       })
       .then((data) => {
         dispatch(confrimOrders(data));
-    }).catch((error) => {
-          console.log('error:', error);
-        })
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };
 
 export const AsyncGetOrder = (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await axiosInstance.get(`orders/order/${id}`, );
+      const { data } = await axiosInstance.get(`orders/order/${id}`);
       dispatch(reciveOrder(data));
     } catch (e) {
       console.log('error:', e);
@@ -91,17 +91,17 @@ export const AsyncGetOrder = (id) => {
 
 export const AsyncEditOrder = (values, id) => {
   return (dispatch) => {
-      toast.promise(
-  axiosInstance.patch(`orders/order/${id}/`), values,
-      {
-        pending: 'Редактирование...',
-        success: 'Успешно редактировано',
-        error: 'Возникла ошибка'
-      }).then((data) => {
-      dispatch( editOrders(data));
-    })
-        .catch((error) => {
-          console.log('error:', error);
-        })
+    toast
+      .promise(axiosInstance.patch(`orders/order/${id}/`, values), {
+        pending: 'Ожидание...',
+        success: 'Успешно изменено',
+        error: 'Возникла ошибка',
+      })
+      .then((data) => {
+        dispatch(editOrders(data));
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
   };
 };

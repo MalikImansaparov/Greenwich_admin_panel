@@ -60,7 +60,7 @@ export const orderReducer = (state = initialState, action) => {
         case DELETE_ORDERS:
             return {
                 ...state,
-                order: state.orders.filter((item) => item.id !== action.payload),
+                orders: state.orders.filter((item) => item.id !== action.payload),
             };
 
         default:

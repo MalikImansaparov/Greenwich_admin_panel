@@ -16,10 +16,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
-import avatar from '../../../assets/img/avater.svg';
-import { updateEmployers } from '../../../store/actionType/actionTypes';
-import {ToastContainer} from "react-toastify";
-import  {toast} from "react-toastify";
+import ConfirmDialog from "../../dialog/confirmPopup";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import ActionButton from "../../ActionButton";
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -110,6 +110,11 @@ export const EmployersTable = () => {
   const [rows, setRows] = React.useState(employersData);
   const [name, setName] = useState(localStorage.getItem('firstName'));
   const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: '',
+    subTitle: '',
+  });
 
   useEffect(() => {
     if (name.length || surename.length === 0) {
@@ -140,7 +145,6 @@ export const EmployersTable = () => {
     if (localStorage.getItem('is_superuser') === 'true') {
       setSuperAdmin('суперадмин');
     }
-
   }, []);
 
   const rowData = rows.map((employer) => {
@@ -158,11 +162,11 @@ export const EmployersTable = () => {
   });
 
   const handleDelete = (id) => {
-    dispatch(AsyncDeleteEmployers(id));
-    toast.success('Успешно удалено', {
-      position: "top-right",
-      autoClose: 1000,
-    });
+          setConfirmDialog({
+              ...confirmDialog,
+              isOpen: false
+          })
+      dispatch(AsyncDeleteEmployers(id));
   };
 
   const handleClick = (id) => {
@@ -170,15 +174,10 @@ export const EmployersTable = () => {
   };
 
   const roleColors = {
-    админ: 'red',
-    флорист: 'green',
-    курьер: 'blue',
+    админ: '#9A77D2',
+    флорист: '#8EC885',
+    курьер: '#D67DA7',
   };
-  const roles = Object.keys(roleColors)
-
-  // const roles = Array.from(rowData.role)
-
-
 
   const columns = [
     {
@@ -213,26 +212,27 @@ export const EmployersTable = () => {
     {
       field: 'role',
       headerName: 'Роль',
-      width: 250,
+      width: 150,
       renderCell: (params) => {
         return (
           <>
-            {
-              roles.map((role, index) => {
-              return (
-                  <Box
-                      key={index}
-                      sx={{
-                        borderRadius: '12px',
-                        padding: '5px 10px',
-                        cursor: 'pointer',
-                        background: roleColors[role]
-                      }}
-                  >
-                    {params.row.role}
-                  </Box>
-              );
-            })}
+            <Box
+              sx={{
+                fontFamily: 'Source Sans Pro',
+                fontSize: '12px',
+                fontWeight: '700',
+                lineHeight: '15px',
+                width: '121px',
+                height: '34px',
+                color: '#ffffff',
+                borderRadius: '20px',
+                padding: '8px 12px',
+                cursor: 'pointer',
+                background: roleColors[params.row.role.toLowerCase()],
+              }}
+            >
+              {params.row.role}
+            </Box>
           </>
         );
       },
@@ -267,10 +267,17 @@ export const EmployersTable = () => {
                   sx={{ cursor: 'pointer', mr: '15px' }}
                   onClick={() => handleClick(params.row.id)}
                 />
-                <DeleteOutlineIcon
-                  sx={{ cursor: 'pointer', fontSize: '30px' }}
-                  onClick={() => handleDelete(params.row.id)}
-                />
+                <ActionButton
+
+                  onClick={() => {
+                    setConfirmDialog({
+                        isOpen: true,
+                        title: 'Вы действительно хотите удалить данного сотрудника?',
+                      onConfirm: () => { handleDelete(params.row.id) }
+                    })
+                  }}>
+                  <DeleteOutlineIcon sx={{ cursor: 'pointer', fontSize: '28px' }}/>
+                </ActionButton>
               </TextAdjust>
             )}
           </>
@@ -281,17 +288,30 @@ export const EmployersTable = () => {
 
   return (
     <Box>
-      <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-      />
+     {/*<Dialog*/}
+     {/*   fullScreen={fullScreen}*/}
+     {/*   open={open}*/}
+     {/*   onClose={handleClose}*/}
+     {/*   aria-labelledby="responsive-dialog-title"*/}
+      {/*>*/}
+      {/*  <DialogTitle id="responsive-dialog-title">*/}
+      {/*    {"Use Google's location service?"}*/}
+      {/*  </DialogTitle>*/}
+      {/*  <DialogContent>*/}
+      {/*    <DialogContentText>*/}
+      {/*      Let Google help apps determine location. This means sending*/}
+      {/*      anonymous location data to Google, even when no apps are running.*/}
+      {/*    </DialogContentText>*/}
+      {/*  </DialogContent>*/}
+      {/*  <DialogActions>*/}
+      {/*    <Button sx={{ width: '100px' }} autoFocus onClick={handleClose}>*/}
+      {/*      Disagree*/}
+      {/*    </Button>*/}
+      {/*    <Button onClick={handleDelete()} autoFocus>*/}
+      {/*      Agree*/}
+      {/*    </Button>*/}
+      {/*  </DialogActions>*/}
+      {/*</Dialog>*/}
       <Box
         sx={{
           display: 'flex',
@@ -324,7 +344,7 @@ export const EmployersTable = () => {
             }}
           >
             <span>{name}</span>
-               <span>{surename}</span>
+            <span>{surename}</span>
           </Typography>
         </Box>
       </Box>
@@ -370,6 +390,10 @@ export const EmployersTable = () => {
           </ItemWrapper>
         </Grid>
       </Grid>
+        <ConfirmDialog
+            confirmDialog={confirmDialog}
+            setConfirmDialog={setConfirmDialog}
+        />
     </Box>
   );
 };;

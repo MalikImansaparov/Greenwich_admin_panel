@@ -36,6 +36,10 @@ const PhotoWrapper = styled('span')`
   border: 1px solid #000000;
   font-weight: 600;
   color: #000000;
+  cursor: pointer;
+  &: hover {
+    background: #e6f0e6;
+  }
 `;
 
 const CustomButton = styled(Button)`
@@ -71,14 +75,57 @@ export const EditProducts = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const productInfo = useSelector((state) => state.products.care);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+    const [selectetdFile, setSelectedFile] = useState([]);
+    const [fileBase64String, setFileBase64String] = useState("");
 
-    useEffect(() => {
-        if (selectedImage) {
-            setImageUrl(URL.createObjectURL(selectedImage));
+    const onFileChange = (e) => {
+        setSelectedFile(e.target.files);
+        console.log(e.target.files[0]);
+        console.log(e.target.files[0].name);
+        console.log(e.target.files[0].size);
+        console.log(e.target.files[0].type);
+    };
+
+    const encodeFileBase64 = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                const Base64 = reader.result;
+                console.log(Base64);
+                setFileBase64String(Base64);
+            };
+            reader.onerror = (error) => {
+                console.log("error: ", error);
+            };
         }
-    }, [selectedImage]);
+    };
+
+    // encodeFileBase64(selectetdFile[0]);
+
+    const decodeFileBase64 = (base64String) => {
+        // From Bytestream to Percent-encoding to Original string
+        return decodeURIComponent(
+            atob(base64String)
+                .split("")
+                .map(function (c) {
+                    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                })
+                .join("")
+        );
+    };
+
+    const decodeBase64 = decodeFileBase64(
+        fileBase64String.substring(fileBase64String.indexOf(",") + 1)
+    );
+
+  useEffect(() => {
+    if (selectedImage) {
+      setImageUrl(URL.createObjectURL(selectedImage));
+    }
+  }, [selectedImage]);
 
   useEffect(() => {
     dispatch(AsyncGetProduct(id));
@@ -95,8 +142,8 @@ export const EditProducts = () => {
     data.append('description', values.description);
     data.append('quantity', values.quantity);
     dispatch(AsyncEditProduct(data, id));
-    dispatch(clearProduct())
-
+    dispatch(clearProduct());
+    navigate(-1);
   };
 
   const initialValues = {
@@ -165,17 +212,25 @@ export const EditProducts = () => {
                           id="contained-button-file"
                           multiple
                           type="file"
-                          onChange={(event) => {
-                            setFieldValue(
-                              'picture',
-                              event.currentTarget.files[0]
-                            );
-                              setSelectedImage(event.target.files[0])
-                          }}
+                          value={fileBase64String}
+                          onChange={encodeFileBase64(selectetdFile[0])}
+                          // onChange={(event) => {
+                          //   setFieldValue(
+                          //     'picture',
+                          //     event.currentTarget.files[0]
+                          //   );
+                          //   setSelectedImage(event.target.files[0]);
+                          // }}
                         />
-                          { imageUrl && selectedImage ? <PhotoWrap component="img" src={imageUrl} alt='' /> :
-                              <PhotoWrap component="img" src={values.picture} alt="" />
-                          }
+                        {imageUrl && selectedImage ? (
+                          <PhotoWrap component="img" src={imageUrl} alt="" />
+                        ) : (
+                          <PhotoWrap
+                            component="img"
+                            src={values.picture}
+                            alt=""
+                          />
+                        )}
                         <Typography>Изменить фото</Typography>
                       </PhotoWrapper>
                     </label>
@@ -270,28 +325,28 @@ export const EditProducts = () => {
                     )}
                   </Box>
                   <Box sx={{ mb: '30px' }}>
-              <LabelWrapper>Описания</LabelWrapper>
-              <TextareaWrapper
-                name="password"
-                onChange={handleChange}
-                type="string"
-                value={values.description}
-                onBlur={handleBlur}
-              />
-              {errors.description && touched.description && (
-                <LabelWrapper
-                  sx={{
-                    textAlign: 'left',
-                    fontSize: '13px',
-                    color: 'error.main',
-                    mt: '12px',
-                    ml: '14px',
-                  }}
-                >
-                  {errors.description}
-                </LabelWrapper>
-              )}
-            </Box>
+                    <LabelWrapper>Описания</LabelWrapper>
+                    <TextareaWrapper
+                      name="password"
+                      onChange={handleChange}
+                      type="string"
+                      value={values.description}
+                      onBlur={handleBlur}
+                    />
+                    {errors.description && touched.description && (
+                      <LabelWrapper
+                        sx={{
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
+                        }}
+                      >
+                        {errors.description}
+                      </LabelWrapper>
+                    )}
+                  </Box>
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Количество</LabelWrapper>
                     <InputWrapper

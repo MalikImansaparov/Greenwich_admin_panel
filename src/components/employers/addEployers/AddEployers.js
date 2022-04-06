@@ -10,10 +10,9 @@ import { InputWrapper, SelectWrapper, LabelWrapper } from '../InputWrapper';
 import { Item } from '../../../style';
 import { validationSchema } from '../../signinAuth/validateForm';
 import { GoBack } from '../../goBack';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   AsyncAddEmployers,
-  AsyncEditEmployers,
 } from '../../../store/asyncAction/asyncEmployers';
 import BreadCrumb from '../../breadCrumbs';
 import { Header } from '../../header/header';
@@ -42,7 +41,6 @@ const CustomButton = styled(Button)`
 export const AddEmployers = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const {
     handleSubmit,
@@ -62,12 +60,9 @@ export const AddEmployers = () => {
       confirmPassword: '',
     },
     onSubmit: (values, { setSubmitting }) => {
+      console.log(values)
       dispatch(AsyncAddEmployers(values));
       setSubmitting(false);
-      toast.success('Успешно сохранено', {
-        position: "top-right",
-        autoClose: 1000,
-      })
       navigate(-1);
     },
     validationSchema,
@@ -160,29 +155,29 @@ export const AddEmployers = () => {
                     </Typography>
                   )}
                 </Box>
-                <Box sx={{ mb: '30px' }}>
-                  <LabelWrapper>Надбавка</LabelWrapper>
-                  <InputWrapper
-                    name="courier_allowance"
-                    onChange={handleChange}
-                    type="text"
-                    value={values.courier_allowance}
-                    placeholder=""
-                  />
-                  {errors.courier_allowance && touched.courier_allowance && (
-                    <Typography
-                      sx={{
-                        textAlign: 'left',
-                        fontSize: '13px',
-                        color: 'error.main',
-                        mt: '12px',
-                        ml: '14px',
-                      }}
-                    >
-                      {errors.courier_allowance}
-                    </Typography>
-                  )}
-                </Box>
+                {/*<Box sx={{ mb: '30px' }}>*/}
+                {/*  <LabelWrapper>Надбавка</LabelWrapper>*/}
+                {/*  <InputWrapper*/}
+                {/*    name="courier_allowance"*/}
+                {/*    onChange={handleChange}*/}
+                {/*    type="text"*/}
+                {/*    value={values.courier_allowance}*/}
+                {/*    placeholder=""*/}
+                {/*  />*/}
+                {/*  {errors.courier_allowance && touched.courier_allowance && (*/}
+                {/*    <Typography*/}
+                {/*      sx={{*/}
+                {/*        textAlign: 'left',*/}
+                {/*        fontSize: '13px',*/}
+                {/*        color: 'error.main',*/}
+                {/*        mt: '12px',*/}
+                {/*        ml: '14px',*/}
+                {/*      }}*/}
+                {/*    >*/}
+                {/*      {errors.courier_allowance}*/}
+                {/*    </Typography>*/}
+                {/*  )}*/}
+                {/*</Box>*/}
                 <Box sx={{ mb: '30px' }}>
                   <LabelWrapper>Роль</LabelWrapper>
                   <SelectWrapper

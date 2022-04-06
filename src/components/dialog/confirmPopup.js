@@ -1,40 +1,46 @@
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 import React from "react";
+import DialogContent from "@mui/material/DialogContent";
+import Typography from "@mui/material/Typography";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import Buttons from "../Button";
+import {styled} from "@mui/styles";
 
-const ConfirmDialog = (props) => {
-    const { title, children, open, setOpen, onConfirm } = props;
-    return (
-        <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
-            aria-labelledby="confirm-dialog"
-        >
-            <DialogTitle id="confirm-dialog">{title}</DialogTitle>
-            <DialogContent>{children}</DialogContent>
-            <DialogActions>
-                <Button
-                    variant="contained"
-                    onClick={() => setOpen(false)}
-                    color="secondary"
-                >
-                    No
-                </Button>
-                <Button
-                    variant="contained"
-                    onClick={() => {
-                        setOpen(false);
-                        onConfirm();
-                    }}
-                    color="default"
-                >
-                    Yes
-                </Button>
-            </DialogActions>
-        </Dialog>
-    );
-};
-export default ConfirmDialog;
+const Modal = styled(Dialog)`
+height: 363px;
+width: 1000px;
+border-radius: 20px;
+text-align: center;
+`
+
+export default function ConfirmDialog(props) {
+  const { confirmDialog, setConfirmDialog } = props;
+
+  return (
+      <Modal open={confirmDialog.isOpen}>
+        <DialogTitle >
+          <IconButton disableRipple >
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="h6">
+            {confirmDialog.title}
+          </Typography>
+        </DialogContent>
+          <DialogContent>
+              <Typography variant="h6">
+              </Typography>
+          </DialogContent>
+        <DialogActions sx={{padding: 0, marginLeft: 0}} >
+          <Buttons
+              text="Нет"
+              onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })} />
+          <Buttons
+              text="Да"
+              onClick={confirmDialog.onConfirm} />
+        </DialogActions>
+      </Modal>
+  )
+}

@@ -20,20 +20,19 @@ export const AsyncGetEmployers = () => {
 
 export const AsyncAddEmployers = (values) => {
   return (dispatch) => {
-    toast.promise(
-     axiosInstance.post(`employee-register`), values,
-         {
-           pending: 'Добавление...',
-           success: 'Успешно добавлен',
-           error: 'Возникла ошибка'
-         })
-         .then((data) => {
-           dispatch(addEmployers(data));
-           dispatch(AsyncGetEmployers());
-         })
-         .catch((error) => {
-           console.log('error:', error);
-         })
+    toast
+      .promise(axiosInstance.post('employee-register', values), {
+        pending: 'Ожидание...',
+        success: 'Успешно добавлено',
+        error: 'Возникла ошибка',
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      })
+      .then((data) => {
+        dispatch(addEmployers(data));
+        dispatch(AsyncGetEmployers());
+      });
   };
 };
 
@@ -50,39 +49,37 @@ export const AsyncGetProfile = (id) => {
 
 export const AsyncEditEmployers = ({ values, id }) => {
   return (dispatch) => {
-    toast.promise(
-    axiosInstance.patch(`all-users/${id}/`), values,
-        {
-          pending: 'Редактирование...',
-          success: 'Успешно редактировано',
-          error: 'Возникла ошибка'
-        }).then((data) => {
+    toast
+      .promise(axiosInstance.patch(`all-users/${id}/`, values), {
+        pending: 'Ожидание...',
+        success: 'Успешно изменено',
+        error: 'Возникла ошибка',
+      })
+      .then((data) => {
         dispatch(updateEmployers(data));
       })
-    .catch((error) => {
-      console.log('error:', error);
-    })
-  }
+      .catch((error) => {
+        console.log('error:', error);
+      });
+  };
 };
 
 export const AsyncDeleteEmployers = (id) => {
   return (dispatch) => {
-    toast.promise(
-        axiosInstance
-            .delete(`all-users/${id}`),
-    {
-          pending: 'Удаление...',
-          success: 'Продукт удален',
-          error: 'Возникла ошибка'
-    })
-            .then(() => {
-              dispatch(deleteEmployers(id));
-              dispatch(AsyncGetEmployers());
-            })
-            .catch((error) => {
-              console.log('error:', error);
-            })
-  }
+    toast
+      .promise(axiosInstance.delete(`all-users/${id}`), {
+        pending: 'Удаление...',
+        success: 'Успешно удалено',
+        error: 'Возникла ошибка',
+      })
+      .then(() => {
+        dispatch(deleteEmployers(id));
+        dispatch(AsyncGetEmployers());
+      })
+      .catch((error) => {
+        console.log('error:', error);
+      });
+  };
 };
 
 export const AsyncGetCourier = () => {

@@ -8,9 +8,8 @@ export const validationSchema = Yup.object().shape({
     .required('Номер обязателный')
     .min(9, 'Не правилный номер')
     .max(14, 'Не правилный номер'),
-  courier_allowance: Yup.string().required('Логин обязателный'),
   role: Yup.string().required('Роль обязателный'),
-  salary: Yup.number().required('зарплата обязателный'),
+  // salary: Yup.number().required('Зарплата обязателный'),
   password: Yup.string()
     .required('Пароль обязателный')
     .min(6, 'Небезопасный пароль'),

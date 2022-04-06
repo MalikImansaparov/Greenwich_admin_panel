@@ -58,6 +58,7 @@ export const EditEmployers = () => {
     const { id } = useParams();
     const profile = useSelector((state) => state.employers.profile);
 
+
     useEffect(() => {
         dispatch(AsyncGetProfile(id));
         return () => {
@@ -68,7 +69,7 @@ export const EditEmployers = () => {
     const handleSubmit = (values) => {
         dispatch(AsyncEditEmployers({ values, id }));
         // setSubmitting(false);
-        navigate(-1);
+
     };
 
     const initialValues = {
