@@ -50,6 +50,7 @@ export const AsyncAddProduct = (formData) => {
         }
       )
       .then((data) => {
+          console.log(data)
         dispatch(addProduct(data));
         dispatch(AsyncAllProducts());
       })

@@ -52,9 +52,9 @@ export const AsyncDeleteOrder = (id) => {
           success: 'Успешно удалено',
         error: 'Возникла ошибка'
     }
- ).then((data) => {
-    dispatch(deleteOrders(data));
-    dispatch(getOrders());
+ ).then(() => {
+    dispatch(deleteOrders(id));
+    dispatch(AsyncGetOrder());
     }).catch((error) => {
           console.log('error:', error);
         })

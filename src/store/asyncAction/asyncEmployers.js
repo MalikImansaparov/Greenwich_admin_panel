@@ -56,7 +56,7 @@ export const AsyncEditEmployers = ({ values, id }) => {
         error: 'Возникла ошибка',
       })
       .then((data) => {
-        dispatch(updateEmployers(data));
+        dispatch(updateEmployers([data]));
       })
       .catch((error) => {
         console.log('error:', error);

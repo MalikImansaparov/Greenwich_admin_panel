@@ -117,10 +117,15 @@ export const EmployersTable = () => {
   });
 
   useEffect(() => {
+      dispatch(AsyncGetEmployers());
+      if (localStorage.getItem('is_superuser') === 'true') {
+          setSuperAdmin('суперадмин');
+      }
     if (name.length || surename.length === 0) {
       setName('Тимур ');
       setSurename('Одинцев');
     }
+      updateEmployers()
   }, []);
 
   const requestSearch = (searchValue) => {
@@ -135,17 +140,13 @@ export const EmployersTable = () => {
     setRows(filteredRows);
   };
 
-  useEffect(() => {
-    setRows(employersData);
-  }, [employersData]);
+  const updateEmployers = () => {
+      setRows(employersData);
+  }
 
   useEffect(() => {
-    setRows(employersData);
-    dispatch(AsyncGetEmployers());
-    if (localStorage.getItem('is_superuser') === 'true') {
-      setSuperAdmin('суперадмин');
-    }
-  }, []);
+    updateEmployers()
+  }, [employersData]);
 
   const rowData = rows.map((employer) => {
     return {
@@ -268,7 +269,6 @@ export const EmployersTable = () => {
                   onClick={() => handleClick(params.row.id)}
                 />
                 <ActionButton
-
                   onClick={() => {
                     setConfirmDialog({
                         isOpen: true,
@@ -288,30 +288,6 @@ export const EmployersTable = () => {
 
   return (
     <Box>
-     {/*<Dialog*/}
-     {/*   fullScreen={fullScreen}*/}
-     {/*   open={open}*/}
-     {/*   onClose={handleClose}*/}
-     {/*   aria-labelledby="responsive-dialog-title"*/}
-      {/*>*/}
-      {/*  <DialogTitle id="responsive-dialog-title">*/}
-      {/*    {"Use Google's location service?"}*/}
-      {/*  </DialogTitle>*/}
-      {/*  <DialogContent>*/}
-      {/*    <DialogContentText>*/}
-      {/*      Let Google help apps determine location. This means sending*/}
-      {/*      anonymous location data to Google, even when no apps are running.*/}
-      {/*    </DialogContentText>*/}
-      {/*  </DialogContent>*/}
-      {/*  <DialogActions>*/}
-      {/*    <Button sx={{ width: '100px' }} autoFocus onClick={handleClose}>*/}
-      {/*      Disagree*/}
-      {/*    </Button>*/}
-      {/*    <Button onClick={handleDelete()} autoFocus>*/}
-      {/*      Agree*/}
-      {/*    </Button>*/}
-      {/*  </DialogActions>*/}
-      {/*</Dialog>*/}
       <Box
         sx={{
           display: 'flex',

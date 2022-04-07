@@ -95,6 +95,7 @@ export const OrderTab = () => {
   const data = Array.from(rows);
   const [name, setName] = useState(localStorage.getItem('firstName'));
   const [surename, setSurename] = useState(localStorage.getItem('lastName'));
+  const [initialRender, setInitialRender] = useState(true)
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
     title: '',
@@ -109,18 +110,26 @@ export const OrderTab = () => {
   }, []);
 
   const requestSearch = (searchValue) => {
-    setSearchText(searchValue);
+   if(searchValue){
+     setSearchText(searchValue);
+   }
     const filteredRows = isOrders.filter((row) => {
       return (
         row.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
         row.phone_number.toLowerCase().includes(searchText.toLowerCase())
       );
     });
-    setRows(filteredRows);
+
+         setRows(filteredRows);
+
   };
 
-  useEffect(() => {
+  const updateOrders = () => {
     setRows(isOrders);
+  }
+
+  useEffect(() => {
+    updateOrders()
   }, [isOrders]);
 
   const rowData = completedOrders.map((order) => {
@@ -153,6 +162,7 @@ export const OrderTab = () => {
   });
 
   useEffect(() => {
+    setRows(isOrders);
     dispatch(AsyncOrders());
     dispatch(AsyncCompletedOrders());
   }, []);
@@ -184,17 +194,6 @@ export const OrderTab = () => {
 
   const handleClick = (id) => {
     navigate(`${id}`);
-  };
-
-  const ACEPT = 'Заказ принят';
-  const DELIVERING = 'Доставляю';
-
-  const statusColors = {
-    ACEPT: '#9A77D2',
-    // Еду за заказом: '#8EC885',
-    // Забрал заказ: '#D67DA7',
-    DELIVERING: '#0D7FD1',
-    // Заказ доставлен: '#A0F998'
   };
 
   const columns = [
@@ -265,17 +264,6 @@ export const OrderTab = () => {
               padding: '5px 10px',
               background: '#C1E7BE;',
               cursor: 'pointer',
-
-              //   fontFamily: 'Source Sans Pro',
-              //   fontSize: '12px',
-              //   fontWeight: '700',
-              //   lineHeight: '15px',
-              //   width: '121px',
-              //   height: '34px',
-              //   borderRadius: '20px',
-              //   padding: '8px 12px',
-              //   cursor: 'pointer',
-              //   background: statusColors[params.row.status.toLowerCase()],
             }}
           >
             {params.row.status}

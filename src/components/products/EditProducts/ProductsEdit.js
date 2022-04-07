@@ -77,7 +77,7 @@ export const EditProducts = () => {
   const productInfo = useSelector((state) => state.products.care);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-    const [selectetdFile, setSelectedFile] = useState([]);
+    const [selectedFile, setSelectedFile] = useState([]);
     const [fileBase64String, setFileBase64String] = useState("");
 
     const onFileChange = (e) => {
@@ -103,23 +103,21 @@ export const EditProducts = () => {
         }
     };
 
-    // encodeFileBase64(selectetdFile[0]);
-
-    const decodeFileBase64 = (base64String) => {
-        // From Bytestream to Percent-encoding to Original string
-        return decodeURIComponent(
-            atob(base64String)
-                .split("")
-                .map(function (c) {
-                    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-                })
-                .join("")
-        );
-    };
-
-    const decodeBase64 = decodeFileBase64(
-        fileBase64String.substring(fileBase64String.indexOf(",") + 1)
-    );
+    //
+    // const decodeFileBase64 = (base64String) => {
+    //     return decodeURIComponent(
+    //         atob(base64String)
+    //             .split("")
+    //             .map(function (c) {
+    //                 return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+    //             })
+    //             .join("")
+    //     );
+    // };
+    //
+    // const decodeBase64 = decodeFileBase64(
+    //     fileBase64String.substring(fileBase64String.indexOf(",") + 1)
+    // );
 
   useEffect(() => {
     if (selectedImage) {
@@ -134,9 +132,10 @@ export const EditProducts = () => {
     };
   }, [dispatch, id]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values, ) => {
+
     let data = new FormData();
-    data.append('picture', values.picture);
+    data.append('picture', fileBase64String);
     data.append('choice', values.choice);
     data.append('price', values.price);
     data.append('description', values.description);
@@ -144,6 +143,7 @@ export const EditProducts = () => {
     dispatch(AsyncEditProduct(data, id));
     dispatch(clearProduct());
     navigate(-1);
+      console.log(data)
   };
 
   const initialValues = {
@@ -212,15 +212,25 @@ export const EditProducts = () => {
                           id="contained-button-file"
                           multiple
                           type="file"
-                          value={fileBase64String}
-                          onChange={encodeFileBase64(selectetdFile[0])}
+                            // onChange={(event) => {
+                            //   setFieldValue(
+                            //     'picture',
+                            //     event.currentTarget.files[0]
+                            //   );
+                            //   setSelectedImage(event.target.files[0]);
+                            // }}
+                          // value={decodeBase64}
+
+                          // defaultValue={fileBase64String}
+                          // onChange={encodeFileBase64(selectetdFile[0])}
                           // onChange={(event) => {
-                          //   setFieldValue(
-                          //     'picture',
-                          //     event.currentTarget.files[0]
-                          //   );
+                          // encodeFileBase64(selectedFile[0])
                           //   setSelectedImage(event.target.files[0]);
-                          // }}
+                          onChange={async (e) => {
+                              const file = e.target.files[0];
+                              const base = await encodeFileBase64(file);
+                              setFileBase64String(base);
+                          }}
                         />
                         {imageUrl && selectedImage ? (
                           <PhotoWrap component="img" src={imageUrl} alt="" />

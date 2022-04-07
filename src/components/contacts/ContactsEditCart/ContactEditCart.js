@@ -97,7 +97,6 @@ export const ContactsEditCart = () => {
     data.append('open_from', values.open);
     data.append('closed_from', values.close);
     dispatch(AsyncEditContact(data, id));
-    dispatch(clearContact());
   };
 
   const initialValues = {

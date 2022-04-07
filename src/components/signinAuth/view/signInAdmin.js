@@ -23,6 +23,8 @@ const TextFieldsWrapper = styled(TextField)`
   fieldset {
     border-radius: 20px;
   }
+  &:-webkit-autofill {
+  transition: all 5000s easy-in-out;
 `;
 const CustomButton = styled(Button)`
   height: 52px;

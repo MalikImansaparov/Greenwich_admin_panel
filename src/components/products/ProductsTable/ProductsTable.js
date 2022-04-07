@@ -111,6 +111,8 @@ export const ProductsTable = () => {
       setName('Тимур ');
       setSurename('Одинцев');
     }
+    updateProducts()
+    dispatch(AsyncAllProducts());
   }, []);
 
   const requestSearch = (searchValue) => {
@@ -123,15 +125,12 @@ export const ProductsTable = () => {
     });
     setRows(filteredRows);
   };
-
+  const updateProducts = () => setRows(productData)
   useEffect(() => {
-    setRows(productData);
+    updateProducts()
   }, [productData]);
 
-  useEffect(() => {
-    setRows(productData);
-    dispatch(AsyncAllProducts());
-  }, []);
+
 
   const rowData = rows.map((product) => {
     return {
@@ -238,7 +237,6 @@ export const ProductsTable = () => {
                   setConfirmDialog({
                     isOpen: true,
                     title: 'Вы действительно хотите удалить данный товар?',
-                    subTitle: "You can't undo this operation",
                     onConfirm: () => { handleDelete(params.row.id) }
                   })
                 }}>

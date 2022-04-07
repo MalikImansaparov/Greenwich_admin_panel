@@ -69,7 +69,7 @@ export const EditEmployers = () => {
     const handleSubmit = (values) => {
         dispatch(AsyncEditEmployers({ values, id }));
         // setSubmitting(false);
-
+        navigate(-1)
     };
 
     const initialValues = {
