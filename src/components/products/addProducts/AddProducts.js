@@ -58,6 +58,23 @@ export const AddProducts = () => {
   const dispatch = useDispatch();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [fileBase64String, setFileBase64String] = useState("");
+
+
+  const encodeFileBase64 = (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const Base64 = reader.result;
+        console.log(Base64);
+        setFileBase64String(Base64);
+      };
+      reader.onerror = (error) => {
+        console.log("error: ", error);
+      };
+    }
+  };
 
   useEffect(() => {
     if (selectedImage) {
@@ -84,7 +101,8 @@ export const AddProducts = () => {
     },
     onSubmit: (values, { setSubmitting }) => {
       let data = new FormData();
-      data.append('picture', values.picture);
+      if (selectedImage)
+        data.append('picture', selectedImage)
       data.append('choice', values.choice);
       data.append('price', values.price);
       data.append('description', values.description);
@@ -111,12 +129,11 @@ export const AddProducts = () => {
                       id="contained-button-file"
                       multiple
                       type="file"
-                      onChange={(event) => {
-                        setFieldValue(
-                            'picture',
-                            event.currentTarget.files[0]
-                        );
-                        setSelectedImage(event.target.files[0])
+                      onChange={async (e) => {
+                        const file = e.target.files[0];
+                        const base = await encodeFileBase64(file);
+                        setFileBase64String(base);
+                        setSelectedImage(e.target.files[0])
                       }}
                   />
                   { imageUrl && selectedImage ?
@@ -221,29 +238,29 @@ export const AddProducts = () => {
                 </Typography>
               )}
             </Box>
-             <Box sx={{ mb: '30px' }}>
-              <LabelWrapper>Описания</LabelWrapper>
-              <TextareaWrapper
-                name="description"
-                onChange={handleChange}
-                type="text"
-                value={values.description}
-                onBlur={handleBlur}
-              />
-              {errors.description && touched.description && (
-                <LabelWrapper
-                  sx={{
-                    textAlign: 'left',
-                    fontSize: '13px',
-                    color: 'error.main',
-                    mt: '12px',
-                    ml: '14px',
-                  }}
-                >
-                  {errors.description}
-                </LabelWrapper>
-              )}
-            </Box>
+            {/* <Box sx={{ mb: '30px' }}>*/}
+            {/*  <LabelWrapper>Описания</LabelWrapper>*/}
+            {/*  <TextareaWrapper*/}
+            {/*    name="description"*/}
+            {/*    onChange={handleChange}*/}
+            {/*    type="text"*/}
+            {/*    value={values.description}*/}
+            {/*    onBlur={handleBlur}*/}
+            {/*  />*/}
+            {/*  {errors.description && touched.description && (*/}
+            {/*    <LabelWrapper*/}
+            {/*      sx={{*/}
+            {/*        textAlign: 'left',*/}
+            {/*        fontSize: '13px',*/}
+            {/*        color: 'error.main',*/}
+            {/*        mt: '12px',*/}
+            {/*        ml: '14px',*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      {errors.description}*/}
+            {/*    </LabelWrapper>*/}
+            {/*  )}*/}
+            {/*</Box>*/}
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Количество</LabelWrapper>
               <InputWrapper

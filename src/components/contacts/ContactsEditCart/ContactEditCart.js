@@ -21,11 +21,9 @@ import {
   AsyncEditContact,
   AsyncGetContact,
 } from '../../../store/asyncAction/asyncContacts';
-import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
 import {clearContact, clearProduct} from '../../../store/actionType/actionTypes';
-import {AsyncGetProduct} from "../../../store/asyncAction/asyncProducts";
-import {toast} from "react-toastify";
+
 
 const PhotoWrapper = styled('span')`
   width: 230px;
@@ -77,6 +75,23 @@ export const ContactsEditCart = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [fileBase64String, setFileBase64String] = useState("");
+
+
+  const encodeFileBase64 = (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const Base64 = reader.result;
+        console.log(Base64);
+        setFileBase64String(Base64);
+      };
+      reader.onerror = (error) => {
+        console.log("error: ", error);
+      };
+    }
+  };
 
   useEffect(() => {
     if (selectedImage) {
@@ -89,9 +104,10 @@ export const ContactsEditCart = () => {
     return dispatch(clearContact());
   }, [dispatch, id]);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values,) => {
     let data = new FormData();
-    data.append('picture', values.picture);
+    if (selectedImage)
+      data.append('picture', fileBase64String)
     data.append('phone', values.phone);
     data.append('address', values.address);
     data.append('open_from', values.open);
@@ -135,7 +151,6 @@ export const ContactsEditCart = () => {
             validationSchema={validationSchema}
           >
             {({
-              setFieldValue,
               handleSubmit,
               handleChange,
               handleBlur,
@@ -156,18 +171,22 @@ export const ContactsEditCart = () => {
                         id="contained-button-file"
                         multiple
                         type="file"
-                        values={values.picture}
-                        onChange={(event) => {
-                          setFieldValue(
-                            'picture',
-                            event.currentTarget.files[0]
-                          );
-                          setSelectedImage(event.target.files[0])
-                        }}
+                          onChange={async (e) => {
+                            const file = e.target.files[0];
+                            const base = await encodeFileBase64(file);
+                            setFileBase64String(base);
+                            setSelectedImage(e.target.files[0])
+                          }}
                       />
-                      { imageUrl && selectedImage ? <PhotoWrap component="img" src={imageUrl} alt='' /> :
-                        <PhotoWrap component="img" src={values.picture} alt="" />
-                      }
+                      {imageUrl && selectedImage ? (
+                          <PhotoWrap component="img" src={imageUrl} alt="" />
+                      ) : (
+                          <PhotoWrap
+                              component="img"
+                              src={values.picture}
+                              alt=""
+                          />
+                      )}
                       <Typography>Изменить фото</Typography>
                     </PhotoWrapper>
                   </label>

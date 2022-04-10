@@ -71,8 +71,6 @@ export const EditOrders = () => {
      navigate(-1);
   };
 
-
-
   const initialValues = {
       id: order?.id,
       first_name: order?.first_name,

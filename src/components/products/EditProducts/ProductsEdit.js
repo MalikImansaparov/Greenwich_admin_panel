@@ -77,47 +77,23 @@ export const EditProducts = () => {
   const productInfo = useSelector((state) => state.products.care);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-    const [selectedFile, setSelectedFile] = useState([]);
-    const [fileBase64String, setFileBase64String] = useState("");
+  // const [fileBase64String, setFileBase64String] = useState("");
+  //
+  //
+  //   const encodeFileBase64 = (file) => {
+  //       const reader = new FileReader();
+  //       if (file) {
+  //           reader.readAsDataURL(file);
+  //           reader.onload = () => {
+  //               const Base64 = reader.result;
+  //               setFileBase64String(Base64);
+  //           };
+  //           reader.onerror = (error) => {
+  //               console.log("error: ", error);
+  //           };
+  //       }
+  //   };
 
-    const onFileChange = (e) => {
-        setSelectedFile(e.target.files);
-        console.log(e.target.files[0]);
-        console.log(e.target.files[0].name);
-        console.log(e.target.files[0].size);
-        console.log(e.target.files[0].type);
-    };
-
-    const encodeFileBase64 = (file) => {
-        const reader = new FileReader();
-        if (file) {
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const Base64 = reader.result;
-                console.log(Base64);
-                setFileBase64String(Base64);
-            };
-            reader.onerror = (error) => {
-                console.log("error: ", error);
-            };
-        }
-    };
-
-    //
-    // const decodeFileBase64 = (base64String) => {
-    //     return decodeURIComponent(
-    //         atob(base64String)
-    //             .split("")
-    //             .map(function (c) {
-    //                 return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-    //             })
-    //             .join("")
-    //     );
-    // };
-    //
-    // const decodeBase64 = decodeFileBase64(
-    //     fileBase64String.substring(fileBase64String.indexOf(",") + 1)
-    // );
 
   useEffect(() => {
     if (selectedImage) {
@@ -133,9 +109,9 @@ export const EditProducts = () => {
   }, [dispatch, id]);
 
   const handleSubmit = (values, ) => {
-
     let data = new FormData();
-    data.append('picture', fileBase64String);
+          if (selectedImage)
+              data.append('picture', selectedImage)
     data.append('choice', values.choice);
     data.append('price', values.price);
     data.append('description', values.description);
@@ -143,7 +119,7 @@ export const EditProducts = () => {
     dispatch(AsyncEditProduct(data, id));
     dispatch(clearProduct());
     navigate(-1);
-      console.log(data)
+
   };
 
   const initialValues = {
@@ -193,7 +169,6 @@ export const EditProducts = () => {
               handleChange,
               handleBlur,
               handleSubmit,
-              setFieldValue,
             }) => (
               <>
                 <form onSubmit={handleSubmit}>
@@ -212,24 +187,11 @@ export const EditProducts = () => {
                           id="contained-button-file"
                           multiple
                           type="file"
-                            // onChange={(event) => {
-                            //   setFieldValue(
-                            //     'picture',
-                            //     event.currentTarget.files[0]
-                            //   );
-                            //   setSelectedImage(event.target.files[0]);
-                            // }}
-                          // value={decodeBase64}
-
-                          // defaultValue={fileBase64String}
-                          // onChange={encodeFileBase64(selectetdFile[0])}
-                          // onChange={(event) => {
-                          // encodeFileBase64(selectedFile[0])
-                          //   setSelectedImage(event.target.files[0]);
-                          onChange={async (e) => {
-                              const file = e.target.files[0];
-                              const base = await encodeFileBase64(file);
-                              setFileBase64String(base);
+                          onChange={ (e) => {
+                              // const file = e.target.files[0];
+                              // const base = await encodeFileBase64(file);
+                              // setFileBase64String(base);
+                              setSelectedImage(e.target.files[0])
                           }}
                         />
                         {imageUrl && selectedImage ? (
@@ -334,29 +296,29 @@ export const EditProducts = () => {
                       </Typography>
                     )}
                   </Box>
-                  <Box sx={{ mb: '30px' }}>
-                    <LabelWrapper>Описания</LabelWrapper>
-                    <TextareaWrapper
-                      name="password"
-                      onChange={handleChange}
-                      type="string"
-                      value={values.description}
-                      onBlur={handleBlur}
-                    />
-                    {errors.description && touched.description && (
-                      <LabelWrapper
-                        sx={{
-                          textAlign: 'left',
-                          fontSize: '13px',
-                          color: 'error.main',
-                          mt: '12px',
-                          ml: '14px',
-                        }}
-                      >
-                        {errors.description}
-                      </LabelWrapper>
-                    )}
-                  </Box>
+                  {/*<Box sx={{ mb: '30px' }}>*/}
+                  {/*  <LabelWrapper>Описания</LabelWrapper>*/}
+                  {/*  <TextareaWrapper*/}
+                  {/*    name="password"*/}
+                  {/*    onChange={handleChange}*/}
+                  {/*    type="string"*/}
+                  {/*    value={values.description}*/}
+                  {/*    onBlur={handleBlur}*/}
+                  {/*  />*/}
+                  {/*  {errors.description && touched.description && (*/}
+                  {/*    <LabelWrapper*/}
+                  {/*      sx={{*/}
+                  {/*        textAlign: 'left',*/}
+                  {/*        fontSize: '13px',*/}
+                  {/*        color: 'error.main',*/}
+                  {/*        mt: '12px',*/}
+                  {/*        ml: '14px',*/}
+                  {/*      }}*/}
+                  {/*    >*/}
+                  {/*      {errors.description}*/}
+                  {/*    </LabelWrapper>*/}
+                  {/*  )}*/}
+                  {/*</Box>*/}
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Количество</LabelWrapper>
                     <InputWrapper

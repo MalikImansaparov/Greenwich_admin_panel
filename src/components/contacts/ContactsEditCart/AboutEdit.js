@@ -74,6 +74,23 @@ export const AboutEdit = () => {
   const about = useSelector((state) => state.contacts.content);
     const [selectedImage, setSelectedImage] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
+    const [fileBase64String, setFileBase64String] = useState("");
+
+
+    const encodeFileBase64 = (file) => {
+        const reader = new FileReader();
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                const Base64 = reader.result;
+                console.log(Base64);
+                setFileBase64String(Base64);
+            };
+            reader.onerror = (error) => {
+                console.log("error: ", error);
+            };
+        }
+    };
 
     useEffect(() => {
         if (selectedImage) {
@@ -88,11 +105,11 @@ export const AboutEdit = () => {
 
   const handleSubmit = (values) => {
     let data = new FormData();
-    data.append('picture', values.picture);
+      if (selectedImage)
+          data.append('picture', fileBase64String)
     data.append('name', values.name);
     data.append('description', values.description);
     dispatch(AsyncEditAbout(data, id));
-    dispatch(clearAbout());
   };
 
   const initialValues = {
@@ -137,7 +154,6 @@ export const AboutEdit = () => {
             validationSchema={validationSchema}
           >
             {({
-              setFieldValue,
               handleSubmit,
               handleChange,
               handleBlur,
@@ -154,19 +170,26 @@ export const AboutEdit = () => {
                     <PhotoWrapper>
                       <InputWrap
                         name="picture"
-                        // value={values.picture}
                         accept="image/*"
                         id="contained-button-file"
                         multiple
                         type="file"
-                        onChange={(event) => {
-                          setFieldValue(
-                            'picture',
-                            event.currentTarget.files[0]
-                          );
+                        onChange={async (e) => {
+                            const file = e.target.files[0];
+                            const base = await encodeFileBase64(file);
+                            setFileBase64String(base);
+                            setSelectedImage(e.target.files[0])
                         }}
                       />
-                      <PhotoWrap component="img" src={values.picture} alt="" />
+                        {imageUrl && selectedImage ? (
+                            <PhotoWrap component="img" src={imageUrl} alt="" />
+                        ) : (
+                            <PhotoWrap
+                                component="img"
+                                src={values.picture}
+                                alt=""
+                            />
+                        )}
                       <Typography>Изменить фото</Typography>
                     </PhotoWrapper>
                   </label>

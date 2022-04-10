@@ -42,6 +42,7 @@ export const AsyncAddProduct = (formData) => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
+
         }),
         {
           pending: 'Ожидание...',
@@ -77,7 +78,6 @@ export const AsyncEditProduct = (formData, id) => {
       )
       .then((data) => {
         dispatch(updateProduct(data));
-        dispatch(AsyncAllProducts());
       })
       .catch((error) => {
         console.log('error:', error);

@@ -10,7 +10,7 @@ import {styled} from "@mui/styles";
 
 const Modal = styled(Dialog)`
 height: 363px;
-width: 1000px;
+width: 40%;
 border-radius: 20px;
 text-align: center;
 `

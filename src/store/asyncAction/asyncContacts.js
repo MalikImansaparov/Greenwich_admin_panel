@@ -6,7 +6,6 @@ import {
   getContact, getContent,
 } from '../actionType/actionTypes';
 import axiosInstance from '../../api/utils/axiosInstance';
-import {AsyncGetEmployers} from "./asyncEmployers";
 import {toast} from "react-toastify";
 
 export const AsyncAllContacts = () => {
@@ -39,8 +38,8 @@ export const AsyncAddContact = (formData) => {
           headers: { 'Content-Type': 'multipart/form-data' },
         }),
         {
-          pending: 'Удаление...',
-          success: 'Продукт удален',
+          pending: 'Добавления...',
+          success: 'Успешно добавлено',
           error: 'Возникла ошибка',
         }
       )
@@ -58,7 +57,7 @@ export const AsyncEditContact = (contact, id) => {
   return (dispatch) => {
     toast
       .promise(
-        axiosInstance.patch(`branches/branches/${id}/`, contact, {
+        axiosInstance.patchn(`branches/branches/${id}/`, contact, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

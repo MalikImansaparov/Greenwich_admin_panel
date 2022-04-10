@@ -15,11 +15,11 @@ import {
   AsyncDeleteProduct,
 } from '../../../store/asyncAction/asyncProducts';
 import CircularPreloader from '../../preloader';
-import avatar from '../../../assets/img/avater.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import ActionButton from "../../ActionButton";
-import {AsyncDeleteEmployers} from "../../../store/asyncAction/asyncEmployers";
 import ConfirmDialog from "../../dialog/confirmPopup";
+import {v4} from 'uuid'
+
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -111,7 +111,6 @@ export const ProductsTable = () => {
       setName('Тимур ');
       setSurename('Одинцев');
     }
-    updateProducts()
     dispatch(AsyncAllProducts());
   }, []);
 
@@ -119,22 +118,24 @@ export const ProductsTable = () => {
     setSearchText(searchValue);
     const filteredRows = productData.filter((row) => {
       return (
-        row.description.toLowerCase().includes(searchText.toLowerCase()) ||
-        row.choice.toLowerCase().includes(searchText.toLowerCase())
+          row.description.toLowerCase().includes(searchText.toLowerCase()) ||
+          row.choice.toLowerCase().includes(searchText.toLowerCase())
       );
     });
     setRows(filteredRows);
   };
-  const updateProducts = () => setRows(productData)
+
   useEffect(() => {
+    const updateProducts = () => {
+      setRows(productData)
+    }
     updateProducts()
   }, [productData]);
-
-
 
   const rowData = rows.map((product) => {
     return {
       id: product?.id,
+      _id: v4(),
       name: product?.description,
       total: product?.price,
       photo: product?.picture,
@@ -171,14 +172,14 @@ export const ProductsTable = () => {
       height: 150,
       renderCell: (params) => {
         return (
-          <div>
-            <Box
-              component="img"
-              src={params.row.photo}
-              alt="product_photo"
-              sx={{ height: '69px', width: '60px', ml: '0px', py: '10px' }}
-            />
-          </div>
+            <div>
+              <Box
+                  component="img"
+                  src={params.row.photo}
+                  alt="product_photo"
+                  sx={{ height: '69px', width: '60px', ml: '0px', py: '10px' }}
+              />
+            </div>
         );
       },
     },
@@ -225,113 +226,110 @@ export const ProductsTable = () => {
       height: 150,
       renderCell: (params) => {
         return (
-          <TextAdjust>
+            <TextAdjust>
             <span>
               <EditIcon
                   sx={{ cursor: 'pointer', mr: '15px' }}
                   onClick={() => handleClick(params.row.id)}
               />
             </span>
-            <ActionButton
-                onClick={() => {
-                  setConfirmDialog({
-                    isOpen: true,
-                    title: 'Вы действительно хотите удалить данный товар?',
-                    onConfirm: () => { handleDelete(params.row.id) }
-                  })
-                }}>
-              <DeleteOutlineIcon sx={{ cursor: 'pointer', fontSize: '30px' }}/>
-            </ActionButton>
-          </TextAdjust>
+              <ActionButton
+                  onClick={() => {
+                    setConfirmDialog({
+                      isOpen: true,
+                      title: 'Вы действительно хотите удалить данный товар?',
+                      onConfirm: () => { handleDelete(params.row.id) }
+                    })
+                  }}>
+                <DeleteOutlineIcon sx={{ cursor: 'pointer', fontSize: '30px' }}/>
+              </ActionButton>
+            </TextAdjust>
         );
       },
     },
   ];
   return (
-    <Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          my: '40px',
-          mr: '15px',
-        }}
-      >
-        <Box sx={{ display: 'flex' }}>
-          <SearchWrapper
-            value={searchText}
-            name="search"
-            type="string"
-            placeholder="Поиск"
-            onChange={(e) => requestSearch(e.target.value)}
-          />
-          <ButtonWrapper>
-            <SearchIcon />
-          </ButtonWrapper>
-        </Box>
-        <Box sx={{ display: 'flex', color: '#487349', cursor: 'pointer' }}>
-          <Typography
+      <Box>
+        <Box
             sx={{
-              width: '200px',
-              textAlign: 'center',
-              fontSize: 22,
-              fontWeight: 600,
-              mt: '8px',
-              mr: '5px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              my: '40px',
+              mr: '15px',
             }}
-          >
-            <span>{name}</span>
-               <span>{surename}</span>
-          </Typography>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          mb: '24px',
-          mr: '10px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography
-          sx={{
-            color: 'black',
-            fontSize: '30px',
-            fontWeight: 600,
-          }}
         >
-          Товары
-        </Typography>
-        <CustomButton to="add" sx={{ textDecoration: 'none' }}>
-          Добавить товара
-        </CustomButton>
-      </Box>
-      <Grid container>
-        <Grid item xs={12}>
-          <ItemWrapper>
-            {isFetching ? (
-              <CircularPreloader />
-            ) : (
-              <DataGrid
-                rows={rowData}
-                columns={columns}
-                pageSize={8}
-                rowsPerPageOptions={[8]}
-                disableSelectionOnClick
-                sx={{ borderRadius: '20px' }}
-              />
-            )}
-          </ItemWrapper>
+          <Box sx={{ display: 'flex' }}>
+            <SearchWrapper
+                value={searchText}
+                name="search"
+                type="string"
+                placeholder="Поиск"
+                onChange={(e) => requestSearch(e.target.value)}
+            />
+            <ButtonWrapper>
+              <SearchIcon />
+            </ButtonWrapper>
+          </Box>
+          <Box sx={{ display: 'flex', color: '#487349', cursor: 'pointer' }}>
+            <Typography
+                sx={{
+                  width: '200px',
+                  textAlign: 'center',
+                  fontSize: 22,
+                  fontWeight: 600,
+                  mt: '8px',
+                  mr: '5px',
+                }}
+            >
+              <span>{name}</span>
+              <span>{surename}</span>
+            </Typography>
+          </Box>
+        </Box>
+        <Box
+            sx={{
+              mb: '24px',
+              mr: '10px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+        >
+          <Typography
+              sx={{
+                color: 'black',
+                fontSize: '30px',
+                fontWeight: 600,
+              }}
+          >
+            Товары
+          </Typography>
+          <CustomButton to="add" sx={{ textDecoration: 'none' }}>
+            Добавить товара
+          </CustomButton>
+        </Box>
+        <Grid container>
+          <Grid item xs={12}>
+            <ItemWrapper>
+              {isFetching ? (
+                  <CircularPreloader />
+              ) : (
+                  <DataGrid
+                      getRowId={(r) => r._id}
+                      rows={rowData}
+                      columns={columns}
+                      pageSize={8}
+                      rowsPerPageOptions={[8]}
+                      disableSelectionOnClick
+                      sx={{ borderRadius: '20px' }}
+                  />
+              )}
+            </ItemWrapper>
+          </Grid>
         </Grid>
-      </Grid>
-      <ConfirmDialog
-          confirmDialog={confirmDialog}
-          setConfirmDialog={setConfirmDialog}
-      />
-    </Box>
+        <ConfirmDialog
+            confirmDialog={confirmDialog}
+            setConfirmDialog={setConfirmDialog}
+        />
+      </Box>
   );
 };
-
-
-
-

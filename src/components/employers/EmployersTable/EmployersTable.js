@@ -17,9 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
 import ConfirmDialog from "../../dialog/confirmPopup";
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import ActionButton from "../../ActionButton";
+import {v4} from 'uuid'
 
 const CustomButton = styled(Link)`
   height: 52px;
@@ -125,31 +124,32 @@ export const EmployersTable = () => {
       setName('Тимур ');
       setSurename('Одинцев');
     }
-      updateEmployers()
   }, []);
 
-  const requestSearch = (searchValue) => {
-    setSearchText(searchValue);
-    const filteredRows = employersData.filter((row) => {
-      return (
-        row.user.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
-        row.user.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
-        row.user.phone_number.toLowerCase().includes(searchText.toLowerCase())
-      );
-    });
-    setRows(filteredRows);
-  };
+    const requestSearch = (searchValue) => {
+        setSearchText(searchValue);
+        const filteredRows = employersData.filter((row) => {
+            return (
+                row.user.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
+                row.user.last_name.toLowerCase().includes(searchText.toLowerCase()) ||
+                row.user.phone_number.toLowerCase().includes(searchText.toLowerCase())
+            );
+        });
+        setRows(filteredRows);
+    };
 
-  const updateEmployers = () => {
-      setRows(employersData);
-  }
+
 
   useEffect(() => {
+      const updateEmployers = () => {
+          setRows(employersData);
+      }
     updateEmployers()
   }, [employersData]);
 
   const rowData = rows.map((employer) => {
     return {
+        _id: v4(),
       id: employer?.id,
       name: !employer?.user.first_name
         ? 'Тимур Одинцев'
@@ -296,18 +296,18 @@ export const EmployersTable = () => {
           mr: '15px',
         }}
       >
-        <Box sx={{ display: 'flex' }}>
-          <SearchWrapper
-            value={searchText}
-            name="search"
-            type="text"
-            placeholder="Поиск"
-            onChange={(e) => requestSearch(e.target.value)}
-          />
-          <ButtonWrapper>
-            <SearchIcon />
-          </ButtonWrapper>
-        </Box>
+          <Box sx={{ display: 'flex' }}>
+              <SearchWrapper
+                  value={searchText}
+                  name="search"
+                  type="string"
+                  placeholder="Поиск"
+                  onChange={(e) => requestSearch(e.target.value)}
+              />
+              <ButtonWrapper>
+                  <SearchIcon />
+              </ButtonWrapper>
+          </Box>
         <Box sx={{ display: 'flex', color: '#487349', cursor: 'pointer' }}>
           <Typography
             sx={{
@@ -354,6 +354,7 @@ export const EmployersTable = () => {
               <CircularPreloader />
             ) : (
               <DataGrid
+                  getRowId={(r) => r._id}
                 rows={rowData}
                 columns={columns}
                 pageSize={8}

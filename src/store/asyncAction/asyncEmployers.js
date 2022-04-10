@@ -26,13 +26,12 @@ export const AsyncAddEmployers = (values) => {
         success: 'Успешно добавлено',
         error: 'Возникла ошибка',
       })
-      .catch((error) => {
-        console.log('error:', error);
-      })
       .then((data) => {
         dispatch(addEmployers(data));
         dispatch(AsyncGetEmployers());
-      });
+      }).catch((error) => {
+      console.log('error:', error);
+    })
   };
 };
 
@@ -82,14 +81,14 @@ export const AsyncDeleteEmployers = (id) => {
   };
 };
 
-export const AsyncGetCourier = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axiosInstance.get(`courier-profile`);
-      dispatch(getCourier(data));
-    } catch (e) {
-      console.log('error:', e);
-    }
-  };
-};
+// export const AsyncGetCourier = () => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axiosInstance.get(`courier-profile`);
+//       dispatch(getCourier(data));
+//     } catch (e) {
+//       console.log('error:', e);
+//     }
+//   };
+// };
 

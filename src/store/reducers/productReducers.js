@@ -48,7 +48,7 @@ export const productsReducer = (state = initialState, action) => {
     case ADD_PRODUCT:
       return {
         ...state,
-        product: [...state.product, ...action.payload],
+        product: [...state.product,  action.payload],
       };
     case UPDATE_PRODUCT:
       return {

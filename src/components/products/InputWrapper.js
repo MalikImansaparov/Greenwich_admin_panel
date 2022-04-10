@@ -82,7 +82,7 @@ export const PhotoWrapper = styled('span')`
 export const TextareaWrapper = styled('textarea')`
   font-family: 'Montserrat';
   width: 500px;
-  height: 166px;
+  height: 180px;
   border-radius: 20px;
   border: 1px solid #000000;
   outline: none;
