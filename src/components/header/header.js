@@ -1,9 +1,7 @@
+import React,{ useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import avatar from "../../assets/img/avater.svg";
-import * as React from "react";
 import {Search} from "../search";
-import { useEffect, useState } from 'react';
 
 export const Header = () => {
   const [name, setName] = useState(localStorage.getItem('firstName'));

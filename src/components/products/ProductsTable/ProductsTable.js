@@ -16,83 +16,14 @@ import {
 } from '../../../store/asyncAction/asyncProducts';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
-import ActionButton from "../../ActionButton";
+import ActionButton from "../../dialog/ActionButton";
 import ConfirmDialog from "../../dialog/confirmPopup";
 import {v4} from 'uuid'
-
-
-const CustomButton = styled(Link)`
-  height: 52px;
-  width: 320px;
-  background-color: #487349;
-  padding: 14px 30px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  text-decoration: none
-  &:hover {
-    background-color: #9C9C9C;
-  }
-`;
-
-const SearchWrapper = styled('input')`
-  max-width: 380px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 20px 0 0 20px;
-  border: none;
-  outline: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-`;
-
-const ButtonWrapper = styled('button')`
-  width: 60px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 0 20px 20px 0px;
-  border: none;
-  outline: none;
-  padding: 10px 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-  &:hover {
-    background: #e6f0e6;
-  }
-`;
-
-const TextAdjust = styled('span')`
-  margin-left: 5px;
-`;
-
-const Content = styled(Box)`
-  margin-left: 15px;
-`;
+import {ButtonWrapper, SearchWrapper, TextAdjust} from "../../employers/EmployersTable/style";
+import {CustomButton} from "../../customButton";
 
 export const ProductsTable = () => {
-  const productData = useSelector((state) => state.products.product);
+  const productData = useSelector((state) => state.products.product || []);
   const isFetching = useSelector((state) => state.products.loading);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -107,11 +38,12 @@ export const ProductsTable = () => {
   });
 
   useEffect(() => {
+      dispatch(AsyncAllProducts());
     if (name.length || surename.length === 0) {
       setName('Тимур ');
       setSurename('Одинцев');
     }
-    dispatch(AsyncAllProducts());
+
   }, []);
 
   const requestSearch = (searchValue) => {
@@ -134,9 +66,9 @@ export const ProductsTable = () => {
 
   const rowData = rows.map((product) => {
     return {
+        _id: v4(),
       id: product?.id,
-      _id: v4(),
-      name: product?.description,
+      name: product?.name,
       total: product?.price,
       photo: product?.picture,
       category: product?.choice,

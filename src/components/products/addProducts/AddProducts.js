@@ -1,57 +1,25 @@
 import React,{useState, useEffect} from "react";
 import { useFormik } from 'formik';
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate } from 'react-router';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
 import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import * as Yup from 'yup';
 import {
   DefaultPhoto,
   InputWrap,
   InputWrapper,
   LabelWrapper, PhotoWrap, PhotoWrapper,
-
   SelectWrapper,
-  TextareaWrapper,
 } from '../InputWrapper';
 import { Item } from '../../../style';
 import { GoBack } from '../../goBack';
 import BreadCrumb from '../../breadCrumbs';
 import Upload from '../../../assets/img/upload.svg';
-import { AsyncAddEmployers } from '../../../store/asyncAction/asyncEmployers';
 import { AsyncAddProduct } from '../../../store/asyncAction/asyncProducts';
-import axiosInstance from '../../../api/utils/axiosInstance';
 import { useDispatch } from 'react-redux';
 import { Header } from '../../header/header';
-
-const CustomButton = styled(Button)`
-  height: 52px;
-  width: 250px;
-  background-color: #487349;
-  padding: 14px 130px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 70px;
-  &:hover {
-    background-color: #9c9c9c;
-  }
-`;
-
-const validationSchema = Yup.object({
-  choice: Yup.string().required('Выберите категорию'),
-  description: Yup.string().required('Названия обязателный'),
-  price: Yup.string().required('Цена обязателный'),
-  quantity: Yup.string().required('Количество обязателный'),
-});
+import {CustomButton} from "../../customButton";
+import {validationSchema} from "../../signinAuth/validateForm";
 
 export const AddProducts = () => {
   const navigate = useNavigate();
@@ -90,7 +58,6 @@ export const AddProducts = () => {
     errors,
     touched,
     isSubmitting,
-    setFieldValue,
   } = useFormik({
     initialValues: {
       picture: '',
@@ -238,29 +205,6 @@ export const AddProducts = () => {
                 </Typography>
               )}
             </Box>
-            {/* <Box sx={{ mb: '30px' }}>*/}
-            {/*  <LabelWrapper>Описания</LabelWrapper>*/}
-            {/*  <TextareaWrapper*/}
-            {/*    name="description"*/}
-            {/*    onChange={handleChange}*/}
-            {/*    type="text"*/}
-            {/*    value={values.description}*/}
-            {/*    onBlur={handleBlur}*/}
-            {/*  />*/}
-            {/*  {errors.description && touched.description && (*/}
-            {/*    <LabelWrapper*/}
-            {/*      sx={{*/}
-            {/*        textAlign: 'left',*/}
-            {/*        fontSize: '13px',*/}
-            {/*        color: 'error.main',*/}
-            {/*        mt: '12px',*/}
-            {/*        ml: '14px',*/}
-            {/*      }}*/}
-            {/*    >*/}
-            {/*      {errors.description}*/}
-            {/*    </LabelWrapper>*/}
-            {/*  )}*/}
-            {/*</Box>*/}
             <Box sx={{ mb: '30px' }}>
               <LabelWrapper>Количество</LabelWrapper>
               <InputWrapper

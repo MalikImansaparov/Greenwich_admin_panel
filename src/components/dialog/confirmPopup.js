@@ -1,11 +1,11 @@
+import React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import React from "react";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-import Buttons from "../Button";
+import Buttons from "./Button";
 import {styled} from "@mui/styles";
 
 const Modal = styled(Dialog)`

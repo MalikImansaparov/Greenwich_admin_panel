@@ -8,15 +8,6 @@ export const SignInLogo = () => {
         <Box>
             <Box component="img"
     src={logo} alt="logo"
-    sx={{
-        height: '108px',
-        width: '525px',
-        marginRight: '50px',
-        alignSelf: 'center',
-        marginBottom: '20px',
-        marginTop: '103px',
-        paddingLeft: '25px'
-    }}
     />
             <Box
     component="img"

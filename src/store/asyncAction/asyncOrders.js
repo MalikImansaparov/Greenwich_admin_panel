@@ -48,7 +48,7 @@ export const AsyncDeleteOrder = (id) => {
       toast.promise(
  axiosInstance.delete(`orders/order/${id}`),
     {
-      pending: 'Ожидания...',
+      pending: 'Ожидание...',
           success: 'Успешно отменено',
         error: 'Возникла ошибка'
     }

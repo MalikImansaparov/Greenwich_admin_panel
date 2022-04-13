@@ -16,27 +16,7 @@ import {
 } from '../../../store/asyncAction/asyncEmployers';
 import BreadCrumb from '../../breadCrumbs';
 import { Header } from '../../header/header';
-import {toast} from "react-toastify";
-
-const CustomButton = styled(Button)`
-  height: 52px;
-  width: 200px;
-  background-color: #487349;
-  padding: 14px 130px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 70px;
-  &:hover {
-    background-color: #9c9c9c;
-  }
-`;
+import {CustomButton} from "../../customButton";
 
 export const AddEmployers = () => {
   const dispatch = useDispatch();
@@ -155,29 +135,6 @@ export const AddEmployers = () => {
                     </Typography>
                   )}
                 </Box>
-                {/*<Box sx={{ mb: '30px' }}>*/}
-                {/*  <LabelWrapper>Надбавка</LabelWrapper>*/}
-                {/*  <InputWrapper*/}
-                {/*    name="courier_allowance"*/}
-                {/*    onChange={handleChange}*/}
-                {/*    type="text"*/}
-                {/*    value={values.courier_allowance}*/}
-                {/*    placeholder=""*/}
-                {/*  />*/}
-                {/*  {errors.courier_allowance && touched.courier_allowance && (*/}
-                {/*    <Typography*/}
-                {/*      sx={{*/}
-                {/*        textAlign: 'left',*/}
-                {/*        fontSize: '13px',*/}
-                {/*        color: 'error.main',*/}
-                {/*        mt: '12px',*/}
-                {/*        ml: '14px',*/}
-                {/*      }}*/}
-                {/*    >*/}
-                {/*      {errors.courier_allowance}*/}
-                {/*    </Typography>*/}
-                {/*  )}*/}
-                {/*</Box>*/}
                 <Box sx={{ mb: '30px' }}>
                   <LabelWrapper>Роль</LabelWrapper>
                   <SelectWrapper

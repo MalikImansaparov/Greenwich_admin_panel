@@ -17,87 +17,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircularPreloader from '../../preloader';
 import SearchIcon from '@mui/icons-material/Search';
 import ConfirmDialog from "../../dialog/confirmPopup";
-import ActionButton from "../../ActionButton";
+import ActionButton from "../../dialog/ActionButton";
 import {v4} from 'uuid'
+import {ButtonWrapper, NumberAdjust, TextAdjust} from "./style";
+import {CustomButton} from "../../customButton";
+import {SearchWrapper} from "../../search";
 
-const CustomButton = styled(Link)`
-  height: 52px;
-  width: 320px;
-  background-color: #487349;
-  padding: 14px 30px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  text-decoration: none
-  &:hover {
-    background-color: #9C9C9C;
-  }
-`;
-
-const actionIcon = styled('Box')`
-  color: '#000000';
-  margin-right: '15px';
-  cursor: pointer;
-  &: hover {
-    color: '#487349';
-  }
-`;
-
-const SearchWrapper = styled('input')`
-  max-width: 380px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 20px 0 0 20px;
-  border: none;
-  outline: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-`;
-
-const TextAdjust = styled('span')`
-  margin-left: 5px;
-`;
-
-const NumberAdjust = styled('span')`
-  margin-left: 25px;
-`;
-
-const ButtonWrapper = styled('button')`
-  width: 60px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 0 20px 20px 0px;
-  border: none;
-  outline: none;
-  padding: 10px 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-  &:hover {
-    background: #e6f0e6;
-  }
-`;
 
 export const EmployersTable = () => {
   const navigate = useNavigate();
@@ -137,7 +62,6 @@ export const EmployersTable = () => {
         });
         setRows(filteredRows);
     };
-
 
 
   useEffect(() => {
@@ -308,7 +232,7 @@ export const EmployersTable = () => {
                   <SearchIcon />
               </ButtonWrapper>
           </Box>
-        <Box sx={{ display: 'flex', color: '#487349', cursor: 'pointer' }}>
+        <Box sx={{ display: 'flex', color: '#487349', cursor: 'pointer' }}>4
           <Typography
             sx={{
               width: '200px',
@@ -358,7 +282,6 @@ export const EmployersTable = () => {
                 rows={rowData}
                 columns={columns}
                 pageSize={8}
-                // checkboxSelection
                 rowsPerPageOptions={[8]}
                 disableSelectionOnClick
                 sx={{ borderRadius: '20px' }}

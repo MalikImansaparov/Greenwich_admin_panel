@@ -7,9 +7,7 @@ export class AuthApi {
         phone_number,
         password,
       });
-
       axiosInstance.defaults.headers['Authorization'] = data.access;
-
       return data;
     } catch (error) {
       throw error;

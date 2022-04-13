@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import { useNavigate, useParams } from "react-router";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/system";
 import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import {
     InputWrap,
     InputWrapper,
     LabelWrapper,
-    PhotoWrap,
+    PhotoWrap, PhotoWrapper,
     SelectWrapper, TextareaWrapper,
 } from '../InputWrapper';
 import { Item } from '../../../style';
@@ -25,50 +23,9 @@ import {
 } from '../../../store/asyncAction/asyncProducts';
 import { clearProduct } from '../../../store/actionType/actionTypes';
 import CircularPreloader from '../../preloader';
+import {CustomButton} from "../../customButton";
+import {validationSchema} from "../../signinAuth/validateForm";
 
-const PhotoWrapper = styled('span')`
-  width: 230px;
-  height: 210px;
-  display: block;
-  justify-content: center;
-  border-radius: 20px;
-  padding-top: 10px;
-  border: 1px solid #000000;
-  font-weight: 600;
-  color: #000000;
-  cursor: pointer;
-  &: hover {
-    background: #e6f0e6;
-  }
-`;
-
-const CustomButton = styled(Button)`
-  height: 52px;
-  width: 250px;
-  background-color: #487349;
-  padding: 14px 130px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 70px;
-  &:hover {
-    background-color: #9c9c9c;
-  }
-`;
-
-const validationSchema = Yup.object({
-  picture: Yup.string().required('Загрузите картину'),
-  description: Yup.string().required('Описание обязателный'),
-  choice: Yup.string().required('Выберите категорию'),
-  price: Yup.number().required('Укажите цену'),
-  quantity: Yup.number().required('Укажите количество'),
-});
 
 export const EditProducts = () => {
   const navigate = useNavigate();
@@ -77,23 +34,6 @@ export const EditProducts = () => {
   const productInfo = useSelector((state) => state.products.care);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
-  // const [fileBase64String, setFileBase64String] = useState("");
-  //
-  //
-  //   const encodeFileBase64 = (file) => {
-  //       const reader = new FileReader();
-  //       if (file) {
-  //           reader.readAsDataURL(file);
-  //           reader.onload = () => {
-  //               const Base64 = reader.result;
-  //               setFileBase64String(Base64);
-  //           };
-  //           reader.onerror = (error) => {
-  //               console.log("error: ", error);
-  //           };
-  //       }
-  //   };
-
 
   useEffect(() => {
     if (selectedImage) {
@@ -114,15 +54,15 @@ export const EditProducts = () => {
               data.append('picture', selectedImage)
     data.append('choice', values.choice);
     data.append('price', values.price);
-    data.append('description', values.description);
+    data.append('name', values.name);
     data.append('quantity', values.quantity);
+    data.append('description', values.description);
     dispatch(AsyncEditProduct(data, id));
-    dispatch(clearProduct());
     navigate(-1);
-
   };
 
   const initialValues = {
+      name: productInfo?.name,
     picture: productInfo?.picture,
     choice: productInfo?.choice,
     price: productInfo?.price,
@@ -188,9 +128,6 @@ export const EditProducts = () => {
                           multiple
                           type="file"
                           onChange={ (e) => {
-                              // const file = e.target.files[0];
-                              // const base = await encodeFileBase64(file);
-                              // setFileBase64String(base);
                               setSelectedImage(e.target.files[0])
                           }}
                         />
@@ -223,13 +160,13 @@ export const EditProducts = () => {
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Наименование</LabelWrapper>
                     <InputWrapper
-                      name="description"
+                      name="name"
                       onChange={handleChange}
                       type="string"
-                      value={values.description}
+                      value={values.name}
                       onBlur={handleBlur}
                     />
-                    {errors.description && touched.description && (
+                    {errors.name && touched.name && (
                       <Typography
                         sx={{
                           textAlign: 'left',
@@ -239,7 +176,7 @@ export const EditProducts = () => {
                           ml: '14px',
                         }}
                       >
-                        {errors.description}
+                        {errors.name}
                       </Typography>
                     )}
                   </Box>
@@ -296,29 +233,29 @@ export const EditProducts = () => {
                       </Typography>
                     )}
                   </Box>
-                  {/*<Box sx={{ mb: '30px' }}>*/}
-                  {/*  <LabelWrapper>Описания</LabelWrapper>*/}
-                  {/*  <TextareaWrapper*/}
-                  {/*    name="password"*/}
-                  {/*    onChange={handleChange}*/}
-                  {/*    type="string"*/}
-                  {/*    value={values.description}*/}
-                  {/*    onBlur={handleBlur}*/}
-                  {/*  />*/}
-                  {/*  {errors.description && touched.description && (*/}
-                  {/*    <LabelWrapper*/}
-                  {/*      sx={{*/}
-                  {/*        textAlign: 'left',*/}
-                  {/*        fontSize: '13px',*/}
-                  {/*        color: 'error.main',*/}
-                  {/*        mt: '12px',*/}
-                  {/*        ml: '14px',*/}
-                  {/*      }}*/}
-                  {/*    >*/}
-                  {/*      {errors.description}*/}
-                  {/*    </LabelWrapper>*/}
-                  {/*  )}*/}
-                  {/*</Box>*/}
+                  <Box sx={{ mb: '30px' }}>
+                    <LabelWrapper>Описания</LabelWrapper>
+                    <TextareaWrapper
+                      name="description"
+                      onChange={handleChange}
+                      type="string"
+                      value={values.description}
+                      onBlur={handleBlur}
+                    />
+                    {errors.description && touched.description && (
+                      <LabelWrapper
+                        sx={{
+                          textAlign: 'left',
+                          fontSize: '13px',
+                          color: 'error.main',
+                          mt: '12px',
+                          ml: '14px',
+                        }}
+                      >
+                        {errors.description}
+                      </LabelWrapper>
+                    )}
+                  </Box>
                   <Box sx={{ mb: '30px' }}>
                     <LabelWrapper>Количество</LabelWrapper>
                     <InputWrapper

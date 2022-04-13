@@ -25,7 +25,7 @@ export const BreadcrubsWrapper = styled('div')`
         {pathname && (
           <BreadcrubsWrapper>
             {pathname === '/products' ? 'Продукты > ' : null}
-            {pathname === `/orders/${id}` ? 'Заказы > Редактирование заказов' : null}
+            {pathname === `/orders/${id}` ? 'Заказы > Редактирование заказа' : null}
             {pathname === '/employers' ? 'Сотрудники > ' : null}
             {pathname === '/employers/add'
               ? 'Сотрудники  >  Добавление сотрудника'
@@ -42,8 +42,8 @@ export const BreadcrubsWrapper = styled('div')`
             {pathname === `/contacts/${id}`
               ? 'Контакты  >  Редактирование контактов '
               : null}
-            {pathname === `/contacts/add}`
-              ? 'Контакты  >  Добавление контактов '
+            {pathname === `/contacts/add`
+              ? 'Контакты  >  Добавление филиала '
               : null}
               {pathname === `/contacts/edit/${id}`
                   ? 'О нас  >  Редактирование о нас '

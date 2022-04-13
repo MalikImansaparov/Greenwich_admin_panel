@@ -76,7 +76,7 @@ export const EditEmployersTab = () => {
                             </Tabs>
                         </Paper>
                         <TabPanel value={value} index={0}>
-                           <EditEmployers/>
+                            <EditEmployers/>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <EditPassword/>

@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate, useParams } from 'react-router';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
 import FormControl from '@mui/material/FormControl';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { InputWrapper, LabelWrapper } from '../InputWrapper';
 import { Item } from '../../../style';
@@ -12,37 +10,10 @@ import { GoBack } from '../../goBack';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from '../../../api/utils/axiosInstance';
-import * as Yup from 'yup';
 import { AsyncGetProfile } from '../../../store/asyncAction/asyncEmployers';
 import { clearProfile } from '../../../store/actionType/actionTypes';
-
-const CustomButton = styled(Button)`
-  height: 52px;
-  width: 250px;
-  background-color: #487349;
-  padding: 14px 130px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 70px;
-  &:hover {
-    background-color: #9c9c9c;
-  }
-`;
-const validationSchema = Yup.object().shape({
-  new_password: Yup.string()
-    .required('Пароль обязателный')
-    .min(6, 'Небезопасный пароль'),
-  new_password2: Yup.string()
-    .oneOf([Yup.ref('new_password'), null], 'Пароль не совпадает')
-    .required('Потверждение обязателный'),
-});
+import {validationSchema} from "../../signinAuth/validateForm";
+import {CustomButton} from "../../customButton";
 
 export const EditPassword = () => {
   const navigate = useNavigate();

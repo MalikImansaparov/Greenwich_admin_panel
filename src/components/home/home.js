@@ -1,9 +1,8 @@
-import {Navigate, Outlet, useNavigate} from "react-router";
+import React,{useEffect} from "react";
+import {Outlet, useNavigate} from "react-router";
 import Box from "@mui/material/Box";
 import ResponsiveDrawer from "../sidebar/drawer";
-import * as React from "react";
 import {useSelector} from "react-redux";
-import {useEffect} from "react";
 
 export const Home = () => {
     const navigate = useNavigate()

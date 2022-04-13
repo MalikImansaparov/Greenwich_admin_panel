@@ -73,57 +73,17 @@ export default function StatisticCourier() {
 
           </Accordion>
           <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-              <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                  <Typography sx={{ width: '35%', flexShrink: 0 }}>
-                      Адилет Маратов
-                  </Typography>
+              {courier.map((statistic) => {
+                  <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                      <Typography sx={{ width: '35%', flexShrink: 0 }}>
+                          {statistic.name}
+                      </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                      <OrderCourier/>
+                  </AccordionDetails>
+              })}
 
-              </AccordionSummary>
-              <AccordionDetails>
-                  <OrderCourier/>
-              </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-              <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography sx={{ width: '35%', flexShrink: 0 }}>
-                      Темирлан Исабеков
-                  </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                  <OrderCourier/>
-              </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel2')}>
-              <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography sx={{ width: '35%', flexShrink: 0 }}>
-                      Азамат Байгазиев
-                  </Typography>
-
-              </AccordionSummary>
-              <AccordionDetails>
-                  <OrderCourier/>
-              </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}>
-              <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography sx={{ width: '35%', flexShrink: 0 }}>
-                      Дастан Кадырбеков
-                  </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                  <OrderCourier/>
-              </AccordionDetails>
-          </Accordion>
-          <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}
-                     sx={{ borderRadius: '0 0 20px 20px '}}>
-              <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                  <Typography sx={{ width: '35%', flexShrink: 0 }}>
-                      Султан Муратов
-                  </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                  <OrderCourier/>
-              </AccordionDetails>
           </Accordion>
       </Item>
   );

@@ -40,15 +40,14 @@ const CustomButton = styled(Button)`
 `;
 
 const validationSchema = Yup.object().shape({
-  first_name: Yup.string().required('Имя обязателный'),
+  first_name: Yup.string().required('Имя обязательный'),
   address: Yup.string().required('Укажите адресс'),
   phone_number: Yup.string()
-    .required('Номер обязателный')
+    .required('Номер обязательный')
     .min(9, 'Не правилный номер')
     .max(14, 'Не правилный номер'),
   total_price: Yup.string().required('Укажите цену'),
-    price_with_discount: Yup.string().required('Укажите скидку'),
-
+  price_with_discount: Yup.string().required('Укажите скидку'),
 });
 
 export const EditOrders = () => {

@@ -39,7 +39,7 @@ export const asyncLogin =
     toast
       .promise(AuthApi.login(phone_number, password), {
         pending: 'Ожидание...',
-        success: 'Успешно регистрированы',
+        success: 'Вы успешно регистрированы',
         error: 'Неверный номер или пароль',
       })
       .then(

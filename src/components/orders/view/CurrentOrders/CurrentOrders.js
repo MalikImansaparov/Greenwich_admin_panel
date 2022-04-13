@@ -9,74 +9,13 @@ import axiosInstance from '../../../../api/utils/axiosInstance';
 import CircularPreloader from '../../../preloader';
 import { ItemWrapper } from '../../../../style';
 import avatar from '../../../../assets/img/avater.svg';
-import { styled } from '@mui/system';
 import SearchIcon from '@mui/icons-material/Search';
-
-const SearchWrapper = styled('input')`
-  max-width: 380px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 20px 0 0 20px;
-  border: none;
-  outline: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 600;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-`;
-
-const ButtonWrapper = styled('button')`
-  width: 60px;
-  height: 48px;
-  background: #e6f0e6;
-  border-radius: 0 20px 20px 0px;
-  border: none;
-  outline: none;
-  padding: 10px 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: #487349;
-  }
-  :-ms-input-placeholder {
-    color: #487349;
-  }
-  &:hover {
-    background: #e6f0e6;
-  }
-`;
+import {ButtonWrapper, SearchWrapper} from "../../../employers/EmployersTable/style";
 
 export const CurrentOrders = () => {
-    // const [rowData, setRowData] = useState([]);
   const isFetching = useSelector((state) => state.orders.loading);
   const isOrders = useSelector((state) => state.orders.order || []);
   const dispatch = useDispatch();
-  //   const [searchText, setSearchText] = React.useState('');
-  //   const [rows, setRows] = React.useState(rowData);
-
-  //   const requestSearch = (searchValue) => {
-  //     setSearchText(searchValue);
-
-  //     const filteredRows = rowData.filter((row) => {
-  //       return (
-  //         row.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
-  //         row.phone_number.toLowerCase().includes(searchText.toLowerCase())
-  //       );
-  //     });
-  //     setRows(filteredRows);
-  //   };
-
-  //   useEffect(() => {
-  //     setRows(rowData);
-  //   }, [rowData]);
 
   const rowDatas = isOrders.map((order) => {
     return {
@@ -181,11 +120,9 @@ export const CurrentOrders = () => {
       >
         <Box sx={{ display: 'flex' }}>
           <SearchWrapper
-            // value={searchText}
             name="search"
             type="string"
             placeholder="Поиск"
-            // onChange={(e) => requestSearch(e.target.value)}
           />
           <ButtonWrapper>
             <SearchIcon />
@@ -202,10 +139,7 @@ export const CurrentOrders = () => {
               mr: '5px',
             }}
           >
-            {' '}
             Тимур Одинцев
-            {/*<span>{firstName}</span>*/}
-            {/*   <span>{lastName}</span>*/}
           </Typography>
           <img src={avatar} alt="avatar" sx={{ mt: '20px' }} />
         </Box>

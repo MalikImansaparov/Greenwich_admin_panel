@@ -24,7 +24,7 @@ const Accordion = styled((props) => (
 
 const AccordionSummary = styled((props) => (
     <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem', ml: '20px' }} />}
         {...props}
     />
 ))(({ theme }) => ({
@@ -62,66 +62,23 @@ export default function StatisticFlorist() {
                     <Typography sx={{ width: '40%', flexShrink: 0, fontSize: '24px' }}>
                         Динамика работы флористов
                     </Typography>
-                    <Typography sx={{ color: 'text.secondary', fontSize: '20px' }}>1245 продаж</Typography>
+                    <Typography sx={{ color: 'text.secondary', fontSize: '20px' }}>1287 продаж</Typography>
                 </Box>
 
             </Accordion>
             <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
-                        Алина Оразакунова
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> 378 продаж</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <OrderFlorist/>
-                </AccordionDetails>
+                {florist.map((statistic) => {
+                    <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+                        <Typography sx={{width: '35%', flexShrink: 0}}>
+                            {statistic.name}
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <OrderFlorist/>
+                    </AccordionDetails>
+                )}
             </Accordion>
-            <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
-                        Вероника Викторовна
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> 370 продаж</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <OrderFlorist/>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel2')}>
-                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
-                        Айгуль Байгазиева
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> 308 продаж</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <OrderFlorist/>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}>
-                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
-                        Дастан Кыдырбеков
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> 278 продаж</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <OrderFlorist/>
-                </AccordionDetails>
-            </Accordion>
-            <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel3')}
-                       sx={{ borderRadius: '0 0 20px 20px '}}>
-                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                    <Typography sx={{ width: '25%', flexShrink: 0 }}>
-                        Карина Муратова
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}> 208 продаж</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <OrderFlorist/>
-                </AccordionDetails>
-            </Accordion>
+
         </Item>
     );
 }

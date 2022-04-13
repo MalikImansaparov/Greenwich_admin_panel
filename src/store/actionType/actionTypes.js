@@ -68,8 +68,6 @@ export const updateEmployers = (payload) => ({
   payload,
 });
 export const deleteEmployers = (id) => ({ type: DELETE_EMPLOYER, payload: id });
-export const getCourier = (payload) => ({ type: GET_COURIER, payload });
-export const clearCourier = (payload) => ({ type: CLEAR_COURIER, payload });
 
 export const getProducts = (payload) => ({ type: PRODUCT_SUCCESS, payload });
 export const getProduct = (payload) => ({ type: GET_PRODUCT, payload });

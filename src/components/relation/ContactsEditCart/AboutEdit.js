@@ -17,14 +17,11 @@ import {
 import { GoBack } from '../../goBack';
 import { Item } from '../../../style';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  AsyncAllAbout,
-
-  AsyncEditAbout, AsyncGetAbout,
+import {AsyncEditAbout, AsyncGetAbout,
 } from '../../../store/asyncAction/asyncContacts';
 import BreadCrumb from '../../breadCrumbs';
 import CircularPreloader from '../../preloader';
-import {clearAbout, clearContact,} from '../../../store/actionType/actionTypes';
+import {clearAbout,} from '../../../store/actionType/actionTypes';
 import {Header} from "../../header/header";
 
 const PhotoWrapper = styled('span')`
@@ -76,7 +73,6 @@ export const AboutEdit = () => {
     const [imageUrl, setImageUrl] = useState(null);
     const [fileBase64String, setFileBase64String] = useState("");
 
-
     const encodeFileBase64 = (file) => {
         const reader = new FileReader();
         if (file) {
@@ -117,7 +113,6 @@ export const AboutEdit = () => {
     name: about?.name,
     description: about?.description,
   };
-
 
   if (!about) {
     return (

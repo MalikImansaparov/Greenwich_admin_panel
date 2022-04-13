@@ -1,13 +1,12 @@
-
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { Item } from '../../../style';
-import { styled } from '@mui/material';
+import { useNavigate} from 'react-router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AsyncAllAbout} from "../../../store/asyncAction/asyncContacts";
+import {styled} from "@mui/material";
+import {Item} from "../../../style";
 
 const CartItem = styled(Item)`
   height: 266px;

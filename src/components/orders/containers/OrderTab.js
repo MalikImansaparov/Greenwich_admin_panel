@@ -26,7 +26,7 @@ import axiosInstance from '../../../api/utils/axiosInstance';
 import { toast } from 'react-toastify';
 import ConfirmDialog from "../../dialog/confirmPopup";
 import {AsyncDeleteProduct} from "../../../store/asyncAction/asyncProducts";
-import ActionButton from "../../ActionButton";
+import ActionButton from "../../dialog/ActionButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const SearchWrapper = styled('input')`
@@ -86,7 +86,7 @@ export const OrderTab = () => {
     const isFetching = useSelector((state) => state.orders.loading);
     const isOrders = useSelector((state) => state.orders.orders || []);
     const completedOrders = useSelector((state) => state.orders.completed || []);
-    const confirmOrders = useSelector((state) => state.orders.completed || []);
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [searchText, setSearchText] = React.useState('');
@@ -102,14 +102,22 @@ export const OrderTab = () => {
         subTitle: '',
     });
 
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/auth');
+        }
+    }, [isAuthenticated]);
 
     useEffect(() => {
         dispatch(AsyncOrders());
         dispatch(AsyncCompletedOrders());
-        if (name.length || surename.length === 0) {
-            setName('Тимур ');
-            setSurename('Одинцев');
+        const setAdminName = () => {
+            if (name.length || surename.length === 0) {
+                setName('Тимур ');
+                setSurename('Одинцев');
+            }
         }
+        setAdminName()
     }, []);
 
     const requestSearch = (searchValue) => {
@@ -129,7 +137,6 @@ export const OrderTab = () => {
             setRows(isOrders);
         }
         updateOrders()
-
     }, [isOrders, initialRender ]);
 
     const rowData = completedOrders.map((order) => {
@@ -165,7 +172,7 @@ export const OrderTab = () => {
 
     setTimeout(() => {
         AsyncOrders();
-    }, 10000);
+    }, 5000);
 
     const handleDelete = (id) => {
         setConfirmDialog({

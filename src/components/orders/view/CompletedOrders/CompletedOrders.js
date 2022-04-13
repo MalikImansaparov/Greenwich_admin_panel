@@ -9,7 +9,6 @@ import { AsyncOrders } from '../../../../store/asyncAction/asyncOrders';
 export const CompletedOrders = () => {
   const dispatch = useDispatch();
   const isOrders = useSelector((state) => state.orders.order);
-  //   const [rowData, setRowData] = useState([]);
   const isFetching = useSelector((state) => state.orders.loading);
 
   const rowDatas = isOrders?.map((order) => {
@@ -23,13 +22,6 @@ export const CompletedOrders = () => {
       active: order?.is_active,
     };
   });
-
-  // let result = {};
-  // for (let i in rowDatas) {
-  //   if (rowDatas[i].active === false) {
-  //     Object.assign(result, { [i]: rowDatas[i] });
-  //   }
-  // }
 
   const showDatas = rowDatas?.map((item) => {
     return item.data.split('T').slice(0, 1).join();

@@ -3,12 +3,10 @@ import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import {NavLink, useNavigate} from 'react-router-dom'
-import {styled} from "@mui/material/styles";
+import { useNavigate} from 'react-router-dom'
 import home from '../../assets/img/home.svg'
 import orders from '../../assets/img/shop.svg'
 import statistic from '../../assets/img/busines.svg'
@@ -18,9 +16,10 @@ import employers from '../../assets/img/users.svg'
 import contacts from '../../assets/img/userI.svg'
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from "@mui/material/IconButton";
-import { useEffect, useState } from 'react';
 import {useDispatch} from "react-redux";
 import {logoutAdmins} from "../../store/asyncAction/asyncAuth/logout";
+import {Img, ListText, NavList} from "./index";
+import {Item} from "../../style";
 
 function ResponsiveDrawer(props) {
   const { window } = props;
@@ -31,42 +30,10 @@ function ResponsiveDrawer(props) {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-  function logoutHandler(){
+  const logoutHandler = () => {
     dispatch(logoutAdmins())
     navigate('/auth')
   };
-
-  const ListText = styled(ListItemText)`
-   font-size: 20px;
-   font-weight: 700;
-  `;
-
-  const Item = styled(ListItem)`
-    max-width: 205px;
-    display: 'block';
-    margin: 10px auto;
-    &: hover {
-      background: #e6f0e6;
-      border-radius: 20px;
-    };
-    &: active {
-      background: main;
-      border-radius: 20px;
-    }
-  `;
-  const NavList = styled(NavLink)`
-    display: flex;
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    &: hover {
-      color: #487349;
-    }
-  `;
-  const Img = styled('img')`
-    width: 30px;
-    height: 40px;
-  `;
 
   const drawer = (
       <Box>
@@ -153,14 +120,13 @@ function ResponsiveDrawer(props) {
             sx={{ width: { md: '180px' }, flexShrink: { md: 0 } }}
             position="static"
         >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Drawer
               container={container}
               variant="temporary"
               open={mobileOpen}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
+                keepMounted: true,
               }}
               sx={{
                 display: { md: 'block', lg: 'none' },

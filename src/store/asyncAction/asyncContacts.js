@@ -1,5 +1,5 @@
 import {
-  addContact, clearContact, deleteEmployers, editAbout,
+  addContact, editAbout,
   editContact,
   getAbout,
   getAllContacts,
@@ -38,7 +38,7 @@ export const AsyncAddContact = (formData) => {
           headers: { 'Content-Type': 'multipart/form-data' },
         }),
         {
-          pending: 'Добавления...',
+          pending: 'Ожидания...',
           success: 'Успешно добавлено',
           error: 'Возникла ошибка',
         }
@@ -57,7 +57,7 @@ export const AsyncEditContact = (contact, id) => {
   return (dispatch) => {
     toast
       .promise(
-        axiosInstance.patchn(`branches/branches/${id}/`, contact, {
+        axiosInstance.patch(`branches/branches/${id}/`, contact, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

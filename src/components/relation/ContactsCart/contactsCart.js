@@ -2,63 +2,16 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import * as React from 'react';
-import { useNavigate, useParams } from 'react-router';
-import { Item } from '../../../style';
-import { styled } from '@mui/material';
+import { useNavigate} from 'react-router';;
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   AsyncAllContacts,
-  AsyncGetAbout,
 } from '../../../store/asyncAction/asyncContacts';
 import { AboutUs } from './about';
-import { Link } from 'react-router-dom';
-import BreadCrumb from "../../breadCrumbs";
 import CircularPreloader from "../../preloader";
-
-const CustomButton = styled(Link)`
-  height: 52px;
-  width: 320px;
-  background-color: #487349;
-  padding: 14px 30px;
-  border-radius: 20px;
-  color: white;
-  transition: all 150ms ease;
-  cursor: pointer;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  text-align: center;
-  text-decoration: none
-  &:hover {
-    background-color: #9C9C9C;
-  }
-`;
-
-const CartItem = styled(Item)`
-  height: 458px;
-  width: 445px;
-  border-radius: 20px;
-  margin-left: 40px;
-  cursor: pointer;
-  padding-top: 0;
-  &: hover {
-    transform: scale(1.1);
-    transition: transform 0.9s;
-    border: 1px solid #487349;
-  }
-`;
-
-const CartList = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-  font-size: 16px;
-`;
-export const CartText = styled('span')`
-  color: #487349;
-`;
+import {CustomButton} from "../../customButton";
+import {CartItem, CartList, CartText} from "./style";
 
 export const ContactsCarts = () => {
   const navigate = useNavigate();
@@ -69,7 +22,6 @@ export const ContactsCarts = () => {
   useEffect(() => {
     dispatch(AsyncAllContacts());
   }, []);
-
 
   return (
     <>

@@ -3,6 +3,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE
 } from '../../constants';
+import {useNavigate} from "react-router";
 
 const requestLogout = () => {
   return {

@@ -19,14 +19,12 @@ const CustomButton = styled(Button)`
   &:hover {
     color: white;
     background-color: #9C9C9C;
-;
   }
   &:not(:first-of-type){
   margin-left: 0;
   color: white;
   background-color: #487349;
-}
-`;
+}`;
 
 export default function Buttons(props) {
     const { text, onClick, ...other } = props
