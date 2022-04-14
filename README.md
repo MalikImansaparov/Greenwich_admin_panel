@@ -32,12 +32,12 @@
 ### Установка
 Use the [git](https://git-scm.com/downloads) to clone the project to your local machine.
 ```sh
-$ git clone https://github.com/FlowerTeam5/Frontend-.git
+$ git clone https://github.com/malikimansaparov/greenwich-admin_panel-.git
 ```
 
 Navigate to the extracted folder
 ```sh 
-cd Grennwich
+cd Greenwich-admin_panel
 ```
 
 Install the dependencies and modules
