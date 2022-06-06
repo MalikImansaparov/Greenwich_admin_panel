@@ -7,8 +7,8 @@
 
 <!-- Номер: +996776720071
 Пароль: password --> 
-[Видео презентации](https://www.youtube.com/watch?v=aRj8yYmExFg)  
-[Техническое задания](https://docs.google.com/document/d/16w-U97Jl5ik8hkZwSz8PW-ZGpU2HNVh6qnYnl_5SxWA/edit#) 
+[Видео презентации проекта](https://www.youtube.com/watch?v=aRj8yYmExFg)  
+[Техническое задания проекта](https://docs.google.com/document/d/16w-U97Jl5ik8hkZwSz8PW-ZGpU2HNVh6qnYnl_5SxWA/edit#) 
 
 ### Инструменты
 - React
