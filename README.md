@@ -7,6 +7,7 @@
 
 <!-- Номер: +996776720071
 Пароль: password --> 
+[Дизайн на фигме](https://www.figma.com/file/WcFV1YxSDPuzP1Xb0PrjNp/Dashboard_Tanya_%235?node-id=5%3A12)  
 [Видео презентации проекта](https://www.youtube.com/watch?v=aRj8yYmExFg)  
 <!--[Техническое задания проекта](https://docs.google.com/document/d/16w-U97Jl5ik8hkZwSz8PW-ZGpU2HNVh6qnYnl_5SxWA/edit#)-->
 
@@ -49,3 +50,7 @@ $ npm install
 $ npm start
 ```
 
+## License
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/https://github.com/malikimansaparov/greenwich_admin_panel/blob/master/LICENSE)
+
+Based on [Greenwich_admin_panel](https://github.com/malikimansaparov/greenwich_admin_panel)
